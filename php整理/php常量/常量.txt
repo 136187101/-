@@ -1,0 +1,3 @@
+define() 定义常量
+defined() 判断常量是否存在
+get_defined_constants() 获取所有当前已经定义了的常量

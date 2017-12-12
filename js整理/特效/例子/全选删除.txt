@@ -1,0 +1,99 @@
+<?php 
+	require_once("../inc/conn.php");
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../css.css"/>
+<title>无标题文档</title>
+<script language="javascript">
+	function qx1()
+	{
+		imth=document.form1.imt;
+		for(i=0;i<=imth.length;i++)
+		{
+			imth[i].checked=true;
+		}
+	}
+	function qx2()
+	{
+		imth=document.form1.imt;
+		for(i=0;i<imth.length;i++)
+		{
+			imth[i].checked=false;
+		}
+	}
+	function dele()
+	{
+		id="";
+		u="";
+		imth=document.form1.imt;
+		for(i=0;i<imth.length;i++)
+		{
+			if(imth[i].checked)
+			{
+				id=imth[i].value;
+				u=u+","+id;
+			}
+		}
+		u=u.substr(1,9999);
+		window.location.href='?id='+u;
+		if(u=="")
+		{
+			alert("您没有选择");
+		}
+	}
+</script>
+</head>
+
+<body>
+<form  method="post" name="form1" id="">
+<?php
+	$mys=5;
+	$sql="select count(*) from tiezi  ";
+	$rs=mysql_query($sql);
+	$rows=mysql_fetch_array($rs);
+	$zys=ceil($rows[0]/$mys);
+	$dqy=$_GET["dqy"];
+	if($dqy==""||$dqy<1)
+	{
+		$dqy=1;	
+	}
+	$myjl=($dqy-1)*$mys;
+	$sql="select * from tiezi limit $myjl,$mys";
+	$rs=mysql_query($sql);
+	while($rows=mysql_fetch_array($rs)){
+?>
+
+  <label>
+    <input type="checkbox" name="imt"   value="<?php echo $rows["t_id"];?>" id="imt_0" />
+    <?php echo $rows["t_biaoti"];?>
+   </label>
+  <br />
+<?php
+	}
+?>
+
+<input name="quanxuan" type="button" value="全选" onclick="qx1()"  />
+<input name="quxiao"  type="button" value="取消" onclick="qx2()" />
+<input name="shanchu"  type="button" value="删除" onclick="dele()" /></form>
+<?php
+	for($i=1;$i<=$zys;$i++)
+	{
+		if($i==$dqy)
+		{
+			echo "<a href='?dqy={$i}' style='font-size:16px'>{$i}</a>&nbsp;";	
+		}
+		else
+		{
+		echo "<a href='?dqy={$i}'>{$i}</a>&nbsp;";
+		}
+	}
+	
+	
+
+?>
+
+ </body>
+</html>

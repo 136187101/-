@@ -1,0 +1,12 @@
+    public function fields(){
+        return [
+            'id',
+            'email'=>'phone',
+            'namex'=>function($model)
+            {
+                return $model->name.$model->username;
+            }
+
+
+        ];
+    }

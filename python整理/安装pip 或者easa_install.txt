@@ -1,0 +1,4 @@
+pip:http://www.tuicool.com/articles/eiM3Er3
+
+
+Windows下easy_install的安装和配置:http://jingyan.baidu.com/article/c45ad29c367535051753e2fb.html

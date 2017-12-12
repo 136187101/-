@@ -1,0 +1,20 @@
+布局文件位置：views/layouts/
+
+新建布局：views/layouts/新建    buju.php
+
+文件内输入内容 但要加上<?php echo $content;?>  输出具体控制器内容
+默认布局：views/layouts/main.php
+
+切换布局 
+如果在控制器内不需要布局，则设置
+public function actionHjd(){
+        $this->layout="buju";
+        return $this->render('hjd');
+    }
+
+	
+如果在控制器内不需要布局，则设置
+public function actionHjd(){
+        $this->layout=false;
+        return $this->render('hjd');
+    }

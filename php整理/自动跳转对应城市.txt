@@ -1,0 +1,57 @@
+//自动跳转城市
+if($_COOKIE["city_id"]=="")
+{
+	//调用新浪ip库
+	$ipjson=file_get_contents("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js");
+	//使用正则表达式 获取JSON，因为他默认是JS格式的 如 var xxx = {json数据}
+	preg_match("/{(.*)}/",$ipjson,$arr);
+	//{}json数据
+	$as=json_decode($arr[0]);
+	//编码转换，因为新浪IP库返回的编码是UTF8格式的
+	$chengshi=iconv('UTF-8','GB2312',$as->city);
+	//查找对应城市
+	$rsss=$db->get_one("select fid from qb_fenlei_city where name like '$chengshi'");
+	setcookie("city_id",$rsss["fid"],time()+3600*24000);
+	echo "<script language=JavaScript> location.replace(location.href);</script>";
+	//$_COOKIE["city_id"]=$rs["fid"];
+}
+
+
+
+//自动跳转城市 2 php 版
+if($_COOKIE["city_id"]=="")
+{
+	
+	function GetIP(){
+	if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+	$ip = getenv("HTTP_CLIENT_IP");
+	else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+	$ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+	$ip = getenv("REMOTE_ADDR");
+	else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+	$ip = $_SERVER['REMOTE_ADDR'];
+	else
+	$ip = "unknown";
+	return($ip);
+	} 
+	
+	
+	//调用新浪ip库
+	$ipjson=file_get_contents("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=".GetIP());
+	
+	
+	//使用正则表达式 获取JSON，因为他默认是JS格式的 如 var xxx = {json数据}
+	//preg_match("/{(.*)}/",$ipjson,$arr);
+	//{}json数据
+	//$as=json_decode($arr[0]);
+	
+	$as=$ipjson;
+	//编码转换，因为新浪IP库返回的编码是UTF8格式的
+	$chengshi=iconv('UTF-8','GB2312',$as->city);
+	//查找对应城市
+	$rsss=$db->get_one("select fid from qb_fenlei_city where name like '$chengshi'");
+	setcookie("city_id",$rsss["fid"],time()+3600*24000);
+	echo "<script language=JavaScript> location.replace(location.href);</script>";
+	//$_COOKIE["city_id"]=$rs["fid"];
+}

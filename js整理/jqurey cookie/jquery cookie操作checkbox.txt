@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script language="javascript">
+$(document).ready(function() {
+	$("#te").html($.cookie('aihao'));
+	//indexOf
+	$("input[name='aihao']").each(function(){
+		//alert($.cookie('aihao').indexOf($(this).val()));
+		if($.cookie('aihao').indexOf($(this).val()) >= 0){
+			$(this).attr("checked","checked");
+		}
+	})
+	$("input[name='aihao']").change(function(){
+			var str = new Array();
+			$("input[name='aihao']").each(function(index) {
+              	if($(this).is(":checked")){
+					str.push($(this).val());
+				}
+				
+            });
+			$.cookie('aihao', str);
+			$("#te").html($.cookie('aihao'));
+		});
+		
+});
+</script>
+</head>
+
+<body>
+<div>
+  <form id="form1" name="form1" method="post">
+  	<p>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="唱歌" id="aihao_0">
+  	    唱歌</label>
+  	  <br>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="看书" id="aihao_1">
+  	    看书</label>
+  	  <br>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="游泳" id="aihao_2">
+  	    游泳</label>
+  	  <br>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="游戏" id="aihao_3">
+  	    游戏</label>
+  	  <br>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="爬山" id="aihao_4">
+  	    爬山</label>
+  	  <br>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="旅游" id="aihao_5">
+  	    旅游</label>
+  	  <br>
+  	  <label>
+  	    <input type="checkbox" name="aihao" value="LOL" id="aihao_6">
+  	    LOL</label>
+  	  <br>
+    </p>
+    
+
+</div>
+<span id="te"></span>
+
+</body>
+</html>

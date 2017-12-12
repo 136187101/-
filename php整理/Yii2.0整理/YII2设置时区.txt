@@ -1,0 +1,8 @@
+时区这东西，在开发的时候，你说重要吧，也还好，毕竟没它也能正常运行，你说不重要吧，那就纠结了。特别是linux系统，都TMD差上几小时，你能不痛苦吗？win还好一点。
+有一些常规方法，是大家目前都在采用的
+1、php.ini中的设置，这个就不谈了，
+2、程序中公用文件里设置，date_default_timezone_set一下时区
+3、或者。。。自己写时间处理函数，在遇到时间的时候，用这个函数处理（比较偏向于使用这种方式，如果你的用户来自于五湖四海，或许就有用了）
+4、yii框架中，可以直接在/protected/config/main.php中加入timeZone，即可（补充：Yii2方法也是一样，在common/config/main.php中添加）
+
+'timeZone'=>'Asia/Chongqing',

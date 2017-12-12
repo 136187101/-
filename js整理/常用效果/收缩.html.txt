@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script  type="text/JavaScript">
+function liwqbj_zhan(j){
+	
+		if(document.getElementById('t'+j).style.display=='none'){
+			
+		document.getElementById('t'+j).style.display='block'
+		}else{
+			document.getElementById('t'+j).style.display='none';
+			document.getElementById('t'+j).style.color='#f00';
+		}				
+		}
+
+</script>
+
+</head>
+<body>
+
+<div onclick="liwqbj_zhan(1)">1</div>
+
+<ul id="t1" style="display:none;">
+<li><a href="#">123124</a></li>
+<li>123124</li>
+<li>123124</li>
+<li>123124</li>
+</ul>
+
+
+<div onclick="liwqbj_zhan(2)">2</div>
+<ul id="t2" style="display:none;">
+<li>123124</li>
+<li>123124</li>
+<li>123124</li>
+<li>123124</li>
+</ul>
+
+<div onclick="liwqbj_zhan(3)">3</div>
+<ul id="t3" style="display:none;">
+<li>123124</li>
+<li>123124</li>
+<li>123124</li>
+<li>123124</li>
+</ul>
+
+</body>
+</html>

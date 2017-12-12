@@ -1,0 +1,71 @@
+<?php
+	ob_start();
+	session_start();
+	require_once("include/init.php");
+	$ip=$_GET[ip];
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+				$("#form1 input").each(function(index){
+							$(this).keyup(function(){
+								po=$("#form1 div").eq(index).html();
+								$.get("zongjia.php?jiage="+po+"&shuliang="+$(this).val(),null,function(retur){
+								$("#form1 label").eq(index).html(retur);
+								})
+							})
+				})
+		})
+</script>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table width="900" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>商品名称</td>
+      <td>商品价格</td>
+      <td>商品数量</td>
+      <td>总价</td>
+      <td>操作</td>
+    </tr>
+    <?php
+
+
+	$rs_g=$db->query("select * from lingshi where ip ='$ip'");
+	
+	$rows=$db->fetch_array($rs_g);
+	foreach($rows as $val)
+	{
+		$rs_goods=$db->getOne("select * from news where id =$val[goods_Id]");
+		$_SESSION[jiage]=$rs_goods[jiage];
+?>
+    <tr>
+      <td><?php echo $rs_goods[title]?></td>
+      <td><?php echo $hjd->price_hko($rs_goods[jiage])?></td>
+      <td>
+      <input type="text" name="textfield" id="textfield" value="<?php echo $val[shuliang]?>" />
+      <div class="weixin" style="display:none;"><?=$rs_goods[jiage]?></div>
+      </td>
+      <td>
+      <label><?php echo $hjd->price_hko($rs_goods[jiage]*$val[shuliang]) ?></label>
+      </td>
+      <td>【删除】</td>
+    </tr>
+    
+    <?php
+	
+	}
+ ?>
+  </table>
+</form>
+
+<a href="goodslx.php">返回</a>
+</body>
+</html>

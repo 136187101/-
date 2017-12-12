@@ -1,0 +1,249 @@
+/**
+ * Created by 侯建东 on 2016/12/7.
+ */
+var express = require('express');
+var router = express.Router();
+var mongoose=require('mongoose');
+var Blog=mongoose.model("Blog");
+var mysql      = require('mysql');
+var multer = require ( 'multer' )
+//上传图片处理中间件
+var upload=multer({ dest: 'uploads/',limits:{fileSize:10000} });
+var path=require('path');
+
+var fs=require('fs');
+
+// 没有挂载路径的中间件，通过该路由的每个请求都会执行该中间件
+router.use(function (req, res, next) {
+    console.log('Time:', Date.now());
+    next();
+});
+
+
+
+router.get('/', function(req, res, next) {
+    /*
+    var blog=new Blog({
+        title:'测试标题',
+        zuozhe:'jhjd',
+        content:"测试内容内容"
+    });
+    blog.save(function (err) {
+        if(err){
+            res.end('error');
+            return;
+        }
+
+    })*/
+    Blog.find({},function (err,docs) {
+        if(err){
+            res.end(err);
+            return;
+        }
+       // console.log(docs);
+        res.render('blog', { title: 'Express',supplies:['mop','broom','duster'],list:docs});
+    })
+
+});
+
+router.get('/add', function(req, res, next) {
+        res.render('add', { title: '添加'});
+});
+router.post('/add', function(req, res, next) {
+    var title=req.body.title;
+    var zuozhe=req.body.zuozhe;
+    var content=req.body.content;
+    var time=new Date();
+    var blog=new Blog({
+        title:title,
+        zuozhe:zuozhe,
+        content:content,
+        time:time
+    });
+    blog.save(blog,function (err) {
+        if(err)
+        {
+            res.end('error',err);
+            return;
+        }else
+        {
+            res.end('success');
+        }
+    })
+
+});
+
+router.get('/update', function(req, res, next) {
+    var id=req.query.id;
+    Blog.findOne({_id:id},function (err,doc) {
+        if(err)
+        {
+            console.log(err);
+        }else
+        {
+            console.log(doc)
+            res.render('update', { title: "修改",find:doc});
+        }
+    });
+});
+
+router.post('/update',function (req,res,next) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var content = req.body.content;
+    var zuozhe = req.body.zuozhe;
+
+    Blog.update({_id:id},{$set:{title:title,content:content,zuozhe:zuozhe}},{multi:true},function (err) {
+        if(err)
+        {
+            console.log(err);
+        }else
+        {
+            res.end('update ok!');
+        }
+    })
+
+   // res.end('submit success');
+})
+
+router.get('/delete', function(req, res, next) {
+    var id=req.query.id;
+    var condittions={_id:id};
+    Blog.remove(condittions,function (err) {
+        if(err)
+        {
+            console.log(err);
+        }else{
+            console.log('deletd ok!');
+            res.end('删除成功');
+        }
+    })
+    // res.render('add', { title: '添加'});
+});
+
+router.get('/findOne',function (req,res,next) {
+    var id=req.query.id;
+    Blog.findOne({_id:id},function (err,doc) {
+        if(err)
+        {
+            console.log(err);
+        }else
+        {
+            console.log(doc)
+            res.render('find', { title: "文章详情",find:doc});
+        }
+    })
+
+})
+// 一个中间件栈，显示任何指向 /user/:id 的 HTTP 请求的信息
+router.use('/h/:id', function(req, res, next) {
+    console.log('Request URL:', req.originalUrl);
+    next();
+}, function (req, res, next) {
+    console.log('Request Type:', req.method);
+    next();
+},function (req,res,next) {
+    console.log('hjd ');
+    next();
+});
+
+router.get('/h/:id', function(req, res, next) {
+    if(req.params.id==0)
+    {
+        next("route");
+    }else
+    {
+        res.write("hello");
+    }
+    res.end(' ');
+});
+router.get('/h/:id', function(req, res, next) {
+
+        res.write("hello world");
+
+    res.end(' ');
+});
+
+router.all('/hjd',function (req,res,next) {
+    console.log('全部');
+    res.send('ss');
+})
+
+router.get('/throw',function (req,res,next) {
+
+    res.write(req.subdomains);
+    if(req.query.id==0)
+    {
+        console.log('false')
+        throw  400;
+    }else
+    {
+        res.send(req.query.id);
+    }
+
+})
+
+router.get('/mysql',function (req,res,next) {
+
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : '123456',
+        database:'crmx'
+    });
+
+    connection.connect();
+
+    connection.query('SELECT * FROM jd_users', function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows);
+        res.send(rows);
+    });
+
+    connection.end();
+})
+
+router.get('/upload',function (req,res,next) {
+    res.render('upload',{title:'图片上传'});
+})
+
+
+router.post('/upload1', upload.single('image'), function (req, res, next) {
+
+
+    // req.file is the `avatar` file
+    // req.body will hold the text , if there were any
+    var filepath=path.join(__dirname,'../')+'/uploads/'+req.file.filename;
+    var newpath=path.join(__dirname,'../')+'/uploads/';
+    fs.readFile(filepath,function (err,data) {
+        if(err)
+        {
+            console.log(err)
+        }else
+        {
+
+            fs.writeFile(newpath+req.file.originalname,data,function (err) {
+                if(err)
+                {
+                    console.log(err)
+                }else
+                {
+
+                    hjd('程序执行完毕');
+
+                }
+            })
+        }
+
+
+        })
+    function  hjd(str) {
+        console.log('执行了hjd方法');
+        res.send(str);
+
+    }
+    console.log('程序执行完毕');
+
+})
+
+module.exports = router;

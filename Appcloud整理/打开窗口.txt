@@ -1,0 +1,9 @@
+<script>
+		function opennew(){
+			api.openWin({
+	            name: 'o2o',
+	            url: 'o2o_window.html'
+            });
+		}
+</script>
+	

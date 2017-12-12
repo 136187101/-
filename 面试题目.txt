@@ -1,0 +1,25 @@
+<?php
+/*
+数据库为wood
+
+
+
+
+会员表：user 字段如下
+id  user_name  passwd  reg_time  last_time  email  shouji  dizi  xingbie  
+
+
+新闻表:users_news 字段如下
+id id uid id title  content  times 
+uid 代表与会员表id相连的字段
+ 
+1.请查出会员id=3所发布的所有新闻
+select a.id,b.* from user a left join users_news b on a.id=b.uid where a.id='3'
+2.请查出会员user_id=5所发布的新闻并且新闻的标题文字有“div”的新闻
+select a.id,b.* from user a left join users_news b on a.id = b.uid where a.id='5' and b.title like '%div%';
+*/
+
+
+
+?>
+div+css切一头部即可

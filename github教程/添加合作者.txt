@@ -1,0 +1,3 @@
+github网站->头像->your-profile->进入自己的项目-> Settings->Collaborators->输入合作者账号等待检索，检索完毕 点击添加
+
+然后点击Copy invite link 复制邀请链接  发给对方 ，对方用浏览器打开链接 点击接受邀请 即可 

@@ -1,0 +1,237 @@
+* {
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0px;
+	padding:0px;
+	font-size:12px;
+	color:#1d5cb4;
+}
+div,ul,li,span,p,a{
+	overflow:hidden;
+}
+a{
+	text-decoration:none;
+	color:#1d5cb4;
+}
+a:hover{
+	text-decoration:underline
+}
+.left{
+	float:left;
+	display:inline
+}
+.right{
+	float:right;
+	display:inline
+}
+body{
+	background:#9FBDDD;
+}
+body.wrap{
+	background:#9FBDDD;
+}
+/*µÇÂ½*/
+#login{
+	width:642px;
+	height:444px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-222px;
+	margin-left:-321px;
+}
+	#login div.left{
+		background:url(login_left_bg.png);
+		width:34px;
+		height:445px;
+	}
+	#login div#logo{
+		width:574px;
+		background:url(login_logo.png) no-repeat;
+	}
+		#login div#logo div.lmain{
+			background:url(login_main_bg.png);
+			height:289px;
+			margin-top:129px;
+		}
+			#login div#logo div.lmain ul{
+				width:244px;
+				margin:40px auto 0px auto;
+			}
+				#login div#logo div.lmain ul li{
+					height:24px;
+					line-height:24px;
+					margin-top:17px;
+					text-align:left;
+					position:relative;
+					color:#000;
+					font-weight:bold;
+					font-size:14px;
+				}
+					#login div#logo div.lmain ul li input{
+						border:1px double #85de75;
+						background:#f8fef6;
+						height:18px;
+						width:180px;
+						line-height:18px;
+					}
+					#login div#logo div.lmain ul li.yzm input{
+						width:115px;
+					}
+					#login div#logo div.lmain ul li img{
+						height:18px;
+						border:1px solid #a0da78;
+						width:52px;
+						position:absolute;
+						top:4px;
+						*top:2px !important;
+						*top:1px;
+						right:2px;
+					}
+			#login div#logo div.lmain input.login{
+				background:url(login_input.png);
+				width:110px;
+				height:26px;
+				border:none;
+				border:#64acf4 1px solid;
+				text-indent:-9999px;
+				display:block;
+				margin:45px auto 0px auto;
+				cursor:pointer;
+			}
+			#login div#logo div.lmain p{
+				display:block;
+				font-weight:normal;
+				text-align:center;
+				font-size:11px;
+				color:#999;
+				margin-top:33px
+			}
+		#login div#logo div.foot{
+			background:url(login_foot.png);
+			height:26px
+		}
+	#login div.right{
+		background:url(login_right_bg.png);
+		height:445px;
+		width:34px
+	}
+/*µÇÂ½*/
+/*¶¥À¸*/
+#head{
+	background:url(ht_head_bg.png);
+	height:60px;
+}
+	#head #logo{
+		background:url(ht_head_logo.png) no-repeat;
+		height:34px;
+		margin:8px 0px 0px 16px;
+		line-height:34px;
+		color:#fff;
+		padding-left:160px;
+	}
+	#head div.right{
+		height:34px;
+		line-height:34px;
+		margin:8px 20px 0px 0px;
+	}
+		#head div.right a , #head div.right{
+			color:#fff;
+			font-size:12px;
+			font-weight:bold;
+		}
+/*¶¥À¸*/
+/*×óÀ¸*/
+#nav{
+	background:url(ht_nav_bg.png) repeat-x #C5D6EA;
+	border-right:#fff 1px solid;
+	height:100%
+}
+	#nav a{
+		color:#124170
+	}
+	#nav h2{
+		height:30px;
+		line-height:30px;
+		text-align:right;
+		padding-right:10px;
+	}
+	#nav h2{
+		width:161px;
+		margin:0px auto;
+	}
+	#nav div.nlist{
+		margin:auto;
+		margin-bottom:5px;
+		margin-left:5px;
+		background:#fff;
+		width:163px;
+	}
+		#nav div.nlist span.right{
+			height:28px;
+			width:28px;
+			cursor:pointer;
+		}
+		#nav div.nlist h3{
+			background:url(ht_nav_hbg.png);
+			height:25px;
+			line-height:25px;
+			padding-left:9px;
+			border:#fff 1px solid;
+		}
+		#nav div.nlist ul{
+			padding:5px
+		}
+			#nav div.nlist ul li{
+				background:url(ht_nav_ico.png) no-repeat 5px 8px;
+				height:23px;
+				line-height:23px;
+				padding-left:13px;
+			}
+/*×óÀ¸*/
+/*main*/
+div.main{
+	margin:5px 8px 0px 8px;
+	border:1px #89c3e4 solid;
+}
+	div.main h3{
+		border:1px #fff solid;
+		height:25px;
+		line-height:25px;
+		text-align:center;
+		background:#89c3e4;
+		color:#fff;
+	}
+	div.main table{
+		border-left:1px #fff solid;
+		background:#fff;
+	}
+		div.main table td{
+			border-right:1px #fff solid;
+			border-bottom:1px #fff solid;
+			padding-left:20px;
+			height:24px;
+			line-height:24px;
+			color:#225080
+		}
+		div.main table td.one{
+			background:#e3f5ff
+		}
+		div.main table td.two{
+			background:#f3ffff
+		}
+		div.main table td.ico{
+			background:url(ht_right_ico.png) no-repeat 10px 8px;
+			padding-left:24px;
+		}
+div.copy{
+	height:40px;
+	line-height:40px;
+	color:#666;
+	text-align:center
+}
+/*main*/
+/*¿ò¼ÜÓÃ*/
+frame{
+	overflow-x:hidden
+}
+/*¿ò¼ÜÓÃ*/

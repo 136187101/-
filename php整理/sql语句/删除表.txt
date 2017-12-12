@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS `A`;
+意思是，如果存在这个表，就删除

@@ -1,0 +1,5 @@
+ThinkPHP\Library\Think\Upload.class.php
+'rootPath'      =>  './Uploads/', //保存根路径
+改为：
+'rootPath'      =>  './', //保存根路径
+即可

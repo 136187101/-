@@ -1,0 +1,119 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/chili-1.7.pack.js"></script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<script type="text/javascript" src="js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="js/jquery.accordion.js"></script>
+<script language="javascript">
+	jQuery().ready(function(){
+		jQuery('#navigation').accordion({
+			header: '.head',
+			navigation1: true, 
+			event: 'click',
+			fillSpace: true,
+			animated: 'bounceslide'
+		});
+	});
+</script>
+<style type="text/css">
+<!--
+body {
+	margin:0px;
+	padding:0px;
+	font-size: 12px;
+}
+#navigation {
+	margin:0px;
+	padding:0px;
+	width:147px;
+}
+#navigation a.head {
+	cursor:pointer;
+	background:url(images/main_34.gif) no-repeat scroll;
+	display:block;
+	font-weight:bold;
+	margin:0px;
+	padding:5px 0 5px;
+	text-align:center;
+	font-size:12px;
+	text-decoration:none;
+}
+#navigation ul {
+	border-width:0px;
+	margin:0px;
+	padding:0px;
+	text-indent:0px;
+}
+#navigation li {
+	list-style:none; display:inline; text-align:left;
+}
+#navigation li li a {
+	display:block;
+	font-size:12px;
+	text-decoration: none;
+	text-align:left;
+	padding:3px; padding-left:12px; color:#333;
+}
+#navigation li li a:hover {
+	background:url(images/tab_bg.gif) repeat-x;
+		border:solid 1px #adb9c2; color:#333;
+}
+-->
+</style>
+</head>
+<body>
+<div  style="height:100%;">
+  <ul id="navigation">
+      <li> <a class="head">系统管理</a>
+      <ul>
+      	 <li><a href="tanzhen.php" target="rightFrame">系统信息</a></li>
+         <li><a href="guanli/ckadmin.php" target="rightFrame">管理员管理</a></li>
+        <li><a href="guanli/addgl.php" target="rightFrame">管理员添加</a></li>
+        <li><a href="data/index.php" target="rightFrame">数据库备份</a></li>
+        <li><a href="rizhi/ckrizhi.php" target="rightFrame">日志</a></li>
+        <li><a href="../leibie/cklb.php" target="rightFrame">网站设置</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">商品管理系统</a>
+      <ul>
+     	 <li><a href="../leibie/gllb.php" target="rightFrame">书籍类别管理 | 添加</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">订单管理系统</a>
+      <ul>
+        <li><a href="guanli/addgl.php" target="rightFrame">正在处理的订单</a></li>
+        <li><a href="guanli/ckziji.php" target="rightFrame">成功的订单</a></li>
+        <li><a href="guanli/ckziji.php" target="rightFrame">失败的订单</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">会员系统</a>
+      <ul>
+        <li><a href="messages.php" target="rightFrame">会员管理 | 添加</a></li>
+        <li><a href="comments.php" target="rightFrame">会员协议更新</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">文章系统</a>
+      <ul>
+        <li><a href="AddLink.php" target="rightFrame">文章管理 | 添加</a></li>
+        <li><a href="Links.php" target="rightFrame">文章分类管理 | 添加</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">版本信息</a>
+      <ul>
+        <li><a href="#" target="_blank">luxiaoer</a></li>
+      </ul>
+    </li>
+     <li> <a class="head">测试</a>
+     	<ul>
+        	<li><a href="AddLink.php" target="rightFrame">添加友情链接</a></li>
+            <li><a href="AddLink.php" target="rightFrame">添加友情链接</a></li>
+            <li><a href="AddLink.php" target="rightFrame">添加友情链接</a></li>
+        </ul>
+     </li>
+  </ul>
+</div>
+</body>
+</html>

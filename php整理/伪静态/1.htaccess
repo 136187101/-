@@ -1,0 +1,367 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule index.html$ index.php
+#首页
+RewriteRule user/reg.html$ user/reg.php
+#注册
+RewriteRule user/reg_tw.html$ user/reg_tw.php
+#注册
+RewriteRule user/reg_two.html$ user/reg_two.php
+#注册
+RewriteRule user/p_inde.html$ user/p_inde.php
+#注册
+RewriteRule user/login.html$ user/login.php
+#登陆
+RewriteRule user/c_inde.html$ user/c_inde.php
+#登陆
+RewriteRule user/dcp_idan.html$ user/dcp_idan.php
+#跳到等待发货页面/user/dcp_idan.php
+RewriteRule user/deal([a-z0-9\-]+)$ user/deal.php?act=$1
+#退出
+RewriteRule user/zhpswd.html$ user/zhpswd.php
+#找回密码
+RewriteRule user/c_gq_kmss.html$ user/c_gq_kmss.php
+#商家会员查看供求留言详细
+RewriteRule gqxx/Search.js$ gqxx/Search.php
+#供求信息搜索
+RewriteRule user/cp_gq_mss.html$ user/cp_gq_mss.php
+#供求信息商家留言管理
+RewriteRule user/p_ywygh.html$ user/p_ywygh.php
+#普通会员认证页面
+RewriteRule user/p_up_ywygh.html$ user/p_up_ywygh.php
+#普通会员修改认证页面
+RewriteRule user/c_xinx.html$ user/c_xinx.php
+#商家会修改个人信息
+RewriteRule user/c_mail.html$ user/c_mail.php
+#商家会修改email
+RewriteRule user/cp_cplay.html$ user/cp_cplay.php
+#商家设置支付宝帐户
+RewriteRule user/cp_chuzhi.html$ user/cp_chuzhi.php
+#商家充值
+RewriteRule user/c_ps.html$ user/c_ps.php
+#商家会修改密码
+RewriteRule user/cp_add_gq.html$ user/cp_add_gq.php
+#会员发布供求信息
+RewriteRule user/cp_tp_gq.html$ user/cp_tp_gq.php
+#会员管理供求信息
+RewriteRule user/cp_dp_ggao.html$ user/cp_dp_ggao.php
+#会员管理店铺广告
+RewriteRule user/cp_up_gq.html$ user/cp_up_gq.php
+#会员修改供求信息
+RewriteRule user/cp_tj_gq.html$ user/cp_tj_gq.php
+#会员修改推荐供求信息
+RewriteRule user/cp_suocang.html$ user/cp_suocang.php
+#会员管理我的收藏
+RewriteRule user/cp_idan.html$ user/cp_idan.php
+#会员管理订单
+RewriteRule user/cp_jjz.html$ user/cp_jjz.php
+#竞价正在商品管理页面
+RewriteRule user/cp_gwche.html$ user/cp_gwche.php
+#会员购物车
+RewriteRule user/shzi.html$ user/shzi.php
+#会员添加收货地址
+RewriteRule user/p_xinx.html$ user/p_xinx.php
+#普通会员修改资料
+RewriteRule user/p_mail.html$ user/p_mail.php
+#普通会员修改E-mail
+RewriteRule user/p_ps.html$ user/p_ps.php
+#普通会员修改密码
+RewriteRule user/cp_mfcc_pro.html$ user/cp_mfcc_pro.php
+#商家会员管理免费橱窗位商品
+RewriteRule user/c_dp_tppl.html$ user/c_dp_tppl.php
+#商家会员管理评论
+RewriteRule user/c_dp_kpl.html$ user/c_dp_kpl.php
+#商家会查看评论
+RewriteRule user/cp_tjpro.html$ user/cp_tjpro.php
+#商家设置商品推荐
+RewriteRule user/cp_l_gq.html$ user/cp_l_gq.php
+#商家发布店铺加盟信息
+RewriteRule user/cp_tpl_gq.html$ user/cp_tpl_gq.php
+#商家发管理铺加盟信息
+RewriteRule user/cp_uppin_gq.html$ user/cp_uppin_gq.php
+#商家修改品牌信息
+RewriteRule user/c_db_tp1.html$ user/c_db_tp1.php
+#商家店铺管理首页
+RewriteRule user/cp_addpp_gq.html$ user/cp_addpp_gq.php
+#商家发布品牌管理首页
+RewriteRule user/cp_tppp_gq.html$ user/cp_tppp_gq.php
+#商家管理品牌管理首页
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)i.html$ dp/index.php?page=$1&uid=$2
+#商家会员查看店铺的链接 rkk
+RewriteRule user/c_db_tp2.html$ user/c_db_tp2.php
+#商家店铺管理首页
+RewriteRule user/c_dp_tp3.html$ user/c_dp_tp3.php
+#商家管理买家必读修改
+RewriteRule user/c_dp_fg.html$ user/c_dp_fg.php
+#商家管理店铺风格
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)a.html$ dp/about.php?page=$1&uid=$2
+#店铺的店铺介绍链接
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)g.html$ dp/gonao.php?page=$1&uid=$2
+#店铺的店铺公告链接
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)p.html$ dp/products.php?page=$1&uid=$2
+#店铺的全部宝贝链接
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)p.html&PB_page=([a-z0-9\-]+)$ dp/products.php?page=$1&uid=$2&PB_page=$3
+#店铺的全部宝贝分页
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)g.html&PB_page=([a-z0-9\-]+)$ dp/gonao.php?page=$1&uid=$2&PB_page=$3
+#店铺的全部公告分页
+RewriteRule dp/gonaox.html$ dp/gonaox.php
+#店铺的公告详细页面
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)p-([0-9]{1,}).html$ dp/products.php?page=$1&uid=$2&biggv=$3
+#店铺产品小分类点过去的链接
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)p-([a-z0-9\-]+)v.html$ dp/products.php?page=$1&uid=$2&bigv=$3
+#店铺产品大分类点过去的链接
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)p-([a-z0-9\-]+)v.html&PB_page=([a-z0-9\-]+)$ dp/products.php?page=$1&uid=$2&bigv=$3&PB_page=$4
+#店铺产品大分类分页时候
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)p-([0-9]{1,}).html&PB_page=([a-z0-9\-]+)$ dp/products.php?page=$1&uid=$2&biggv=$3&PB_page=$4
+#店铺产品小分类分页时候
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)b.html$ dp/bdu.php?page=$1&uid=$2
+#店铺的卖家必读链接
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)x.html$ dp/xyong.php?page=$1&uid=$2
+#RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)x.html?pageno=([a-z0-9\-]+)$ dp/xyong.php?page=$1&uid=$2&pageno=$3
+#店铺的信用评价链接
+RewriteRule dp/productx.html$ dp/productx.php
+#店铺商品详细页
+RewriteRule user/c_dp_ab.html$ user/c_dp_ab.php
+#商家管理店铺介绍
+RewriteRule user/c_dp_link.html$ user/c_dp_link.php
+#商家管理友情链接管理
+RewriteRule user/c_dp_ggao.html$ user/c_dp_ggao.php
+#商家管理公告添加
+RewriteRule user/cp_dp_tpggao.html$ user/cp_dp_tpggao.php
+#商家管理公告
+RewriteRule user/cp_upl.html$ user/cp_upl.php
+#商家修改加盟信息
+RewriteRule dp/([a-z0-9\-]+)-([a-z0-9\-]+)lk.html$ dp/link.php?page=$1&uid=$2
+#店铺的友情链接页面 index-34lk.html
+RewriteRule user/c_dp_type.html$ user/c_dp_type.php
+#商家管理商品分类
+RewriteRule clnz/index.html$ clnz/index.php
+#潮流女装首页
+RewriteRule fzzh/add_content.do$ fzzh/add_content.php
+#会员发布展会信息
+RewriteRule ssnz/index.html$ ssnz/index.php
+#时尚男装首页
+RewriteRule user/c_dp_addpro.html$ user/c_dp_addpro.php
+#商家会员添加产品
+RewriteRule user/c_tp_pro.html$ user/c_tp_pro.php
+#商家会员管理产品
+RewriteRule user/c_dp_up_pro.html$ user/c_dp_up_pro.php
+#商家会员修改产品
+RewriteRule ydxx/index.html$ ydxx/index.php
+#运动休闲首页
+RewriteRule tzdt/index.html$ tzdt/index.php
+#童装动态首页
+RewriteRule dpzm/index.html$ dpzm/index.php
+#店铺加盟首页
+RewriteRule ppdq/index.html$ ppdq/index.php
+#品牌大全首页
+RewriteRule xbxm/index.html$ xbxm/index.php
+#箱包鞋帽首页
+RewriteRule wjsc/index.html$ wjsc/index.php
+#玩具市场首页
+RewriteRule fzsc/index.html$ fzsc/index.php
+#服装商城首页
+RewriteRule sswh/index.html$ sswh/index.php
+#时尚文化首页
+RewriteRule tpjs/index.html$ tpjs/index.php
+#图片集市首页
+RewriteRule fzzh/index.html$ fzzh/index.php
+#服装展示首页
+RewriteRule mdmp/index.html$ mdmp/index.php
+#名店名铺首页
+RewriteRule gqxx/add_gq.do$ gqxx/add_gq.php
+#名店名铺首页
+RewriteRule message/index.html$ message/index.php
+#网站留言首页
+RewriteRule message/content.html$ message/content.php
+#网站查看留言
+RewriteRule bulletin/index.html$ bulletin/index.php
+#网站公告列表首页
+RewriteRule gqxx/index.html$ gqxx/index.php
+#cb网站底部关于我们
+RewriteRule copyright/about.html$ copyright/about.php
+#cb网站底部联系我们
+RewriteRule copyright/lxwm.html$ copyright/lxwm.php
+#cb底部常见问题与解答 
+RewriteRule copyright/wt_da-([a-z0-9\-]+).html$ copyright/wt_da.php?id=$1
+#cb底部常见问题与解答 详细页
+RewriteRule copyright/wt.html$ copyright/wt.php
+#cb底部投诉商家
+RewriteRule copyright/ts.html$ copyright/ts.php
+#cb底部用户条例
+RewriteRule copyright/yh.html$ copyright/yh.php
+#cb底部广告合作
+RewriteRule copyright/gg.html$ copyright/gg.php
+#cb底部隐私条款
+RewriteRule copyright/ys.html$ copyright/ys.php
+#cb网站底部招贤纳士
+RewriteRule copyright/zpx-([a-z0-9\-]+).html$ copyright/zpx.php?id=$1
+#cb网站底部招贤纳士详细页
+RewriteRule copyright/zp.html$ copyright/zp.php
+#cb网站底部网站地图
+RewriteRule copyright/map.html$ copyright/map.php
+#cb网站底部意见反馈
+RewriteRule copyright/yj.html$ copyright/yj.php
+#cb网站底部友情链接
+RewriteRule copyright/yqlj.html$ copyright/yqlj.php
+#供求信息首页
+
+RewriteRule clnz/content-([a-z0-9\-]+).html$ clnz/content.php?id=$1
+#潮流女装的内容页
+RewriteRule clnz/list-([a-z0-9\-]+).html$ clnz/list.php?type=$1
+#潮流女装的列表页
+RewriteRule clnz/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ clnz/list.php?type=$1&PB_page=$2
+#潮流女装的列表页，分页链接
+RewriteRule clnz/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ clnz/content.php?id=$1&page=$2
+#潮流女装的内容页，分页链接
+
+RewriteRule ssnz/content-([a-z0-9\-]+).html$ ssnz/content.php?id=$1
+#时尚男装的内容页
+RewriteRule ssnz/list-([a-z0-9\-]+).html$ ssnz/list.php?type=$1
+#时尚男装的列表页
+RewriteRule ssnz/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ ssnz/list.php?type=$1&PB_page=$2
+#时尚男装的列表页，分页链接
+RewriteRule ssnz/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ ssnz/content.php?id=$1&page=$2
+#时尚男装的内容页，分页链接
+
+RewriteRule ydxx/content-([a-z0-9\-]+).html$ ydxx/content.php?id=$1
+#运动休闲的内容页
+RewriteRule ydxx/list-([a-z0-9\-]+).html$ ydxx/list.php?type=$1
+#运动休闲的列表页
+RewriteRule ydxx/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ ydxx/list.php?type=$1&PB_page=$2
+#运动休闲的列表页，分页链接
+RewriteRule ydxx/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ ydxx/content.php?id=$1&page=$2
+#运动休闲的内容页，分页链接
+
+RewriteRule tzdt/content-([a-z0-9\-]+).html$ tzdt/content.php?id=$1
+#童装动态的内容页
+RewriteRule tzdt/list-([a-z0-9\-]+).html$ tzdt/list.php?type=$1
+#童装动态的列表页
+RewriteRule tzdt/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ tzdt/list.php?type=$1&PB_page=$2
+#童装动态的列表页，分页链接
+RewriteRule tzdt/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ tzdt/content.php?id=$1&page=$2
+#童装动态的内容页，分页链接
+
+RewriteRule xbxm/content-([a-z0-9\-]+).html$ xbxm/content.php?id=$1
+#箱包鞋帽的内容页
+RewriteRule xbxm/list-([a-z0-9\-]+).html$ xbxm/list.php?type=$1
+#箱包鞋帽的列表页
+RewriteRule xbxm/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ xbxm/list.php?type=$1&PB_page=$2
+#箱包鞋帽的列表页，分页链接
+RewriteRule xbxm/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ xbxm/content.php?id=$1&page=$2
+#箱包鞋帽的内容页，分页链接
+
+RewriteRule wjsc/content-([a-z0-9\-]+).html$ wjsc/content.php?id=$1
+#玩具市场的内容页
+RewriteRule wjsc/list-([a-z0-9\-]+).html$ wjsc/list.php?type=$1
+#玩具市场的列表页
+RewriteRule wjsc/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ wjsc/list.php?type=$1&PB_page=$2
+#玩具市场的列表页，分页链接
+RewriteRule wjsc/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ wjsc/content.php?id=$1&page=$2
+#玩具市场的内容页，分页链接
+RewriteRule wjsc/jglist.html$ wjsc/jglist.php
+#玩具市场报价的列表页
+RewriteRule wjsc/jglist.html&PB_page=([a-z0-9\-]+)$ wjsc/jglist.php?PB_page=$1
+#玩具市场报价的列表页，分页链接
+RewriteRule wjsc/jgcontent-([a-z0-9\-]+).html$ wjsc/jgcontent.php?id=$1
+#玩具市场报价的内容页，分页链接
+RewriteRule wjsc/prolist.html$ wjsc/prolist.php
+#玩具市场产品展示的列表页
+RewriteRule wjsc/prolist.html&PB_page=([a-z0-9\-]+)$ wjsc/prolist.php?PB_page=$1
+#玩具市场的产品展示列表页，分页链接
+RewriteRule wjsc/procontent-([a-z0-9\-]+).html$ wjsc/procontent.php?id=$1
+#玩具市场的产品展示内容页，分页链接
+
+RewriteRule bulletin/content-([a-z0-9\-]+).html$ bulletin/content.php?id=$1
+#网站公告的内容页
+
+RewriteRule fzzh/content-([a-z0-9\-]+).html$ fzzh/content.php?id=$1
+#服装展会的内容页
+RewriteRule fzzh/list-([a-z0-9\-]+).html$ fzzh/list.php?type=$1
+#服装展会的列表页
+RewriteRule fzzh/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ fzzh/list.php?type=$1&PB_page=$2
+#服装展会的列表页，分页链接
+RewriteRule fzzh/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ fzzh/content.php?id=$1&page=$2
+#服装展会的内容页，分页链接
+
+RewriteRule fzzh/fzlist.html$ fzzh/fzlist.php
+#服装展会列表页
+RewriteRule fzzh/fzcontent-([a-z0-9\-]+).html$ fzzh/fzcontent.php?id=$1
+#服装展会内容页
+
+RewriteRule sswh/content-([a-z0-9\-]+).html$ sswh/content.php?id=$1
+#时尚文化的内容页
+RewriteRule sswh/list-([a-z0-9\-]+).html$ sswh/list.php?type=$1
+#时尚文化的列表页
+RewriteRule sswh/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ sswh/list.php?type=$1&PB_page=$2
+#时尚文化的列表页，分页链接
+RewriteRule sswh/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ sswh/content.php?id=$1&page=$2
+#时尚文化的内容页，分页链接
+
+RewriteRule tpjs/content-([a-z0-9\-]+).html$ tpjs/content.php?id=$1
+#图片欣赏的内容页
+RewriteRule tpjs/list-([a-z0-9\-]+).html$ tpjs/list.php?type=$1
+#图片欣赏的列表页
+RewriteRule tpjs/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ tpjs/list.php?type=$1&PB_page=$2
+#图片欣赏的列表页，分页链接
+RewriteRule tpjs/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ tpjs/content.php?id=$1&page=$2
+#图片欣赏的内容页，分页链接
+
+RewriteRule gqxx/content-([a-z0-9\-]+).html$ gqxx/content.php?id=$1
+#供求信息的内容页
+RewriteRule gqxx/list-([a-z0-9\-]+).html$ gqxx/list.php?type=$1
+#供求信息的列表页
+RewriteRule gqxx/list.html$ gqxx/list.php
+#供求信息的列表页
+
+RewriteRule dpzm/content-([a-z0-9\-]+).html$ dpzm/content.php?id=$1
+#店铺加盟的内容页
+RewriteRule dpzm/list-([a-z0-9\-]+).html$ dpzm/list.php?type=$1
+#店铺加盟的列表页
+RewriteRule dpzm/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ dpzm/list.php?type=$1&PB_page=$2
+#店铺加盟的列表页，分页链接
+RewriteRule dpzm/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ dpzm/content.php?id=$1&page=$2
+#店铺加盟的内容页，分页链接
+RewriteRule dpzm/jmlist.html$ dpzm/jmlist.php
+#店铺加盟的加盟列表页
+RewriteRule dpzm/jmcontent-([a-z0-9\-]+).html$ dpzm/jmcontent.php?id=$1
+#店铺加盟的加盟内容页
+
+
+RewriteRule ppdq/content-([a-z0-9\-]+).html$ ppdq/content.php?id=$1
+#品牌大全的内容页
+RewriteRule ppdq/list-([a-z0-9\-]+).html$ ppdq/list.php?type=$1
+#品牌大全的列表页
+RewriteRule ppdq/list-([a-z0-9\-]+).html&PB_page=([a-z0-9\-]+)$ ppdq/list.php?type=$1&PB_page=$2
+#品牌大全的列表页，分页链接
+RewriteRule ppdq/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ ppdq/content.php?id=$1&page=$2
+#品牌大全的内容页，分页链接
+RewriteRule ppdq/pplist.html$ ppdq/pplist.php
+#品牌大全的加盟列表页
+RewriteRule ppdq/ppcontent-([a-z0-9\-]+).html$ ppdq/ppcontent.php?id=$1
+#品牌大全的加盟内容页
+
+RewriteRule tpjs/list.html$ tpjs/list.php
+#名店名铺首页
+RewriteRule yulan/content-([a-z0-9\-]+).html$ yulan/content.php?id=$1
+##搜索页面
+RewriteRule yulan/content-([a-z0-9\-]+).html&page=([a-z0-9\-]+)$ yulan/content.php?id=$1&page=$2
+#搜索页面内容分页
+
+RewriteRule yulan/list.html$ yulan/list.php
+#搜索页面的列表页
+
+
+RewriteRule fzsc/list.html$ fzsc/list.php
+#服装商城页面的列表页
+
+RewriteRule fzsc/big_type.html$ fzsc/big_type.php
+#服装商城分类页面
+
+RewriteRule fzsc/search.html$ fzsc/search.php
+#服装商城商级搜索页面
+
+
+</IfModule>

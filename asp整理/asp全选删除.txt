@@ -1,0 +1,72 @@
+<script language="javascript">
+function CheckAll(form)
+{ ///定义函数checkall,参数为form
+
+for (var i=0;i<form.elements.length;i++)
+///循环,form.elements.length得到表单里的控件个数
+{
+
+///把表单里的内容依依付给e这个变量
+var e = form.elements[i];
+	if (e.name != 'chkall')
+	e.checked = form.chkall.checked;
+	}
+}
+</script>
+
+
+
+
+
+</head>
+<%
+	sql="select * from news"
+	set rs=conn.execute(sql)
+%>
+<body>
+<form id="form1" name="form1" method="post" action="delete.asp">
+<table width="200" cellspacing="1" cellpadding="0">
+<tr>
+<td width="26">全选</td>
+<td width="169"><input name="chkall" type="checkbox" id="chkall" value="all" onclick="CheckAll(this.form)" /></td>
+</tr>
+<% do while not rs.eof %>
+<tr>
+<td><input name="id" type="checkbox" id="<%rs("id")%>" value="<%rs("id")%>" /></td>
+<td><%=rs("news_bt")%></td>
+</tr>
+<%
+rs.movenext
+loop
+%>
+<tr>
+  <td> </td>
+  <td><input type="submit" name="Submit" value="删除" /></td>
+</tr>
+</table>
+</form>
+
+
+
+
+
+
+
+delete.asp文件：
+
+<!--#include file="conn.asp"-->
+<%
+Num=request.form("id").count
+if Num=0 then
+Response.Write ("<script language='javascript'>alert('没有要删除的新闻');window.location.href='news.asp'</script>")
+Response.End
+end if
+
+ids=request.Form("id")
+sqlStr="Delete * From news Where news_id in ("&ids&")"
+conn.execute(sqlStr)
+
+Response.redirect(request.servervariables("http_referer"))
+Response.End
+%>
+

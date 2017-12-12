@@ -1,0 +1,45 @@
+php
+if(is_file('install.php')){
+	header(locationinstall.php);
+	exit;
+}
+require(dirname(__FILE__).fglobal.php);
+$rs=$db-query(select a.title,a.aid,b.content,b.aid from qb_news_article a left join qb_news_reply b on b.aid=a.aid );
+
+
+print_r($ar);
+创建新闻文件夹
+if(file_exists(News))
+{
+	echo 有这个文件夹;
+}else
+{
+	echo 没有这个文件夹;
+	mkdir(News);
+}
+
+读取模板文件
+$template=fopen(Newstemplate.html,r);
+$a=fread($template,filesize(Newstemplate.html));
+fclose($template);
+
+$i=1;
+while($rows=$db-fetch_array($rs))
+{
+
+$title=$rows[title];
+$time=date(Y-m-d His);
+$content=$rows[content];
+$a1=str_replace({title},$title,$a);
+$a1=str_replace({time},$time,$a1);
+$a1=str_replace({content},$content,$a1);
+创建个文件
+
+$f=fopen(News{$i}.html,w+);
+fwrite($f,$a1);
+fclose($f);
+$i++;	
+}
+
+
+

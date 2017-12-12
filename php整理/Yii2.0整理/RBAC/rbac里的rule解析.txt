@@ -1,0 +1,76 @@
+首先建立好rbac的角色控制权限后
+如前所述，规则给角色和权限增加额外的约束条件。规则是 yii\rbac\Rule 的派生类。 它需要实现 execute() 方法。在之前我们创建的层次结构中，作者不能编辑自己的帖子，我们来修正这个问题。 首先我们需要一个规则来认证当前用户是帖子的作者：
+
+namespace app\rbac;
+
+use yii\rbac\Rule;
+
+/**
+ * 检查 authorID 是否和通过参数传进来的 user 参数相符
+ */
+class AuthorRule extends Rule
+{
+    public $name = 'isAuthor';
+
+    /**
+     * @param string|integer $user 用户 ID.
+     * @param Item $item 该规则相关的角色或者权限
+     * @param array $params 传给 ManagerInterface::checkAccess() 的参数
+     * @return boolean 代表该规则相关的角色或者权限是否被允许
+     */
+    public function execute($user, $item, $params)
+    {
+        return isset($params['post']) ? $params['post']->createdBy == $user : false;
+    }
+}
+
+上述的这个文件是在控制台里写的一个文件，我用的是基础模板所以把它放在了commands(命令)目录下AuthorRule.php
+$name 是规则的名字 可以自己定义修改
+下面的execute方法是必须要实现的。参数$users=>用户id,$item=>与该规则相关的角色或者权限,$params 这里我也不清楚，但我传递的是$params[post]等于model（task::fondone(1)）
+方法里面可以自己写判断，有权限就返回true 没权限就返回false 这里是查的这篇文章的创建人等不等与传递过来的 $users参数
+
+
+上述规则检查 post 是否是 $user 创建的。我们还要在之前的命令中 创建一个特别的权限 updateOwnPost ：
+
+namespace app\commands;
+use Yii;
+
+use yii\console\Controller;
+
+class RbacController extends Controller
+{
+
+
+    public function actionInit(){
+        $auth = Yii::$app->authManager;
+
+        //创建规则	
+        $rule = new AuthorRule();
+        $auth->add($rule);
+
+       // 添加 "updateOwnPost" 权限并与规则关联
+        $updateOwnPost = $auth->createPermission('updateOwnTask');  //权限name
+        $updateOwnPost->description = 'Update own task';  //权限描述
+        $updateOwnPost->ruleName = $rule->name;//权限规则
+        $auth->add($updateOwnPost);
+
+      // "updateOwnPost" 权限将由 "updatePost" 权限使用
+        $ru=$auth->getPermission('updateTask'); //获取权限
+        $auth->addChild($updateOwnPost, $ru); // "updateOwnPost" 权限将由 "updatePost" 权限使用
+
+// 允许 "author" 更新自己的帖子
+        $author=$auth->getRole('sem'); //获取角色
+
+        $auth->addChild($author, $updateOwnPost); // 允许 "author" 更新自己的帖子
+        exit;
+    }
+}
+
+上述文件需要用控制台执行，我将它创建到commands/RbacController.php 里
+这里需要注意几点
+ $ru=$auth->getPermission('updateTask'); //获取权限
+ $author=$auth->getRole('sem');//获取角色
+
+
+
+2017年8月11日17:09:53 

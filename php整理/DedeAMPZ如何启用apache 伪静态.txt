@@ -1,0 +1,15 @@
+在DedeAMPZ整合套件服务器版上学习了一段时间的php，想在本地利用wordpress搭建一个dz系统，设置永久固定链接格式，测试的时候发现了一些问题，不管怎么样固定链接都不能正常使用，总是报505的错误，经过两天的网上查询，是服务器的设置问题，现在解决如下：
+
+打开电脑右下角的DedeAMPZ PHP套件客户端，修改WEB全局配置
+
+Options Indexes
+AllowOverride None
+Order allow,deny
+Allow from all
+
+修改为：
+
+Options Indexes FollowSymLinks
+AllowOverride all
+Order allow,deny
+Allow from all

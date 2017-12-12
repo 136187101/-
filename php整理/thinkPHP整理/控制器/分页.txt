@@ -1,0 +1,9 @@
+			import("ORG.Util.Page");
+			$count=$news->count();
+			$Page=new Page($count,1);
+			$Page->setConfig("header","条新闻");
+			$Page->setConfig("first","首页");
+			$Page->setConfig("last","末页");
+			$show=$Page->show();
+			$this->list=M("News")->field("id,title,content,times")->where("id!=''")->order("id desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+			$this->show=$show;

@@ -1,0 +1,76 @@
+pgsql 常用的命令：
+1. 创建数据库
+create database name with owner username;
+
+2. 创建用户
+create role with createdb ;
+create user user_name;
+
+3. 修改密码
+alter user user_name with password ‘new password‘;
+
+查询当前db中所有表的信息：
+"select * from pg_tables" —— 得到当前db中所有表的信息（这里pg_tables是系统视图）
+
+修改表名：
+ALTER TABLE table_name RENAME TO new_table_name;
+
+修改表字段结构：
+ALTER TABLE journal ALTER is_retail TYPE character(350);
+
+修改字段报错的方法不能自动转换成类型 integer HINT: 您可能需要指定"USING is_retail::integer"。
+ALTER TABLE goods.goods
+alter COLUMN is_retail set data TYPE smallint using 0
+
+修改表的字段名
+alter table config.sql_config RENAME config_id to sql_config_id;
+删除表字段的非空限制属性
+alter table config.sql_config alter note DROP not null;
+删除表字段:
+alter table config.sql_config DROP null_exit_text
+
+外键： 
+alter table 成绩表 add constraint FK_StudentNo foreign key (StudentNo) references Student (StudentNo)
+ON UPDATE CASCADE ON DELETE CASCADE
+级联更新，级联删除，这样在删除主表Student时，成绩表中该学生的所有成绩都会删除。
+
+导出整个数据库,需要客户端安装pg_dump
+pg_dump -h localhost -U postgres(用户名) 数据库名(缺省时同用户名) >/data/dum.sql
+pg_dump -h 192.168.1.98 -U k branch.server > WX.S
+pg_dump -h 192.168.2.152 -U k centre.server > or.ce.s
+
+导入整个数据库
+psql -U postgres(用户名) 数据库名(缺省时同用户名) < /data/dum.sql
+psql -U postgres centre.se < sql_config.dll.sql
+
+用 psql 就可以了, 本机不用指定密码
+-d 指定数据库
+-U 指定用户
+-f 指定导出的文件
+-h 指定服务器
+--password 说明需要输入密码
+本机
+psql -d yemai -U yemai -f yemai.sql
+psql -d hold -U hold -f .sql
+远程
+psql -h 192.168.2.176 -d centre.se -U postgres sql.sql
+
+
+导出某个表
+pg_dump -h localhost -U postgres(用户名) 数据库名(缺省时同用户名) -t table(表名) >/data/dum.sql
+pg_dump -h 192.168.2.176 -U postgres centre.se -t config.sql_config > c.s.sl
+
+函数
+替换字符串
+replace
+
+pg_dump -h localhost -U postgres "centre.se" > centre.se.sql
+
+psql 的常用简介命令：
+\d
+\dn 查看表
+\q 退出
+\du 查看所有用户、角色
+
+修改时间
+select now() + interval ‘2 years‘;

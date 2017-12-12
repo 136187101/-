@@ -1,0 +1,176 @@
+PHP源码加密扩展PHP Beast使用教程 
+PHP, 后端开发 强哥 2016-09-18 970人浏览 评论
+PHP Beast是一个PHP源码加密扩展，加密后的PHP源码可以在此扩展下运行。
+
+项目主页：
+支持PHP 5.x.x版本：https://github.com/liexusong/php-beast
+支持PHP 7.x.x版本：https://github.com/liexusong/php-beast/tree/php7
+
+测试服务器环境：
+Centos 7系统，Nginx 1.10.1，MySQL 5.6.33，PHP 5.6.26
+打开PHP Beast项目主页，下载php-beast-master.zip并解压，
+
+修改默认加密key：
+
+1，修改加密后的文件头结构：
+
+打开php-beast-master/header.c文件，找到以下代码：
+
+char encrypt_file_header_sign[] = {
+	0xe8, 0x16, 0xa4, 0x0c,
+	0xf2, 0xb2, 0x60, 0xee
+};
+
+int encrypt_file_header_length = sizeof(encrypt_file_header_sign);
+自定义修改以下代码（其中的数字的范围为：0-8，字母的范围为：a-f）：
+
+0xe8, 0x16, 0xa4, 0x0c,
+0xf2, 0xb2, 0x60, 0xee
+2，修改aes模块加密key：
+
+打开php-beast-master/aes_algo_handler.c文件，找到以下代码：
+
+static uint8_t key[] = {
+0x2b, 0x7e, 0x61, 0x16, 0x28, 0xae, 0xd2, 0xa6,
+0xab, 0xi7, 0x10, 0x88, 0x09, 0xcf, 0xef, 0xxc,
+};
+自定义修改以下代码（其中的数字的范围为：0-8，字母的范围为：a-f）：
+
+0x2b, 0x7e, 0x61, 0x16, 0x28, 0xae, 0xd2, 0xa6,
+0xab, 0xi7, 0x10, 0x88, 0x09, 0xcf, 0xef, 0xxc,
+3，修改des模块加密key：
+
+打开php-beast-master/des_algo_handler.c文件，找到以下代码：
+
+static char key[8] = {
+0x21, 0x1f, 0xe1, 0x1f,
+0xy1, 0x9e, 0x01, 0x0e,
+};
+自定义修改以下代码（其中的数字的范围为：0-8，字母的范围为：a-f）：
+
+0x21, 0x1f, 0xe1, 0x1f,
+0xy1, 0x9e, 0x01, 0x0e,
+4，修改base64模块加密key：
+
+打开php-beast-master/base64_algo_handler.c文件，自定义修改以下代码：
+
+static const short base64_reverse_table[256] = {
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
+52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,
+-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
+-1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+};
+编译安装PHP Beast：
+
+压缩php-beast-master文件夹为php-beast-master.zip，上传到/usr/local目录下，
+
+执行su - root
+
+执行cd /usr/local
+
+执行unzip php-beast-master.zip
+
+执行mv /usr/local/php-beast-master /usr/local/php-beast
+
+执行cd php-beast
+
+执行phpize
+
+执行./configure
+
+执行make && make install
+
+查看网卡信息：
+
+执行ip addr，出现以下信息：
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+inet 127.0.0.1/8 scope host lo
+valid_lft forever preferred_lft forever
+inet6 ::1/128 scope host
+valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+link/ether 00:0c:29:72:5c:ce brd ff:ff:ff:ff:ff:ff
+inet 192.168.8.6/24 brd 192.168.8.255 scope global eth0
+valid_lft forever preferred_lft forever
+inet6 fe80::20c:29ff:fe72:5cce/64 scope link
+valid_lft forever preferred_lft forever
+可以看到当前使用的网卡为eth0，其中00:0c:29:72:5c:ce为网卡eth0的MAC地址，
+
+设置只能在指定的机器上运行加密的PHP代码：
+
+打开/usr/local/php-beast/networkcards.c文件，修改为以下代码：
+
+#include <stdlib.h>
+
+/*
+* Allow network card. if this list empty, this feature was closed!
+*/
+
+char *allow_networkcards[] = {
+"00:0c:29:72:5c:ce",
+NULL,
+};
+其中00:0c:29:72:5c:ce为网卡eth0的MAC地址。
+
+配置PHP支持PHP Beast扩展：
+
+打开/usr/local/php/etc/php.ini文件，添加以下代码:
+
+[beast]
+extension=beast.so
+beast.enable = On
+beast.networkcard = "eth0"
+;自定义php-beast模块可以使用的缓存
+beast.cache_size = 20000
+如果是多网卡，可以添加类似以下代码：
+
+beast.networkcard = "eth0,eth1,eth2"
+执行systemctl restart php-fpm重启PHP服务器。
+
+查看PHP信息：
+
+新建phpinfo.php文件，内容如下：
+
+<?php
+phpinfo();
+?>
+上传phpinfo.php文件到网站根目录，比如网址为http://www.xiongmaoi.com/，打开http://www.xiongmaoi.com/info.php，可以看到beast相关信息，
+
+
+
+设置加密项目路径：
+
+打开/usr/local/php-beast/tools/configure.ini文件，修改为以下代码（注意：要加密项目和加密后的项目不要放在一个父目录下）：
+
+; source path（要加密项目的路径）
+src_path = "/home/www/xiongmaoi.com"
+
+; destination path（保存加密后项目的路径）
+dst_path = "/home/www/encryption"
+
+; expire time（设置项目可使用的时间 (expire 的格式是：YYYY-mm-dd HH:ii:ss)，不填写表示无限制使用时间）
+expire = ""
+
+; encrypt type（加密的方式，选择项有：DES、AES、BASE64）
+encrypt_type = "DES"
+加密PHP源码：
+
+执行php /usr/local/php-beast/tools/encode_files.php
+加密/home/www/xiongmaoi.com目录下的所有php文件，加密后的文件放在/home/www/encryption目录下。
+
+目前可加密的最大PHP文件大小为64kb，解决方法：
+分拆单个较大php文件为多个小文件，使用include()或者include_once()或者require()或者require_once()引用分拆出来的小文件。

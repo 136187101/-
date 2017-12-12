@@ -1,0 +1,52 @@
+function doedit_more(value,id)
+{
+		var http_request = false;
+		var values = encodeURI(value); //这里UTF-8下要用encodeURI 否则在IE浏览器上出现乱码。
+		//var value = encodeURIComponent(value);
+        if (window.ActiveXObject){    /*在IE下初始化XMLHttpRequest对象 */
+                try{
+                        //新版本的 Internet Explorer
+                        http_request= new ActiveXObject("Msxml2.XMLHTTP");
+                }catch (oldIE){
+                        try {
+                                //较老版本的 Internet Explorer
+                                http_request= new ActiveXObject("Microsoft.XMLHTTP");
+                        } catch (failed){
+                                        // 还是创建失败 =.=|||
+                                        http_request= false;
+                                }             
+                }
+			} else if (window.XMLHttpRequest){    /*在Firefox下初始化XMLHttpRequest对象 */
+					http_request= new XMLHttpRequest();
+			}
+			if(!http_request){
+					alert("创建ajax失败！"); 
+					return false;
+			   }
+		url = "/admin/ajax/xiangmu.php?values="+values+"&id="+id;
+		if (http_request)
+		{
+			http_request.open("GET", url, true);	
+			http_request.onreadystatechange = liwqbj;    //指定响应方法
+			http_request.setRequestHeader('If-Modified-Since','0'); 
+			http_request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			http_request.send(null);
+		}
+		
+		function liwqbj(){
+				if(http_request.readyState < 4)
+				{
+					document.getElementById("xiangmu_id").innerHTML="<img src=/admin/images/load.gif />";
+				}
+				if (http_request.readyState == 4 ) {
+					if (http_request.status == 200) {
+						Text = http_request.responseText;
+						document.getElementById("xiangmu_id").className="yangshi";
+						document.getElementById("xiangmu_id").innerHTML=Text;
+					} else {
+						alert('您请求的页面发现错误');
+					}
+				}
+		}
+}  
+</script>

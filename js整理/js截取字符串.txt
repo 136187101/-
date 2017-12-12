@@ -1,0 +1,12 @@
+var str="abcdefghigklmndede.jpg"
+
+document.write(str.indexOf("de",0))
+
+document.write(str.indexOf("jpg",0))
+document.write(str.substring(0,5));
+
+截取字符串：
+str.substring(0,5)
+
+查找字符串第一次出现
+document.write(str.indexOf("de",0))

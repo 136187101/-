@@ -1,0 +1,196 @@
+显示内容部分：
+
+//定义变量
+int i,start,stop,t,stat,statt,pp,pagecount,pagesize;
+//变量初始值
+stat=0;
+statt=0;
+start=0;//开始查询的字符串位置，初始为0
+stop=0;
+pagesize=2000;//定义每页至少显示字符串数
+pagecount=0;
+
+//获得当前的页数
+pa=Request.Params["page"];
+if(pa=="" || pa==null)
+pa="1";
+pp=Convert.ToInt32(pa);
+
+//获得内容
+articletxt=rs["contenttxt"].ToString();
+
+//判断页面的内容长度是否大于定义的每页至少显示字符串数
+if(articletxt.Length>=pagesize)//如果大于字符串数，则我们可以分页显示
+{
+t=articletxt.Length/pagesize;//获得大致的总页数
+//根据目前获得的页数循环
+for(i=0;i<t;i++)
+{
+  //如果查询开始位置到查询的范围超出整个内容的长度，那么就不用寻找断点（分页点）；反之，查找
+  if(start+pagesize<articletxt.Length)
+  {
+   stat=articletxt.IndexOf("</P>",start+pagesize);//查找</P>分页点的位置
+   if(stat<=0)//如果找不到
+    stat=articletxt.IndexOf("</p>",start+pagesize);//查找</p>分页点的位置；这里您可以自己设置分页点的判断
+  }
+  if(stat<=0)//如果找不到分页点，说明不能分页，也就不需要做其他的劳动了；否则，就进行分页
+   articletext=articletxt;//将结果付给要导出的变量
+  else
+  {
+   stop=stat;//分页点的位置也就作为这一页的终点位置
+   if(start+pagesize>=articletxt.Length)//如果起始位置到查询的范围超出整个内容的长度，那么这一页的终点位置为内容的终点
+    stop=articletxt.Length;
+   if(pp==i+1)//如果是当前，那么输出当前页的内容
+    articletext=articletxt.Substring(start,stop-start);//取内容的起始位置到终点位置这段字符串输出
+   start=stat;//将终点位置作为下一页的起始位置
+   pagecount++;//获得实际页总数
+  }
+}
+}
+
+分页部分
+
+
+string html;//定义分页代码变量
+if(pagecount>1)//当页数大于1的时候我们显示页数
+{
+  for(i=1;i<=pagecount;i++)
+  {
+     if(i==pp)//如果是当前页，加粗显示
+      html+="<b>["+i+"]</b> ";
+     else
+    html+="<a href=?id="+articleid+"&page="+i+">["+i+"]</a> ";
+  }
+  if(pp+1>pagecount)//显示下一页，方便浏览
+   html+="<a href=?id="+articleid+"&page="+(pagecount)+">[下一页]</a></p>";
+  else
+   html+="<a href=?id="+articleid+"&page="+(pp+1)+">[下一页]</a></p>";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+php 内容分页$content=" 文章内容 "; 
+//[page_end] 分页符号
+
+       function Pagination($total, $per, $page)
+     {
+               /*
+               函数名称：Pagination($total, $per, $page)
+               功能：分页，并且提供相邻页的链接
+               最后修订：tony(qidongfei@163.com) 2007-3-21
+
+               定义 $total : 记录总数
+               $per： 每页的记录数
+               $page ：当前页码
+               */
+             if($page=="" || $page<1) $page=1;
+             $apage=$total/$per;//计算页数（包含小数点的）
+             $allpage=ceil($apage);//取整返回
+             $next=$page+1;         //下一页
+             $pre=$page-1;           //上一页
+             $startcount0=$page-3;   //前面3页输出起始序号
+             $endcount0=$page-1;     //前面3页输出终止序号
+             $startcount=$page+1;   //后面3页输出起始序号
+             $endcount=$page+3;     //后面3页输出终止序号
+             if($startcount0<1) $startcount0=1; //为了避免输出的时候产生负数，设置如果小于1就从序号1开始
+             if($allpage<$endcount) $endcount=$allpage;   //页码+3的可能性就会产生最终输出序号大于总页码，那么就要将其控制在页码数之内
+
+
+             $url=basename($_SERVER['PHP_SELF']);   //取得当前的文件名
+
+             $query_array=explode("&",$_SERVER['argv'][0]);   //取得传递的参数，并且拆分到数组打散
+
+             foreach ($query_array as $key => $value)     if (strstr($value,"page="))   unset($query_array[$key]);   //处理一下，将page=xxx的参数干掉
+
+             $query_string=implode("&amp;",$query_array);
+
+
+             if($page==1 && $allpage==1)
+             { 
+$menu.= "";  
+
+return $menu;
+
+             }
+             else
+             {
+
+
+                         if($page==1)
+                         {
+                           /*如果为第一页，直接从第二页链接开始输出*/
+                               $menu.= "<B>[$page]</B>&nbsp;";
+                               for ($page=2;$page<=$endcount;$page++)   $menu.= "<a href=\"{$url}?{$query_string}&amp;page={$page}\" class=link02><B>[$page]</B></a>   ";
+                               $menu.= "&nbsp;<a href=\"{$url}?{$query_string}&amp;page=".$next."\" class=link02><B>下一页</B></a>&nbsp;&nbsp;<a href=\"{$url}?{$query_string}&amp;page=".$allpage."\" class=link02><B>末页</B></a>";  
+return $menu;
+
+                         }
+                         elseif($page==$allpage)
+                         {
+
+                               $menu.="   <a href=\"{$url}?{$query_string}&amp;page=1\" class=link02><B>首页</B></a>
+                                       <a href=\"{$url}?{$query_string}&amp;page=".$pre."\" class=link02><B>上一页</B></a>&nbsp;&nbsp;";
+                               for ($page=$startcount0;$page<=$endcount0;$page++)   $menu.="<a href=\"{$url}?{$query_string}&amp;page={$page}\" class=link02><U><B>[$page]</B></U></a>   "; //后面3页
+                               $menu.="<B>[$allpage]</B>";  
+return $menu;
+
+                         }
+                         else
+                         {
+                                     $menu.="   <a href=\"{$url}?{$query_string}&amp;page=1\" class=link02><B>首页</B></a>&nbsp;&nbsp;<a href=\"{$url}?{$query_string}&amp;page=".$pre."\" class=link02><B>上一页</B></a>&nbsp;&nbsp;"; 
+
+                                   for ($page=$startcount0;$page<=$endcount0;$page++)  
+   $menu.="<a href=\"{$url}?{$query_string}&amp;page={$page}\" class=link02><B>[$page]</B></a>&nbsp;";     //前面3页输出
+                                   $menu.="<B>[$page]</B>&nbsp;";
+                                   for ($page=$startcount;$page<=$endcount;$page++)  
+   $menu.="<a href=\"{$url}?{$query_string}&amp;page={$page}\" class=link02><U><B>[$page]</B></U></a>&nbsp;"; //后面3页
+
+                                   $menu.="&nbsp;<a href=\"{$url}?{$query_string}&amp;page=".$next."\" class=link02><B>下一页</B></a>&nbsp;&nbsp;<a href=\"{$url}?{$query_string}&amp;page=".$allpage."\" class=link02><B>末页</B></a>
+                                       ";  
+return $menu;
+
+                         }
+             }
+
+
+     }
+
+
+   function arPagination($content,$page)
+   {
+     /*
+     函数名称： arPagination($content,$page)
+     功能：文章分页
+     最后修订：tony(qidongfei@163.com) 2007-03-21
+     定义 $content : 文章的内容
+     $page ：当前页码
+     说明：分页标签[page_end]
+     */
+     if($page=="" || $page==0) $page=1;
+     $pagenum=$page-1;
+     $contentarr = explode ("[page_end]", $content);     //按照[arpage]对文章内容进行分割
+     $arrnum=count($contentarr);                       //返回数组的总数
+     $aaa=Pagination($arrnum, "1", $page) ; 
+$menu.="<span style=\"float:right\">$aaa</span><br/><br/><br/>";               //输出分页
+     $menu.="$contentarr[$pagenum]";                       //输出当前页
+$menu.="<br/><br/><center>$aaa</center>";               //输出分页
+
+return $menu;
+
+   }
+
+
+   $content = arPagination($content,$_GET['page']);     //显示   

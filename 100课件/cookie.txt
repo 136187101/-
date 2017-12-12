@@ -1,0 +1,2 @@
+cookie 只对下级目录生效，cookie 不能超过4k 一个网站cookie不能超过20个
+setcookie("cookiename","vailue",times()+3600)

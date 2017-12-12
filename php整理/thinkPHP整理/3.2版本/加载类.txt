@@ -1,0 +1,13 @@
+这些目录下面的类库都可以自动加载，你只要把相应的类库放入目录中，然后添加或者修改命名空间定义。 你可以在Org/Util/目录下面添加一个Image.class.php 文件，然后添加命名空间如下：
+namespace Org\Util;
+class Image {
+}
+这样，就可以用下面的方式直接实例化Image类了：
+$image = new \Org\Util\Image;
+
+如果在别的php 文件 
+
+import('ORG.Util.PHPMailer');
+    $mail=new \PHPMailer;
+
+则可以这样调用

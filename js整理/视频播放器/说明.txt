@@ -1,0 +1,36 @@
+Video.js 是一个通用的在网页上嵌入视频播放器的 JS 库，Video.js 自动检测浏览器对 HTML5 的支持情况，如果不支持 HTML5 则自动使用 Flash 播放器。
+
+使用方法
+在页面中引用video-js.cs样式文件和video.js
+
+<link href="video-js.css" rel="stylesheet" type="text/css">
+<script src="video.js"></script>
+
+
+设置flash路径，Video.js会在不支持html5的浏览中使用flash播放视频文件
+
+<script>
+    videojs.options.flash.swf = "video-js.swf";
+</script>
+html
+
+poster="**"播放初始图。可使用三种视频格式，根据所需要格式选择对应的。
+
+<video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"
+      poster="http://video-js.zencoder.com/oceans-clip.png"
+      data-setup="{}">
+    <source src="http://视频地址格式1.mp4" type='video/mp4' />
+    <source src="http://视频地址格式2.webm" type='video/webm' />
+    <source src="http://视频地址格式3.ogv" type='video/ogg' />
+    <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+    <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+</video>
+设置自动播放将下面代码加到html中代码后面
+
+<script type="text/javascript">
+    var myPlayer = videojs('example_video_1');
+    videojs("example_video_1").ready(function(){
+        var myPlayer = this;
+        myPlayer.play();
+    });
+</script>

@@ -1,0 +1,25 @@
+整个互联网上解决这个IE6的透明PNG的方案也是多不胜数,从使用IE特有的滤镜或是e xpression,再到javascript+透明GIF替代.但是这些方法都有一个缺点,就是不支持CSS中backgrond-position与 background-repeat.
+
+而我今天介绍DD_belatedPNG,只需要一个理由,就是它支持backgrond-position与background-repeat.这是其他js插件不具备的.同时DD_belatedPNG还支持a:hover属性,以及<img>.
+
+看Demo: http://www.ediyang.com/demo/DD_Png/
+
+原理 
+这个js插件使用了微软的VML语言进行绘制,而其他多数解决PNG问题的js插件用的是AlphaImageLoader滤镜.
+
+使用方法 
+1.在这里下载DD_belatedPNG.js文件. 
+http://dillerdesign.com/experiment/DD_belatedPNG/#download
+
+2.在网页中引用,如下:
+<!--[if IE 6]>
+<script src="DD_belatedPNG.js" mce_src="DD_belatedPNG.js"></script>
+<script type="text/javascript">     /* EXAMPLE */   DD_belatedPNG.fix('.png_bg');   /* 将 .png_bg 改成你应用了透明PNG的CSS选择器,例如我例子中的'.trans'*/   </script> <![endif]-->   
+3.有2种调用函数,一种是DD_belatedPNG.fix(),如上代码.另一种是fix(),这中方法需要在函数内指出css选择器名. 
+使用a:hover请留意 
+5-25 更新:如果你也像jutoy同学一样想要用透明PNG作为a:hover时的背景图片,那么你需要留意你的代码,需要以”a:hover”来作为选择器. 否则可能会导致无法成功.同时我也更新了demo,请需要的更新查看.接着我们看看正确的代码:
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG.js" ></script>
+<script type="text/javascript">   DD_belatedPNG.fix('.trans,.box a:hover');   </script>
+<![endif]-->   
+

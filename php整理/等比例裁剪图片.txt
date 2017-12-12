@@ -1,0 +1,54 @@
+<?php
+function file_group($filelj,$width,$height){
+ $suijishu = rand(100,999);                            //取一个100--999的随机数；
+ $xfilej=time().$suijishu.substr($filelj,15,200);//这里需注意。截取的名称里不能带有"/"字符
+ $fileljp=$filelj;//图片路径，根据实际情况修改，要相对路径!!!!!!!!!!!!!
+ $image=$fileljp;//图片路径 
+ $img=getimagesize($image);//载入图片的函数   得到图片的信息
+ switch($img[2]){//判断图片的类型
+  case 1:
+   $im=@imagecreatefromgif($image);//载入图片，创建新图片
+  break;
+  case 2:
+   $im=@imagecreatefromjpeg($image);
+  break;
+  case 3:
+   $im=@imagecreatefrompng($image);
+  break;
+ }
+ $width_y=$img[0];
+ $height_y=$img[1];
+ if($width_y>$height_y){//如果宽大于高
+  $width_y_y=$height_y;
+  $height_y_y=$height_y;
+  $jq_x=($width_y-$height_y)/2;
+  $jq_y=0;
+ }else if($width_y<$height_y){//如果宽小于高
+  $height_y_y=$width_y;
+  $width_y_y=$width_y;
+  $jq_x=0;
+  $jq_y=($height_y-$width_y)/2;
+ }else if($width_y=$height_y){//如果宽小于高
+  $width_y_y=$width_y;
+  $height_y_y=$height_y;
+  $jq_x=0;
+  $jq_y=0;
+ }
+ $newim=imagecreatetruecolor($width,$height); //剪切图片第一步，建立新图像 x就是宽 ，y就是高//图片大小
+ imagecopyresampled($newim,$im,0,0,$jq_x,$jq_y,$width,$height,$width_y_y,$height_y_y);//这个函数不失真
+ imagejpeg($newim, "admin/grouppic/".$xfilej, 100);//加个100可以更清晰
+ //截取图片       此处为调用页面的grouppic文件的相对路径
+ return "/admin/grouppic/".$xfilej;//返回因为绝对路径
+}
+
+$aa=file_group("admin/pic/1313857386518.jpg",100,100);
+?>
+<?php echo $aa;?>
+<img src="<?php echo $aa?>" />
+
+ 
+
+ 
+
+PS：要传递的图像必须为相对路径。
+

@@ -1,0 +1,2 @@
+SELECT * FROM INFO_resnote WHERE `RID` = '10' ORDER BY istop DESC , hot DESC LIMIT 0 , 30 条件字段 用逗号隔开  
+

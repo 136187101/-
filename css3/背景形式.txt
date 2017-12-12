@@ -1,0 +1,11 @@
+background-image:url(../images/bg12.png),url(../images/bg13.png),url(../images/section1.jpg);
+可多个图片做背景
+background-position:center 40px,center,center;
+背景定位
+
+都可以用逗号隔开
+
+
+ background:rgba(255,0,0,1);
+
+透明   颜色值，透明度

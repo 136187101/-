@@ -1,0 +1,11 @@
+输出：json 格式数据 json_encode
+ 
+	session_start();
+	require_once("../common/init.php");
+	$rs=$db->query("select * from liaotian where fausers='$_GET[fausers]' and jieusers='$_GET[jieusers]' and chakan='0'");
+	while($rows=$db->fetch_array($rs))
+	{
+		$arr[$rows[id]]=array("name"=>$rows[fausers],"content"=>$rows[content]);
+		$db->query("update liaotian set chakan ='1' where id =$rows[id]");
+	}
+	echo json_encode($arr);

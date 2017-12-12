@@ -1,0 +1,25 @@
+<?php
+function wenjian($file,$kong=""){
+		$arr=scandir($file);
+		echo $file."<br>";
+		foreach($arr as $key=>$val)
+		{
+			if($val!="." && $val!="..")	{
+			$fl=$file.$val."/";
+			if(is_dir($fl))
+			{
+			//echo $fl."<br>";
+				if(is_dir($fl))
+				{
+					wenjian($fl);	
+				}
+					//wenjian($fl);	
+				}
+			}
+			
+		}
+	
+	}
+wenjian("c:/SWTOOLS/");
+
+?>

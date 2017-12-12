@@ -1,0 +1,8 @@
+   需要在控制器里加入过滤器代码；记得引入use yii\web\Response; 类
+	 public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['contentNegotiator']['formats'] = '';
+        $behaviors['contentNegotiator']['formats']['application/json'] = Response::FORMAT_JSON;
+        return $behaviors;
+    }

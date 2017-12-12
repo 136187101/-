@@ -1,0 +1,63 @@
+ThinkPHP3.21 验证码的个性设置
+
+最近正研究thinkphp开发的 onethink发现验证码写的不错。加上最近项目中有使用到，就简单完善了一下方便调用。
+支持定义验证码的高，宽，字体大小，中文验证码等。为了方便模板中直接调用单独定义了一个模块API，
+ThinkPHPApplicationApiControllerVerifyController.class.php。
+代码：
+<?php
+namespace ApiController;
+use ThinkController;
+class VerifyController extends Controller {
+public function index() {
+$fontSize = I('get.f',25);//字体大小
+$length   = I('get.l',5);//验证码字数
+$imageW   = I('get.w',0);//宽
+$imageH   = I('get.h',0);//高
+$imagecn  = I('get.cn',0); //使用中文验证码 
+$useZh = false;
+if($imagecn==1){
+  $useZh = true;
+}
+$verify = new ThinkVerify();
+$verify->fontSize= $fontSize;//字体大小
+$verify->length  = $length;//验证码字数
+$verify->imageW  = $imageW;//宽
+$verify->imageH  = $imageH;//高
+$verify->useZh   = $useZh;//使用中文验证码 
+        $verify->entry(1);
+    }
+}
+?>
+模板调用方式：http://127.0.0.1/index.php?m=Api&c=Verify&a=index&f=35&l=4&w=290&h=73。
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>调用验证码测试</title>
+</head>
+<body>
+<hr />
+<img src="{:U('Api/Verify/index',array('f'=>35,'l'=>4,'w'=>290,'h'=>73))}"/>
+</body>
+</html>
+判断验证码：
+<?php
+namespace HomeController;
+use ThinkController;
+class IndexController extends Controller {
+    public function index(){;
+$verify = I('get.verify','');
+if(!check_verify($verify)){
+          echo('验证码输入错误！');
+        }
+$this->display();
+    }
+}
+注：需要在公共函数库function.php里面加入这个函数：
+<?php
+function check_verify($code, $id = 1){
+    $verify = new ThinkVerify();
+    return $verify->check($code, $id);
+}
+?>

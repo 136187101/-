@@ -1,0 +1,160 @@
+确定缓存技术已经开启，
+$smarty->cache_dir="smarty_cache";//缓存文件
+$smarty->caching=true;//是否启用缓存技术，项目在调试中，建议不开启。
+$smarty->cache_lifetime=10;//缓存存在时间 单位：秒
+
+
+id缓存技术
+$smart->display("index.html",$id);
+//每个ID都会生成一个缓存文件
+
+//清除所有缓存技术
+$smarty->clearAllCache();
+//清除单独id缓存技术
+$smart->clearCache("index.html",$id);
+
+//局部缓存技术
+function insert_time(){
+	return date("Y:m:d H:i:s");
+	}
+
+调用页面：{insert name=time}
+
+
+
+
+
+Smarty 缓存设置 
+
+smarty 是一款很优秀的模版，学php的phper 肯定都对它有所了解 
+
+今天就简单的把 这几天学的东西写在这里 备忘 
+
+一 ： 基础设置 
+
+
+
+   Smarty缓存的配置   $smarty->cache_dir = "/caches/";  //缓存目录 
+   $smarty->caching = true;  //开启缓存,为flase的时侯缓存无效 
+   $smarty->cache_lifetime = 60;  //缓存时间 
+
+
+二：cache_id 设置 
+很多时候 需要 向文件传递变量，但当我们以下方法 
+
+
+
+<?php 
+$smarty->display("news.html"); 
+?> 
+
+
+在这种情况下 所有的 news.html 将会从缓存调出 
+也就是说 news.php?id=5 和news.php?id=6  是一个缓存页面 
+在这种情况下 就需要缓存id设置了 
+
+
+
+<?php 
+$smarty->display("news.html",md5($id)); 
+?> 
+
+这样就会缓存不同的文章 
+
+三 smarty 缓存控制 
+
+主要说以下 缓存控制的三种方法 
+
+  在一个页面中有写部分是动态的 如 显示当前的时间 和 当前ip 
+那么该如何 动态显示当前时间呢 ， 
+
+  当然用 js 也可以 这里主要说以下 smarty的三种方法实现 
+
+1、使用insert函数使模板的一部分不被缓存 
+
+首先在php页面中 
+
+
+
+<?php 
+function insert_get_now_time() 
+{ 
+  return date("Y-m-d h:i:s",time()+3600*8); 
+} 
+
+?> 
+
+
+在 模版中 
+
+现在时间为：<{insert name="get_now_time"}> 
+
+
+
+注意：首先 函数命名一定要 以 insert_ 开头 后面紧跟着 模版中的函数名字 
+      只要定义了函数 smarty 会自动 加载其函数 。 
+
+以下两种方法是从网络上获取得 
+
+希望队大家有用 
+
+2使用register_function阻止插件从缓存中输出 
+
+
+
+index.tpl: 
+<div>{current_time}{/div} 
+
+index.php: 
+function smarty_function_current_time($params, &$smarty){ 
+    return date("Y-m-d H:m:s"); 
+} 
+
+$smarty=new smarty(); 
+$smarty->caching = true; 
+$smarty->register_function('current_time','smarty_function_current_time',false); 
+if(!$smarty->is_cached()){ 
+    ....... 
+} 
+$smarty->display('index.tpl'); 
+
+
+注解： 
+定义一个函数，函数名格式为：smarty_type_name($params, &$smarty) 
+type为function 
+name为用户自定义标签名称，在这里是{current_time} 
+两个参数是必须的，即使在函数中没有使用也要写上。两个参数的功能同上。 
+
+3、使用register_block使整篇页面中的某一块不被缓存 
+
+
+
+index.tpl: 
+<div align='center'> 
+Page created: {"0"|date_format:"%D %H:%M:%S"} 
+
+{dynamic} 
+Now is: {"0"|date_format:"%D %H:%M:%S"} 
+... do other stuff ... 
+{/dynamic} 
+
+</div> 
+
+index.php: 
+function smarty_block_dynamic($param, $content, &$smarty) { 
+return $content; 
+} 
+$smarty = new Smarty; 
+$smarty->caching = true; 
+$smarty->register_block('dynamic', 'smarty_block_dynamic', false); 
+if(!$smarty->is_cached()){ 
+    ....... 
+} 
+$smarty->display('index.tpl'); 
+
+
+注解： 
+定义一个函数，函数名格式为：smarty_type_name($params, &$smarty) 
+type为block 
+name为用户自定义标签名称,在这里是{dynamic} 
+两个参数是必须的，即使在函数中没有使用也要写上。两个参数的功能同上。

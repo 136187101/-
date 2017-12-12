@@ -1,0 +1,11 @@
+在配置文件CONFIG.PHP里配置	
+'TMPL_PARSE_STRING'=>array(
+	'__BAIDU__'=>"http://www.baidu.com",
+	),
+
+__URL__<br />
+../Public<br />
+__PUBLIC__<br />
+__TMPL__<br />
+__APP__<br />
+__BAIDU__

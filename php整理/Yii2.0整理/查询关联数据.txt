@@ -1,0 +1,21 @@
+class Customer extends \yii\db\ActiveRecord
+{
+    public function getOrders()
+    {
+        // 客户和订单通过 Order.customer_id -> id 关联建立一对多关系
+        return $this->hasMany(Order::className(), ['customer_id' => 'id']);
+    }
+}
+
+class Order extends \yii\db\ActiveRecord
+{
+    // 订单和客户通过 Customer.id -> customer_id 关联建立一对一关系
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
+}
+
+
+return $this->hasOne(UserBackend::className(),['id'=>'submituser'])->select('id,name');
+可以选择查询的关联字段

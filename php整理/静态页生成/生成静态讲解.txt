@@ -1,0 +1,235 @@
+首先说原理。某驼查了那么多资料，发现不管用什么方法，原理都是一样的。就是用程序读取相应的数据来替换模版中的变量，然后生成静态页。php中主要用到的就是要用到fread()和fwirte()。而静态页面生成了之后，就会牵扯到修改的问题。这里可以用到正则匹配的方法来替换模版中改变的部位。不过此种方法太麻烦，驼驼推荐的方法是直接把原来生成的模版砍掉，重新生成，呵呵，真正的一了百了。 
+
+还需要说明的一点就是，这种生成静态页面的方法一般都用于那些变化不是很频繁的页面，比如信息的最终页面。而针对列表页，如果信息更新不是很频繁的话，也是可取的。现在网上流行好多可以生成静态页面的blog或者论坛程序，都是通过手动点击后台“生成html页”的按钮来“半自动”生成html的。而对一些信息量非常大的门户网站，则行不通。因为静态页之所以叫“静态”，是因为其不可自动改变。如果信息列表每天更新100次，那么静态的列表页就要重新生成100次。如果我有10个这样的栏目，那想想也够吐血的了。 
+
+好了，闲话少说，现在来看看实际的程序演示： 
+
+first：是一个利用ob函数来做的咚咚，代码比较简单，效率相对也高一些。某驼从某个 
+
+高人处得到的源码，做了一些改动 
+
+<?php    ob_start(); 
+@readfile("http://localhost/?package=pricab&place_port=4"); 
+$text = ob_get_flush(); 
+$myfile = fopen("myfile.html","w"); 
+$text = str_replace ("{counent}",$string,$text);     
+fwrite($myfile,$text);     
+ob_clean(); 
+?> 
+
+因为就算要生成静态页面，动态读取那部分也是要保留的，把数据插入数据库后，把url传递给readfile函数，然后读入缓存，fwrite一下就可以生成静态页面，这个是驼驼最欣赏的一种作法。代码行数最少，效率最高。驼驼这边要求http://localhost/?package=pricab&place_port=4是一个裸页，也就是单纯的内容，没有头，尾，菜单。这样才能比较自由的定制自己的模版myfile.html。如果仅仅是要求生成静态页的话， 
+ob_start();     
+@readfile("http://localhost/?package=pricab&place_port=4");     
+$string = ob_get_flush(); 
+$myfile = fopen("myfile.html","w");     
+fwrite($myfile,$string);     
+ob_clean(); 
+
+就可以over了 
+
+second：普通生成静态html页。 
+
+这种作法就是按部就班的来做，fread进来页面，然后str_replace替换 
+
+首先是创建最终内容页： 
+
+$title = "http://siyizhu.com测试模板";   
+$file = "TwoMax Inter test templet,<br>author：[email=Matrix@Two_Max]Matrix@Two_Max[/email]"; 
+$fp = fopen ("temp.html","r");   
+$content = fread ($fp,filesize ("temp.html"));   
+$content = str_replace ("{file}",$file,$content);   
+$content = str_replace ("{title}",$title,$content);   
+$filename = "test/test.html";   
+$handle = fopen ($filename,"w"); //打开文件指针，创建文件   /* 　检查文件是否被创建且可写   */   if (!is_writable ($filename)) 
+{     die ("文件：".$filename."不可写，请检查其属性后重试！");   }   
+if (!fwrite ($handle,$content)){ //将信息写入文件     die ("生成文件".$filename."失败！");   }     
+fclose ($handle); //关闭指针    die ("创建文件".$filename."成功！"); 
+
+这一步比较简单。只是单纯的变量替换即可。如果要生成静态的列表页面的话，原理也是一样，用程序来生成文章列表，把它当成一个大的变量，替换模版中的变量，列表的翻页页是如此。当然，如果有信息更新的话，列表翻页也是要重新生成的。 
+
+<?php     
+$title = "http://";     
+$file = "TwoMax Inter test templet,<br>author：[email=Matrix@Two_Max]Matrix@Two_Max[/email]";     
+$fp = fopen ("temp.html","r");     
+$content = fread ($fp,filesize ("temp.html"));     
+$content = str_replace ("{file}",$file,$content);     
+$content = str_replace ("{title}",$title,$content);     
+// 生成列表开始     
+$list = '';     
+$sql = "select id,title,filename from article";     
+$query = mysql_query ($sql);     
+while ($result = mysql_fetch_array ($query)){     
+$list .= '<a href='.$root.$result['filename'].'   target=_blank>'.$result['title'].'</a><br>';    }     
+$content .= str_replace ("{articletable}",$list,$content);     //生成列表结束   
+// echo $content;     
+$filename = "test/test.html";     
+$handle = fopen ($filename,"w"); //打开文件指针，创建文件   
+/* 　检查文件是否被创建且可写    */    if (!is_writable ($filename)){     die ("文件：".$filename."不可写，请检查其属性后重试！");    }    if (!fwrite ($handle,$content)){ //将信息写入文件     die ("生成文件".$filename."失败！");    }     fclose ($handle); //关闭指针     die ("创建文件".$filename."成功！"); ?> 
+
+关于翻页：
+ 
+如我们指定分页时，每页20篇。某子频道列表内文章经数据库查询为45条，则，首先我们通过查询得到如下参数：1，总页数；2，每页篇数。第二步，for ($i = 0; $i < allpages; $i++)，页面元素获取，分析，文章生成，都在此循环中执行。不同的是，die ("创建文件".$filename."成功！";这句去掉，放到循环后的显示，因为该语句将中止程序执行。例： 
+
+<?php $fp = fopen ("temp.html","r"); 
+$content = fread ($fp,filesize ("temp.html")); 
+$onepage = '20'; 
+$sql = "select id from article where channel='$channelid'"; 
+$query = mysql_query ($sql); 
+$num = mysql_num_rows ($query); 
+$allpages = ceil ($num / $onepage); 
+for ($i = 0;$i<$allpages; $i++) 
+{ if ($i == 0){ $indexpath = "index.html"; } 
+else { $indexpath = "index_".$i."html"; } 
+$start = $i * $onepage; $list = ''; 
+$sql_for_page = "select name,filename,title from article where channel='$channelid' limit $start,$onepage"; 
+$query_for_page = mysql_query ($sql_for_page); 
+while ($result = $query_for_page){ $list .= '<a href='.$root.$result['filename'].' target=_blank>'.$title.'</a><br>'; } 
+$content = str_replace ("{articletable}",$list,$content); 
+if (is_file ($indexpath)){ @unlink ($indexpath); //若文件已存在，则删除 } $handle = fopen ($indexpath,"w"); //打开文件指针，创建文件 /*　 检查文件是否被创建且可写 */ if (!is_writable ($indexpath)){ echo "文件：".$indexpath."不可写，请检查其属性后重试！"; //修改为echo } if (!fwrite ($handle,$content)){ //将信息写入文件 echo "生成文件".$indexpath."失败！"; //修改为echo } fclose ($handle); //关闭指针 } 
+fclose ($fp); die ("生成分页文件完成，如生成不完全，请检查文件权限系统后重新生成！");?> 
+third：smarty模版生成静态页面 
+驼驼是用smarty模版的，smarty自己有一个fetch函数，其功用有点类似于fread()可以用来生成静态的页面. 
+这个例子大家想必看起来眼熟，对，smarty手册中关于fetch函数的例子，hoho 某驼借用一下，比竟官方的例子总是很经典的嘛！ 
+<?php include("Smarty.class.php"); 
+$smarty = new Smarty; 
+$smarty->caching = true; 
+// only do db calls if cache doesn't exist if(!$smarty->is_cached("index.tpl")) {   
+// dummy up some data   $address = "245 N 50th";   
+$db_data = array(                 
+"City" => "Lincoln",                 
+"State" => "Nebraska",                 
+"Zip" => "68502"               
+);   
+$smarty->assign("Name","Fred");   
+$smarty->assign("Address",$address);   
+$smarty->assign($db_data); } 
+// capture the output $output = $smarty->fetch("index.tpl"); 
+//这个地方算是关键// do something with $output here echo $output; //hoho 
+看到output的结果了吧 
+然后呢?fwrite一下，我们就得到我们所要的结果了。 
+$fp = fopen("archives/2005/05/19/0001.html", "w"); 
+fwrite($fp, $content);fclose($fp); 
+?> 
+<?phpob_start();echo "Hello World!"; 
+$content = ob_get_contents();//取得php页面输出的全部内容 
+$fp = fopen("archives/2005/05/19/0001.html", "w"); 
+fwrite($fp, $content); 
+fclose($fp); 
+?> 
+PHP生成静态页面类 
+/*********************/ 
+/*                   */ 
+/* Version : 5.2.5 */ 
+/* Author : liqiangwork#sohu.com */ 
+/* QQ : 570937581   */ 
+/*                   */ 
+/*********************/ 
+//-----------------------------生成静态的类------------------------------- 
+class Makehtml{ 
+   public $MbUrl,$OutUrl,$AllHtml,$SouChar,$ObjChar; //变量 
+   public $row; //游标 
+   public $Shuzusou,$Shuzuobj; //替换的字符串数组 
+   //-----------------------初始化------------------------- 
+    function __construct(){ //初始化 
+     $this->MbUrl=""; 
+     $this->OutUrl=""; 
+     $this->AllHtml=""; 
+     $this->Sql=""; 
+     $this->SouChar=""; 
+     $this->ObjChar=""; 
+    } 
+   
+   
+   //-----------------------------自动按字段替换--------------------------- 
+    function AutoReplace(){ 
+      //------------------自动获取要替换的字符串------------------- 
+      $tlen=count($row); 
+      $shuzu1=array(); 
+      $shuzu2=array(); 
+      if($row){ 
+      $i=0; 
+      foreach($row as $key => $value){       
+     $shuzu2="<=\$".$key."\$>"; 
+     $shuzu1=$value; 
+     $i++; 
+      } 
+      $this->Replacehtml(shuzu2,shuzu1); 
+      } 
+      //------------------自动获取要替换的字符串------------------- 
+    } 
+   //-----------------------------自动按字段替换完成------------------------ 
+   
+   
+   //-----------------------------批量替换数组-------------------------- 
+   function Replacehtml($Shuzusou,$Shuzuobj){ //批量替换数组 
+    if(count($Shuzusou)!=count($Shuzuobj)){ 
+      exit("替换数组不匹配"); 
+    } 
+    if($this->AllHtml==""){ 
+      exit("没有要替换的内容");     
+    } 
+    for($i=0;$i<count($Shuzusou);$i++){ 
+     $this->AllHtml=str_replace($Shuzusou[$i],$Shuzuobj[$i],$this->AllHtml); 
+     //print("<br>".$Shuzusou(i)."=".$Shuzuobj(i)."<br>") 
+   } 
+   } 
+   //-----------------------------批量替换数组完成-------------------------- 
+   
+   //-----------------------------读取文件--------------------------------- 
+    function Readfile(){ 
+     $file=fopen($this->MbUrl,"r"); 
+     $fsize=filesize($this->MbUrl); 
+     $this->AllHtml=fread($file,$fsize); 
+     fclose($file); 
+       }   
+   //-----------------------------读取文件完成------------------------------ 
+   //-----------------------------保存文件--------------------------------- 
+   function SaveFile(){ 
+    $file=fopen($this->OutUrl,"w"); 
+    fwrite($file,$this->AllHtml); 
+    fclose($file); 
+   } 
+   //-----------------------------保存文件完成------------------------------ 
+} 
+//------------------------------生成静态的类完成------------------------------- 
+
+以下为引用的内容： 
+//------------------静态生成---- 
+     $MyMake=new Makehtml; 
+     $MyMake->MbUrl="News_Show.shtml"; 
+     $MyMake->Readfile(); 
+     $THTml=$MyMake->AllHtml; 
+     $shuzu1=array(); 
+     $shuzu2=array(); 
+     $shuzu1[0]="<=\$keybord\$>"; 
+     $shuzu1[1]="<=\$description\$>"; 
+     $shuzu1[2]="<=\$title\$>"; 
+     $shuzu1[3]="<=\$Title1\$>"; 
+     $shuzu1[4]="<\$=Bid\$>"; 
+     $shuzu1[5]="<\$=Id\$>"; 
+     $shuzu1[6]="<=\$Contentb\$>"; 
+     $shuzu1[7]="<\$=BigId\$>"; 
+     $shuzu1[8]="<=\$Date\$>"; 
+     $shuzu1[9]="<=\$City\$>"; 
+     $shuzu1[10]="<=\$SmallId\$>"; 
+     $shuzu1[11]="<=\$CityId\$>"; 
+     $shuzu1[12]="width=\"100%\""; 
+     $MyMake->OutUrl="News_show_1.shtml"; 
+     $shuzu2[0]="数组0"; 
+     $shuzu2[1]="数组1"; 
+     $shuzu2[2]="数组2"; 
+     $shuzu2[3]="数组3"; 
+     $shuzu2[4]="数组4";         
+     $shuzu2[5]="数组5"; 
+     $shuzu2[6]="数组6"; 
+     $shuzu2[7]="数组7"; 
+     $shuzu2[8]="数组8"; 
+     $shuzu2[9]="数组9"; 
+     $shuzu2[10]="数组10"; 
+     $shuzu2[11]="数组11"; 
+     $shuzu2[12]="width=\"95%\""; 
+     $MyMake->Replacehtml($shuzu1,$shuzu2); 
+     $MyMake->SaveFile(); 
+    //------------------静态生成完成-----------
+
+本篇文章来源于PHP论坛 文章地址：http://bbs.php.cn/thread-36818-1-1.html

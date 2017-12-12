@@ -1,0 +1,19 @@
+添加
+sql="insert into 表名(字段,字段) values('"&news_bt&"','"&news_nr&"')"
+
+查看
+sql="select * from 表名"
+
+倒序查看
+	sql="select * from 表名 order by news_id desc "
+正序
+	sql="select * from 表名 order by news_id asc "
+
+删除
+	sql="delete from 表名 where news_id="&id
+
+更改
+	sql="update 表名 set 字段='"&bt&"', 字段='"&nr&"' where news_id="&id
+
+模糊查询
+	sql="select * from 表名 where 字段 like '%查询的字%' "

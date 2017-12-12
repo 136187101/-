@@ -1,0 +1,4 @@
+$auth=Yii::$app->getAuthManager();
+$auth->getrole('管理员')//根据名称获取某个角色
+$auth->getroles()//称获取所有角色
+$auth->getRolesByUser(2)//根据用户id 获取用户的角色列表

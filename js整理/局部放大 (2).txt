@@ -1,0 +1,117 @@
+<?php  
+require '../../include/init.php';
+@require_once("../session.php");
+$xcfid=$_GET[xcfid];
+$uid=$_GET[uid];
+$xx_id=$_GET[xxid];
+$rows_album=$hjd->get_one("select * from album where id = '$xx_id'");
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/skin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../css/css.css"/>
+<style type="text/css">
+/*会员相册信息*/
+body{ background:none;}
+.member_album{ width:850px; height:auto; margin:0 auto;}
+.member_album ul{ list-style-type:none; margin:0; padding:0;}
+.member_album ul li{ float:left; margin:0; padding:0; margin-right:10px; }
+.member_album ul li p{ text-align:center; margin:0; padding:0;}
+.zoomPan{width:570px;position:relative; }
+.sh{zoom:1;background:#eee;filter:progid:DXImageTransform.Microsoft.dropShadow(color='#54000000', OffX=2,OffY=2);-webkit-box-shadow:4px 4px 4px #666;-moz-box-shadow:4px 4px 4px #666;}
+#zoom{position:absolute;width:254px;height:254px;border:3px solid #fff;left:-9999px;top:0;overflow:hidden;background:#fff;}
+#zoom img{position:relative;}
+
+</style>
+<script type="text/javascript">
+function AutoResizeImage(maxWidth,maxHeight,objImg){
+var img = new Image();
+img.src = objImg.src;
+var hRatio;
+var wRatio;
+var Ratio = 1;
+var w = img.width;
+var h = img.height;
+wRatio = maxWidth / w;
+hRatio = maxHeight / h;
+if (maxWidth ==0 && maxHeight==0){
+Ratio = 1;
+}else if (maxWidth==0){//
+if (hRatio<1) Ratio = hRatio;
+}else if (maxHeight==0){
+if (wRatio<1) Ratio = wRatio;
+}else if (wRatio<1 || hRatio<1){
+Ratio = (wRatio<=hRatio?wRatio:hRatio);
+}
+if (Ratio<1){
+w = w * Ratio;
+h = h * Ratio;
+}
+objImg.height = h;
+objImg.width = w;
+}
+</script>
+</head>
+
+<body>
+
+<table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="Navitable">
+  <tr>
+    <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="2%" height="26"><div align="center"><img src="../images/tb.gif" width="16" height="16" /></div></td>
+        <td width="48%"><strong><span style="background:url(tpl/images/th_bg.gif);  padding-left:10px; border:none;">会员相片详细信息</span></strong></td>
+        <td width="50%" align="right"><span class="STYLE3">你当前的位置</span>：[会员相片管理]          </td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+<form id="form1" name="form1" method="post" action="">
+
+</form>
+<div class="member_album">
+	<ul>
+    	
+        <li>
+        	 <div class="zoomPan" id="zoomPan">
+            <img src="<?php echo "/".substr($rows_album[url],3,100)?>" onload="AutoResizeImage(250,250,this)" border="0" style=" margin-bottom:5px;" />
+            	<p><?php echo $rows_album["title"]?></p>
+                 <div id="zoom" class="sh"><img src="<?php echo "/".substr($rows_album[url],3,100)?>" alt="" /></div>
+                </div>
+              <script type="text/javascript">
+				//<![CDATA[
+				function zoomBox() {this.index.apply(this, arguments)}
+				zoomBox.prototype = {
+					index: function(win,zoom) {
+						var win=document.getElementById(win);
+						var box=document.getElementById(zoom);
+						var img=box.getElementsByTagName('IMG')[0];
+						var zoom=img.width/win.getElementsByTagName('IMG')[0].width;
+						var z=Math.round(box.offsetWidth/2);
+						win.onmousemove=function (e){
+							e = e || window.event;
+							var x=e.clientX,y=e.clientY, ori=win.getBoundingClientRect();
+							if (x>ori.right+20||y>ori.bottom+20||x<ori.left-20||y<ori.top-20)box.style.display='none';
+							x-=ori.left;
+							y-=ori.top;
+							box.style.left=x-z+'px';
+							box.style.top=y-z+'px';
+							img.style.left=-x*zoom+z+'px';
+							img.style.top=-y*zoom+z+'px';
+						}
+						win.onmouseover=function (){box.style.display=''}
+					}
+				};
+				window.onload=function (){
+					x=new zoomBox('zoomPan','zoom')
+				}
+				 //]]>
+				</script>           
+        </li>
+    </ul>
+</div>
+</body>
+</html>

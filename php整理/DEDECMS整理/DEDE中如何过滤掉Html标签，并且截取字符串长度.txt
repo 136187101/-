@@ -1,0 +1,5 @@
+DEDE中如何过滤掉Html标签，并且截取字符串长度
+    在dede标签中只要使用2个函数就可以。
+[field:body function="cn_substr(Html2text(@me),80)"/]
+    Html2text()函数是去掉html标签代码。
+    cn_substr(str,80)函数是截取字符串长度。

@@ -1,0 +1,22 @@
+商品图片: <img src="{$goods.goods_img}" /><br><br>
+商品名称：{$goods.goods_style_name}<br><br>
+商品货号：{$goods.goods_sn}<br><br>
+商品品牌: {$goods.goods_brand}<br><br>
+商品数量：{$goods.goods_number} 单位：{$goods.measure_unit}<br><br>
+添加时间：{$goods.add_time}<br><br>
+市场价格：{$goods.market_price}<br><br>
+本店价格：{$goods.shop_price_formated}<br><br>
+注册用户价格：{$rank_price.price}<br><br>
+注册用户价格：{$rank_price.price}<br><br>
+注册用户价格：{$rank_price.price}<br><br>
+
+
+接着我们访问这个页面:(Ecshop的访问网址/goods.php?id=1)例如：http://localhost/ecshop/goods.php?id=1
+
+
+
+这样我们就访问到了商品id为1的商品了，我们也可以让id=2就访问到id = 2商品了，那如何看某个商品的id呢？
+
+
+
+我们看后台：商品管理-》商品列表-》就可以看到商品品的列表，最前面那一栏就是商品的id了，，然后就可以拿来调取了，呵呵。

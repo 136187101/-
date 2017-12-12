@@ -1,0 +1,5 @@
+select id,title,fuid,path,concat(path,'-',id) as pid from think_cate order by pid asc
+
+concat 合并字段为一个新字段
+
+无限极分类树亲缘关系

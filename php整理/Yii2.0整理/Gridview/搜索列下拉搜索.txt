@@ -1,0 +1,17 @@
+ <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+[
+              'attribute'=>'is_delete',
+               'label'=>'stats',
+                'value'=>function($dataProvider)
+                {
+                    return $dataProvider['is_delete']==0?'正常':'已删除';
+                },
+                'filter'=>[0=>'正常',1=>'已删除']
+
+            ],
+
+]
+?>

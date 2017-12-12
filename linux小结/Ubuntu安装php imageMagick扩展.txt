@@ -1,0 +1,32 @@
+在ubuntu 12.04系统下安装 imageMagick扩展。
+
+1. 打开终端  terminal
+
+2. 如果没有安装 pear请先执行以下命令安装 :
+ 
+
+复制代码 代码示例:
+sudo apt-get install php-pear php5-dev
+3. 安装 ImageMagick :
+ 
+
+复制代码 代码示例:
+sudo apt-get install imagemagick libmagickwand-dev
+4. 执行 pecl 安装 imagick :
+ 
+
+复制代码 代码示例:
+sudo pecl install imagick'
+
+find / -name 'imagick.so'
+搜索位置
+ /usr/lib/php5/20121212/imagick.so
+复制位置
+
+打开php.ini文件
+添加一段代码“extension=/usr/lib/php5/20121212/imagick.so”，加载 imagick.so 文件
+保存
+
+ 
+
+至此，ubuntu中imageMagick扩展安装完成。

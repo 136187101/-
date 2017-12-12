@@ -1,0 +1,4 @@
+在文件或者目录空白处 右键选中TortoiseSVN
+选择Repo-browser
+输入svn 目录比如 svn://121.42.155.34/
+右键add folder 选择你要新建的目录就可以啦

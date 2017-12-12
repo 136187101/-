@@ -1,0 +1,14 @@
+#coding=utf-8
+
+class hjd:
+    def __init__(self,conn):
+        self.email=conn
+    def name(self):
+        print("ºî½¨¶«")
+class tong(hjd):
+    def wutong(self):
+        print("this is {0}".format(self.email));
+
+
+h=tong("dempooa")
+h.wutong()

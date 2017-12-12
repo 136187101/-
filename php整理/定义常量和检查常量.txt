@@ -1,0 +1,10 @@
+	∂®“Â
+	define('HJD_SHOW', true);
+	require_once("../../hjd_include/init.php");
+
+
+	//ºÏ≤È
+	if(!defined("HJD_SHOW"))
+	{
+	die("What are you doing ? Bang  ! Bang ! Bang !");
+	}

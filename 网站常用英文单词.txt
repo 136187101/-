@@ -1,0 +1,9 @@
+首页 index
+新闻 news
+内容 content
+关于我们 about us
+产品 product
+方案 program
+联系我们 contact us
+单篇文章 single
+搜索 search

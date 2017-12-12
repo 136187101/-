@@ -1,0 +1,8 @@
+<?php
+$kc_name_arr=array("a","b","c","a","c");
+// 获取去掉重复数据的数组
+$unique_arr = array_unique ( $kc_name_arr );
+print_r($unique_arr);
+// 获取重复数据的数组
+$repeat_arr = array_diff_assoc ( $kc_name_arr, $unique_arr );
+?>

@@ -1,0 +1,10 @@
+$.getJSON("users/jie.php","jieusers=<?php echo $_SESSION["fausers"];?>&fausers=136187101&at="+Math.random(),function(json){
+$.each(json,function(key,val)
+{
+	txt="<li>"+val.name+" : "+val.content+"</li>";
+	$(".lt_main").append(txt);	
+})
+})
+
+window.setInterval(jieshou,2000);
+

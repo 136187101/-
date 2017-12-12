@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script language="javascript">
+function check(name)
+{
+	if(name=="")
+	{
+		msg.innerHTML="";
+		return;
+	}
+	//获得XMLHttpRequest对象
+	var request;
+	if(window.ActivexObject)
+		request=new ActiveXObject("Microsoft.XMLHttp");
+		//IE要这样获得XMLHttpRequest对象
+	else
+		request=new XMLHttpRequest();
+		//火狐要这样获得XMLHttpRequest对象
+	//建立与服务器的链接
+	request.open("GET","checkUserName.php?name="+name);
+	//发送请求
+	request.send();
+	//回调函数
+	request.onreadystatechange=huihui;
+	//发送一个请求后，客户端无法确定什么时候会完成这个请求，所以需要用事件机制来捕获请求的状态，XMLHttpRequest对象提供了onreadyStateChange事件实现这一功能。这类似于回调函数的做法。
+		function huihui()
+			{
+				if(request.readyState==4&&request.status==200)
+				//readyState有五种可取值0：尚未初始化，1：正在加载，2：加载完毕，3：正在处理；4：处理完毕。一旦readyState属性的值变成了4，就可以从服务器返回的响应数据进行访问了。
+				//Http状态码 含义200 请求成功
+				{
+					temp=request.responseText;
+					if(temp=="0")
+						msg.innerHTML="<span style=color:#090>此用户名可以被注册</span>";
+					else
+						msg.innerHTML="<span style=color:#F00>此用户名已经存在，请换一个</span>";
+				}
+			}
+			
+}
+
+</script>
+</head>
+
+<body>
+用户名：<input type="text" name="username" onblur="check(this.value)" /><label id="msg"></label>
+</body>
+</html>

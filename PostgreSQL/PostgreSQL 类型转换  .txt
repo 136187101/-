@@ -1,0 +1,152 @@
+
+
+        类似Oracle ，PostgreSQL也有强大的类型转换函数, 下面仅举两个类型转换例子。
+     
+--1 例子
+postgres=# select 1/4;
+ ?column?
+----------
+        0
+(1 row)
+
+        在PG里如果想做除法并想保留小数，用上面的方法却行不通，因为"/" 运算结果为取整，并
+且会截掉小数部分。
+ 
+
+--2 类型转换
+postgres=# select round(1::numeric/4::numeric,2);
+ round
+-------
+  0.25
+(1 row)
+
+  备注：类型转换后，就能保留小数部分了。
+
+francs=> select oid,relname,reltuples from pg_class where oid='test_1'::regclass;
+
+  oid  | relname | reltuples 
+
+-------+---------+-----------
+
+ 16416 | test_1  |         6
+
+备注： 'test_1'::regclass 这里将表名转换成表的 oid，其它用法参考本文属的附二。
+
+
+--3 也可以通过 cast 函数进行转换
+postgres=# select round( cast ( 1 as numeric )/ cast( 4 as numeric),2);
+ round
+-------
+  0.25
+(1 row)
+
+
+--4 关于 cast 函数的用法
+postgres=# SELECT substr(CAST (1234 AS text), 3,1);
+ substr
+--------
+ 3
+(1 row)
+
+
+--5 附一: PostgreSQL 类型转换函数
+
+Function 	Return Type 	Description 	Example
+
+
+to_char
+(timestamp, text
+
+)
+	
+text
+	convert time stamp to string 	
+to_char(current_timestamp, 'HH12:MI:SS')
+
+to_char
+(
+interval, text
+)
+	
+text
+	convert interval to string 	
+to_char(interval '15h 2m 12s', 'HH24:MI:SS')
+
+to_char
+(
+int, text
+)
+	
+text
+	convert integer to string 	
+to_char(125, '999')
+
+
+to_char
+(
+double
+
+precision
+, text
+)
+	
+text
+	convert real/double precision to string 	
+to_char(125.8::real, '999D9')
+
+to_char
+(
+numeric, text
+)
+	
+text
+	convert numeric to string 	
+to_char(-125.8, '999D99S')
+
+to_date
+(text, text
+)
+	
+date
+	convert string to date 	
+to_date('05 Dec 2000', 'DD Mon YYYY')
+
+to_number
+(
+text, text
+)
+	
+numeric
+	convert string to numeric 	
+to_number('12,454.8-', '99G999D9S')
+
+to_timestamp
+(
+text, text
+)
+	
+timestamp with time zone
+	convert string to time stamp 	
+to_timestamp('05 Dec 2000', 'DD Mon YYYY')
+
+to_timestamp
+(
+double precision
+)
+	
+timestamp with time zone
+	convert Unix epoch to time stamp 	
+to_timestamp(1284352323)
+
+
+附二 Table 8-23. Object Identifier Types
+Name	References	Description	Value Example
+oid	any	numeric object identifier	564182
+regproc	pg_proc	function name	sum
+regprocedure	pg_proc	function with argument types	sum(int4)
+regoper	pg_operator	operator name	+
+regoperator	pg_operator	operator with argument types	*(integer,integer) or -(NONE,integer)
+regclass	pg_class	relation name	pg_type
+regtype	pg_type	data type name	integer
+regconfig	pg_ts_config	text search configuration	english
+regdictionary	pg_ts_dict	text search dictionary	simple

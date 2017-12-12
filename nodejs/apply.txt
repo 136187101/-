@@ -1,0 +1,16 @@
+var users=require('./Users');
+
+function teacher(id,name,age){
+	users.apply(this,[id,name,age]);
+	this.hjd=function(res){
+		res.write(this.name+'ÔÚÑ§Ï°');
+	}
+	
+	
+	
+}
+
+module.exports=teacher;
+
+
+¼Ì³Ðusers £¡£¡£¡

@@ -1,0 +1,5 @@
+         <script>
+ var div=document.getElementById('div');
+           if(div.scrollHeight>div.offsetHeight)
+                div.scrollTop=div.scrollHeight-div.offsetHeight; 
+ </script>

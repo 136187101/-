@@ -1,0 +1,17 @@
+目前有好几个js库都不约而同的使用了$符号，当然了，在每个框架中的作用基本一致，但不是同一个对象。
+
+关于jQuery使用$的冲突解决如下：
+
+ 
+
+第一步：
+
+<script type="text/javascript">
+   jQuery.noConflict();
+</script>
+
+ 
+
+第二步：
+
+在你的js代码中使用jQuery对象的地方，把$替换为jQuery。

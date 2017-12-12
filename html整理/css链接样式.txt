@@ -1,0 +1,6 @@
+CSS可控制超链接样式-css链接样式如下
+a:active是超级链接的初始状态 
+a:hover是把鼠标放上去时的状况 
+a:link 是鼠标点击时 
+a:visited是访问过后的情况
+

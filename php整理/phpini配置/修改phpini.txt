@@ -1,0 +1,34 @@
+这些函数为 ini_alter — 改变配置参数值 ini_get — 获得配置参数值 ini_restore — 恢复原始配置参数值 ini_set — 设置配置参数值 例如获得 include 路径可以用 <? print(ini_get("include_path")); ini_set("i
+这些函数为 
+ini_alter — 改变配置参数值 
+ini_get — 获得配置参数值 
+ini_restore — 恢复原始配置参数值 
+ini_set — 设置配置参数值 
+
+例如获得 include 路径可以用 
+<? 
+print(ini_get("include_path")); 
+
+ini_set("include_path","f:"); 
+
+print(ini_get("include_path")); 
+
+ini_restore("include_path"); 
+
+print(ini_get("include_path")); 
+
+ini_set("include_path","f:php2000"); 
+
+print(ini_get("include_path")); 
+?> 
+
+输出为（我加上了换行以便于比较） 
+f:php2000 
+f: 
+f: 
+f:php2000 
+
+不知道为何 restore 错误??? ??? 
+
+这样我们可以在程序里面随时改变参数配置值，同时我发现，在再次执行时，系统的默认参数没有改变，也就是说，改变仅限于当前脚本运行期间。 
+ 

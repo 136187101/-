@@ -1,0 +1,19 @@
+ array_merge函数的注意事项
+
+　　array_merge — 合并一个或多个数组　
+
+　　array_merge() 将一个或多个数组的单元合并起来，一个数组中的值附加在前一个数组的后面。返回作为结果的数组。
+
+　　如果输入的数组中有相同的字符串键名，则该键名后面的值将覆盖前一个值。然而，如果数组包含数字键名，后面的值将不会覆盖原来的值，而是附加到后面。
+
+　　如果只给了一个数组并且该数组是数字索引的，则键名会以连续方式重新索引。
+
+　　array_merge will return NULL if any of the arguments are NULL。
+
+　　例如:
+
+　　　　$array1 = NULL;
+　　　　$array2 = array(1 => "data");
+　　　　$result = array_merge($array1, $array2);
+
+　　　　var_dump($result);结果为NULL，所以在写SQL语句获取结果集的时候要注意，if(empty($resut)){$result=array();} 赋值为空数组后再和其他的数组进行合并

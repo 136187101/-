@@ -1,0 +1,4 @@
+启动mongodb服务：
+D:/mongodb/bin>mongod --dbpath D:\mongodb\data\db
+注意改下目录地址
+mongodb默认连接端口27017，如果出现如图的情况，可以打开http://localhost:27017查看（笔者这里是chrome），发现如图则表示连接成功，如果不成功，可以查看端口是否被占用。

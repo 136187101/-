@@ -1,0 +1,5 @@
+±‰¡ø {$name}
+—≠ª∑
+<volist name="array" id="news">
+	{$news.title}
+</volist>

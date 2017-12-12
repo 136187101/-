@@ -1,0 +1,15 @@
+  1、scrollbar-face-color 滚动条凸出部分的颜色；
+
+    2、scrollbar-highlight-color 滚动条空白部分的颜色；
+
+    3、scrollbar-shadow-color 滚动条阴影的颜色；
+
+    4、scrollbar-3dlight-color 立体滚动条亮边的颜色；
+
+    5、scrollbar-arrow-color 上下按钮上三角箭头的颜色；
+
+    6、scrollbar-track-color 滚动条底色；
+
+    7、scrollbar-dark-shadow-color 立体滚动条强阴影的颜色；
+
+    8、scrollbar-base-color 滚动条的基本颜色； 

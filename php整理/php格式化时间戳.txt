@@ -1,0 +1,4 @@
+		$rows["addtimes"]=date("Y-m-d",$rows["addtimes"]);
+		
+	时间转时间戳：
+	echo strtotime($_GET["startdate"])."<br>";

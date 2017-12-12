@@ -1,0 +1,25 @@
+set_time_limit(0)
+使本程式突破預設的30s的限制 .
+
+
+ini_set用法2011-02-22 10:45
+　PHP ini_set函数是设置选项中的值，在执行函数后生效，脚本结束的时候，这个设置也失效。不是所有的选项都能被改函数设置的。具体那些值能够设置，可以查看手册中的列表。
+
+　　就是能够设置php.ini中的选项值比如，display_error选项关闭了，但是你要显示程序中的错误信息，方便你调试程序，那么就可以使用PHP ini_set函数：
+
+　　ini_set(”display_errors”, “On”);
+
+　　那么在你这个页面的程序都会显示错误信息了，而且你还可以使用error_reporting来设置显示的错误信息级别。
+
+　　如果你需要增加脚本执行时间，那么可以设置：
+
+　　ini_set(”max_execution_time”, “180″);
+
+　　那么脚本执行时间就由默认的30秒变为180秒，当然，你也可以使用set_time_limit()来设置。
+
+　　其实你把PHP ini_set函数和ini_get结合使的话，非常好。比如你想在配置文件里添加自己的包含文件路径，但是你有没有权限更改php.ini，那么你可以结合两个函数：
+
+　　ini_set(’include_path’,ini_get(’include_path’).’:/your_include_dir:’);
+
+ 
+ 

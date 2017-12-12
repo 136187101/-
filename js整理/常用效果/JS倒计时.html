@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<div class="time">
+ 距离活动结束还有<span id="day"></span>天
+<!-- <span id="hours"></span>小时
+ <span id="min"></span>分
+ <span id="sec"></span>秒
+</div> -->
+<script type="text/javascript">
+var day = document.getElementById("day");
+var hours = document.getElementById("hours");
+var min = document.getElementById("min");
+var sec = document.getElementById("sec");
+var DifferenceHour = -1;
+var DifferenceMinute = -1;
+var DifferenceSecond = -1;
+//var Tday = new Date("11 20,2010 10:00:00")   //**倒计时时间点-注意格式
+var Tday = new Date("09/17/2011 10:00:00");   //IE:月/日/年
+var daysms = 24 * 60 * 60 * 1000;
+var hoursms = 60 * 60 * 1000;
+var Secondms = 60 * 1000;
+var microsecond = 1000;
+function clock () {
+ var time = new Date();
+ var hour = time.getHours();
+ var minute = time.getMinutes();
+ var second = time.getSeconds();
+ var timevalue = "" + ((hour > 12) ? hour-12:hour);
+ timevalue += ((minute < 10) ? ":0":":") + minute;
+ timevalue += ((second < 10) ? ":0":":") + second;
+ timevalue += ((hour > 12) ? " PM":" AM");
+ // document.formnow.now.value = timevalue
+ var convertHour = DifferenceHour;
+ var convertMinute = DifferenceMinute;
+ var convertSecond = DifferenceSecond;
+ var Diffms = Tday.getTime() - time.getTime();
+ DifferenceHour = Math.floor(Diffms / daysms);
+ Diffms -= DifferenceHour * daysms;
+ DifferenceMinute = Math.floor(Diffms / hoursms);
+ Diffms -= DifferenceMinute * hoursms;
+ DifferenceSecond = Math.floor(Diffms / Secondms);
+ Diffms -= DifferenceSecond * Secondms;
+ var dSecs = Math.floor(Diffms / microsecond);
+ if (convertHour != DifferenceHour) {
+  day.innerHTML = DifferenceHour;
+ }
+ if (convertMinute != DifferenceMinute) {
+  hours.innerHTML = DifferenceMinute;
+ }
+ if (convertSecond != DifferenceSecond) {
+  min.innerHTML = DifferenceSecond;
+ }
+ sec.innerHTML = dSecs;
+ // document.formnow.Tnow.value= DifferenceHour DifferenceMinute + DifferenceSecond + dSecs
+ setTimeout("clock()", 1000);
+}
+clock();
+</script> 
+</body>
+</html>

@@ -1,0 +1,2 @@
+'LOG_RECORD'            => TRUE// 默认不记录日志
+'LOG_LEVEL'             => 'EMERG,ALERT,CRIT,ERR',// 允许记录的日志级别

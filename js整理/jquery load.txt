@@ -1,0 +1,7 @@
+jQuery Load使用缓存的方法
+$.ajaxSetup ({
+
+cache: false //关闭AJAX相应的缓存
+
+});
+

@@ -1,0 +1,16 @@
+<!--[if lt IE 9]>
+<div class="container"><div class="alert alert-danger">您的浏览器版本<strong>太旧了</strong>，为了正常显示网站，请升级您的浏览器 <a target="_blank" href="http://browsehappy.com">立即升级</a></div></div>
+<![endif]-->
+
+
+.alert-danger {
+background-color: #f2dede;
+border-color: #ebccd1;
+color: #b94a48;
+}
+
+.alert {
+padding: 15px;
+border: 1px solid transparent;
+border-radius: 4px;
+}

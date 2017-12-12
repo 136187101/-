@@ -1,0 +1,34 @@
+    tongbu:function(path){
+        var datea=fs.readFileSync(path,'utf-8');
+        console.log(datea);
+        console.log('同步输出完成');
+    },
+    yibu:function(path,callfun){
+        var date=fs.readFile(path,function(err,data){
+            if(err){
+                console.log(err);
+            }else
+            {
+                //console.log(data.toString());
+
+                callfun(data);
+            }
+
+
+        })
+        console.log('异步输出完成');
+    }，
+	writeFile:function(path,string,callfun){
+		fs.writeFile(path,string,function(err){
+			if(err){
+				console.log(err);
+			}else
+			{
+                callfun('写入文件成功');
+			}
+
+		})
+		console.log('程序执行');
+	}
+
+	

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="../js/jquery.min.js" type="text/javascript"></script>
+<script language="javascript">
+	function css(){
+			$(".xs").toggle();
+		}
+	a=setInterval("css()",500);
+	$(document).ready(function(e) {
+        $(".xs").click(function(){
+		alert("1");
+		window.clearInterval(a)
+		})
+    });
+</script>
+
+
+
+</head>
+<style type="text/css">
+	.xs{ display:none; width:200px; height:200px; border:1px #000000 solid; background:#CCC;}
+</style>
+
+<body>
+
+	<div class="xs"></div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+	//ѡ�
+	$(document).ready(function(){
+			$("#in_sousuo ul li").each(function(index){
+					$(this).mousemove(function(){
+							$("#in_sousuo div").removeClass("sscontent");
+							$("#in_sousuo ul li").removeClass("sstitle");
+							$(this).addClass("sstitle");
+							$("#in_sousuo div").eq(index).addClass("sscontent");
+						})
+				})
+
+		})
+</script>
+
+

@@ -1,0 +1,4 @@
+1.删除hjd_Ub/attached下的文件和图片内容
+2.删除newspic下的内容
+3.删除根目录下的pic下的所有图片
+4.删除更目录下的newspic所有图片

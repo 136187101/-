@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>JS浮动框</title>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+$(document).ready(function(){
+var bheight=document.body.clientHeight;
+$("#lay").click(function(){
+$("#brg").css("display","block");
+$("#showdiv").css("display","block");
+$("html").css("height","100%")
+$("html").css("max-height","100%")
+$("html").css("border","0")
+$("html").css("overflow","hidden")
+
+//$("#testdiv").load("test.html");
+});
+$("#close").click(function(){
+$("#brg").css("display","none");
+$("#showdiv").css("display","none");
+$("html").css("height","auto")
+$("html").css("max-height","auto")
+$("html").css("border","auto")
+$("html").css("overflow","auto")
+
+//$("#testdiv").load("");
+});
+});
+
+<style type="text/css">
+#brg{ width:100%; height:100%; background:#333; position:absolute; top:0; left:0; filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6; position:absolute; top:0; left:0; display:none;}
+#showdiv{ width:100%; height:auto; position:absolute; left:0; top:0; z-index:20; display:none; }
+#testdiv{ width:400px; height:400px; margin:0 auto; margin-top:100px; border:1px solid #4d4d4d; background:#fff;}
+#close{width:100px; height:27px; line-height:27px; font-size:14px; font-weight:bold; border:1px solid #4d4d4d; text-align:center; cursor:pointer; margin:0 auto; background:#333; color:#fff;}
+.btn{ margin:20px auto auto 20px; width:200px; height:27px; line-height:27px; font-size:14px; font-weight:bold; border:1px solid #4d4d4d; text-align:center; cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="lay" class="btn">点击我弹出一个层哦</div>
+<div id="brg"></div>
+<div id="showdiv">
+<div id="testdiv">
+	<div id="close">关闭</div>
+  <form name="form1" method="post" action="">
+  	相册名称：<input name="" type="text">
+	相册概述：<input name="" type="text">
+	
+  </form>
+</div>
+</div>
+</body>
+</html>

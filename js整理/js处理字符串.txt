@@ -1,0 +1,37 @@
+在用javascript对URL字符串进行编码中，虽然escape()、encodeURI()、encodeURIComponent()三种方法都能对一些影响URL完整性的特殊字符进行过滤。但后两者是将字符串转换为UTF-8的方式来传输，解决了页面编码不一至导致的乱码问题。例如：发送页与接受页的编码格式(Charset)不一致（假设发送页面是GB2312而接收页面编码是UTF-8），使用escape()转换传输中文字串就会出现乱码问题。  
+
+以下是JS下对URL进行编/解码的各种方法：  
+1、escape 方法：返回一个可在所有计算机上读取的编码 String 对象。  
+function escape(charString : String) : String  
+不会被此方法编码的字符： @ * / +  
+说明：escape 方法返回一个包含 charstring 内容的字符串值（Unicode 格式）。所有空格、标点、  
+重音符号以及任何其他非 ASCII 字符都用 %xx 编码替换，其中 xx 等于表示该字符的十六进制数。  
+例如，空格返回为“%20”。（字符值大于 255 的字符以 %uxxxx 格式存储。）  
+注意：escape 方法不能用来对“统一资源标识符”(URI) 进行编码。对其编码应使用 encodeURI 和encodeURIComponent 方法。  
+
+2、encodeURI 方法：返回编码为有效的统一资源标识符 (URI) 的字符串。  
+function encodeURI(URIString : String) : String  
+不会被此方法编码的字符：! @ # $ & * ( ) = : / ; ? + '  
+说明：encodeURI 方法返回一个已编码的 URI。如果将编码结果传递给 decodeURI，则将返回初始的字符串。encodeURI 不对下列字符进行编码：“:”、“/”、“;”和“?”。请使用  
+encodeURIComponent 对这些字符进行编码。  
+
+3、encodeURIComponent 方法：返回编码为统一资源标识符 (URI) 的有效组件的字符串。  
+function encodeURIComponent(encodedURIString : String) : String  
+不会被此方法编码的字符：! * ( ) '  
+说明：encodeURIComponent 方法返回一个已编码的 URI。如果将编码结果传递给decodeURIComponent，则将返回初始的字符串。因为 encodeURIComponent 方法将对所有字符编码，  
+请注意，如果该字符串代表一个路径，例如 /folder1/folder2/default.html，则其中的斜杠也将被编码，这样，当该字符串作为请求发送到 Web 服务器时它将是无效的。如果字符串中包含多个 URI 组件，请使用 encodeURI 方法进行编码。  
+
+4、unescape 方法：从用 escape 方法编码的 String 对象中返回已解码的字符串。  
+function unescape(charString : String) : String  
+说明：unescape 方法返回一个包含 charstring 内容的字符串值。所有以 %xx 十六进制形式编码的  
+字符都用 ASCII 字符集当中等效的字符代替。（以 %uxxxx 格式（Unicode 字符）编码的字符用十六  
+进制编码 xxxx 的 Unicode 字符代替。）  
+注意：unescape 方法不应用于解码“统一资源标识符”(URI)。请改用 decodeURI 和 decodeURIComponent 方法。  
+
+5、decodeURI 方法：返回一个已编码的统一资源标识符 (URI) 的非编码形式。  
+function decodeURI(URIstring : String) : String  
+decodeURIComponent 方法：返回统一资源标识符 (URI) 的一个已编码组件的非编码形式。  
+function decodeURIComponent(encodedURIString : String) : String  
+BTW：C#中对URL编码的方法。。。  
+编码：Server.UrlEncode(string)  
+解码：Server.UrlDecode(string) 前面三种客户端编码都可以用这个方法在后台解码。 

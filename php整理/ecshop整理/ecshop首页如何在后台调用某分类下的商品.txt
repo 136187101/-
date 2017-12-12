@@ -1,0 +1,12 @@
+ecshop首页如何在后台调用某分类下的商品的方法如下，这是后台调用哈，但是不是和个性化，只能用ecshop的模板
+后台“模板管理——设置模板”里有“分类下的商品”，你可以调用设置，可以设置调用多少条！
+当然，我们可以在index.dwt里面加上这个
+<!-- TemplateBeginEditable name="网友设计" -->
+<!-- TemplateEndEditable -->
+然后刷新，就会在设置模板里看见“网友设计”这个选项咯，我们就可以在这个区域里显示我们调用的某分类下的商品了
+上面这个代码可以放在index.dwt的任何位置，当然不要放在
+<!-- TemplateBeginEditable name="网站公告" -->
+<!-- TemplateEndEditable -->
+ 
+<!-- TemplateBeginEditable name="主区域" -->
+<!-- TemplateEndEditable -->

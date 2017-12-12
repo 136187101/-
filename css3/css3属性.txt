@@ -1,0 +1,26 @@
+opacity:1 
+透明度 1为不透明
+transition-delay: 0.7s;
+在过渡效果开始前等待 0.7 秒
+
+把鼠标指针放到 div 元素上，其宽度会从 100px 逐渐变为 300px：
+div
+{
+width:100px;
+transition: width 2s;
+-moz-transition: width 2s; /* Firefox 4 */
+-webkit-transition: width 2s; /* Safari 和 Chrome */
+-o-transition: width 2s; /* Opera */
+}
+
+语法
+transition: property duration timing-function delay;
+值	描述
+transition-property	规定设置过渡效果的 CSS 属性的名称。
+transition-duration	规定完成过渡效果需要多少秒或毫秒。
+transition-timing-function	规定速度效果的速度曲线。
+transition-delay	定义过渡效果何时开始。
+
+缩放：
+
+transform:scale(num，num)　　使用scale方法来实现文字或图像的缩放处理，在参数中指定缩放倍率。譬如“scale(0.5)”表示缩小50%，“scale(2)”表示放大1倍。此方法可设置两个值，分别表示水平和垂直方向，设置一个参数，则第二个参数默认取第一个。　　此属性在不同的浏览器下不同的写法　　比如缩小50%:　　Chrome & Safari:-webkit-transform..

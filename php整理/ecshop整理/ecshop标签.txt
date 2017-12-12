@@ -1,0 +1,62 @@
+要想彻底了解ecshop，我们就要懂得ecshop标签的功能，了解了这些我们使用起来ecshop也就如鱼得水了。
+  页面关键字：{$keywords}   
+  页面标题：{$page_title}
+  产品分类：父分类列表 {foreach from=$categories item=cat }
+  父分类超链接 [url==”{$cat.url}”>{$cat.name|escape:html}</a>
+  相对应子分类 {foreach from=$cat.children item=child}
+  子分类超链接 [url==”{$child.url}”>{$child.name|escape:html}</a>
+  促销产品：{if $promotion_info} 检验是否存在促销产品，不存在就不显示相关信息
+  促销产品列表：{foreach from=$promotion_info item=item key=key}   
+  订单查询：{if empty($order_query)}   
+  订单用户ID {if $order_query.user_id}
+  订单数量：{$lang.order_number}
+  订单编号：{$order_query.order_sn}
+  发货查询：{if $invoice_list}   
+  发货列表：{foreach from=$invoice_list item=invoice}
+  订单号名称：{$lang.order_number}
+  订单号：{$invoice.order_sn}
+  发货单名称：{$lang.consignment}
+  发货单号：{$invoice.invoice_no}
+  销售排行：{if $top_goods}   
+  销售列表：{foreach name=top_goods from=$top_goods item=goods}
+  产品短名称：{$goods.short_name}   
+  下面来看一个例子：<!– {foreach name=top_goods from=$top_goods item=goods}–>
+  <li class=”top10-li-{$smarty.foreach.top_goods.iteration}”> [url==”{$goods.url}” title=”{$goods.name|escape:html}”>{$goods.short_name}</a></li>  
+  <!–{/foreach}–>
+  精品推荐：{if $best_goods}   
+  精品推荐列表：{foreach from=$best_goods item=goods}
+  市场价名称：{$lang.market_price}
+  市场价价格：{$goods.market_price}
+  促销价名称：{$lang.promote_price}
+  促销价价格：{$goods.promote_price}
+  商店价名称：{$lang.shop_price}
+  商店价价格：{$goods.shop_price}  
+  {$lang.xxxx_xxxx}以lang开头的为相对应的名称
+  {$goods.xxxx_xxxx}以goods开头的为价格
+  {$page_title} 网站标题
+  {$keywords} 网站关键字标签
+  {$description} 网站描述标签
+  {$shop_notice} 商店公告  
+  $new_articles 新文章
+  {$article.short_title} 调用文章标题
+  {foreach from=$new_articles item=article} 循环的开始
+  {/foreach} 循环的结束
+  from=$best_goods 表示循环的内容来自$best_goods
+  $best_goods 精品商品推荐的标签
+  {$goods.short_style_name} 表示goods 这个对象的商品名称
+  $new_goods 新品上市
+  $hot_goods 热卖商品  
+  $categories 分类的标签
+  $goods_list 商品标签
+  商品图片: <img src= {$goods.goods_img} />
+  商品名称：{$goods.goods_style_name}
+  商品货号：{$goods.goods_sn}<br>
+  商品品牌: {$goods.goods_brand}
+  商品数量：{$goods.goods_number}
+  单位：{$goods.measure_unit}
+  添加时间：{$goods.add_time}
+  市场价格：{$goods.market_price}
+  本店价格：{$goods.shop_price_formated}
+  注册用户价格：{$rank_price.price}
+  注册用户价格：{$rank_price.price}
+  注册用户价格：{$rank_price.price}

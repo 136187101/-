@@ -1,0 +1,4 @@
+phpmyadmin里MySQL字符集:cp1252 West European (latin1) ，解决乱码问题 使用虚拟主机空间上的phpmyadmin操作数据库的时候，如果看到phpmyadmin首页上显示的MySQL 字符集为cp1252 West European (latin1)，当我们导入数据时就会出现乱码，解决的方法是：
+
+在phpmyadmin首页的右边有个Language选项，把默认的中文 - Chinese simplified-gb2312改成 中文 - Chinese simplified，则左边的MySQL 字符集会变成UTF-8 Unicode (utf8) ，乱码问题得到解决！
+

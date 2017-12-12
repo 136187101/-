@@ -1,0 +1,174 @@
+本来以为yii2框架验证码这块很全面，尝试百度google了一下，大多数教程写的零零散散不全面，想着自己写一份带有完整步骤的验证码教程。
+
+
+我们假设site/login 表单登录需要增加验证码。
+
+
+1、siteController控制器的actions方法增加captcha设置
+
+
+
+
+
+
+?
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+ 
+public function actions() { 
+return [ 
+'captcha' => [ 
+'class' => 'yii\captcha\CaptchaAction', 
+'maxLength' => 4, 
+'minLength' => 4 
+], 
+]; 
+}
+ 
+
+上面我们简单设置了验证码的位数，有小伙伴好奇都有哪些配置项，这个你可以查看文件 vendor\yiisoft\yii2\captcha，包括验证码背景色，字体文件等设置都可以在这里找到。
+
+
+2、siteController继续配置。
+
+
+
+
+
+
+?
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+ 
+public function behaviors() { 
+return [ 
+'access' => [ 
+'class' => AccessControl::className(), 
+'rules' => [ 
+[ 
+'actions' => ['login', 'error', 'captcha'], 
+'allow' => true, 
+], 
+], 
+]; 
+}
+ 
+
+为access rules的actions增加captcha方法可访问。
+
+
+3、我们看看view层，增加验证码input。
+
+
+
+
+
+
+?
+
+1
+2
+3
+4
+ 
+use yii\captcha\Captcha; 
+<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [ 
+'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>', 
+]) ?>
+ 
+
+4、这样还不行，我们还需要增加验证码的验证规则
+
+
+我们这里用到的是LoginForm，因此修改LoginForm文件
+
+
+
+
+
+
+?
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+ 
+class LoginForm extends Model { 
+//...... public $verifyCode; 
+public function rules() { 
+return [ 
+//...... 
+['verifyCode', 'captcha'], 
+]; 
+} 
+public function attributeLabels() { 
+return [
+'verifyCode' => '', //验证码的名称，根据个人喜好设定 
+]; 
+} 
+} 
+//定义了verifyCode属性 
+//rules规则添加了验证 
+//label中定义了其显示名称
+ 
+
+5、到第四步基本上配置好验证码就会正常显示了。如果你的后台设定了rbac权限控制，恐怕你仍然需要在config内为as accss增加/site/captcha可访问。
+
+
+6、看效果就好了。
+
+
+
+
+
+7、有同学问为啥页面刷新验证码不跟着刷新，我个人觉得刷不刷新不重要，当你输错验证码页面刷新的时候验证码才会刷新。如果你非要刷新页面验证码跟着刷新，尝试一种简单的方法实现。
+
+
+
+
+
+
+?
+
+1
+ 
+$('验证码对象').click();
+ 
+
+即在页面刷新的时候重新点击一次验证码进行强制刷新。
+
+
+以上所述是小编给大家介绍的Yii2增加验证码步骤，希望对大家有所帮助！

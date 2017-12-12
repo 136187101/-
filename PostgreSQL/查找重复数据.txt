@@ -1,0 +1,5 @@
+SELECT contract_no,count(*) as count FROM `jd_contract` GROUP by contract_no HAVING count>1 
+
+
+SELECT a_users,count(*) as count FROM jd_account GROUP by a_users order by count desc
+

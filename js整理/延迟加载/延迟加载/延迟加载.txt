@@ -1,0 +1,59 @@
+Jquery.LazyLoad.js插件参数详解： 
+
+
+1,用图片提前占位 
+placeholder : "img/grey.gif", 
+参数:placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏 
+
+2,载入使用何种效果 
+effect : "fadeIn", 
+参数：effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn 
+
+3,提前开始加载 
+threshold : 200, 
+参数:threshold,值为数字,代表页面高度.如设置为200,表示滚动条在离目标位置还有200的高度时就开始加载图片,可以做到不让用户察觉. 
+
+4,事件触发时才加载 
+event : "click", 
+参数:event,值有click(点击),mouseover(鼠标划过),sporty(运动的),foobar(…).可以实现鼠标莫过或点击图片才开始加载,后两个值未测试… 
+
+5,对某容器中的图片实现效果 
+container: $("#container"), 
+参数:container,值为某容器.lazyload默认在拉动浏览器滚动条时生效,这个参数可以让你在拉动某DIV的滚动条时依次加载其中的图片 
+
+6,图片排序混乱时 
+failurelimit : 10, 
+参数:failurelimit,值为数字.lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况,failurelimit意在加载N张可见区域外的图片,以避免出现这个问题
+
+什么是ImageLazyLoad技术 
+在页面上图片比较多的时候，打开一张页面必然引起与服务器大数据量的交互。尤其是对于高清晰的图片，占的几M的空间。ImageLazyLoad技术就是，当前可见界面的图片是加载进来的，而不可见页面（通过滚动条下拉可见）中的图片是不加载的，这样势必会引起速度上质的提升。 
+
+怎么实现ImageLazyLoad 
+
+一、使用JQuery插件 ，插件名: jquery.lazyload（7kb大小），压缩后（3kb大小） 
+
+
+在线压缩js http://closure-compiler.appspot.com/home 
+虽然是很牛X的特效,不过用JQuery插件只需要短短几句代码,使用过程如下: 
+
+1.导入JS插件 
+<script src="jquery.js" type="text/javascript"></script> 
+<script src="jquery.lazyload.js" type="text/javascript"></script> 
+2.在你的页面中加入如下的javascript： 
+
+$("img").lazyload(); 
+
+这将会使所有的图片都延迟加载。 
+
+
+当然插件还有几个配置项可供设置。 
+
+1.改变threshold 
+
+$(“img”).lazyload({ threshold : 200 }); 
+
+把阀值设置成200 意思就是当图片没有看到之前先load 200像素。 
+
+
+详细出处参考：http://www.jb51.net/article/21987.htm
+详细出处参考：http://www.jb51.net/article/21987.htm

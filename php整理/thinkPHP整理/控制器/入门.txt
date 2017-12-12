@@ -1,0 +1,15 @@
+thinkphp 单一入口模式
+所操作的三个目录 M V C
+Lib
+   -Action //控制器文件   C
+   -Model //模型   M
+Tpl //模版文件  V
+
+控制器命名规则
+   模块名+Action.class.php （模块名采用驼峰法并且首字母大写）
+试图命名规则
+   Tpl/模块名/操作名.html
+模块命名规则
+   模型名+Model.class.php （模型名的定义采用驼峰法并且首字母大写）
+
+  

@@ -1,0 +1,67 @@
+     dede织梦默认的广告插件不错，但是美中不足的是图片部分没法直接上传图片，只能够用ftp上传到程序后再写上地址用。不管是我们自己使用还是给客户做的网站使用都很不方便，这里郑州网站建设公司千松网络科技跟大家分享下给dede织梦广告插件增加图片上传功能的方法。
+ 
+
+广告图片上传功能效果图
+总共需要修改四个文件。
+一、打开文件/dede/ad_add.php文件，找到代码：
+$normbody = "<a href=\"{$link}\"><img src=\"{$normbody['url']}\"$width $height border=\"0\" /></a>"; 
+修改为：
+$normbody = "<a href=\"{$link}\" id=\"qyuef\"><img src=\"{$pic}\"$width $height border=\"0\" /></a>"; 
+二、打开文件/dede/ad_edit.php文件，找到代码：
+$endtime = GetMkTime($endtime); 
+在下方加入代码：
+if($img=="qyuefimg"){ 
+    $normbody = "<a href=\"{$piclink}\" id=\"qyuef\"><img src=\"{$pic}\"  border=\"0\" /></a>"; 
+    } 
+三、打开文件/dede/templets/ad_add.htm文件，在头部<head></head>之间增加下方代码：
+<script language="javascript" src="../include/js/dedeajax2.js"></script> 
+<script language='javascript' src="js/main.js"></script> 
+找到代码：
+<input type="text" size="40" name="normbody[url]" value="" class='iptxt'/> 
+修改为：
+<input type="text" size="40" name="pic" id="pic" value="" class='iptxt'/> 
+<input type="button" name="Submit" value="浏览..." style="width:70px" onClick="SelectImage('form1.pic','');"> 
+四、打开文件/dede/templets/ad_add.htm文件，在头部<head></head>之间增加下方代码：
+<script language="javascript" src="../include/js/dedeajax2.js"></script> 
+<script language='javascript' src="js/main.js"></script> 
+找到代码：
+<tr> 
+  <td height="80" align="center">正常显示内容：</td> 
+  <td width="76%"><textarea name="normbody" rows="10" id="normbody" style="width:80%;height:100"><?php echo htmlspecialchars(stripslashes($row['normbody']))?></textarea></td> 
+  <td width="9%">&nbsp;</td> 
+</tr> 
+修改为：
+<tr> 
+  <td height="80" align="center">正常显示内容：</td> 
+  <td width="76%"> 
+  <?php 
+   
+  if(strstr($row['normbody'],'id="qyuef"')) 
+  { 
+  $pat = '/<a[^>]*?\s*href=\"(.*?)\"(.*?)>(.*?)<\/a>/i'; 
+  preg_match_all($pat,$row['normbody'], $m); 
+  $piclink=$m[1][0]; 
+  $pic=$m[3][0]; 
+  $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";  
+  preg_match_all($pattern,$pic,$match);  
+  $qyuefpic=$match[1][0] 
+  ?> 
+  <input type="hidden" size="40" name="img" id="img" value="qyuefimg" class='iptxt'/> 
+  <input type="text" size="40" name="pic" id="pic" value="<?php echo $qyuefpic?>" class='iptxt'/> 
+<input type="button" name="Submit" value="浏览..." style="width:70px" onClick="SelectImage('form1.pic','');"></span> 
+<tr> 
+  <td height="80" align="center">图片链接：</td> 
+  <td><input type="text" size="40" name="piclink" id="piclink" value="<?php echo $piclink?>" class='iptxt'/></td> 
+  <td>&nbsp;</td> 
+</tr> 
+  <?php 
+  }else{ 
+   
+ ?> 
+  <textarea name="normbody" rows="10" id="normbody" style="width:80%;height:100"><?php echo $row['normbody']?></textarea> 
+  <?php 
+  } 
+ 
+  ?> 
+       到此，全部修改完毕，如果你还是不会修改，那么可以下载我下方提供的修改过的文件直接覆盖即可。默认的后台目录地址dede未修改，如果你更改过相应的也更改下文件夹名。注意：我这个是utf8的，如果你的程序为gbk版本，把下面下载的文件用dw或者其他编辑工具更改下编码即可。不会更改？百度一下。
+插件下载地址：http://pan.baidu.com/share/link?shareid=622390&uk=454004364 

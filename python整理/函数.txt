@@ -1,0 +1,9 @@
+#coding=utf-8
+def hjd(a):
+    if a>20:
+        print("大于20")
+    else:
+        print("小于20")
+
+
+hjd(1)

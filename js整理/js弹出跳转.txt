@@ -1,0 +1,21 @@
+弹出框：<script language='javascript'>alert('添加成功');</script>
+
+
+跳转页面：<script language='javascript'>window.location.href='add_news.asp'</script>
+
+
+
+确认 取消：
+<script language="javascript">
+function hjd(){
+			if (confirm("确认要删除吗?")){
+					return true}
+				else{return false}		
+				}
+</script>
+
+<a onclick="javascript:return hjd()" ><a/>
+
+
+2、在新窗体中打开页面用：
+window.open('你所要跳转的页面');

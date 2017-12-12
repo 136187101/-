@@ -1,0 +1,1 @@
+不用卸载，找到python安装路径，Lib-->sit_package下，把django文件夹和django.egg这种文件删了就好了。。

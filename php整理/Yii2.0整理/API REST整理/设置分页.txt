@@ -1,0 +1,16 @@
+per-page=10&page=2  在接口访问地址上加参数即可
+per-page 每页显示多少条
+page 第几页
+
+有时候你可能想通过直接在body中包含分页信息来帮助简化客户端开发工作，那么你也可以配置 yii\rest\Serializer::$collectionEnvelope 属性如下：
+
+use yii\rest\ActiveController;
+
+class UserController extends ActiveController
+{
+    public $modelClass = 'app\models\User';
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
+}

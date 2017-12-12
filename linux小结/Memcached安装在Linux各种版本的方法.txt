@@ -1,0 +1,39 @@
+Memcached 支持许多平台：Linux、FreeBSD、Solaris、Mac OS，也可以安装在Windows上
+
+Linux系统安装memcached，首先要先安装libevent库
+
+在Ubuntu/Debian上运行
+# apt-get install libevent-dev
+在Redhat/Fedora/Centos上运行
+# yum install libevent libevent-deve
+
+安装Memcached
+
+在Ubuntu/Debian上运行
+sudo apt-get install memcached
+在Redhat/Fedora/Centos上运行
+yum install memcached
+在FreeBSD上运行
+portmaster databases/memcached
+
+源代码编译安装
+从其官方网站（http://memcached.org）下载memcached最新版本。
+
+# wget http://memcached.org/latest
+# tar -zxvf memcached-1.x.x.tar.gz
+# cd memcached-1.x.x
+# ./configure --prefix=/usr/local/memcached
+# make && make test
+# make install
+
+Memcached命令的运行
+# /usr/local/memcached/bin/memcached -h   命令帮助
+注意：如果使用自动安装 memcached 命令位于 /usr/local/bin/memcached。
+启动选项：
+-d是启动一个守护进程；
+-m是分配给Memcache使用的内存数量，单位是MB；
+-u是运行Memcache的用户；
+-l是监听的服务器IP地址，可以有多个地址；
+-p是设置Memcache监听的端口，，最好是1024以上的端口；
+-c是最大运行的并发连接数，默认是1024；
+-P是设置保存Memcache的pid文件。

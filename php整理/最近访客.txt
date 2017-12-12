@@ -1,0 +1,39 @@
+//记录访问
+if($_SESSION["seid_q"]!="")
+{
+	if($_SESSION["seid_q"]!=$usersid)
+	{
+		//查询最近查看是否有这个用户
+		$rs_fk=$db->query("select * from fangke where uid = '$usersid' and fid='$_SESSION[seid_q]'");
+		if($hjd->num_rows($rs_fk)==0)
+		{
+			$db->query("insert into fangke (uid,fid,ftimes) values('$usersid','$_SESSION[seid_q]','$date')");	
+		}
+		else
+		{
+			$db->query("update fangke set ftimes='$date' where uid = '$usersid' and fid = '$_SESSION[seid_q]'");	
+		}
+		//查询这个用户的访客数量是否大于5位，如果大于5位就删除5位开外的
+		$rs_cfk=$db->query("select * from fangke where uid='$usersid'");
+		if($hjd->num_rows($rs_cfk)>5)
+			{
+					
+					$rs_jww=$db->query("select * from fangke where uid='$usersid' order by ftimes desc limit 0,5");
+					while($rows_jww=$hjd->fetch_array($rs_jww))
+					{
+						 $jwwid=$rows_jww["id"].",".$jwwid;	
+					}
+					 $jwwid=substr($jwwid,0,-1);
+					 
+					$db->query("delete from fangke where uid = '$usersid' and fid not in ($jwwid) ");
+			}
+		
+	}
+}
+
+
+数据库结构：
+id int(12)                 
+uid int(12)                  
+fid int(12)                   
+ftimes varchar(30) 

@@ -1,0 +1,14 @@
+jquery:
+$(document).ready(function(){
+$("#formID").validationEngine();	
+
+})
+
+class:
+class="validate[required,length[5,5]]"
+
+javascript:
+function validate2fields(){if($("#firstname").val() =="" || $("#lastname").val() == ""){return true;}else{return false;}}
+
+css:
+<link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" media="screen" title="no title" charset="utf-8" /><link rel="stylesheet" href="css/reg.css" type="text/css" media="screen" title="no title" charset="utf-8" />

@@ -1,0 +1,48 @@
+simplexml_load_string()
+
+¶¨ÒåºÍÓÃ·¨
+
+simplexml_load_string() º¯Êý°Ñ XML ×Ö·û´®ÔØÈë¶ÔÏóÖÐ¡£
+
+Èç¹ûÊ§°Ü£¬Ôò·µ»Ø false¡£
+Óï·¨
+
+simplexml_load_file(string,class,options,ns,is_prefix)
+
+²ÎÊý 	ÃèÊö
+string 	±ØÐè¡£¹æ¶¨ÒªÊ¹ÓÃµÄ XML ×Ö·û´®¡£
+class 	¿ÉÑ¡¡£¹æ¶¨ÐÂ¶ÔÏóµÄ class¡£
+options 	¿ÉÑ¡¡£¹æ¶¨¸½¼ÓµÄ Libxml ²ÎÊý¡£
+ns 	¿ÉÑ¡¡£
+is_prefix 	¿ÉÑ¡¡£
+·µ»ØÖµ
+
+·µ»ØÀà SimpleXMLElement µÄÒ»¸ö¶ÔÏó£¬¸Ã¶ÔÏóµÄÊôÐÔ°üº¬ XML ÎÄµµÖÐµÄÊý¾Ý¡£Èç¹ûÊ§°Ü£¬Ôò·µ»Ø false¡£
+Àý×Ó
+
+<?php
+$xmlstring = <<<XML
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<note>
+<to>George</to>
+<from>John</from>
+<heading>Reminder</heading>
+<body>Don't forget the meeting!</body>
+</note>
+XML;
+
+$xml = simplexml_load_string($xmlstring);
+
+var_dump($xml);
+?>
+
+Êä³ö£º
+
+object(SimpleXMLElement)#1 (4)
+{
+["to"]=> string(4) "George"
+["from"]=> string(4) "John"
+["heading"]=> string(8) "Reminder"
+["body"]=> string(29) "Don't forget the meeting!"
+}
+

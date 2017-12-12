@@ -1,0 +1,7 @@
+提示：如果你将RESTful APIs作为应用开发，可以设置应用配置中 user 组件的 enableSession， 如果将RESTful APIs作为模块开发，可以在模块的 init() 方法中增加如下代码，如下所示：
+
+public function init()
+{
+    parent::init();
+    \Yii::$app->user->enableSession = false;
+}

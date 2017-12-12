@@ -1,0 +1,10 @@
+.JQuery下锚点的平滑跳转 Edit
+对于锚点的平滑跳转，在一般的商业性质的网站上，权衡来说，要谨慎使用。
+
+例如：让页面平滑滚动到一个id为box的元素处，则JQuery代码只要一句话，如下：
+
+
+
+$(“html,body”).animate({scrollTop:$(“#box”).offset().top},1000)
+
+其中animate为JQuery的自定义动画方法，$(“#box”).offset().top表示id为box的JQuery对象距离页面顶部的偏移值，1000表示平滑动画执行的时间为1000毫秒，也就是1秒。

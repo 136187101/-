@@ -1,0 +1,16 @@
+前台二次开发入门知识
+
+比如要在前台增加一项功能,就在/do/目录下新建一个PHP文件,如abc.php
+前台访问的方式是 http://域名/do/abc.php
+然后这个abc.php一般代码如下
+
+<?php
+require_once("global.php"); //这个是核心文件,里边涉及到系统的变量与方法
+
+//相关代码部分
+
+require(ROOT_PATH."inc/head.php"); //这个是头部模板
+require(html("abc"));    //这个是内容部分的模板,一般存放目录是/template/default/abc.htm
+//以上的abc一般要跟PHP文件名对应,方便用户查找
+require(ROOT_PATH."inc/foot.php"); //这个是底部模板
+?>

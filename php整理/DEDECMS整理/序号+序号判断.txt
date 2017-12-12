@@ -1,0 +1,89 @@
+[html] view plaincopy
+[field:global name=autoindex/]----- 一般使用  
+[field:global name=autoindex runphp="yes"]@me=@me+5;[/field:global]-----  6、7、8、9、.....  
+[field:global name=autoindex runphp="yes"](@me%2==0)? @me="|":@me="";[/field:global]------奇偶的样式  
+ 
+
+下面是转别人的，估计以后有用，关于自己写SQL的情况下递增的调用的
+
+在{dede:arclist/}这个标签中大家都知道有个[field:global.autoindex/]，这个变 量每生成一行就+1，那很多人希望{dede:sql/}标签也需要加上这个功能，很多朋友提问，肯定会认为官方不会去做，其实不然，官方主要希望大家能 够一同分享这种使用、开发的小技巧，小经验，其实这个东西很简单，自己稍微摸索下就可以知道。
+下面 我们就开始增加这个小扩展，我们知道在V5.3中织梦的标签已经分离出来，也就是类似于arclist这样的标签可以自己修改或者二次开发，程序这些标签 存放的目录在/include/taglib文件夹下面，我们可以看那个文件名，就很容易知道这些标签文件名和标签的对应关系。
+那我们现在需要修改的是{dede：sql/}这个标签，那我们就修改sql.lib.php这个文件。
+打开后我们找到第34行，也就是代码
+$ctp->LoadSource($Innertext);
+处，在下面加上以下一段代码：
+$GLOBALS['autoindex'] = 0;
+这段代码就是定义一个全局变量，并赋值为0，接下来我们只需要将下面代码进行下修改：
+while($row = $dsql->GetArray($thisrs))
+{
+   $sqlCt++;
+   foreach($ctp->CTags as $tagid=>$ctag){
+    if(!empty($row[$ctag->GetName()])){ $ctp->Assign($tagid,$row[$ctag->GetName()]); }
+   }
+   $GLOBALS['autoindex']++; //每循环一次加上一个1然后解析出来
+   $revalue .= $ctp->GetResult();
+}
+这样一来，这个[field:global.autoindex/]标签就可以在那个{dede:sql/}中使用了，我们举个例子：
+{dede:sql sql='select * from [url=mailto:#@__archives]#@__archives'[/url]}
+[field:global.autoindex/]-[field:title/]</br>
+{/dede:sql}
+怎么样？很简单吧，其实这种扩展还有很多很多，自己可以试试哦。
+
+你这样写就行了：
+{dede:global name='b' runphp='yes'} 
+ob_start(); 
+extract($GLOBALS,   EXTR_SKIP);
+//----------------------- 
+//下面是任意PHP代码 
+print_r($this->refObj->Fields); //测试调用当前文档类的字段数组（只支持PHP5）
+
+
+
+//---------------------- 
+//返回值给标签自身 
+@me = ob_get_contents(); 
+ob_clean(); 
+{/dede:global}
+
+当然，你想支持<?php   ?>这种语法也行，修改一下模板类，载入模板内容时把<?php 替换为
+{dede:global name='b' runphp='yes'} 
+ob_start(); 
+extract($GLOBALS,   EXTR_SKIP);
+
+把 ?> 替换为
+@me = ob_get_contents(); 
+ob_clean(); 
+{/dede:global}
+
+ 
+
+还有一种做法，自定义一个PHP标签
+Copy code
+
+<?php
+if(!defined('DEDEINC')) exit('Request Error!');
+
+function lib_php(&$ctag, &$refObj)
+{
+     $phpcode = trim($ctag->GetInnerText());
+     if($phpcode=='') return '';
+     ob_start();
+     extract($GLOBALS,   EXTR_SKIP);
+     @eval($phpcode);
+     $revalue = ob_get_contents();
+     ob_clean(); 
+     return $revalue;
+}
+
+?>
+
+
+把这代码保存为
+
+include/taglib/php.lib.php
+
+这样直接用
+{dede:php}
+//这里就能用任意PHP代码了，不过需要注意的是，如果有include文件的，一定要用 DEDEROOT 作为引入目录
+//如：reuqire_once(DEDEROOT.'/xxx.inc.php');
+{/dede:php}

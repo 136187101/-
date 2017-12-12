@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="Copyright" content="{首页优化标题}" />
+<meta name="keywords" content="{首页优化关键词}"  />
+<meta name="description" content="{首页优化关详细}" />
+<title>{首页标题}</title>
+<link rel="stylesheet" type="text/css" href="/css/css.css">
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript">
+    $(document).ready(function() {
+		   var currentIndex = 0;
+            var DEMO; //函数对象
+            var currentID = 0; //取得鼠标下方的对象ID
+            var pictureID = 0; //索引ID
+            $("#ifocus_piclist li").eq(0).show(); //默认
+            autoScroll();
+            $("#ifocus_btn li").hover(function() {
+                StopScrolll();
+                $("#ifocus_btn li").removeClass("current")//所有的li去掉当前的样式加上正常的样式
+                $(this).addClass("current"); //而本身则加上当前的样式去掉正常的样式
+                currentID = $(this).attr("id"); //取当前元素的ID
+                pictureID = currentID.substring(currentID.length - 1); //取最后一个字符
+                $("#ifocus_piclist li").eq(pictureID).fadeIn("slow"); //本身显示
+                $("#ifocus_piclist li").not($("#ifocus_piclist li")[pictureID]).hide(); //除了自身别的全部隐藏
+            }, function() {
+                //当鼠标离开对象的时候获得当前的对象的ID以便能在启动自动时与其同步
+                currentID = $(this).attr("id"); //取当前元素的ID
+                pictureID = currentID.substring(currentID.length - 1); //取最后一个字符
+                currentIndex = pictureID;
+                autoScroll();
+            });
+            //自动滚动
+            function autoScroll() {
+                $("#ifocus_btn li:last").removeClass("current");
+                $("#ifocus_btn li").eq(currentIndex).addClass("current");
+                $("#ifocus_btn li").eq(currentIndex - 1).removeClass("current");
+                $("#ifocus_piclist li").eq(currentIndex).fadeIn("slow");
+                $("#ifocus_piclist li").eq(currentIndex - 1).hide();
+                var imagenum = "{-首页焦点总数-}";
+				currentIndex++; currentIndex = currentIndex >= imagenum ? 0 : currentIndex;
+                DEMO = setTimeout(autoScroll, 5000);
+            }
+            function StopScrolll()//当鼠标移动到对象上面的时候停止自动滚动
+            {
+                clearTimeout(DEMO);
+            }
+	});
+</script>
+</head>
+<body>
+<!--头部信息开始-->
+<div class="top"><em><img src="/images/banner.jpg" width="999" height="123" /></em></div>
+<div class="daohang">
+	<div class="daohang_a">
+		<ul>
+			<li><a href="/" class="linkbai">网站首页</a></li>
+			<li><a href="/4006/" class="linkbai">联通4006</a></li>
+			<li><a href="/4000/" class="linkbai">联通4000</a></li>
+			<li><a href="/4008/" class="linkbai">电信4008</a></li>
+			<li><a href="/4001/" class="linkbai">移动4001</a></li>
+			<li><a href="/xuanhao/" class="linkbai">选号中心</a></li>
+			<li><a href="/news/" class="linkbai">新闻动态</a></li>
+			<li><a href="/pay/" class="linkbai">付款方式</a></li>
+			<li><a href="/about/" class="linkbai">企业介绍</a></li>
+			<li><a href="/contact/" class="linkbai">联系我们</a></li>
+		</ul>
+	</div>
+	<div class="daohang_b">
+		<ul>
+			<li>地区选择</li>
+			<li style="width:720px;">{-首页地区分类-}</li>
+		</ul>
+	</div>
+</div>
+<!--头部信息结束-->
+
+
+
+<!--中部信息开始-->
+<div class="center">
+	<div class="center_left">
+	  <div class="center_left_QQ">
+			<div class="center_QQ_title"><img src="/images/zaixianqq.jpg" /></div>
+        <div class="center_QQ_neirong">
+              <ul>
+                <li>咨询①:</li>
+                <li><a href="tencent://message/?uin=464286348&amp;Site=全国400电话办理申请中心&amp;Menu=yes"><img border="0" alt="400电话申请办理业务咨询" align="absMiddle" width="78" height="25" src="http://wpa.qq.com/pa?p=1:464286348:47" /></a></li>
+                <li><a href="tencent://message/?uin=928932388&amp;Site=全国400电话办理申请中心&amp;Menu=yes"><img border="0" alt="400电话申请办理业务咨询" align="absMiddle" width="78" height="25" src="http://wpa.qq.com/pa?p=1:928932388:47" /></a></li>
+              </ul>
+	          <ul>
+                <li>咨询②:</li>
+                <li><a href="tencent://message/?uin=464286348&amp;Site=全国400电话办理申请中心&amp;Menu=yes"><img border="0" alt="400电话申请办理业务咨询" align="absMiddle" width="78" height="25" src="http://wpa.qq.com/pa?p=1:464286348:47" /></a></li>
+                <li><a href="tencent://message/?uin=928932388&amp;Site=全国400电话办理申请中心&amp;Menu=yes"><img border="0" alt="400电话申请办理业务咨询" align="absMiddle" width="78" height="25" src="http://wpa.qq.com/pa?p=1:928932388:47" /></a></li>
+              </ul>
+	          <ul>
+                <li>咨询③:</li>
+                <li><a href="tencent://message/?uin=464286348&amp;Site=全国400电话办理申请中心&amp;Menu=yes"><img border="0" alt="400电话申请办理业务咨询" align="absMiddle" width="78" height="25" src="http://wpa.qq.com/pa?p=1:464286348:47" /></a></li>
+                <li><a href="tencent://message/?uin=928932388&amp;Site=全国400电话办理申请中心&amp;Menu=yes"><img border="0" alt="400电话申请办理业务咨询" align="absMiddle" width="78" height="25" src="http://wpa.qq.com/pa?p=1:928932388:47" /></a></li>
+              </ul>
+          <span><a href="#"><img src="/images/400.jpg" border="0" /></a></span>		  </div>
+	  </div>
+	  <div class="bj400_1">
+	  	<p>{-首页4006简介-}</p>
+	  	<span><a href="/4006/">查看详情>></a></span>	  </div>
+	  
+	  <div class="center_left_QQ" style="margin-top:12px;">
+			<div class="center_QQ_title"><span style="margin-left:20px;">400电话办理申请步骤</span></div>
+	        <div class="center_QQ_anj">
+            	<ul>
+					<li><a href="#"><img src="/images/anj_01.jpg" border="0" /></a></li>
+					<li><img src="/images/anj_s.jpg" /></li>
+					<li><a href="#"><img src="/images/anj_02.jpg" border="0" /></a></li>
+					<li><img src="/images/anj_s.jpg" /></li>
+					<li><a href="#"><img src="/images/anj_03.jpg" border="0" /></a></li>
+					<li><img src="/images/anj_s.jpg" /></li>
+					<li><a href="#"><img src="/images/anj_04.jpg" border="0" /></a></li>
+					<li><img src="/images/anj_bj.jpg" /></li>
+				</ul>
+				<dl>
+					<dd><img src="/images/hot.jpg" />&nbsp;<font color="#FF0000">抢订号码</font></dd>
+					<dd><a href="/about/about-25.html">资质荣誉</a></dd>
+					<dd><a href="about/about-30.html">关于我们</a></dd>
+					<dd><a href="/contact/">联系方式</a></dd>
+					<dd><a href="/pay/">付款方式</a></dd>
+					<dd><a href="/about/about-27.html">企业招聘</a></dd>
+				</dl>
+			</div>
+	  </div>
+	</div>
+	<div class="center_right">
+		<div class="jiaodian">
+			<div id="ifocus_pic">
+					  <div id="ifocus_piclist" style="left:0; top:0;">
+						  <ul>
+						  	{-首页焦点图-}
+						  </ul>
+					  </div>
+					  <div id="ifocus_btn">
+						<ul>
+							{-首页焦点数量-}
+						</ul>
+					 </div>
+			</div>	  
+		<!--<img src="/images/jiaodian.jpg" width="747" height="205"/>-->
+		</div>
+		<div class="cen_400">
+		  <div class="bj400_2">
+				<p>{-首页4000简介-}</p>
+		    <span><a href="/4000/">查看详情>></a></span>			</div>
+			<div class="bj400_3">
+				<p>{-首页4008简介-}</p>
+			<span><a href="/4008/">查看详情>></a></span>			</div>
+			<div class="bj400_4">
+				<p>{-首页4001简介-}</p>
+			<span><a href="/4001/">查看详情>></a></span>			</div>
+		</div>
+		<div class="gonggao"><a href="#"><img src="/images/gonggao.jpg" border="0"/></a></div>
+		<div class="kuangjia">
+	  <div class="center_left_kj">
+			<div class="center_kuangjia_bj">为什么用400电话？<span style="font-size:12px; position:relative; left:150px;"><a href="news/news-18.html">查看更多>></a></span></div>
+	        <div class="center_kuangjia_centent">
+				<ul>
+					{-首页为什么使用4000电话列表-}
+				</ul>
+			</div>
+	  </div>
+	  <div class="center_left_kj" style="margin-left:8px;">
+			<div class="center_kuangjia_bj">400电话客户展示</div>
+	        <div class="center_kuangjia_centent">
+				<dl>
+					{-首页400电话客户-}
+				</dl>
+			</div>
+	  </div>
+	  <div class="center_left_kj">
+			<div class="center_kuangjia_bj">新闻动态<span style="font-size:12px; position:relative; left:215px;"><a href="news/news-17.html">查看更多>></a></span></div>
+	        <div class="center_kuangjia_centent">
+				<ul>
+					{-首页新闻动态列表-}
+				</ul>
+			</div>
+	  </div>
+	  <div class="center_left_kj" style="margin-left:8px;">
+			<div class="center_kuangjia_bj">最新加入客户<span style="font-size:12px; position:relative; left:190px;"><a href="news/news-19.html">查看更多>></a></span></div>
+	        <div class="center_kuangjia_centent">
+				<ul>
+					{-首页最新加入客户生成列表-}
+				</ul>
+			</div>
+	  </div>
+		</div>
+	</div>
+</div>
+<!--中部信息结束-->
+
+
+<!--中部信息地区开始-->
+<div class="diqu">
+	<span>&nbsp;全国其他地区办理点</span>
+	<div style="line-height:22px; padding:0px 10px;">{-首页地区分类二-}</div>
+</div>
+<!--中部信息地区结束-->
+
+
+<!--中部信息友情链接开始-->
+<div class="link">
+	<ul>
+		{-首页友情链接-}
+	</ul>
+</div>
+<!--中部信息友情链接结束-->
+
+
+<!--底部信息开始-->
+<div class="bottom"><a href="/4006"  >联通4006</a> | <a href="/4000"  >联通4000</a> |  <a href="/4008"  >电信4008</a> |  <a href="/4001"  >移动4001</a> |  <a href="/xuanhao"  >选号中心</a> |  <a href="/news"  >新闻动态</a> |  <a href="/pay"  >付款方式</a> |  <a href="/about"  >企业介绍</a> |  <a href="/contact"  >联系我们</a> |  <a href="/maps.html"  >网站地图</a><br />Copyright © 2002-2009 . 北京市海淀区苏州街18号长远天地B座B1号楼1002室</div>
+<!--底部信息结束-->
+</body>
+</html>

@@ -1,0 +1,14 @@
+strtotime
+
+$strtime=1454302861;//购买时间
+$s=strtotime("+1 month -1 days",$strtime);
+echo date("Y-m-d H:i:s",$s);
+exit;
+
+// 当天的零点
+$today = strtotime(date('Y-m-d', time()));
+// 当天的24
+$end = $today + 24 * 60 * 60;
+
+//获取指定日期，例如2014-06-06
+$time = time('2014-06-06');

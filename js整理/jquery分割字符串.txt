@@ -1,0 +1,6 @@
+  var strinfo = "aa,bb,cc,dd,ee,ff";
+     var strs = new Array();
+       strs = strinfo.split(",");、、将它分割成数租
+   $.each(strs, function (index, tx) { alert(tx); });
+
+ 

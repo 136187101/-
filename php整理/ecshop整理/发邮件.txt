@@ -1,0 +1,11 @@
+
+define('IN_ECS', true);
+require('../../includes/init.php');
+$a=array('136187101@qq.com','654255433@qq.com');
+if(send_mail('侯建东',$a,'说句话啊亲', '擦', 1))
+{
+	echo "发送成功";
+}else {
+	
+	echo "发送失败";
+}

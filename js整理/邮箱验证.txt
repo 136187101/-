@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> New Document </TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+</HEAD>
+
+<BODY>
+<script language="javascript">
+function check(){
+var email=document.getElementById("email").value;
+var isemail=(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
+    if (email=="")
+    {
+alert("请输入您的邮箱!");
+return false;
+    }
+if (email.length>25)
+{
+alert("长度太长");
+return false
+}
+if (!isemail.test(email))
+{
+     alert("不是邮箱");
+   return false;
+}
+
+}
+
+</script>
+<FORM METHOD=POST ACTION="" onsubmit="return check()">
+<INPUT TYPE="text" NAME="email"><INPUT TYPE="submit">
+</FORM>
+
+
+</BODY>
+</HTML>
+

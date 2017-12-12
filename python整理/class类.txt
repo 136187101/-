@@ -1,0 +1,16 @@
+#coding=utf-8
+
+class hjd:
+    def __init__(self,conn):
+        self.email=conn
+    def name(self):
+        print("name 方法")
+    def tong(self,qq):
+        print("她的QQ号是：{0},她的email是{1}".format(qq,self.email))
+
+h=hjd("852261344@qq.com")
+h.tong(862261344)
+
+
+ def __init__(self,conn):        构造函数
+ self 可以理解为this（此类的。。。。）

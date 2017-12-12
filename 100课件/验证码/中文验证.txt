@@ -1,0 +1,27 @@
+//随即数
+for ($i=1;$i<=4;$i++){
+$suiji.=dechex(rand(1,15));
+}
+//创建一个图片画布
+$im=imagecreatetruecolor(100, 30);
+//选色板
+imagecolorallocate($im, 255, 255, 255);
+$tc=imagecolorallocate($im, 255, 255, 255);
+
+//画线
+for($i=0;$i<5;$i++){
+$sjc=imagecolorallocate($im,rand(0,255),rand(0,255),rand(0,255));
+imageline($im, rand(0,30), rand(0,30),  rand(0,100),  rand(0,30), $sjc);
+}
+//加点
+for($i=0;$i<200;$i++)
+{
+	$sjc=imagecolorallocate($im,rand(0,255),rand(0,255),rand(0,255));
+	imagesetpixel($im,rand(0,100),rand(0,30), $sjc);
+}
+$str=iconv("gbk","utf-8","你要我说多难堪");
+//写入内容
+//imagestring($im,rand(1, 6), rand(0,50), rand(0,16), $suiji, $tc);
+imagettftext($im,16,0,10,20,$tc,'迷你简黄草.ttf', $str);
+header("Content-type:image/png");
+imagepng($im);

@@ -1,0 +1,7 @@
+[field:array runphp=yes ]
+if(@me['shorttitle']!=''){
+@me = '<a href="'.@me['arcurl'].'"   class="butten" target="_blank">²é¿´ÏêÏ¸</a>';
+}else{
+@me =  '<a    class="butten" target="_blank">¾´ÇëÆÚ´ı</a>';
+}
+[/field:array]

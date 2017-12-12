@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<META http-equiv=Pragma content=no-cache> 
+<META http-equiv=Cache-Control content=no-cache> 
+<META http-equiv=Expires content=0>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<SCRIPT language=JavaScript> 
+<!-- 
+if (window.Event) 
+document.captureEvents(Event.MOUSEUP); 
+function nocontextmenu() 
+{ 
+event.cancelBubble = true 
+event.returnValue = false; 
+return false; 
+} 
+
+function norightclick(e) 
+{ 
+if (window.Event) 
+{ 
+if (e.which == 2 || e.which == 3) 
+return false; 
+} 
+else 
+if (event.button == 2 || event.button == 3) 
+{ 
+event.cancelBubble = true 
+event.returnValue = false; 
+return false; 
+} 
+} 
+document.oncontextmenu = nocontextmenu; // for IE5+ 
+document.onmousedown = norightclick; // for all others 
+//--> 
+</SCRIPT> 
+
+</head>
+
+<body>
+<noscript>
+<iframe src="*.htm"></iframe>
+</noscript>
+
+
+
+
+</body>
+</html>

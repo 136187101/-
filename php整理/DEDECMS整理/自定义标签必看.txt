@@ -1,0 +1,17 @@
+function lib_hjdfllist(&$ctag,&$refObj)
+{
+    global $dsql,$envs;
+	print_r($envs);
+	exit;
+}
+
+其中：
+	$dsql 是数据库
+	$envs 是当前页的数据信息
+
+	例如Array ( [typeid] => 42 [reid] => 3 [aid] => 0 [keyword] => [idlist] => [topid] => 2 [cross] => 1 )
+	
+	typeid:当前栏目ID
+	reid:上级ID
+	aid:文章ID
+	topid:栏目顶级ID

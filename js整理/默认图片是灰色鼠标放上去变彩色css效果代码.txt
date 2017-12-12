@@ -1,0 +1,10 @@
+<STYLE type=text/css>
+A IMG {
+	FILTER: gray
+}
+A:hover IMG {FILTER:
+}
+</STYLE>
+<title>默认图片是灰的鼠标放上去变亮变清晰了</title><A href="http://www.lanrentuku.com"><IMG src="http://www.lanrentuku.com/images/uppic/lanrentuku_colorpic.jpg" border="0"></A>
+<br />
+转载请注明出处：<a href="http://www.lanrentuku.com/">懒人图库 </a>

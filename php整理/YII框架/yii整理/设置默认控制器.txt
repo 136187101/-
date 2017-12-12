@@ -1,0 +1,6 @@
+在config/web.php 
+
+加入 
+'defaultRoute' => 'index（控制器）',
+
+注意：加入必须为一级数组 不要加到其他参数的数组里

@@ -1,0 +1,5 @@
+function sj(){
+var	sj=new Date();
+var	sjj=sj.toLocaleString();
+sj1.innerHTML=sjj;
+}

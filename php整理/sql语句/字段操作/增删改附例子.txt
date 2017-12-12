@@ -1,0 +1,38 @@
+添加字段：
+alter table 表名
+Add column 字段名 字段类型  默认值 AFTER 字段名 (在哪个字段后面添加)
+
+
+例子：
+alter table appstore_souapp_app_androidmarket
+Add column getPriceCurrency varchar(50)   default null AFTER getPrice
+
+
+
+修改字段：
+alter table表名
+change 字段名 新字段名 字段类型 默认值
+
+
+例子：
+alter table appstore_souapp_app_androidmarket change hasPrice hasPrice varchar(10)  null;
+
+
+
+删除字段：
+alter table 表名 drop column 字段名
+
+例子：
+alter table appstore_souapp_app_androidmarket
+drop column getPriceCurrency
+
+
+
+调整字段顺序：
+alter table 表名
+change 字段名 新字段名 字段类型 默认值 after 字段名(跳到哪个字段之后)
+
+
+例子：
+alter table appstore_souapp_app_androidmarket
+change getPriceCurrency getPriceCurrency varchar(50)   default null AFTER getPrice

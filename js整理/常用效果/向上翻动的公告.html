@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+　　<title>无标题页</title>
+</head>
+<body>
+
+<div style="width:218px;height:23px;overflow:hidden; ">
+   <div id="noticev2" style="white-space:nowrap; background:#000;" onmouseover="javascript:isMove=false" onmouseout="javascript:isMove=true">
+   <a href="#">1111</a>
+   <a href="#">2222</a>
+   <a href="#">3333</a>
+   </div>
+   </div>
+<script language="JavaScript" text="text/javascript">
+<!--
+var tID;
+var tn;
+var nStopTime=3000;
+var nSpeed=50;
+var isMove=true;
+var nHeight=20;
+var nS=0;
+var nNewsCount=0;
+function moveT(n) {
+   clearTimeout(tID);
+   var noticev2= document.getElementById("noticev2");
+   if(n) {
+   noticev2.style.lineHeight=nHeight+"px";
+   var theText=noticev2.innerHTML.toLowerCase();
+   nNewsCount=theText.split("<br>").length;
+   noticev2.innerHTML+="<br>"+noticev2.innerHTML;
+   tn=nHeight;
+   }
+   nS=nSpeed;
+   if(isMove) {
+   noticev2.style.marginTop=tn+"px";
+   if((tn-2)%nHeight==0) {
+   nS=nSpeed+nStopTime;
+   }
+   tn--;
+   if(Math.abs(tn)==(nNewsCount*nHeight*2-nHeight)) {
+   tn=(nNewsCount-1)*nHeight*-1;
+   }
+   }
+   tID=setTimeout("moveT()",nS);
+}
+moveT(1);
+//-->
+</script>
+</body>
+</html>

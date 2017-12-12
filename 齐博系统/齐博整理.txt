@@ -1,0 +1,35 @@
+自定义风格：
+目录：data/style/xxx.php
+新建一个风格
+<?php	
+	$styledb['name']='侯建东风格';
+	$styledb['keywords']='hjd';
+
+在template下建立相应目录 hjd
+
+每个模版都必须有三个文件，head.htm,index.htm,foot.htm   分别是 头部，内容主体，底部信息
+
+设置标签：
+	在htm里加入模版设置代码 ，$label[xxx]是标签，可以再后台更换
+<!--
+
+<?php
+
+print <<<EOT
+
+--> 
+<table>
+<tr>$label[fafa]</tr>
+</table>
+<!--
+
+EOT;
+
+?>
+
+-->
+
+
+图片路径：绝对路径$webdb[www_url];
+
+忘记密码强制进入后台，进入global 按照提示改成1 进去改admin密码退出在改回0

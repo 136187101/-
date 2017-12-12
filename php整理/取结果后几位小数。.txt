@@ -1,0 +1,3 @@
+ $sun=number_format($rows["t_piaoshu"]/$summ*100,1)
+
+number_format(数,取几位小数)

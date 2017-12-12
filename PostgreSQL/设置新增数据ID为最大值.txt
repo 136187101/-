@@ -1,0 +1,3 @@
+select setval('jd_log_id_seq', max(id)) from jd_log; 
+
+表中插入数据后，sequence值一般不会自动增长，必须手工set，序列的当前值

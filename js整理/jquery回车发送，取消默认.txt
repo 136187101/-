@@ -1,0 +1,8 @@
+		//绑定回车键发送信息
+		$('#kong').keydown(function(e){
+			if(e.keyCode==13){
+			  e.preventDefault();//清除回车键默认行为
+			  fasong();		
+			  $("#kong").val("");//清空内容鼠标定位
+			}
+		});		

@@ -1,0 +1,10 @@
+高级模板下可以直接使用这个：
+
+if ($model->save()) {
+    Yii::$app->getSession()->setFlash('success', '保存成功');
+} else {
+    Yii::$app->getSession()->setFlash('error', '保存失败');
+}
+return $this->redirect(['member/security']);
+
+基础模板我没用过，不知道它那里有没有高级模板下 frontend/widgets/Alert.php 这个小插件，有的话也是可以用的。

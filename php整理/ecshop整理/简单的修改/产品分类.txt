@@ -1,0 +1,18 @@
+{foreach from=$goods_list item=goods}
+<img src="{$goods.goods_thumb}" border="0"  /><br>
+{$goods.goods_name}<br />
+{/foreach}
+
+
+接着我们访问这个页面:(Ecshop的访问网址/category.php?id=1)例如：http://localhost/ecshop/category.php?id=1
+
+
+
+这样我们就访问到了分类id为1的商品了，我们也可以让id=2就访问到id = 2商品了，那如何看某个分类的id呢？
+
+
+
+我们看后台： 商品管理-》商品分类-》就可以看到商品分类的列表，然后把鼠标指上去选择新窗口打开，就能在
+
+地址 
+来里面看到goods.php?act=list&cat_id=1这样子的信息，cat_id所等于的值就是这个分类的id了，然后就可以拿来调取了，呵呵。

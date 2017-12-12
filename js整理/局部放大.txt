@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>图片局部放大镜效果JS代码-素材中国一流素材网</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+.zoomPan{width:570px;left:100px;position:relative; }
+.sh{zoom:1;background:#eee;filter:progid:DXImageTransform.Microsoft.dropShadow(color='#54000000', OffX=2,OffY=2);-webkit-box-shadow:4px 4px 4px #666;-moz-box-shadow:4px 4px 4px #666;}
+#zoom{position:absolute;width:254px;height:254px;border:3px solid #fff;left:-9999px;top:0;overflow:hidden;background:#fff;}
+#zoom img{position:relative;}
+</style>
+</head>
+<body>
+
+<div class="zoomPan" id="zoomPan">
+    <img src="images/s.jpg" alt=""  />
+    <div id="zoom" class="sh"><img src="images/b.jpg" alt="" /></div>
+</div>
+</body>
+<script type="text/javascript">
+//<![CDATA[
+function zoomBox() {this.index.apply(this, arguments)}
+zoomBox.prototype = {
+    index: function(win,zoom) {
+        var win=document.getElementById(win);
+        var box=document.getElementById(zoom);
+        var img=box.getElementsByTagName('IMG')[0];
+        var zoom=img.width/win.getElementsByTagName('IMG')[0].width;
+        var z=Math.round(box.offsetWidth/2);
+        win.onmousemove=function (e){
+            e = e || window.event;
+            var x=e.clientX,y=e.clientY, ori=win.getBoundingClientRect();
+            if (x>ori.right+20||y>ori.bottom+20||x<ori.left-20||y<ori.top-20)box.style.display='none';
+            x-=ori.left;
+            y-=ori.top;
+            box.style.left=x-z+'px';
+            box.style.top=y-z+'px';
+            img.style.left=-x*zoom+z+'px';
+            img.style.top=-y*zoom+z+'px';
+        }
+        win.onmouseover=function (){box.style.display=''}
+    }
+};
+window.onload=function (){
+    x=new zoomBox('zoomPan','zoom')
+}
+ //]]>
+</script>
+<!--广告区域开始-->
+
+<p style="text-align:center;">代码整理：<a href="http://www.16sucai.com/" target="_blank">素材中国</a>一流素材网</p>
+<p style="text-align:center;">＊尊重他人劳动成果，转载请自觉注明出处！注：此代码仅供学习交流，请勿用于商业用途。</p>
+<p></p>
+<!--广告区域结束--> 
+</html>

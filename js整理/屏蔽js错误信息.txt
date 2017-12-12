@@ -1,0 +1,10 @@
+<script language="javascript">
+
+function killerrors() {
+
+return true;
+
+}
+
+window.onerror = killerrors;
+</script>

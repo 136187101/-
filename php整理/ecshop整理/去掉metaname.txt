@@ -1,0 +1,6 @@
+如何去除 <meta name="Generator" content="ECSHOP v2.7.2" />
+
+ 打开includes/cls_template.php，
+
+1087行找到 $source = preg_replace('/<head>/i', "<head> <meta name=\"Generator\" content=\"" . APPNAME .' ' . VERSION . "\" />", $source); 将它注释或去掉就可以了。
+

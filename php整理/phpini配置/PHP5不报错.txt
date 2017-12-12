@@ -1,0 +1,7 @@
+修改PHP.ini,将 display_errors   =   Off 改为 display_errors   =   On
+
+修改PHP.ini,将 error_reporting = E_ALL 前面加上分号，即屏蔽此句，再找到error_reporting = E_ALL & ~E_NOTICE，将此句前面的分号去掉，也就是说将前者替换成后者再执行报错。
+
+重启APACHE，再试不会出现空白页而不报错的情况了。
+
+详情请参看：在Windows XP下配置apache2+php5+mysql5的经过（已更新此步）http://hi.baidu.com/seaman4444/blog/item/e8c6a8990cb33d0d6f068cfe.html

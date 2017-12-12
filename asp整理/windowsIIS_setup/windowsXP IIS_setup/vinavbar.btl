@@ -1,0 +1,32 @@
+<!--
+  Copyright (c) 1997-98 Microsoft Corp.  All Rights Reserved.
+
+  File: vinavbar.btl
+  WebBot VINavBar Component Template Language
+-->
+
+<!--WEBBOT BOT=VINavBar
+PREVIEW="<strong>Visual InterDev Navigation Bar</strong>"
+DESCR="Generates a page navigation bar based on the web's navigation structure."
+HELP="Use the Visual InterDev Navigation Bar bot to generate a navigation bar on your page which 
+generates links based on the current page's location in the web's navigation structure.  You can
+have the navigation bar generate text links, graphic buttons, or custom html which you 
+provide.  To use graphic buttons, you must set the Use Table and Use Theme properties to true.
+  This generates a table based navigation bar
+which uses cascading style sheets to pick up the styles and images for the current theme
+you have referenced within the page you are modifying.  For more information, see the PageNavBar Control help topic
+in Visual InterDev."
+S-Rendering="Graphics" RADIO-Rendering="Graphics" RADIO-Rendering="Text" RADIO-Rendering="HTML"
+S-Type="Children" RADIO-Type="Banner" RADIO-Type="Parent" RADIO-Type="Siblings" RADIO-Type="Children"  RADIO-Type="Arrows" RADIO-Type="Global" RADIO-Type="First"
+S-Orientation="Horizontal" RADIO-Orientation="Horizontal" RADIO-Orientation="Vertical"
+B-Use-Table=TRUE
+B-Use-Theme=TRUE
+B-Include-Home=FALSE
+B-Include-Up=FALSE
+S-HTML-Fragment
+S-Selected-HTML-Fragment
+S-Script-Lang="VBScript" RADIO-Script-Lang="VBScript" RADIO-Script-Lang="JScript"
+U-Page
+U-Target
+B-Use-Object-Syntax=FALSE
+-->

@@ -1,0 +1,27 @@
+登录后1440秒未活动后总是自动退出，好烦呀，一天还要登录多次，终于有时间来解决这个问题了，感觉是session超时，结果在网上search了下，找到解决办法啦，哈哈哈，在此做个笔记：
+
+phpmyadmin在使用过程中经常出现“登陆超时（1440秒未活动），请重新登录”，很烦
+
+解决方法如下：
+
+修改php.ini，找到
+
+session.gc_maxlifetime = 1440
+
+将数值改大就行了，然后使之生效
+
+试验了一下，结果不好使。
+
+最终解决方案：
+
+找到 phpMyAdmin / libraries / config.default.php 文件，打开，修改
+
+$cfg['LoginCookieValidity'] = 1440;
+
+将1440修改成更大的值即可。
+
+ 
+
+注意：$cfg['LoginCookieValidity']的值不能大于php.ini里的session.gc_maxlifetime的值，否则phpmyadmin 里会出现“您的 PHP 配置参数 session.gc_maxlifetime (外链，英文) 短于您在 phpMyAdmin 中设置的 Cookies 有效期，因此您的登录会话有效期将会比您在 phpMyAdmin 中设置的时间要更短。”错误。
+
+ 

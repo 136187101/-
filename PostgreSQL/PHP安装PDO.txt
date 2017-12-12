@@ -1,0 +1,7 @@
+在php.ini 将extension=php_pdo_pgsql.dll 的注释取消掉
+
+http://www.th7.cn/Program/php/201411/321402.shtml
+
+/usr/local/php5/lib/php/extensions/no-debug-non-zts-20121212/
+
+extension=/usr/local/php5/lib/php/extensions/no-debug-non-zts-20121212/pdo_pgsql.so

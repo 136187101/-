@@ -1,0 +1,119 @@
+Ubuntu编译安装mysql
+
+1、更新系统必备的工具
+sudo apt-get install build-essential  
+sudo apt-get install libncurses5-dev  
+sudo apt-get install sysv-rc-conf  
+sudo apt-get install cmake
+
+2、下载解压mysql源码包  
+cd /usr/local/mysql_56
+wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.15.tar.gz
+tar xf mysql-5.6.15.tar.gz
+
+3、创建mysql用户组
+sudo groupadd mysql  
+sudo useradd -r -g mysql mysql  
+
+4、进入mysql解压后的目录，使用cmake指令编译mysql  （注意路径）
+cmake . \
+-DCMAKE_INSTALL_PREFIX=/usr/local/mysql_hjd_56 \
+-DMYSQL_DATADIR=/usr/local/mysql_hjd_56/data \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DMYSQL_UNIX_ADDR=/tmp/mysqld.sock \
+-DWITH_DEBUG=0 \
+-DWITH_INNOBASE_STORAGE_ENGINE=1
+
+5、编译安装，使用root比较简单，权限问题很严重 
+sudo make  
+sudo make install
+
+6、进入安装厚的目录执行  （注意路径）
+sudo scripts/mysql_install_db \
+--user=mysql \
+--basedir=/usr/local/mysql_56 \
+--datadir=/usr/local/mysql_56/data \
+--no-defaults
+必须有一个–no-defaults选项，如果没有该选项，则程序会自动载入默认的配置文件
+
+7、配置my.cnf   
+sudo cp /usr/local/mysql_hjd_56/support-files/my-default.cnf /etc/mysql/my.cnf
+通常我们是通过脚本传入适当的参数启动mysqld。因此在/etc/mysql/my.cnf中加入如下的内容：
+[mysqld]
+basedir=/usr/local/mysql_hjd_56
+datadir=/usr/local/mysql_hjd_56/data
+user=mysql
+pid-file = /usr/local/mysql_hjd_56/mysql.pid
+
+8、复制服务控制文件 
+sudo cp /usr/local/mysql_hjd_56/support-files/mysql.server /etc/init.d/mysql
+
+9、建立mysql.pid 
+cd /usr/local/mysql_56  
+touch mysql.pid
+
+mysql目录权限改为  chown -R mysql:mysql 
+
+10、测试mysql运行 
+sudo service mysql start  
+
+报错的处理什么pid的错误，应该是没有权限造成的，具体错误可以去/usr/mysql/data/xxxx.err中查看
+
+查看方法
+tail xxx.err
+一般都是permision denied，自己处理一下吧
+
+11、设置开机运行   
+sudo sysv-rc-conf  
+
+该工具采用的是图形界面，很直观在此就不介绍如何使用了，我们需要做的是找到【mysql】一栏，选定【3】【4】【5】这三列，这样就完成了开机自动启动MySQL daemon了。
+
+按Q 保存并退出
+
+重启后service mysql status
+
+mysql is running
+
+成功了 
+
+
+
+The program 'mysql' can be found in the following packages:
+* mysql-server-core-5.1
+* mysql-cluster-server-5.1
+* mysql-server-core-5.0
+Try: apt-get install <selected package>
+
+并不是真的错误而不错
+
+是因为编译安装mysql的
+
+mysql/bin目录没有添加到path里面
+
+所以要cd 到mysql/bin目录下然后 ./mysql  或者 .bin/mysql -uroot -p
+
+注意：创建root 密码 如：mysqladmin -uroot -p password zjwlgr47782906
+           mysql/data 位置到数据盘，改/ect/mysql/mysql.cnf 重启，注意权限
+
+
+使用mysqladmin.exe命令来修改Mysql的root密码
+　　一般Mysql的root默认密码为空，如果你之前并没有设置过root密码就使用mysqladmin命令，你可以使用如下mysqladmin命令来修改root密码
+========================以下是命令===================================
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysqladmin -u root -p password 123456
+Enter password
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysql -u root -p123456
+========================以上是命令===================================
+如上所述使用mysqladmin第一次修改root的默认密码时，Enter password回车即可，然后使用mysql.exe命令输入root及其密码即可进入Mysql命令行。
+　　如果已设置了Mysql的root密码，现在需要修改并进入Mysql命令行模式，则输入
+========================以下是命令===================================
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysqladmin -u root -p123456 password root
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysql -u root -proot
+========================以上是命令===================================
+即可。
+这里使用了到了Mysql自带的两种命令mysqladmin.exe和mysql.exe，mysqladmin修改密码的命令格式如下
+mysqladmin -u root -p[oldpass] password newpass
+　　注意oldpass(老密码)可选，如果root默认密码为空，则不需要输入，如果需要更改老密码，请注意老密码与-p之间不要有空格，否则会报错，另外password和newpass(新密码)之间以空格分隔。
+　　mysql命令与mysqladmin命令格式大同小异，主要用来输入正确的用户名和密码后进入Mysql命令行模式，格式如下
+mysql -u root -p[password]
+　　如果不输入password，回车后会出现Enter password的提示。如果root密码为空，也不需要输入password，出现Enter password提示后回车即可。

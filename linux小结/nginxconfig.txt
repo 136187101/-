@@ -1,0 +1,27 @@
+location / {
+            root   /datafile/adminnew;
+            index  index.html index.htm index.php;
+            if (!-e $request_filename) {
+                rewrite  ^/(.*)index.php(.*)$  $1/index.php?s=$2  last;
+                rewrite  ^(.*)$  /index.php?s=$1  last;
+                break;
+            }
+            proxy_headers_hash_max_size 51200;
+            proxy_headers_hash_bucket_size 6400;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+        location ~ \.php($|/index.php) {
+            root           /datafile/adminnew;
+            if ($uri !~ "^/Uploads/") {
+            fastcgi_pass   127.0.0.1:9000;
+            }
+            fastcgi_index  index.php;
+            fastcgi_read_timeout 300s;
+            fastcgi_connect_timeout 300s;
+            fastcgi_send_timeout 300s;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }

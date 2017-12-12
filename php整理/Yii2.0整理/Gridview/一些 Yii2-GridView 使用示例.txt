@@ -1,0 +1,131 @@
+
+
+其他都没变，URL 只显示「请求地址」（因为地址太长了不方便显示），但是同时能满足URL模糊搜索的需求。
+
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+
+        'token_id',
+        [
+            'label' => 'url',
+            'filter' => Html::activeTextInput($searchModel, 'url', ['class' => 'form-control']),
+            'format' => 'raw',
+            'value' => function ($data) {
+                return Html::a("请求地址", $data->url);
+            },
+        ],
+        'shop_id',
+        'ip',
+        'created_at:datetime',
+
+        ['class' => 'yii\grid\ActionColumn'],
+    ],
+]); ?>
+
+
+
+
+针对状态，可以下拉搜索：
+
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+
+        'user_id',
+        [
+            'label' => 'status', // 可选 复写
+            'attribute' => 'status',
+            'filter' => Html::activeDropDownList($searchModel, 'status', \common\models\Token::getStatus(), ['class' => 'form-control']),
+            'value' => function ($data) {
+                return \common\models\Token::getStatus()[$data->status];
+            },
+        ],
+         'created_at:datetime',
+         'expired_at:datetime',
+
+        ['class' => 'yii\grid\ActionColumn'],
+    ],
+]); ?>
+
+Model 里面代码：
+
+/**
+ * @return array
+ */
+public static function getStatus()
+{
+    return [
+        '' => '全部',
+        self::STATUS_ACTIVE => '正常',
+        self::STATUS_DELETE => '删除',
+    ];
+}
+
+
+
+新增一个按钮：
+
+[
+    'class' => 'yii\grid\ActionColumn',
+    'header' => '操作',
+    'options' => ['width' => '100px;'],
+    'template' => '{view} {update} {area}',
+    'buttons' => [
+        'area' => function ($url, $model) {
+            return Html::a('<span class="glyphicon glyphicon-list"></span>', $url, [
+                'title' => Yii::t('app', 'Area'),
+            ]);
+        }
+    ],
+    'urlCreator' => function ($action, $model, $key, $index) {
+        if ($action === 'view') {
+            return ['view', 'id' => $model->id];
+        } else if ($action === 'update') {
+            return ['update', 'id' => $model->id];
+        } else if ($action === 'area') {
+            return ['area/index', 'group_id' => $model->id];
+        }
+    }
+]
+
+
+
+
+根据状态动态显示按钮
+
+[
+    'class' => 'yii\grid\ActionColumn',
+    'header' => '操作',
+    'template' => '{export} {use}',
+    'buttons' => [
+        'export' => function ($url, $model) {
+            if($model->status==0){
+                return Html::a('导出 Excel', $url, [
+                    'class' => 'btn btn-success',
+                ]);
+            }
+            return null;
+        },
+        'use' => function ($url, $model) {
+            if($model->status==2){
+                return Html::a('投入使用', $url, [
+                    'class' => 'btn btn-info',
+                    'data' => [
+                        'confirm' => "确认要投入使用吗？",
+                        'method' => 'post',
+                    ],
+                ]);
+            }
+            return null;
+        },
+    ],
+],
+
+
+
+

@@ -1,0 +1,141 @@
+<?php 
+/*
+ * 客服聊天记录
+ * hjd from 2013年1月30日15:50:09
+ * 
+ */
+define('IN_ECS', true);
+require(dirname(__FILE__) . '/includes/init.php');
+
+if($_GET[act]=="list")
+{
+	//聊天记录列表
+	$smarty->assign('ur_here',"聊天记录");
+	$smarty->assign('full_page',    1);//有分页
+	$list = get_comment_list();
+	$smarty->assign('list',$list['item']);//内容
+	$smarty->assign('kefulist',$list[kefu]);//客服列表
+	$smarty->assign('filter',       $list['filter']); //分页信息
+	$smarty->assign('record_count', $list['record_count']);//总条数
+	$smarty->assign('page_count',   $list['page_count']);//总页数	
+	$smarty->display('kf_jilu_list.htm');
+}
+//ajax分页
+elseif ($_REQUEST['act'] == 'query')
+{
+	$list = get_comment_list();
+	$smarty->assign('list', $list['item']);
+	$smarty->assign('kefulist',$list['kefu']);//客服列表
+	$smarty->assign('filter',       $list['filter']);
+	$smarty->assign('record_count', $list['record_count']);
+	$smarty->assign('page_count',   $list['page_count']);
+	$smarty->assign('search',$list[search]);//筛选条件
+
+	make_json_result($smarty->fetch('kf_jilu_list.htm'), '',array('filter' => $list['filter'], 'page_count' => $list['page_count']));
+}
+//留言列表
+function get_comment_list()
+{
+	
+	//先查出客服的id  ,过滤，只显示用户的
+	$kufuidin=$GLOBALS[db]->query("select id from kefu");
+	while($rowskfid=$GLOBALS[db]->fetch_array($kufuidin))
+	{
+		$kefid.=$rowskfid[id].",";
+	}
+	$kefid=substr($kefid,0,-1);
+	
+	//筛选查询
+	if($_REQUEST['timestart']!='' || $_REQUEST['timeend']!='' || $_REQUEST["type"]!="" || $_REQUEST["kefu"]!="")
+	{
+		//选了时间选择
+		$state=strtotime($_REQUEST["timestart"]);
+		$end=strtotime($_REQUEST["timeend"]);
+		if($state!='' and $end!="")
+		{
+			$while1="and times>'$state' and times<'$end' ";
+		}
+
+		//填了框的
+		$str=$_REQUEST["text"];
+
+		if($str!="")
+		{
+			$while2="and (name like '%$str%' or tel like '%$str%' or email like '%$str%' or content like '%$str%')";
+		}
+		$query="select id,fausers,jieusers,times,type,max(times) as time from h_liaotianjl  where id !='' $while1 ".$while2." and fausers not in($kefid) group by fausers order by times desc";
+		//选择了留言状态筛选的
+		if($_REQUEST["type"]!="")
+		{
+			$query="select id,name,tel,email,content,times,uid,type from message  where type='$_REQUEST[type]'  order by times desc";
+		}
+		if($_REQUEST["kefu"]!="")
+		{
+			$query="select id,fausers,jieusers,times,type,max(times) as time from h_liaotianjl  where  fausers not in($kefid) and jieusers='$_REQUEST[kefu]' group by fausers order by times desc";
+		}
+
+		$searct=array("timestart"=>$_REQUEST["timestart"],"timeend"=>$_REQUEST["timeend"],"text"=>$_REQUEST["text"],"type"=>$_REQUEST["type"]);
+
+
+	}
+
+
+	/* 查询条件  参数*/
+	$filter['sort_by']      = "time";
+	$filter['sort_order']   = "desc";
+	if($query==""){
+		$sql = $GLOBALS['db']->query("SELECT id FROM h_liaotianjl where fausers not in($kefid) group by fausers");
+	}else
+	{
+		$sql=$GLOBALS['db']->query($query);
+	}
+	$filter['record_count'] = $GLOBALS['db']->num_rows($sql);
+	$filter['page_size']='5';
+	$_REQUEST['page_size']=5;//每页显示
+	$filter['kefu']=$_REQUEST[kefu]; //客服参数
+	$filter['timestart']=$_REQUEST[timestart];//开始时间参数 
+	$filter['timeend']=$_REQUEST[timeend];//结束时间参数
+
+	/* 分页大小 */
+	$filter = page_and_size($filter);
+	$arr = array();
+	if($query==""){
+		$sql  = "SELECT id,fausers,jieusers,times,type,max(times) as time FROM h_liaotianjl where fausers not in($kefid) group by fausers order by ".$filter['sort_by']." ".$filter['sort_order']." LIMIT ". $filter['start'] .", $filter[page_size]";
+	}else{
+		$sql=$query." LIMIT ". $filter['start'] .", $filter[page_size]";;
+	}
+	$res  = $GLOBALS['db']->query($sql);
+	while($rows= $GLOBALS['db']->fetch_array($res))
+	{
+		//解析时间戳
+		$rows[times]=date("Y-m-d H:i:s",$rows[time]);
+		//判断咨询类型-》改变-》返回
+		if($rows["type"]=="z_gmzx")
+		{
+			$rows["type"]="购买咨询";
+		}elseif($rows["type"]=="z_shzx")
+		{
+			$rows["type"]="售后咨询";
+		}elseif($rows["type"]=="z_tsjy")
+		{
+			$rows["type"]="投诉建议";
+		}
+		//获取回复人-客服的姓名
+		$kfanme=$GLOBALS[db]->getRow("select name from kefu where id ='$rows[jieusers]'");
+		$rows["jieusers"]=$kfanme[name];
+		$arr[]=$rows;
+	}
+	
+	//客服列表
+	$rskf=$GLOBALS['db']->query("select id,name from kefu");
+	while($rowskf=$GLOBALS['db']->fetch_array($rskf))
+	{
+		$kefu[]=$rowskf;
+	}
+	$arr2 = array('item' => $arr, 'filter' => $filter, 'page_count' => $filter['page_count'], 'record_count' => $filter['record_count'],'search'=>$searct,'kefu'=>$kefu);
+
+	return $arr2;
+}
+
+
+?>

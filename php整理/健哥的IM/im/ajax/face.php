@@ -1,0 +1,60 @@
+<div class="chat_box_post_feac">
+	<dl><span class="chat_box_post_span_1">点击表情选择</span><span class="chat_box_post_span_2"><a href="#" id="chat_feac_2"><img src="/im/img/del.gif" /></a></span></dl>
+	<ul>
+		<li><a href="#" title="[呵呵]"><img src="/admin/face/1.gif" /></a></li>
+		<li><a href="#" title="[嘻嘻]"><img src="/admin/face/2.gif" /></a></li>
+		<li><a href="#" title="[偷笑]"><img src="/admin/face/3.gif" /></a></li>
+		<li><a href="#" title="[哈哈]"><img src="/admin/face/4.gif" /></a></li>
+		<li><a href="#" title="[爱你]"><img src="/admin/face/5.gif" /></a></li>
+		<li><a href="#" title="[抓狂]"><img src="/admin/face/6.gif" /></a></li>
+		<li><a href="#" title="[可爱]"><img src="/admin/face/7.gif" /></a></li>
+		<li><a href="#" title="[害羞]"><img src="/admin/face/8.gif" /></a></li>
+		<li><a href="#" title="[睡觉]"><img src="/admin/face/9.gif" /></a></li>
+		<li><a href="#" title="[汗]"><img src="/admin/face/10.gif" /></a></li>
+		<li><a href="#" title="[困]"><img src="/admin/face/11.gif" /></a></li>
+		<li><a href="#" title="[钱]"><img src="/admin/face/12.gif" /></a></li>
+		<li><a href="#" title="[怒]"><img src="/admin/face/13.gif" /></a></li>
+		<li><a href="#" title="[晕]"><img src="/admin/face/14.gif" /></a></li>
+		<li><a href="#" title="[哼]"><img src="/admin/face/15.gif" /></a></li>
+		<li><a href="#" title="[泪]"><img src="/admin/face/16.gif" /></a></li>
+		<li><a href="#" title="[酷]"><img src="/admin/face/17.gif" /></a></li>
+		<li><a href="#" title="[衰]"><img src="/admin/face/18.gif" /></a></li>
+		<li><a href="#" title="[吃惊]"><img src="/admin/face/19.gif" /></a></li>
+		<li><a href="#" title="[闭嘴]"><img src="/admin/face/20.gif" /></a></li>
+		<li><a href="#" title="[鄙视]"><img src="/admin/face/21.gif" /></a></li>
+		<li><a href="#" title="[挖鼻屎]"><img src="/admin/face/22.gif" /></a></li>
+		<li><a href="#" title="[花心]"><img src="/admin/face/23.gif" /></a></li>
+		<li><a href="#" title="[鼓掌]"><img src="/admin/face/24.gif" /></a></li>
+		<li><a href="#" title="[失望]"><img src="/admin/face/25.gif" /></a></li>
+		<li><a href="#" title="[思考]"><img src="/admin/face/26.gif" /></a></li>
+		<li><a href="#" title="[生病]"><img src="/admin/face/27.gif" /></a></li>
+		<li><a href="#" title="[亲亲]"><img src="/admin/face/28.gif" /></a></li>
+		<li><a href="#" title="[怒骂]"><img src="/admin/face/29.gif" /></a></li>
+		<li><a href="#" title="[太开心]"><img src="/admin/face/30.gif" /></a></li>
+		<li><a href="#" title="[懒得理你]"><img src="/admin/face/31.gif" /></a></li>
+		<li><a href="#" title="[右哼哼]"><img src="/admin/face/32.gif" /></a></li>
+		<li><a href="#" title="[左哼哼]"><img src="/admin/face/33.gif" /></a></li>
+		<li><a href="#" title="[嘘]"><img src="/admin/face/34.gif" /></a></li>
+		<li><a href="#" title="[委屈]"><img src="/admin/face/35.gif" /></a></li>
+		<li><a href="#" title="[吐]"><img src="/admin/face/36.gif" /></a></li>
+		<li><a href="#" title="[可怜]"><img src="/admin/face/37.gif" /></a></li>
+		<li><a href="#" title="[打哈欠]"><img src="/admin/face/38.gif" /></a></li>
+		<li><a href="#" title="[做鬼脸]"><img src="/admin/face/39.gif" /></a></li>
+		<li><a href="#" title="[握手]"><img src="/admin/face/40.gif" /></a></li>
+		<li><a href="#" title="[耶]"><img src="/admin/face/41.gif" /></a></li>
+		<li><a href="#" title="[GooD]"><img src="/admin/face/42.gif" /></a></li>
+		<li><a href="#" title="[弱]"><img src="/admin/face/43.gif" /></a></li>
+		<li><a href="#" title="[不要]"><img src="/admin/face/44.gif" /></a></li>
+		<li><a href="#" title="[OK]"><img src="/admin/face/45.gif" /></a></li>
+		<li><a href="#" title="[赞]"><img src="/admin/face/46.gif" /></a></li>
+		<li><a href="#" title="[来]"><img src="/admin/face/47.gif" /></a></li>
+		<li><a href="#" title="[蛋糕]"><img src="/admin/face/48.gif" /></a></li>
+		<li><a href="#" title="[心]"><img src="/admin/face/49.gif" /></a></li>
+		<li><a href="#" title="[伤心]"><img src="/admin/face/50.gif" /></a></li>
+		<li><a href="#" title="[钟]"><img src="/admin/face/51.gif" /></a></li>
+		<li><a href="#" title="[猪头]"><img src="/admin/face/52.gif" /></a></li>
+		<li><a href="#" title="[咖啡]"><img src="/admin/face/53.gif" /></a></li>
+		<li><a href="#" title="[话筒]"><img src="/admin/face/54.gif" /></a></li>
+		<li><a href="#" title="[月亮]"><img src="/admin/face/55.gif" /></a></li>
+	</ul>
+</div>

@@ -1,0 +1,15 @@
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+
+关于页面样式的问题！
+<meta http-equiv="Page-Enter" content="revealTrans(duration=2, transition=23)">
+<meta http-equiv="Page-Exit" content="revealTrans(duration=1, transition=23)">
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<meta name="keywords" content="交友; 爱情; 婚姻; 婚介; 征婚; 交友中心; 世纪佳缘; 世纪家园; 复旦；小龙女;龚海燕;神经元; 上海交友; 北京交友; 广州交友; 杭州交友; 武汉交友;大连交友; 天津交友; 深圳交友; 南京交友;西安交友; 成都交友; 重庆交友; 厦门交友; 哈尔滨交友; 长春交友; 沈阳交友; 济南交友;" />
+<meta name="description" content="世纪佳缘为单身白领提供婚恋征友服务，免费注册，免费发布、搜索征友信息。现有2900万会员，规模大、征友效果好，是安全、纯净的婚恋交友平台。" />
+
+

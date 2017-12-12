@@ -1,0 +1,24 @@
+.bai {
+	font-weight: bold;
+	color: #FFFFFF;
+}
+body {
+	font-size: 12px;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	color:#333333;
+	padding-top:5px;
+}
+.input0{
+font-family:Verdana, Arial, Helvetica, sans-serif,ËÎÌו; font-size: 12px;height:25px;padding:3px 0px 1px 1px;border:1px solid #BDC5CA;
+background:url("images/button_bg.gif");border:1px solid #BDC5CA
+}
+.kuang {
+	height: 17px;
+	width: 199px;
+	border: 1px solid #9DCCE6;
+	font-size: 12px;
+	color: #1D749E;
+}

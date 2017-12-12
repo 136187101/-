@@ -1,0 +1,64 @@
+<?php 
+/*
+ * 客服系统 - 留言
+ * HJD from 2013年1月25日13:09:35
+ * 
+ */
+define('IN_ECS', true);
+require(dirname(__FILE__) . '/includes/init.php');
+if($_REQUEST["act"]=="list")
+{
+	$smarty->assign('ur_here',"留言列表");
+	$smarty->assign('full_page',    1);
+	
+	$list = get_comment_list();
+	
+	$smarty->assign('list',$list[item]);//内容
+	$smarty->assign('filter',       $list['filter']); //分页信息
+	$smarty->assign('record_count', $list['record_count']);//总条数
+	$smarty->assign('page_count',   $list['page_count']);//总页数
+	$smarty->display('kf_message_list.htm');
+	
+}
+if ($_REQUEST['act'] == 'query')
+{
+	$list = get_comment_list();
+
+	$smarty->assign('list', $list['item']);
+	$smarty->assign('filter',       $list['filter']);
+	$smarty->assign('record_count', $list['record_count']);
+	$smarty->assign('page_count',   $list['page_count']);
+
+	make_json_result($smarty->fetch('kf_message_list.htm'), '',array('filter' => $list['filter'], 'page_count' => $list['page_count']));
+}
+
+
+function get_comment_list()
+{
+	/* 查询条件 */
+	$filter['sort_by']      = "times";
+	$filter['sort_order']   = "desc";
+	$sql = "SELECT count(*) FROM message";
+	$filter['record_count'] = $GLOBALS['db']->getOne($sql);
+	$filter['page_size']=5;
+	
+	/* 分页大小 */
+	$filter = page_and_size($filter);
+	/* 获取评论数据 */
+	$arr = array();
+	$sql  = "SELECT * FROM message ".
+	" LIMIT ". $filter['start'] .", $filter[page_size]";
+	$res  = $GLOBALS['db']->query($sql);
+	while($rows= $GLOBALS['db']->fetch_array($res))
+	{
+		$arr[]=$rows;
+	}
+	$arr2 = array('item' => $arr, 'filter' => $filter, 'page_count' => $filter['page_count'], 'record_count' => $filter['record_count']);
+	
+	return $arr2;
+}
+
+
+
+
+?>

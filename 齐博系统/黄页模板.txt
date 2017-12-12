@@ -1,0 +1,4 @@
+头部的登陆涉及网站
+	模板目录：head.html
+	根目录/do/hack.php    包含  根目录/hack/login/index.php
+	介个php文件的模板在template/default/login_tpl/0.html

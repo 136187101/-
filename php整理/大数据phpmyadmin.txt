@@ -1,0 +1,3 @@
+首先检查php.ini
+配置文件中的以下三个地方，upload_max_filesize, memory_limit
+和post_max_size

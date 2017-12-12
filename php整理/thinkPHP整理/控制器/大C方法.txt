@@ -1,0 +1,8 @@
+C方法是ThinkPHP用于设置、获取，以及保存配置参数的方法，使用频率较高。
+设置参数 
+
+C('DB_NAME','thinkphp');
+获取参数 
+要获取设置的参数，可以用： 
+$userId = C('USER_ID');
+$userType = C('USER_TYPE');

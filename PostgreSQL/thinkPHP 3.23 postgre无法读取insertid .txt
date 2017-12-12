@@ -1,0 +1,15 @@
+ if($insertid=$Refund->add()){
+            if($insertid==1)
+            {
+				//如果insertid等于1 
+                $result = $Refund->query("select currval('jd_account_id_seq')");  //查询系列的当前值
+                $insertid=$result[0][currval]; 
+            }else
+			{
+				$insertid=$insertid; //原有方法，
+			
+			}
+
+			
+			其实这个方法有点弊端，如果是MySQL 里 新数据表的话，那么insertid 也是1 那么就会执行上述代码，
+			所以如果数据库为MySQL的话 需要注释postgresql 的代码

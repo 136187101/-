@@ -1,0 +1,19 @@
+载入分组配置文件
+在Conf-config.php 中添加
+//分组
+'APP_GROUP_LIST'        => 'Home,Admin',      // 项目分组设定,多个组之间用逗号分隔,例如'Home,Admin'
+'DEFAULT_GROUP'         => 'Home',  // 默认分组
+
+在控制器文件中建立 Home和Admin分组文件夹，控制器对应这两个文件夹
+在模版文件中建立 Home和Admin分组文件夹，模版文件对应这两个文件夹
+
+模型分组
+
+
+
+如果确实需要分组的话，仍然可以按照Action的方式，在Model目录下面创建Home和Admin目录，然后放入对应的Model类库，采用这种方式的话，模型类的调用方法有所区别。
+
+如果模型类也分组存放，在使用D方法调用的时候需要使用：
+
+$User = D('Home.User')；// 实例化Home分组下面的UserModel类
+

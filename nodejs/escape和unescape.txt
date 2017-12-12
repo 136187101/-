@@ -1,0 +1,5 @@
+> querystring.escape('<侯建东>')
+'%3C%E4%BE%AF%E5%BB%BA%E4%B8%9C%3E'
+
+> querystring.unescape('%3C%E4%BE%AF%E5%BB%BA%E4%B8%9C%3E')
+'<侯建东>'

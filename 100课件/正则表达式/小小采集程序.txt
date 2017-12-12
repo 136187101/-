@@ -1,0 +1,35 @@
+<?php
+//切割 preg_split;
+set_time_limit(0);
+
+function caiji($url)
+{
+		//新闻列表页面
+		$cont=file_get_contents($url);
+		//匹配新闻列表
+		$zz="/class=\"news\">(.*)<\/ul>/sU";
+		if(preg_match_all($zz,$cont,$arr)){
+		//echo $contt=preg_replace(array("/^(<span>(.*)<\/span>)/","/class=\"news\">/"),array("",""),$arr[0]);
+		$con2=$arr[1][0];
+		preg_match_all("/<a href=\"(.*)\"><span>(.*)<\/span>/",$con2,$arr2);
+		foreach($arr2[1] as $key=>$val)
+		{
+			//echo $val;
+			//采集内容页
+			$conturl="http://localhost/".$val;
+			//echo $val."<br>";
+			$contcont=file_get_contents($conturl);
+			preg_match_all("/class=\"n_cccont\">(.*)<\/div>/sU",$contcont,$conarr);
+			echo "链接：".$val."标题为:".$arr2[2][$key]."<br>内容为：".$conarr[1][0]."<hr>";	
+		}
+		
+		}else{echo "匹配失败";}
+			
+}
+
+for($i=1;$i<=5;$i++){
+//采集标题列表页面
+caiji("http://localhost/a.php?&pageno=".$i);
+}
+
+?>

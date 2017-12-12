@@ -1,0 +1,23 @@
+<?php 
+set_time_limit(0)
+?>
+<div id="div" tyle="height:500px; border:1px #999 solid; overflow:auto;">
+<?php
+    print str_repeat(" ", 4096);
+		for($i=1;$i<2000;$i++)
+		{
+			echo $i."条记录被导入<br>";
+			ob_flush();
+			flush();
+			usleep(100000);	
+		?>
+         <script>
+ var div=document.getElementById('div');
+           if(div.scrollHeight>div.offsetHeight)
+                div.scrollTop=div.scrollHeight-div.offsetHeight; 
+ </script>
+        <?php
+		}
+
+?>
+</div>

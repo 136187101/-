@@ -1,0 +1,11 @@
+	//统计访问人数
+	$ip=$_SERVER['REMOTE_ADDR'];
+	$rs_fw=$db->query("select * from fangwen where ip ='$ip'");
+	if($hjd->num_rows($rs_fw)==0)
+	{
+		$db->query("insert into  fangwen (fangwen,ip) values('0','$ip')");
+	}
+	//查询总访问人数
+	$rs_rs=$db->query("select * from  fangwen");
+
+

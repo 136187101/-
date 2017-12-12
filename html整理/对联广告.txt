@@ -1,0 +1,34 @@
+<script language="JavaScript" type="text/javascript">
+lastScrollY=0;
+function heartBeat(){
+var diffY;
+if (document.documentElement && document.documentElement.scrollTop)
+diffY = document.documentElement.scrollTop;
+else if (document.body)
+diffY = document.body.scrollTop
+else
+{/*Netscape stuff*/}
+//alert(diffY);
+percent=.1*(diffY-lastScrollY);
+if(percent>0)percent=Math.ceil(percent);
+else percent=Math.floor(percent);
+document.getElementById("LeftAd").style.top=parseInt(document.getElementById("LeftAd").style.top)+percent+"px";
+document.getElementById("RightAd").style.top=parseInt(document.getElementById("LeftAd").style.top)+percent+"px";
+lastScrollY=lastScrollY+percent;
+//alert(lastScrollY);
+}
+suspendcode12="<DIV id=LeftAd style='left:5px;POSITION:absolute;TOP:20px; width='100'; height='300'; overflow:hidden;'><embed src='http://blog.gulu77.com/demo/flash/dl.swf' quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='100' height='0'><a style='text-align:left; cursor: hand; display:block; background:#eee; width:100px;' href='javascript:void(0)' onclick='javascript:ClosedivLeft()' hidefocus='true'><img src='images/jiamengpg.jpg'></a></div>"
+suspendcode14="<DIV id=RightAd style='right:5px;POSITION:absolute;TOP:20px;'><embed src='http://blog.gulu77.com/demo/flash/dl.swf' quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='100' height='0'></embed><a style='text-align:left; cursor: hand; display:block; background:#eee; width:100px;' href='javascript:void(0)' onclick='javascript:ClosedivRight()' hidefocus='true'><img src='images/jiamengpg.jpg'></a></div>"
+document.write(suspendcode12);
+document.write(suspendcode14);
+window.setInterval("heartBeat()",1);
+function ClosedivLeft()
+{
+LeftAd.style.visibility="hidden";
+}
+function ClosedivRight()
+{
+RightAd.style.visibility="hidden";
+}
+</script>
+<script src="http://blog.gulu77.com/demo/style/js/copyrightdemo.js" type="text/javascript"></script>

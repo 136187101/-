@@ -1,0 +1,13 @@
+对于 Adaptec AAA 或 ARO 系列的 RAID 控制器，其当前安装的驱动程序与该版本 Microsoft Windows 不兼容，在升级中将禁用它。
+
+对于 Adaptec AAA 或 ARO 系列的 RAID 控制器，如果要从与其连接的磁盘启动计算机，则要求有与该版本 Windows 兼容的驱动程序，否则无法升级。
+		 
+详细信息，请访问制造商的网站。
+		 
+有关此版本 Microsoft Windows 支持的设备列表，请查看位于 http://www.microsoft.com/isapi/redir.dll?prd=whistler&ar=help&sba=compatible 的 Microsoft Windows XP 兼容性列表。  
+		 
+	 
+ 
+ 
+ 
+ 

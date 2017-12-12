@@ -1,0 +1,45 @@
+
+<DIV id=xiangguan  style="OVERFLOW: hidden; margin-top:2px; WIDTH:400Px; margin:0px 0 0 10px; padding:20px 0 0 0">
+                  <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+                 
+                    <TR>
+                      <TD id=xiangguan1>
+                        <TABLE cellSpacing=0 cellPadding=0 width=606 border=0>
+                          <TBODY>
+                          <TR> <TD class=pic2 vAlign=bottom align=middle>
+                              <P class=pic1><A href="http://www.drame.cn/list.asp?ProdId=0167"><IMG 
+                              class=tlcpbg alt=黄色主题精美网页模板 src="2/0028.gif" 
+                              border=0></A> </P></TD>
+                            <TD class=pic2 vAlign=bottom align=middle>
+                              <P class=pic1><A href="http://www.drame.cn/list.asp?ProdId=0029"><IMG 
+                              class=tlcpbg alt=暗黑风格的网页源代码 src="2/0029.gif" 
+                              border=0></A> </P></TD>
+                            <TD class=pic2 vAlign=bottom align=middle>
+                              <P class=pic1><A 
+                              href="http://www.drame.cn/list.asp?ProdId=0134"><IMG 
+                              class=tlcpbg alt=绿色水晶风格网页模板代码 
+                              src="2/0030.gif"  
+                              border=0></A> </P></TD>
+                            <TD class=pic2 vAlign=bottom align=middle>
+                           </TD>
+                            <TD class=pic2 vAlign=bottom align=middle>
+                              <P class=pic1><A 
+                              href="http://www.drame.cn/list.asp?ProdId=0087"><IMG 
+                              class=tlcpbg alt=web2.0水晶风格网页模板下载 
+                              src="2/0031.gif"  
+                              border=0></A> </P></TD></TR></TBODY></TABLE></TD>
+                      <TD id=xiangguan2 width=6></TD></TR></TABLE></DIV>
+                  <SCRIPT>
+  var speed=15
+  xiangguan2.innerHTML=xiangguan1.innerHTML
+  function Marquee(){
+  if(xiangguan2.offsetWidth-xiangguan.scrollLeft<=0)
+  xiangguan.scrollLeft-=xiangguan1.offsetWidth
+  else{
+  xiangguan.scrollLeft++
+  }
+  }
+  var MyMar=setInterval(Marquee,speed)
+  xiangguan.onmouseover=function() {clearInterval(MyMar)}
+  xiangguan.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+</SCRIPT>

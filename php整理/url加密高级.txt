@@ -1,0 +1,8 @@
+<a href="?id=<?php echo base64_encode("123")?>">°Ù¶È</a>
+
+<?
+echo base64_decode($_GET[id]);
+
+
+?>
+ 

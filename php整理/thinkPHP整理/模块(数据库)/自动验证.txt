@@ -1,0 +1,36 @@
+模块 自动验证
+	class NewsModel extends Model
+	{
+		protected $_validate = array(
+			array("title","require","标题必须填写"),
+		);
+		
+		protected $_auto =array(
+			array('times','time',1,'function')
+		);
+	}
+
+// 默认情况下用正则进行验证  
+array('title','require','标题不能为空。'),  
+array('order','number','排序必须是数字。',2),  
+array('email','email','邮箱格式不符合要求。'),  
+array('qq','qq','QQ号码不正确。'),  
+  
+// 在新增的时候验证标题title字段是否唯一  
+array('title','','标题已经存在！',0,'unique',1),  
+  
+// 验证确认密码是否和密码一致  
+array('repassword','password','确认密码不正确。',0,'confirm'),  
+  
+// 验证class填写的值为 一班  
+array('class','一班','班级必须填写一班。',0,'equal'),  
+  
+// 当值不为空的时候判断是否在一个范围内  
+array('value',array(1,2,3),'值的范围不正确。',2,'in'),  
+  
+// 自定义函数验证用户名格式  
+array('username','checkName','用户名格式不正确。',0,'function'),  
+  
+// 在注册或更改资料是调用 checkEmail 方法检查邮箱  
+array('email','checkEmail',1,'callback'), 
+

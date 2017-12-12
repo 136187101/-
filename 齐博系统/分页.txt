@@ -1,0 +1,22 @@
+<?php 
+function_exists('html') OR exit('ERR');
+if($job=="list")
+{
+	//ËùÓÐµêÆÌ
+	$rows2 = 20;
+	if($page<1){
+		$page=1;
+	}
+	
+	$min=($page-1)*$rows2;
+	$rs=$db->query("SELECT a.rid,a.title,a.uid,a.username,a.city_id,b.fid,b.name FROM {$_pre}company a left join {$pre}fenlei_city b on b.fid=a.city_id order by a.rid desc limit $min,$rows2");
+	$num=$db->get_one("SELECT count(*) as num  FROM {$_pre}company");
+	$totalNum=$num["num"];
+	while($rows = $db->fetch_array($rs)){
+	
+		$list[]=$rows;
+	}
+	$showpage=getpage("","","$admin_path&job=list",$rows2,$totalNum);
+	
+	get_admin_html("list");
+}

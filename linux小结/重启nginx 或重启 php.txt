@@ -1,0 +1,16 @@
+平滑重启Nginx ：
+cd /usr/local/nginx_162/sbin/ 
+./nginx -s reload
+
+查看进程：
+ps -ef | grep nginx
+干掉进程：
+kill -HUP 26281
+
+
+重启php
+ps -ef | grep php-fpm
+kill 进程id  带master 的
+
+启动php-fpm
+sudo /usr/local/php5/sbin/php-fpm

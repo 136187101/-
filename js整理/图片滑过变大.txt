@@ -1,0 +1,32 @@
+<style>
+#demo{overflow:hidden;width:120px;text-align:center;padding:10px;}
+#demo img{border:none;width:100px;height:100px;border:5px solid #f4f4f4}
+#enlarge_images{position:absolute;display:none;z-index:2;border:5px solid #f4f4f4}
+</style>
+<div id="demo" style="overflow:hidden;width:120px;text-align:center;padding:10px">
+	<img src="http://www.lanrentuku.com/images/uppic/200801101244190.jpg">
+</div>
+<div id="enlarge_images"></div>
+<script>
+var demo = document.getElementById("demo");
+var gg = demo.getElementsByTagName("img");
+var ei = document.getElementById("enlarge_images");
+for(i=0; i<gg.length; i++){
+	var ts = gg[i];
+	ts.onmousemove = function(event){
+		event = event || window.event;
+		ei.style.display = "block";
+		ei.innerHTML = '<img src="' + this.src + '" />';
+		ei.style.top  = document.body.scrollTop + event.clientY + 10 + "px";
+		ei.style.left = document.body.scrollLeft + event.clientX + 10 + "px";
+	}
+	ts.onmouseout = function(){
+		ei.innerHTML = "";
+		ei.style.display = "none";
+	}
+	ts.onclick = function(){
+		window.open( this.src );
+	}
+}
+</script>
+转载请注明出处：<a href="http://www.lanrentuku.com/">懒人图库 </a>

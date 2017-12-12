@@ -1,0 +1,1 @@
+echo M("News")->getLastSql(); ÊäÈëµ±Ç°SQLÓï¾ä£»

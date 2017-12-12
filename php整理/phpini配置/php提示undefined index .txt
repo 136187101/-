@@ -1,0 +1,57 @@
+我们经常接收表单POST过来的数据时报Undefined index错误,如下: $act=$_POST['action']; 
+用以上代码总是提示 
+Notice: Undefined index: act in D:\test\post.php on line 20 
+另外，有时还会出现 
+Notice: Undefined variable: Submit ...... 等一些这样的提示 
+
+出现上面这些是 PHP 的提示而非报错，PHP 本身不需要事先声明变量即可直接使用，但是对未声明变量会有提示。一般作为正式的网站会把提示关掉的，甚至连错误信息也被关掉。 
+
+解决方法： 
+
+方法1：服务器配置修改 
+修改 php.ini 中的 error配置下错误显示方式：将error_reporting = E_ALL 修改为 
+
+error_reporting = E_ALL & ~E_NOTICE 
+
+修改后重启下APCHE服务器，方可生效。 
+
+方法2：对变量进行初始化。 
+
+方法3：做判断isset($_post['']),empty($_post['']) if --else 
+
+方法4：在出现notice代码之前加上@，@表示这行有错误或是警告不要输出，@$username=$_post['username']; 
+在变量前面 加上一个 @ ，如 if (@$_GET['action']=='save') { ... 
+
+方法5：最后一种很实用，是别人写的一个函数，通过这个函数进行传递值。 
+
+定义一个函数： 
+
+
+复制代码 代码如下:
+function _get($str){ 
+$val = !empty($_GET[$str]) ? $_GET[$str] : null; 
+return $val; 
+} 
+
+
+然后在用的时候，直接用 _get('str') 代替 $_GET['str'] 就行啦~
+
+[PHP-Core-Error] 
+
+error_reporting = E_ALL & ~E_NOTICE 
+; 错误报告级别是位字段的叠加，推荐使用 E_ALL | E_STRICT 
+; 1 E_ERROR 致命的运行时错误 
+; 2 E_WARNING 运行时警告(非致命性错误) 
+; 4 E_PARSE 编译时解析错误 
+; 8 E_NOTICE 运行时提醒(经常是bug，也可能是有意的) 
+; 16 E_CORE_ERROR PHP启动时初始化过程中的致命错误 
+; 32 E_CORE_WARNING PHP启动时初始化过程中的警告(非致命性错) 
+; 64 E_COMPILE_ERROR 编译时致命性错 
+; 128 E_COMPILE_WARNING 编译时警告(非致命性错) 
+; 256 E_USER_ERROR 用户自定义的致命错误 
+; 512 E_USER_WARNING 用户自定义的警告(非致命性错误) 
+; 1024 E_USER_NOTICE 用户自定义的提醒(经常是bug，也可能是有意的) 
+; 2048 E_STRICT 编码标准化警告(建议如何修改以向前兼容) 
+; 4096 E_RECOVERABLE_ERROR 接近致命的运行时错误，若未被捕获则视同E_ERROR 
+; 6143 E_ALL 除E_STRICT外的所有错误(PHP6中为8191,即包含所有)
+详细出处参考：http://www.jb51.net/article/30328.htm

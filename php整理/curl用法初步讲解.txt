@@ -1,0 +1,237 @@
+cURl不但支持很多的网络协议，而且提供了关于url请求的具体信息，很强大！
+
+要使用cURL来发送url请求，具体步骤大体分为以下四步：
+
+// 1. 初始化一个cURL会话
+$ch = curl_init();
+// 2. 设置请求选项, 包括具体的url
+curl_setopt($ch, CURLOPT_URL, "http://www.form1.cn");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+// 3. 执行一个cURL会话并且获取相关回复
+$response = curl_exec($ch);
+// 4. 释放cURL句柄,关闭一个cURL会话
+curl_close($ch);
+cURL之所以强大，正是体现在第二个步骤中。你可以通过curl_setopt灵活地设置请求选项，这里面有很多的可选项，具体可以参考http://cn2.php.net/manual/zh/function.curl-setopt.php
+
+错误处理，在上述代码中，你也可以增加错误处理的代码：
+$response = curl_exec($ch);
+if ($response  === FALSE) {
+  echo "cURL 具体出错信息: " . curl_error($ch);
+}
+注意了，在做上述判断时务必要使用===，因为请求的回复可能是空字符串，curl在请求出错的情况下回返回FALSE值，所以我们必须使用===，而不是==。
+
+获取curl请求的具体信息，在执行一个cURL请求后，你也可以使用curl_getinfo获取该请求的具体信息:
+1
+2
+3
+curl_exec($ch);
+$curl_info= curl_getinfo($ch);
+echo "收到的http回复的code为： {$curl_info['http_code']}";
+上述$curl_info是一个关联数组，可以从中获取很多的具体请求信息。参考http://cn2.php.net/manual/zh/function.curl-getinfo.php
+
+使用curl发送post请求，我们在前面说过，在向某个url发送get请求的话，没有必要使用cURL来发送get请求，可以使用比较便捷的file_get_contents函数来完成请求。但是，一般地，我们在提交某个表单的时候，数据是通过post请求的内容区域来提交的，而不是通过url参数来传递的, 这种情况下，我们应该使用灵活的cURL来模拟发送post请求。
+现在，让我们使用cURL来模拟发送一个post请求到post.php脚本，提交几个数据到post.php，然后在post.php中输出post请求中的数据。示例代码如下:
+
+$url = "http://www.form1.cn/post.php";
+$post_data = array (
+  "blog_name" => "360weboy",
+  "blog_url" => "http://www.form1.cn",
+  "action" => "Submit"
+);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 设置请求为post类型
+curl_setopt($ch, CURLOPT_POST, 1);
+// 添加post数据到请求中
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+// 执行post请求，获得回复
+$response= curl_exec($ch);
+curl_close($ch);
+echo $response;
+以上请求发送到post.php中后，通过print_r($_POST)输出后，以上示例代码会输出如下回复：
+Array
+(
+    [blog_name] => 360weboy
+    [blog_url] => http://www.form1.cn
+    [action] => Submit
+)
+正如我们看到的，cURL成功发送post请求到post.php，提交了一些数据，并且收到了相应的来自post.php的回复，最后输出回复。上例虽然简单，但是充分演示了cURL发送post请求的便捷及强大之处，你可以在curl_setopt上做文章。
+
+文件上传，下面来看下如果通过cURL发送post请求来实现文件上传。就拿深入浅出PHP下的文件上传中的文件上传例子来演示，在深入浅出php下的文件上传中，是通过表单的提交来实现文件上传的，那么通过cURL怎么来实现呢?
+
+//php5.4以下版本如下：
+$url = "http://www.form1.cn/upload.php";
+$post_data = array (
+  "attachment" => "@E:/jackblog/boy.jpg"
+);
+//初始化cURL会话
+$ch = curl_init();
+//设置请求的url
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//设置为post请求类型
+curl_setopt($ch, CURLOPT_POST, 1);
+//设置具体的post数据
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+$response = curl_exec($ch);
+curl_close($ch);
+print_r($response);
+ 
+//php5.5以上版本用CURLFile替代@方式如下：
+$url = "http://www.form1.cn/upload.php";
+$post_data = array (
+    "imgFile" => new CURLFile(realpath('E:/jackblog/boy.jpg'))
+);
+//初始化cURL会话
+$ch = curl_init();
+//设置请求的url
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//伪造网页来源地址,伪造来自百度的表单提交
+curl_setopt($ch, CURLOPT_REFERER, "http://www.baidu.com");
+//设置端口
+curl_setopt($ch, CURLOPT_PORT , 80);
+//设置为post请求类型
+curl_setopt($ch, CURLOPT_POST, 1);
+//设置具体的post数据
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+$response = curl_exec($ch);
+//$response = curl_getinfo($ch);
+curl_close($ch);
+print_r($response);
+通过以上示例代码，可以将我本地机器上的boy.jpg上传到本地服务器的upload.php中，如果在upload.php输出上传的具体信息的话，以上示例代码最后的输出的回复为：
+
+Array
+(
+    [attachment] => Array
+(
+    [name] => boy.jpg
+    [type] => application/octet-stream
+    [tmp_name] => D:\xampp\tmp\phpF27D.tmp
+    [error] => 0
+    [size] => 11490
+)
+)
+由此可见，如果你要通过cURL来上传文件的话，只需要将上传的文件路径作为post数据设置到curl请求中，并且在路径前面加上@符合。
+
+文件下载，上述将了文件上传，同样的也可以使用curl来自动地完成文件的下载以及保存。有一点要补充下，在执行一个curl请求时，如果你需要获取返回的内容，而不是直接输出返回的内容的话，别忘记使用下面的代码设置，因为curl的默认是输出请求的回复内容:
+1
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+假如在360weboy的服务器根目录下面有一个test.zip文件，我们需要将其下载下来，并且保存到本地文件中，就可以尝试使用下面的代码来实现：
+//设置请求的下载文件的url
+$url  = 'http://www.form1.cn/test.zip';
+//保存到本地的文件路径
+$path = 'local/path/to/test.zip';
+//初始化请求，设置请求，获取回复,关闭会话
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$data = curl_exec($ch);
+curl_close($ch);
+//将文件内容写入本地文件
+file_put_contents($path, $data);
+注意：我以上省略了错误处理方面的代码，只是简单做个示例, 在实际中，你还需要通过curl_getinfo函数来进行错误处理!
+上述代码对于下载比较大型的文件是不适用的，因为需要先将文件读取到内存中，等所有内容都读取完毕，然后再写入到本地硬盘中。即使php中设置的memory limit非常大，这种情况对性能的影响也是很大的。所以，我们对于大型文件的下载，应该让curl来接管这个任务，实现边下载，边写入的处理，这样的话，就没什么问题了。请看下述代码:
+
+$url  = 'http://www.form1.cn/test.zip';
+$path = 'local/path/to/test.zip';
+// 打开本地文件
+$fp = fopen($path, 'w');
+// 告诉curl本地文件句柄
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_FILE, $fp);
+curl_exec($ch);
+curl_close($ch);
+fclose($fp);
+在上述代码中，我们先打开个本地文件，并将文件句柄设置到curl中，然后让curl一边读取远程数据，一边写入到本地文件中。因为我们不需要在程序中获取远程回复的内容了，所以只要执行请求就可以。
+
+curl伪造IP
+$header = array(
+    'CLIENT-IP:127.0.0.1',
+    'X-FORWARDED-FOR:127.0.0.1',
+);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+
+http 验证，如果服务器端需要验证请求，可以通过类似一下示例代码来实现:
+
+$url = "http://www.form1.cn/users/";
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 设置用户名以及密码
+curl_setopt($ch, CURLOPT_USERPWD, "username:password");
+// 设置重导向
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_UNRESTRICTED_AUTH, 1);
+$response = curl_exec($ch);
+curl_close($ch);
+
+cURL中传递cookie的方法
+curl的easy接口中提供了5个与cookie有关的option，其中，CURLOPT_COOKIEFILE，CURLOPT_COOKIEJAR，CURLOPT_COOKIELIST都会打开curl的cookie引擎，使得curl在收到http response时解析header field中的cookie。
+设置CURLOPT_COOKIEFILE会使curl下一次发请求时从指定的文件中读取cookie。 
+设置CURLOPT_COOKIEJAR会使curl在调用 curl_easy_cleanup的时候把cookie保存到指定的文件中。
+设置CURLOPT_COOKIELIST会把指定的cookie字符串列表加入easy handle维护的cookie列表中。每个cookie字符串要么符合HTTP response header的"Set-Cookie: NAME=VALUE;..."格式
+CURLOPT_COOKIE用于设置一个分号分隔的“NAME=VALUE”列表，用于在HTTP request header中设置Cookie header。
+
+<? php
+$url = "http://www.form1.cn/zzzz.php";
+$post_data = array (
+    "foo" =< "bar",
+    "query" =< "Nettuts",
+    "action" =< "Submit"
+);
+$cookie_jar_index = 'f:/js/test/cookie.txt';
+$cookie = "a=b;c=d;name=sss";
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 我们在POST数据哦！
+curl_setopt($ch, CURLOPT_POST, 1);
+// 把post的变量加上
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+$output = curl_exec($ch);
+curl_close($ch);
+echo $output;
+
+通过代理发送请求，cURL还可以通过代理服务器来向发送请求，请看一下示例代码:
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,'http://www.form1.cn');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 设置代理ip地址
+curl_setopt($ch, CURLOPT_PROXY, '222.73.173.50:8080');
+// 要验证的话，这里设置用户名以及密码
+curl_setopt($ch, CURLOPT_PROXYUSERPWD,'username:password');
+$response = curl_exec($ch);
+curl_close ($ch);
+
+发送json数据，最后，我们来看下通过cURL来想服务器端发送json数据。具体的代码如下：
+$url = 'http://www.form1.cn/json.php';
+// 建立json字符串
+$data = array('site' => '360weboy', 'url' => 'http://www.form1.cn','email'=>'form1.cn@gmail.com');
+$json_string = json_encode($data);
+$ch=curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 通过post请求发送上述json字符串
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch, CURLOPT_POSTFIELDS, array('data'=>$json_string));
+$response = curl_exec($ch);
+curl_close($ch);
+echo $response;
+大家可以看到，上述请求是发送到我的本地服务器的json.php下，我在该文件中使用json_decode来将接受到的json字符串转换为对象，然后输出其中的email字段，代码如下:
+
+$json_data = json_decode($_POST['data']);
+echo $json_data->email;
+在上述代码中接受的json字符串为:
+1
+'{"site":"360weboy","url":"http:\/\/www.form1.cn","email":"360weboy@gmail.com"}'
+经过json_decode以后，就转换为php中的数据格式，成为了一个对象，所以可以通过$json_data->email来访问其中email字段的值，最后也就是输出360weboy@gmail.com。你可以使用上述代码测试一下。
+如果通过以下php数组生成json字符串的话:
+1
+$data = array('360weboy', 'http://www.form1.cn', '360weboy@gmail.com');
+所生成的json字符串如下：
+1
+'["360weboy","http:\/\/www.form1.cn","360weboy@gmail.com"]'
+上述json字符串在经过json_decode处理后，就会变成php中的数组格式，如果要获取email的话，就可以通过$json_data[2]来访问。

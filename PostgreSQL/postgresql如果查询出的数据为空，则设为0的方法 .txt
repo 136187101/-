@@ -1,0 +1,1 @@
+    select COALESCE(b.price, 0) as price from fruit_sale b  

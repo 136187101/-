@@ -1,0 +1,42 @@
+yii2时间插件-datetimepicker [ 2.0 版本 ]
+ teamoping  2016-08-11 11:50:15  2143次浏览  3条评论  5  2 0
+推荐通过Composer来安装该插件，执行下面的命令来下载插件
+
+composer require kartik-v/yii2-widget-datetimepicker "*"
+或者在根目录的composer.json文件中添加
+
+"kartik-v/yii2-widget-datetimepicker": "*"
+然后执行
+
+composer update
+注意:如果composer报错，可以执行composer self-update 或者 composer install
+
+使用
+
+1.直接调用
+
+<?php
+use kartik\datetime\DateTimePicker;
+echo '<label>Start Date/Time</label>';
+echo DateTimePicker::widget([
+    'name' => 'datetime_10',
+    'options' => ['placeholder' => 'Select operating time ...'],
+    'convertFormat' => true,
+    'pluginOptions' => [
+        'format' => 'd-M-Y g:i A',
+        'startDate' => '01-Mar-2014 12:00 AM',
+        'todayHighlight' => true
+    ]
+]);
+2结合ActiveForm使用
+
+<?php
+use kartik\datetime\DateTimePicker;
+?>
+<?= $form->field($model, 'start_time')->widget(DateTimePicker::classname(), [
+        'options' => ['placeholder' => ''],
+        'pluginOptions' => [
+            'autoclose' => true
+        ]
+    ]);
+?>

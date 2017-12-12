@@ -1,0 +1,38 @@
+	case "add_xcpic":
+		foreach($_POST as $key => $val){$$key=$val;}//接收POST
+		
+		$pub = array(".gif",".jpg",".jpeg",".png");
+		$type = implode(",",$pub);
+		$root = $_SERVER['DOCUMENT_ROOT'];
+		$dest_folder="/uploads/index/";
+		
+		foreach($_FILES["picurl"]["error"] as $key => $error){
+			if($error == UPLOAD_ERR_OK){
+				$tmp_name=$_FILES["picurl"]["tmp_name"][$key];          
+				$name=$_FILES["picurl"]["name"][$key];
+				$leixing     = strtolower(strrchr($name,"."));
+				$suijishu    = rand(100,999);
+				$server_file = time().$suijishu.$leixing;     
+				$uploadfile = $root.$dest_folder.$server_file; 
+				
+				if (in_array($leixing,$pub)){
+					if(!move_uploaded_file($tmp_name, $uploadfile)){
+						$js->Alert("上传图片失败，请重新上传！");
+						$js->Back();
+					}
+				}else{
+					$js->Alert("上传文件类型不支持,请上传".$type."类型的文件！");
+					$js->Back();
+				}
+				
+				$picurl_file = $dest_folder.$server_file;
+				$title       = $picname[$key];
+				//echo $title."--".$picurl_file."<br />";
+				$zj->IMG_file_GD("/uploads/index/",$server_file,68,68,"x");//剪切为正方式
+				$zj->IMG_fileimage("/uploads/index/",$server_file,167,"z");//以宽为参数同比例缩放
+				
+				$db->update("INSERT INTO `wl_xcpic` (`id` ,`xcid` ,`title` ,`picurl` ,`duan` ,`inttime`)VALUES (NULL , '$xcid', '$title', '$picurl_file', '0', '".time()."');");
+			}
+		}
+		header('Location: /Alert/?p=yes&u=/admin/z_jdpic/tp_pic.php?xcid='.$xcid);
+	break;

@@ -1,0 +1,18 @@
+　　首先我们看下ecshop目录下的languages目录．这个是ecshop语言包所在。ecshop默认的中文简体是zh_cn目录．语言包的载入过程都是通过ecshop的init.php中的require(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/common.php')处理和控制代码来加载的．
+
+       这个$_CFG['lang']是存储在数据库shop_config的。里面的code=lang字段的值就是该语言包名称。默认是zh_cn所有语言包中的数组名称是$_LANG.我们可以看到在init.php中，通过smarty来初始化 $smarty->assign('lang', $_LANG);
+
+　　当ecshop语言包得到初始化之后，我们就可以在模板中通过{$lang.edit}方式来访问语言包中各个名称了。
+
+      ecshop的后台，也有讲究．语言包加载．他的控制文件在admin/includes/init.php里面．
+
+      require(ROOT_PATH . 'languages/' .$_CFG['lang']. '/admin/common.php');
+      require(ROOT_PATH . 'languages/' .$_CFG['lang']. '/admin/log_action.php');
+
+if (file_exists(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/admin/' . basename(PHP_SELF)))
+{
+    include(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/admin/' . basename(PHP_SELF));
+}
+
+     如果是后台的admin/category.php．那么这个页面的模板文件是加载languages\zh_cn\admin\category.php这个要特别注意。如果你新建立页面．那么也要在语言包里面建立新的语言包文件．
+

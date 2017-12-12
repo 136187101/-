@@ -1,0 +1,8 @@
+for i in range(0,100):
+    print(i)
+
+
+×Ö·û´®£º
+
+for i in range(0,100):
+    print("hello python{0}{1}".format(i,"Tong"))

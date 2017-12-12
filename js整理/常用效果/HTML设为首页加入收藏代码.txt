@@ -1,0 +1,16 @@
+HTML设为首页/加入收藏代码
+2009-10-19 21:45（特别注意：要把’这个符号换成无任何输入法状态中输入的’这个符号，否则程序无法运行）   
+1.文字型：    
+<a onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.sfygxy.com');" href="http://www.sfygxy.com">设为首页</a>   
+
+-------------------------------------------------------------------------------
+
+加入收藏代码
+
+1.
+
+<a href="#" onclick="javascript:window.external.AddFavorite('http://www.sfygxy.com','试飞院工学院')" title="收藏本站到你的收藏夹"><font size="-1" color="#FFE09E">收藏本站</font></a>
+
+2.
+
+<a href="javascript:void(0);" onClick="window.external.AddFavorite(document.location.href,document.title)">加入收藏</a>

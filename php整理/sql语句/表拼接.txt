@@ -1,0 +1,5 @@
+SELECT device_code as code,grkcId as gid,time as time,price as price,pay_type as type FROM `wl_grkc_trade_record` 
+UNION
+SELECT code as code,gid as gid,ctime as time ,price as price,pay_type as type FROM `wl_ychgrade_record`
+UNION
+SELECT code as code,gid as gid,ctime as time ,price as price,pay_type as type FROM `wl_ychgrade_record_liantong`

@@ -1,0 +1,149 @@
+最近在工作中需要处理多语言的翻译问题，翻译都是写在excel表格里面。为了处理方便我就保留中文和英文两列。这样需要将这些数据从excel中取出来，然乎保存在excel的数组中，通过使用循环数组将相应的数据放入到数据库中。
+
+ 
+
+所以工作的第一步就是要将数据从excel中取出来。这里我使用到了一个开源php处理excel类：phpexcel.  该项目的详细信息 http://phpexcel.codeplex.com/ 。
+
+我目前使用的是phpexcel1.7.3版本, 解压缩后里面有一个PHPExcel和PHPExcel.php文件。
+
+我们主要使用那个PHP文件。见下图文件目录结构 
+
+ 
+
+这个版本据说是可以支持excel2007，但是我使用2007编辑的xlsx是无法获得该库的支持。于是乎我就将它转化为2003。感觉支持地很好。
+
+下面介绍一下具体的使用：
+
+require_once('./phpexcel1.7.3/PHPExcel.php');
+
+$php_excel_obj = new PHPExcel();
+
+$php_reader = newPHPExcel_Reader_Excel2007();
+
+ 
+
+if(!$php_reader->canRead($file_name))
+
+{
+
+       $php_reader= new PHPExcel_Reader_Excel5();
+
+       if(!$php_reader->canRead($file_name))
+
+       {
+
+              echo'NO Excel!';
+
+       }
+
+}
+
+$php_excel_obj = $php_reader->load($file_name);
+
+$current_sheet =$php_excel_obj->getSheet(0);
+
+ 
+
+上面的主要功能是初始化相关的excel类，并装载excel第一个sheet
+
+ 
+
+$all_column =$current_sheet->getHighestColumn();
+
+$all_row =$current_sheet->getHighestRow();
+
+ 
+
+以上分别获得该表格的最大列值(字母表示如：‘G’),和最大的行数（数值表示）
+
+ 
+
+下面将使用循环来讲excel里面的数据读到excel中：
+
+$all_arr = array();
+
+$c_arr = array();
+
+ 
+
+//字符对照表
+
+for($r_i = 1; $r_i<=$all_row; $r_i++)
+
+{
+
+       $c_arr= array();
+
+       for($c_i= 'A'; $c_i<= 'B'; $c_i++)
+
+       {
+
+              $adr= $c_i . $r_i;
+
+ 
+
+              $value= $current_sheet->getCell($adr)->getValue();
+
+ 
+
+              if($c_i== 'A' && empty($value) )
+
+                     break;
+
+              if(is_object($value))
+
+                     $value= $value->__toString();
+
+              $c_arr[$c_i]= $value;
+
+       }
+
+ 
+
+       $c_arr&& $all_arr[] =  $c_arr;
+
+}
+
+ 
+
+ 
+
+ 
+
+下面简单地介绍一下phpexcel的写操作，这个操作经常用于将数据库中的数据导入到excel中，便于展示和做成更美观的效果。
+
+ 
+
+require_once('./phpexcel1.7.3/PHPExcel.php');
+
+ 
+
+$excel_obj = new PHPExcel();
+
+$objWriter = newPHPExcel_Writer_Excel5($excel_obj); 
+
+$excel_obj->setActiveSheetIndex(0);
+
+$act_sheet_obj=$excel_obj->getActiveSheet();
+
+ 
+
+$act_sheet_obj->setTitle('sheet');
+
+$act_sheet_obj->setCellValue('A1', '字符串内容');
+
+$act_sheet_obj->setCellValue('A2', 26);
+
+ 
+
+$file_name = "output.xls";
+
+$objWriter->save($file_name);
+
+ 
+
+代码很简单， 首先初始化相关的excel写类，然后写入数据，最后保存为xls文件。
+
+输出的效果见图
+
+ 

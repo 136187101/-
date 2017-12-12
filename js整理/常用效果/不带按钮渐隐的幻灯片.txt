@@ -1,0 +1,35 @@
+<div id=oTransContainer  style="FILTER: progid:DXImageTransform.Microsoft.Wipe(GradientSize=1.0,wipeStyle=0, motion='forward'); WIDTH: 1002px; HEIGHT: 280px"><img class=pic id=oDIV1 src="images/01.jpg" width=1002 height=280>
+<script>	
+			var NowFrame = 1;
+			var MaxFrame = 4;
+			var bStart = 0;
+			function fnToggle(){
+				var next = NowFrame + 1;
+				if(next == MaxFrame+1) {
+					NowFrame = MaxFrame;
+					next = 1;
+				}
+				if(bStart == 0){
+					bStart = 1;
+					setTimeout('fnToggle()', 2000);  //多少毫秒之后调用这个函数  
+					return;
+				}else{
+					oTransContainer.filters[0].Apply();  
+					document.images['oDIV'+next].style.display = "";
+					document.images['oDIV'+NowFrame].style.display = "none";
+					oTransContainer.filters[0].Play(duration=2);
+						if(NowFrame == MaxFrame){
+						NowFrame = 1;
+						}else{
+						NowFrame++;
+						}
+				 	 }	
+					 setTimeout('fnToggle()', 6000);
+				}fnToggle();
+				
+             </script>
+<img class=pic id=oDIV2 src="images/s1.jpg" width=1002 height=280 style="DISPLAY: none;">
+<img class=pic id=oDIV3 src="images/s2.jpg" width=1002 height=280 style="DISPLAY: none;">
+<img class=pic id=oDIV4 src="images/s3.jpg" width=1002 height=280 style="DISPLAY: none;">
+<img class=pic id=oDIV5 src="images/s3.jpg" width=1002 height=280 style="DISPLAY: none;">
+  </div>

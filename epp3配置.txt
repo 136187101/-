@@ -1,0 +1,6 @@
+着色：
+php:窗口—》首选项-》php->Editor->Syntax Coloring
+html:窗口-》首选项->web->html文件->编辑器->语法着色
+默认编码：
+窗口->首选项->常规->内容类型->文本->php content typd ->缺省编码->UTF-8 点击更新
+html同上

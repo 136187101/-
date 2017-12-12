@@ -1,0 +1,3 @@
+问题：您的服务器设置了 open_base_dir 且没有包含 E:/DedeAMPZ/tmp/uploads,您将无法上传文件
+
+解决办法：原来是在 apache的配置域名这里（默认是 DedeAMPZ\Program\Apache\conf\httpd-vhosts.conf）php_admin_value open_basedir"E:/DedeAMPZ/WebRoot/test.com/phpweb"  把 open_basedir  改成 open_base_dir重启apache就OK了

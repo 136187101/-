@@ -1,0 +1,1 @@
+ top.location = "../index.jsp";//跳出框架，并回到首页

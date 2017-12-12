@@ -1,0 +1,4 @@
+JavaScript 
+window.parent.location.reload();
+
+document.getElementById("Frm").location.reload();

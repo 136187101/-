@@ -1,0 +1,11 @@
+文件目录为：E:\python\seom-master
+
+cmd操作:
+E:
+cd python
+cd seom-master
+
+
+
+运行此命令
+python manage.py runserver

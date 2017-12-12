@@ -1,0 +1,119 @@
+		在这里，我主要将查询出来的结果dump出来，给大家看。如果呢大家有需要，自己可以将其assgin到模版当去进行遍历或者进行显示
+5.3.17查询语言
+
+	普通查询
+		在查询带入where条件等，最少有三种形式
+
+		在普通查询里面还可以使用查询表达示
+
+
+		在此处我会跟大家把查询表达示都讲一次。
+
+		EQ  等于(=)
+		NEQ: 不等于(!=)
+
+		GT 大于(>)
+
+
+		EGT 大于等于（>=）
+
+		LT：小于(<)
+
+		ELT:小于等于(<=)
+
+		LIKE 等价于sql  like
+
+
+		[NOT] BETWEEN 是指SQL里面的BETWEEN  还可以在前加上not
+
+
+		[not] in  查询集合
+
+		exp  比较特殊，是指使用标准SQL语句，实现更加复杂的情况
+
+		
+		$data['id']=array('exp','in(3,9,11)')
+
+
+
+
+		因为，如果说
+
+		1，字符串形式
+			'id>5 and id<9  ' 在SQL语句当中写的基本形式也是字符串形式
+		2，数组形式
+
+			$user=M('user');
+
+			$data['id']='5';  //它只找出用户名为liwenkai的吧？没有办法让其找出id大于的吧？
+
+			
+
+			$list=$user->where(array('username'=>'liwenkai'))->select();
+			
+		3，对象形式
+
+			$user=M('user');
+			$a=new stdClass();
+
+			$a->username='liwenkai';
+
+			
+			$list=$user->where($a)->select();
+		
+
+
+	区间查询
+		
+		id>3 and id<10
+
+		
+		$data['id']=array(array('gt',3),array('lt',10));
+
+
+	组合查询
+		
+		$data['username']='liwenkai';
+		$data['password']=array('eq','wenkai');
+		$data['id']=array('lt',10);
+
+		//where username=liwenkai and  password=wenkai  and id<10 默认的逻辑关系为or的关系
+
+	复合查询
+
+		$data['username']=array('eq','liwenkai');
+		$data['password']=array('like','w%');
+
+		$data['_logic']='or';
+		
+
+		$where['_complex']=$where;
+		$where['id']=array('lt',5);
+
+
+		(id<5) and  ( (username='liwenkai') or (password like 'w%') )
+
+		
+
+	统计查询
+		//select count() from
+		//$user->count();   //总数
+			
+		//$user->max('字段');	//查量大值
+
+		//$user->min('字段');
+
+		//$user->avg（'字段'） 平均数
+			
+		//$user->sum('字段')   和
+
+	定位查询
+			getN
+			last
+			first
+	SQL查询
+
+
+			execute()     主要用于更新和写入
+			query()       主要用于查询
+	动态查询

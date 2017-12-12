@@ -1,0 +1,31 @@
+	function price_hko($price){
+		 $email = round($price,2); 
+		 $domain_p = strstr($email, '.');
+		 $domain = substr($domain_p,0,1);
+		 if($domain=="." && strlen($domain_p) == 3){
+		 	$price_retu=$price;
+		 }else if($domain=="." && strlen($domain_p) == 2){
+		 	$price_retu=$price."0";
+		 }else{
+		 	$price_retu=$price.".00";
+		 }
+		 return $price_retu;
+	}
+//----------------------------------------------------------------如果是44输出44.00,如是44.5输出44.50,如是44.53输出44.53
+
+		function price_hko($price){
+		 $email = round($price,2); //取两位四舍五入
+		 echo $email."<br />";
+		 $domain_p = strstr($email, '.');//strstr() 函数搜索一个字符串在另一个字符串中的第一次出现。".XX"
+		 echo $domain_p."<br />";
+		 $domain = substr($domain_p,0,1);//截取字符串，这里显示为“.”.
+		 echo $domain."<br />";
+		 if($domain=="." && strlen($domain_p) == 3){//strlen() 函数返回字符串的长度。如果是小数点加两位小数则
+		 	$price_retu=$price;
+		 }else if($domain=="." && strlen($domain_p) == 2){//如果是小数点加两位小数则在.X后面加个0
+		 	$price_retu=$price."0";
+		 }else{
+		 	$price_retu=$price.".00";//如果是小数点加一位小数则在.后面加个00
+		 }
+		 return $price_retu;
+	}

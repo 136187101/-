@@ -1,0 +1,13 @@
+define('IN_ECS', true);
+
+require(dirname(__FILE__) . '/includes/init.php');
+
+if ((DEBUG_MODE & 2) != 2)
+{
+    $smarty->caching = true;
+}
+
+    assign_template();
+    assign_dynamic('catalog');
+    $position = assign_ur_here(0, $_LANG['catalog']);
+$smarty->display("hjd.dwt",      $cache_id)

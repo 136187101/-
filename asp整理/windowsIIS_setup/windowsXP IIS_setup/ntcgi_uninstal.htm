@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Uninstall FrontPage Extensions</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h3><font face="Arial">Uninstall FrontPage Extensions</font></h3>
+
+<p>Uninstalls the FrontPage Server Extensions from a virtual server and all subwebs
+associated with that virtual server. The content in the webs is not deleted, but the
+FrontPage Server Extensions are removed so that FrontPage-based authoring, administration,
+and browse-time WebBot Components will no longer work. The Full Uninstall option will
+remove the web meta-information, which may cause some FrontPage features to stop working
+if you decide to install the FrontPage Server Extensions at a later time.</p>
+
+<p>To delete a single subweb use the <a href="delsbweb.htm">Delete Subweb form</a>.</p>
+
+<form action="scripts/fpadmcgi.exe" method="POST">
+  <input type="hidden" name="version" value="1.0.0.0"><table border="0">
+    <tr>
+      <td>Full Uninstall:</td>
+      <td><select name="operation" size="1">
+        <option value="uninstall">No</option>
+        <option value="fulluninstall">Yes</option>
+      </select> </td>
+    </tr>
+    <tr>
+      <td>Virtual Host Name:</td>
+      <td><input type="text" size="40" name="host"></td>
+    </tr>
+    <tr>
+      <td>Port Number:</td>
+      <td><input type="text" size="40" name="port" value="80"></td>
+    </tr>
+  </table>
+  <p><input type="submit" name="Submit" value="Uninstall"></p>
+</form>
+<!--webbot bot="Include" u-include="footer.htm" tag="BODY" startspan -->
+
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+  <tr>
+    <td width="33%"><font face="arial, helvetica" size="1"><p align="center"></font><a href="http://www.microsoft.com/isapi/redir.dll?prd=frontpage&amp;ar=home" target><img src="fpcreate.gif" alt="Created &amp; Managed With FrontPage 2000" border="0" width="130" height="43"></a></td>
+    <td width="33%"><p align="center"><font face="arial, helvetica" size="1">HTML
+    Administration Forms Version 4.0</font></td>
+    <td width="33%"><font face="arial, helvetica" size="1"><p align="center"><a href="http://www.microsoft.com/isapi/redir.dll?prd=frontpage&amp;ar=serk">Click
+      here for online documentation of the FrontPage
+    Server Extensions.</a></font></td>
+  </tr>
+</table>
+<!--webbot bot="Include" endspan i-checksum="65287" -->
+
+</body>
+</html>

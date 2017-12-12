@@ -1,0 +1,16 @@
+/**
+ * 系统提示信息
+ *
+ * @access      public
+ * @param       string      msg_detail      消息内容
+ * @param       int         msg_type        消息类型， 0消息，1错误，2询问
+ * @param       array       links           可选的链接
+ * @param       boolen      $auto_redirect  是否需要自动跳转
+ * @return      void
+ */
+function sys_msg($msg_detail, $msg_type = 0, $links = array(), $auto_redirect = true)
+
+
+
+$like[]=array("href"=>"kefu.php?act=list","text"=>"客服列表");
+sys_msg("添加成功",0,$like);

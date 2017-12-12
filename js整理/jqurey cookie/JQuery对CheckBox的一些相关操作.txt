@@ -1,0 +1,90 @@
+一、通过选择器选取CheckBox:
+
+  1.给CheckBox设置一个id属性，通过id选择器选取：
+
+    <input type="checkbox" name="myBox" id="chkOne" value="1" checked="checked" />
+    JQuery:
+        $("#chkOne").click(function(){});
+ 
+
+   2.给CheckBox设置一个class属性，通过类选择器选取：
+
+    <input type="checkbox" name="myBox" class="chkTwo" value="1" checked="checked" />
+
+ 
+    JQuery:
+        $(".chkTwo").click(function(){});
+ 
+  3.通过标签选择器和属性选择器来选取：
+   <input type="checkbox" name="someBox"  value="1" checked="checked" /> 
+
+ 
+
+   <input type="checkbox" name="someBox" value="2" />
+
+   JQuery: 
+        $("input[name='someBox']").click(function(){});
+
+ 
+二、对CheckBox的操作：
+   以这段checkBox代码为例：
+ 
+   <input type="checkbox" name="box"  value="0" checked="checked" /> 
+
+ 
+
+   <input type="checkbox" name="box" value="1" />
+
+   <input type="checkbox" name="box" value="2" />
+
+   <input type="checkbox" name="box" value="3" />
+
+ 
+   1.遍历checkbox用each()方法：
+       $("input[name='box']").each(function(){});
+   2.设置checkbox被选中用attr();方法：
+     $("input[name='box']").attr("checked","checked"); 
+ 
+
+    在HTML中，如果一个复选框被选中，对应的标记为 checked="checked"。 但如果用jquery alert($("#id").attr("checked")) 则会提示您是"true"而不是"checked"，所以判断 if("checked"==$("#id").attr("checked")) 是错误的，应该是 if(true == $("#id").attr("checked"))
+ 
+  3.获取被选中的checkbox的值：
+    $('#CheckBox').is(':checked')
+   $("input[name='box']：checked")与 $("input[name='box']")有何区别没试过，我试了用 $("input[name='box']")能成功。
+
+   4.获取未选中的checkbox的值：
+
+ 
+
+    $("input[name='box']").each(function(){
+          if ($(this).attr('checked') ==false) {
+                alert($(this).val());
+            }
+     });
+
+   5.设置checkbox的value属性的值:
+
+          $(this).attr("value",值);
+
+ 
+
+三、 一般都是创建一个js数组来存储遍历checkbox得到的值，创建js数组的方法：
+
+     1.  var array= new Array();
+
+     2. 往数组添加数据：
+
+        array.push($(this).val());
+ 
+
+     3.数组以“,”分隔输出：
+
+         alert(array.join(','));
+ 
+ 
+ 
+ 
+
+  <input type="checkbox" name="myBox" class="chkTwo" value="2" />
+
+  <input type="checkbox" name="myBox" id="chkOne" value="2" />

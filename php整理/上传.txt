@@ -1,0 +1,45 @@
+<?php
+	if($_POST[Submit])
+	{
+		$image=$_FILES[file];
+		$name=$image[name];
+		$size=$image[size];
+		$thmp=$image[tmp_name];
+		$type=strstr($name,".");
+		print_r($image);
+		$root=$_SERVER['DOCUMENT_ROOT']."/images/";
+
+		$tpel=array(".jpg",".jpeg",".png",".gif");
+		
+		$suiji=time().rand(0,999).$type;
+		if(in_array($type,$tpel))
+		{
+			if(move_uploaded_file($thmp,$root.$suiji))
+			{
+				echo "上传成功";
+			}
+		}else
+		{
+			echo "no";	
+		}
+		
+	}
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+</head>
+
+<body>
+
+
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <input type="file" name="file" id="fileField" />
+  <input type="submit" name="Submit" id="button" value="提交" />
+</form>
+</body>
+</html>

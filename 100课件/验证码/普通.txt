@@ -1,0 +1,15 @@
+session_start();
+for($i=0;$i<4;$i++){
+	$suiji.=dechex(rand(1,15));
+}
+$_SESSION[check_pic]=$suiji;
+//创建一个画布
+$huabu=imagecreate(100, 30);
+//设置颜色第一个为背景色
+$bg=imagecolorallocate($huabu, 0, 0, 0);
+$tc=imagecolorallocate($huabu, 253, 0, 0);
+//把内容写入图片中
+imagestring($huabu,rand(1,6),30,10,$suiji,$tc);
+//输出图片
+header ("Content-type: image/png"); 
+imagejpeg($huabu,'',100);

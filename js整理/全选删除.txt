@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+        $("#1quan").click(function(){
+				if($(this).attr("checked"))
+				{
+					$("input[name='aihao']").attr("checked",true)
+				}
+				else
+				{
+					$("input[name='aihao']").attr("checked",false)
+				}
+			
+			})
+		$("#delete").click(function(){
+				var text;
+				$("input[name='aihao']").each(function(index) {
+					if($(this).attr("checked")=="checked")
+					{
+						text=$(this).val()+text;
+					}
+                });
+				alert(text)
+			
+			})
+    });
+</script>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+ 全选<input name="aiha22o" id="1quan" type="checkbox" value="0"  />
+ <a id="delete" href="#">删除</a>
+  <p>
+      <input type="checkbox" name="aihao" value="1" id="CheckboxGroup1_0" />
+      看书
+    <br />
+      <input type="checkbox" name="aihao" value="2" id="CheckboxGroup1_1" />
+      游泳
+    <br />
+      <input type="checkbox" name="aihao" value="3" id="CheckboxGroup1_2" />
+      唱歌
+    <br />
+      <input type="checkbox" name="aihao" value="4" id="CheckboxGroup1_3" />
+      足球
+    <br />
+  </p>
+</form>
+</body>
+</html>

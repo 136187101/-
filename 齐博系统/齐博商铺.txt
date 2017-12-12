@@ -1,0 +1,13 @@
+公司资料在   /hy/member/homepage_ctrl/info.php
+对应模板 ：/hy/member/homepage_ctrl/template/homepage_ctrl/info.htm
+
+如果要添加一个修改项：
+	1.在info模板里添加文本框，名称与数据库字段名称一致
+	2.在info.php 修改的SQL里 加入这个字段 例如：`qy_contact_tel`='$qy_contact_tel',
+
+注册商铺： /hy/member/homepage_ctrl/post_company.php
+对应模板：hy/member/template/post_company.htm
+如果要再提交商铺时加一个字段：
+	1.在模板里iform 里添加一个文本 名称与数据库字段一致
+	2.试试就知道了
+	

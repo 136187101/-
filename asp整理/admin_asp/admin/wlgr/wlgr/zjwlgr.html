@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>单页管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="style.css" rel="stylesheet" type="text/css" />
+<SCRIPT language=javascript1.2>
+function showsubmenu(sid)
+{
+whichEl = eval("submenu" + sid);
+if (whichEl.style.display == "none")
+{
+eval("submenu" + sid + ".style.display=\"\";");
+}
+else
+{
+eval("submenu" + sid + ".style.display=\"none\";");
+}
+}
+</SCRIPT>
+<STYLE>
+BODY {
+	SCROLLBAR-FACE-COLOR: #9FBDDD;
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	SCROLLBAR-SHADOW-COLOR: #ffffff;
+	SCROLLBAR-3DLIGHT-COLOR: #ffffff;
+	SCROLLBAR-ARROW-COLOR: #ffffff;
+	SCROLLBAR-TRACK-COLOR: #9FBDDD;
+	SCROLLBAR-DARKSHADOW-COLOR: #9FBDDD;
+	SCROLLBAR-BASE-COLOR: #ff0000;
+	background-color: #A7C2E0;
+}
+</STYLE>
+</head>
+<body id="nav">
+<h2><a href="../wlgr.asp" target="_top">管理首页</a>	|&nbsp;	<a href="../../tui.asp" target="_top">退出系统</a>&nbsp;&nbsp; </h2>
+<div class="nlist">
+	<h3 onClick="showsubmenu(0)"><span class="right"></span>系统管理</h3>
+	<ul style="display:none" id='submenu0'>
+		<li><a target=mainFrame href=../../aspcheck.asp>系统信息查看</a></li>
+		<li><a target=mainFrame href=../../ovttlf1.asp>数据库备份</a></li>
+		<li><a target=mainFrame href=../../rizhi.asp>日志管理</a></li>
+		<li><a target=mainFrame href=../../shu.asp>添加管理员</a></li>
+		<li><a target=mainFrame href=../../guan.asp>管理员管理</a></li>
+	</ul>
+</div>
+<div class="nlist">
+	<h3 onClick="showsubmenu(1)"><span class="right"></span>文章管理</h3>
+	<ul style="display:" id='submenu1'>
+		<li><a target=mainFrame href=../../jsshuxi/art_list.asp>新闻管理</a> | <a target=mainFrame href=../../add_news.asp>添加数据</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/art_class.asp?channelid=1>栏目管理</a> | <a target=mainFrame href=../../jsshuxi/art_class_do.asp>添加</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/art_list.asp?ManageType=Recyclebin>回收站管理</a> | <a target=mainFrame href=../../jsshuxi/Comment.asp>评论管理</a></li>
+	</ul>
+</div>
+<div class="nlist">
+	<h3 onClick="showsubmenu(2)"><span class="right"></span>产品天加</h3>
+	<ul style="display:none" id='submenu2'>
+		<li><a target=mainFrame href=../../add_product.asp>添加产品</a> | <a target=mainFrame href=../../jsshuxi/admin_rss.asp>生成rss</a></li>
+		<li> <a target=mainFrame href=../../jsshuxi/make.asp>生成选项</a></li>
+		<li> <a target=mainFrame href=../../jsshuxi/make.asp>生成选项</a></li>
+	</ul>
+</div>
+<div class="nlist">
+	<h3 onClick="showsubmenu(3)"><span class="right"></span>自定义标签与单页</h3>
+	<ul style="display:none" id='submenu3'>
+		<li><a target=mainFrame href=../../jsshuxi/admin_Label.asp>标签管理</a> | <a target=mainFrame href=../../jsshuxi/admin_Label.asp?Action=add>添加标签</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/admin_Page.asp>单页管理</a> | <a target=mainFrame href=../../jsshuxi/admin_Page.asp?Action=add>添加单页</a></li>
+	</ul>
+</div>
+<div class="nlist">
+	<h3 onClick="showsubmenu(4)"><span class="right"></span>采集管理</h3>
+	<ul style="display:none" id='submenu4'>
+		<li><a target=mainFrame href=../../jsshuxi/Admin_Collection.asp?Action=Main>采集管理</a> | <a target=mainFrame href=../../jsshuxi/Admin_CollectionManage.asp>项目管理</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/Admin_Filter.asp?Action=Main>过虑管理</a> | <a target=mainFrame href=../../jsshuxi/Admin_CollectionHistory.asp?Action=main>采集历史记录</a>
+      <li><a href=../../jsshuxi/Admin_CollectionManage.asp?Action=Import target=mainFrame>项目导入</a> | <a href=../../jsshuxi/Admin_CollectionManage.asp?Action=Export target=main>项目导出</a></li>
+	</ul>
+</div>
+<div class="nlist">
+	<h3 onClick="showsubmenu(5)"><span class="right"></span>辅助功能管理</h3>
+	<ul style="display:none" id='submenu5'>
+		<li><a target=mainFrame href=../../jsshuxi/Admin_Template.asp?Action=Main&TempType=1>模板管理</a> | <a target=mainFrame href=../../jsshuxi/Admin_Skin.asp>风格管理</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/Admin_TextReplace.asp>文档替换</a> | <a target=mainFrame href=../../jsshuxi/admin_DateReplace.asp>数据库执行</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/wj.asp?wj=../upload>附件管理</a> | <a target=mainFrame href=../../jsshuxi/Admin_FilesOnline.asp>在线比较</a></li>
+		<li><a target=mainFrame href=../../jsshuxi/Admin_Database.asp?action=BackupData>数据库管理</a> | <a target=mainFrame href=../../jsshuxi/Admin_Database.asp?action=DoInit>网站初始化</a></li>
+	</ul>
+</div>
+<div class="nlist">
+	<h3><span class="right"></span>版权信息</h3>
+	<ul>
+		<li>版本：<a target="_blank" href="http://www.60du.net/"></a></li>
+		<li>论坛：<a target="_blank" href="http://bbs.60du.net/"></a></li>
+		<li>作者：</li>
+	</ul>
+</div>
+</body>
+</html>

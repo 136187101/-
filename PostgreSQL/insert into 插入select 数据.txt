@@ -1,0 +1,3 @@
+insert into jd_account_users (account_id,u_id) 
+
+SELECT a.id,u.id from jd_account a join jd_users u on a.appid='6e2c09b982d4470cb48634642cad7fb7' and  u.name='ºú±ùÏ¼';

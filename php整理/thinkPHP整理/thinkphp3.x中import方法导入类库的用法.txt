@@ -1,0 +1,112 @@
+import方法是ThinkPHP框架用于类库导入的封装实现，尤其对于项目类库、扩展类库和第三方类库的导入支持，import方法早期的版本可以和java的import方法一样导入目录和通配符导入，后来考虑到性能问题，在后续的版本更新中不断改进和简化了，所以现在的用法比较简单明了。  
+  
+调用格式：  
+  
+    import('类库名', '起始路径', '类库后缀')   
+  
+import方法有一个别名vendor方法，专门用于导入第三方类库，区别在于起始路径和类库后缀默认值不同。  
+  
+我们来分析下具体的用法：   
+  
+一、导入系统基类库  
+  
+系统基类库其实就是指的Think类库包，所在目录就是指框架的核心Lib目录，import方法可以用于导入系统基类库，例如：   
+  
+    import('Think.Util.Array');  
+  
+表示导入系统目录下面的Lib/Util/Array.class.php 类库文件，相当于我们这样使用   
+  
+    require THINK_PATH.'Lib/Util/Array.class.php';  
+  
+也可以支持多级目录，例如：   
+  
+    import('Think.Util.U1.ClassA');  
+    import('Think.Util.U1.A2.ClassB');  
+  
+通过import方法导入类库后，就可以进行类库的实例化操作了。   
+  
+  
+二、导入扩展类库  
+  
+扩展类库位于Extend/Library目录下面，这是系统的公共扩展类库目录，目前支持的扩展类库包只有ORG和Com包。   
+  
+    import('ORG.Util.Image');   
+    import('Com.Sina.OAuth');  
+  
+会导入扩展目录下面的第三方类库（分别是Extend/Library/ORG/Util/Image.class.php和Extend/Library/Com/Sina/OAuth.class.php 类库文件），第三方类库包只能支持ORG和Com两种，下面的子目录可以随意添加。   
+  
+三、导入项目应用类库  
+  
+如果没有指定起始导入路径的话，类库包Think、ORG、Com之外的都会被认为是导入项目应用类库，例如：   
+  
+    import("MyApp.Action.UserAction");   
+    import("MyApp.Model.InfoModel");  
+  
+表示导入MyApp项目的UserAction和InfoModel类库文件，由于通常，我们都是导入当前项目下面的类库，所以可以简写成：   
+  
+    import("@.Action.UserAction");   
+    import("@.Model.InfoModel");  
+  
+@符号表示导入当前项目下面的类库，这种方式也一定程度上方便了项目类库的代码移植，如果项目名称改变或者移动到其它项目下面的时候，写法不需要改变。   
+  
+  
+四、导入非标准类库文件  
+  
+这里所说的非标准类库文件，主要是指位于特殊位置或者非.class.php后缀的类库文件。像导入基类库、扩展类库和项目类库都是基于框架规范的目录下面，如果我们需要导入项目的Common目录下面的MyClass.php文件，则可以采用：   
+  
+    import('Common.MyClass',APP_PATH,'.php');  
+  
+或者  
+  
+    import('MyClass',APP_PATH.'Common','.php');  
+  
+或者要导入当前目录下面的RBAC类库   
+  
+    import("RBAC.AccessDecisionManager",dirname(__FILE__),".php");  
+  
+还有一种特殊情况，是类库命名的特殊性。按照系统的规则，import方法是无法导入具有点号的类库文件的，因为点号会直接转化成斜线，例如我们定义了一个名称为User.Info.class.php 的文件的话，采用：   
+  
+    import("ORG.User.Info");  
+  
+方式加载的话就会出现错误，导致加载的文件不是ORG/User.Info.class.php 文件，而是ORG/User/Info.class.php 文件，这种情况下，  
+  
+我们可以使用：   
+  
+    import("ORG.User#Info");  
+  
+来导入。  
+  
+  
+五、第三方类库导入  
+  
+ThinkPHP 的基类库都是以.class.php 为后缀的，这是系统内置的一个约定，当然也可以通过 import 的参数来控制， 为了更加方便引入其他框架和系统的类库， 系统还提供了一个import方法的别名vendor，专门用于导入第三方类库，并且默认的起始目录和类文件后缀有区别。  
+  
+第三方类库位于系统扩展目录下的Vendor 目录， 例如，我们把 Zend 的 Filter\Dir.php 放到 Vendor 目录下面，这个时候 Dir 文件的路径就是 Vendor\Zend\Filter\Dir.php，我们使用vendor 方法导入只需要使用：   
+  
+    Vendor('Zend.Filter.Dir');  
+  
+就可以导入Dir类库了。  
+  
+Vendor方法也可以支持和import方法一样的基础路径和文件名后缀参数，例如：   
+  
+    Vendor('Zend.Filter.Dir',dirname(__FILE__),'.class.php');  
+  
+六、别名导入  
+  
+除了命名空间的导入方式外，import方法还可以支持别名导入，要使用别名导入，首先要定义别名，我们可以在项目配置目录下面增加alias.php 用以定义项目中需要用到的类库别名，例如：   
+  
+    return array(       
+        'rbac' =>LIB_PATH.'Common/Rbac.class.php',       
+        'page' =>LIB_PATH.'Common/Page.class.php',   
+    );  
+  
+那么，现在就可以直接使用：   
+  
+    import("rbac");   
+    import("page");  
+  
+导入Rbac和Page类，别名导入方式禁止使用import方法的第二和第三个参数，别名导入方式的效率比命名空间导入方式要高效，缺点是需要预先定义相关别名。  
+  
+可以为某些需要的类库定义别名，那么无需定义自动加载路径也可以快速的自动加载。  
+  
+一般情况下，由于框架内部采用了自动加载方式，所以大多数情况下，不需要用户手动导入类库文件，通常用于导入扩展类库和第三方类库的情况居多。而且配合别名定义和自动加载路径的定义，也能减少用户手动导入类库的情况。   

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$tit}</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript" src="js/action.js"></script>
+<script type="text/javascript" src="js/scrollpic.js"></script>
+<script type="text/javascript" src="js/roll.js"></script>
+
+
+</head>
+
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+{$page_title}
+当前位置：{$ur_here}
+{$lang.order_number}
+{foreach from=$best_goods item=goods}
+<p>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a><br />
+    名称：{$goods.short_style_name}<br />
+    市场价：{$goods.market_price}<br />
+    本店价：{$goods.shop_price}<br />
+  商品货号：{$goods.goods_sn}<br>
+  商品品牌: {$goods.goods_brand}
+  商品数量：{$goods.goods_number}
+  单位：{$goods.measure_unit}
+  添加时间：{$goods.add_time}
+  市场价格：{$goods.market_price}
+  本店价格：{$goods.shop_price_formated}
+  注册用户价格：{$rank_price.price}
+  注册用户价格：{$rank_price.price}
+  注册用户价格：{$rank_price.price}
+{/foreach}
+
+</p>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

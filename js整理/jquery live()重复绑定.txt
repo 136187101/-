@@ -1,0 +1,5 @@
+
+//先通过die()方法解除，再通过live()绑定 
+$("#selectAll").die().live("click",function(){ 
+//事件运行代码 
+}); 

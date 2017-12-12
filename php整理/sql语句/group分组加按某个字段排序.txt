@@ -1,0 +1,13 @@
+在google上看了大量的例子，发现需要在select中对id做手脚，让mysql 知道除了f_id外，对id应该进行如何的操作。诸如Max, Min, Avg,Sun..都是可以的，于是变成以下的代码就搞定了…… 
+
+
+select f_id, max(id) as id from table group by f_id order by id desc 
+
+
+
+在网上找的是以上内容  
+
+自己写的比较合适自己的是 
+SELECT * FROM liaotian WHERE times IN (SELECT max( times )FROM liaotian WHERE jieusers = '9' GROUP BY fausers)
+
+哈哈，乐开花

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script type="text/javascript">
+ var focus_width=190
+ var focus_height=150
+ var text_height=14
+ var swf_height = focus_height+text_height
+ 
+
+
+  var pics='../images/01.jpg'+'|'+'../images/02.jpg'+'|'+'../images/03.jpg'+'|'+'../images/04.jpg'+'|'+'../images/05.jpg';
+ var texts='Limb&nbsp;function&nbsp;rehabilitation&nbsp;evaluation&nbsp;and&nbsp;training&nbsp;system'+'|'+'Surface&nbsp;EMG'+'|'+'Portable&nbsp;EMG/EP&nbsp;System'+'|'+'EMG&nbsp;bio-feedback&nbsp;stimulator'+'|'+'EEG/ERP';
+ var links='cpxx_xx.asp?id=68'+'|'+'cpxx_xx.asp?id=66'+'|'+'cpxx_xx.asp?id=61'+'|'+'cpxx_xx.asp?id=57'+'|'+'cpxx_xx.asp?id=56';
+ 
+ 
+ document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"  codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ focus_width +'" height="'+ swf_height +'">');
+ document.write('<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="focus1.swf"><param name="quality" value="high">');
+ document.write('<param name="menu" value="false"><param name=wmode value="transparent">');
+ document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'">');
+ document.write('<embed src="focus1.swf" wmode="transparent" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'& menu="false" quality="high" width="'+ focus_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+ document.write('</object>');
+ </script>
+
+
+</body>
+</html>

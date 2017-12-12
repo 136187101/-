@@ -1,0 +1,28 @@
+1.
+在wapalipay.php 里 21行 改为
+$payment_lang = ROOT_PATH . 'languages/' .$GLOBALS['_CFG']['lang']. '/payment/wapalipay2.php';
+
+/includes/modules/payment/目录下上传wapalipay.php
+
+2.
+在languages/zh_cn/payment/ 下上传
+wapalipay2.php
+
+3.
+后台安装信息
+
+例如：
+支付宝
+xxxxxx@163.com
+c6gmmikgagtn1bznqx81qk3aer75aikp
+2088811557642531
+即时到账交易接口
+0
+否
+是
+
+
+
+
+
+

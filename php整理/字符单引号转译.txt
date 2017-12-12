@@ -1,0 +1,2 @@
+addslashes
+addslashes -- 使用反斜线引用字符串string addslashes ( string str )

@@ -1,0 +1,23 @@
+  <script type="text/javascript" charset="utf-8" src="../editubb/kindeditor.js"></script>
+<script language=javascript type="text/javascript"> 
+function checkSubmit() 
+{ 
+	if(document.myform.fuleiid.value==''){
+				alert('请选择分类名称谢谢！！');
+				myform.fuleiid.style.background='#FFFFCC';
+				myform.fuleiid.style.color='red';
+				myform.fuleiid.focus();
+				return false;
+	}
+	return true; 
+}
+    KE.show({
+        id : 'content1',
+        cssPath : '/admin/editubb/index.css'
+    });
+</script>
+
+
+
+
+调用的方法：<!--<textarea name="content" id="content1" style="width:100%;height:300px;visibility:hidden;">添加信息</textarea>	-->

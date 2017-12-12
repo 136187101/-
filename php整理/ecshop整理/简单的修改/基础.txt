@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+
+<body>
+商店公告：{$shop_notice}<br />
+
+网站快讯：
+<ul>
+{foreach from=$new_articles  item=news}
+<li>{$news.title}</li>
+{/foreach}
+</ul>
+<div>
+<h2>产品分类</h2>
+{foreach from=$categories item=prfl}
+	<a href="{$prfl.url}">{$prfl.name}</a><br />
+    	{foreach from=$prfl.cat_id item=xfl}
+        	&nbsp;&nbsp;{$xfl.name}<br />
+        {/foreach}
+{/foreach}
+</div>
+
+商品列表：<br />
+<table width="70%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+{foreach from=$best_goods item=goods key=k}
+    <td align="center">
+    <a href="{$goods.url}"><img src="{$goods.goods_img}" /></a>
+    <br />
+    {$goods.name} </td>
+    {if ($k+1)%3==0}
+    </tr><tr>
+    {/if}
+{/foreach}
+  </tr>
+</table>
+
+</body>
+</html>

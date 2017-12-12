@@ -1,0 +1,25 @@
+匹配：
+preg_match_all 全部匹配函数
+$mode="/{(.*)}/U";
+$str="adjkh{title}cx{zuozhe}czmxc{content}";
+preg_match_all($mode,$str,$arr);
+
+替换：1正则，2正则数组，3修正符e,4后面加一个参数选择替换次数
+preg_replace 正则替换函数
+//替换 preg_replace
+$str="标题：{title}<br>作者：{zuozhe}<hr>内容:{cont}";
+$mode=array("/{(.*)le}/U","/{zuozhe}/","/{cont}/");
+$replace=array("houm微小说","侯建东","全国最全微小说");
+echo preg_replace($mode,$replace,$str);
+
+修正符e
+$str="azxcjk65465A4cqqa35687";
+$mode="/(a)/ie";
+echo preg_replace($mode,md5("\\1"),$str,1);后面的1可以选择替换多少次
+
+
+分割：preg_split;
+$str="asd,xzas,qweqwe'asd-asdzb2zd+asd"; 后面的1可以选择切割多少次
+$mode="/[,'-+]/";//元字符
+$arr=preg_split($mode,$str,3);
+print_r($arr);

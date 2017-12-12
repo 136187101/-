@@ -1,0 +1,18 @@
+$stmart->assign("row",$row);//可理解为赋值操作。可为数组
+$stmart->display("index.html");执行的模板文件；
+调用html页面内容：如下
+{$row}<!--直接书写-->
+下为循环代码：
+注：数组要用点，与java类似
+{section name=list loop=$row}
+{$row[list].name}
+{/section}
+foreach遍历数组
+{foreach from=$name item=id key=k}
+数组<b>{$k}{$id}</b><br />
+{/foreach}
+include 
+{include file='top.html' title='希望'}
+文本的处理技巧
+literal 去除非stmarty 语句的符号{}
+strip 去除标记中的空格和回车

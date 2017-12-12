@@ -1,0 +1,23 @@
+重新定义了冲突的 toJSONString 函数。把这段代码加在 transport.js 最后！
+
+if (Object.prototype.toJSONString){
+
+
+var oldToJSONString = Object.toJSONString;
+Object.prototype.toJSONString = function(){
+if (arguments.length > 0){
+return false;
+}else{
+return oldToJSONString.apply(this, arguments);
+
+
+}
+
+}
+
+
+}
+
+另：jquery.js 加在 transport.js 定义之后，
+<script type=”text/javascript” src=”transport.js”></script>
+<script type=”text/javascript” src=”jquery.js”></script> 加在 transport.js 后面。

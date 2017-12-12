@@ -1,0 +1,10 @@
+如果是新文件 需要git add 文件名或者文件夹
+如果是多个更新 可以用git add .
+
+然后提交到缓存区
+git commit -m '更新说明'
+
+提交到远程git仓库
+
+git push
+

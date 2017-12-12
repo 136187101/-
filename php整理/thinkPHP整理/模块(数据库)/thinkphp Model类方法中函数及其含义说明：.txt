@@ -1,0 +1,112 @@
+1、getModelName()：获取当前Model的名称
+
+2、getTableName()：获取当前Model的数据表名称
+
+3、switchModel(type,vars=array()) ：动态切换模型
+
+4、table()：设置当前操作的数据表
+
+5、field()： 设置要查询的数据字段
+
+6、where()：设置查询或者操作条件
+
+7、data(data)： 设置数据对象
+
+8、order(order) ：设置排序
+
+9、limit(limit) ：查询限制
+
+10、page(page)： 查询分页
+
+11、join(join)： 进行JOIN查询
+
+12、having(having)： 进行having查询
+
+13、group(group)：进行group查询
+
+14、lock(lock) ：查询锁定
+
+15、distinct(distinct) ：唯一性查询
+
+16、count(field) ：记录统计
+
+17、sum(field) ：总数查询
+
+18、min(field) ：最小值查询
+
+19、max(field) ： 最大值查询
+
+20、avg(field) ： 平均值查询
+
+21、_initialize() ：模型初始化方法
+
+22、_facade(data) ：对保存到数据库的数据进行处理
+
+23、_before_write(&data) ：写入数据前的回调方法 包括新增和更新
+
+24、add(data='',options=array()) ：新增数据
+
+25、_before_insert(&data,options) ：写入数据前的回调方法
+
+26、_after_insert(data,options) ：写入数据后的回调方法
+
+27、selectAdd(fields='',table='',options=array()) ：通过Select方式添加记录
+
+28、save(data='',options=array()) ：更新数据到数据库
+
+29、_before_update(&data,options)  ：更新数据前的回调方法
+
+30、_after_update(data,options)  ：更新成功后的回调方法
+
+31、delete(options=array()) ：删除数据
+
+32、_after_delete(data,options) ：删除成功后的回调方法
+
+33、select(options=array()) ：查询数据集
+
+34、_after_select(&resultSet,options) ：查询成功后的回调方法
+
+35、findAll(options=array()) ：select方法的别名
+
+36、_options_filter(&options) ：表达式过滤回调方法
+
+37、find(options=array()) ：查询数据
+
+38、_after_find(&result,options) ：查询成功的回调方法
+
+39、setField(field,value,condition='') ：设置记录的某个字段值
+
+40、setInc(field,condition='',step=1) ：字段值增长
+
+41、setDec(field,condition='',step=1) ：字段值减少
+
+42、getField(field,condition='',sepa=' ') ：获取某个字段值
+
+43、create(data='',type='') ：创建数据对象
+
+44、autoCheckToken(data) ：表单令牌验证
+
+45、query(sql) ：执行原生SQL查询
+
+46、execute(sql='') ：执行原生SQL操作
+
+47、startTrans() 启动事务
+
+48、commit() ：提交事务
+
+49、rollback() ：事务回滚
+
+50、getError() ：获取模型的错误信息
+
+51、getDbError() ：获取数据库的错误信息
+
+52、getLastInsID() ：获取最后执行的SQL语句
+
+53、getPk() ：获取主键名称
+
+54、getDbFields() ：获取数据表的字段信息
+
+55、regex(value,rule) ：使用正则验证数据
+
+56、setProperty(name,value) ：设置模型的属性值
+

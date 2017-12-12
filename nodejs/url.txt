@@ -1,0 +1,84 @@
+url.parse('http://www.imooc.com/video/6710')
+Url {
+  protocol: 'http:',
+  slashes: true,
+  auth: null,
+  host: 'www.imooc.com',
+  port: null,
+  hostname: 'www.imooc.com',
+  hash: null,
+  search: null,
+  query: null,
+  pathname: '/video/6710',
+  path: '/video/6710',
+  href: 'http://www.imooc.com/video/6710' }
+  
+  
+url.parse('http://www.imooc.com:8080/video/6710?id=1&cours=node#asd')
+Url {
+  protocol: 'http:',   //协议
+  slashes: true,		//协议是否有斜杠
+  auth: null,			//身份认证
+  host: 'www.imooc.com:8080', //全部小写的主机部分的URL,包括端口信息。
+  port: '8080',			//端口
+  hostname: 'www.imooc.com',//域名
+  hash: '#asd',				//锚点 带#号的
+  search: '?id=1&cours=node',	//将用于查询的地方。包括问号
+  query: 'id=1&cours=node',    //参数
+  pathname: '/video/6710',		//路径名称
+  path: '/video/6710?id=1&cours=node', //连接的路径名和搜索。不执行解码。
+  href: 'http://www.imooc.com:8080/video/6710?id=1&cours=node#asd' //最初的完整的URL解析。协议和主机都是小写的。
+  } 
+  
+  
+  
+  > url.format({
+...   protocol: 'http:',
+...   slashes: true,
+...   auth: null,
+...   host: 'www.imooc.com:8080',
+...   port: '8080',
+...   hostname: 'www.imooc.com',
+...   hash: '#asd',
+...   search: '?id=1&cours=node',
+...   query: 'id=1&cours=node',
+...   pathname: '/video/6710',
+...   path: '/video/6710?id=1&cours=node',
+...   href: 'http://www.imooc.com:8080/video/6710?id=1&cours=node#asd' })
+'http://www.imooc.com:8080/video/6710?id=1&cours=node#asd'
+
+
+> url.resolve('http://baidu.com','/a/v/c')
+'http://baidu.com/a/v/c'
+
+
+
+> url.parse('http://www.imooc.com:8080/video/6710?id=1&cours=node#asd',true)
+Url {
+  protocol: 'http:',
+  slashes: true,
+  auth: null,
+  host: 'www.imooc.com:8080',
+  port: '8080',
+  hostname: 'www.imooc.com',
+  hash: '#asd',
+  search: '?id=1&cours=node',
+  query: { id: '1', cours: 'node' },
+  pathname: '/video/6710',
+  path: '/video/6710?id=1&cours=node',
+  href: 'http://www.imooc.com:8080/video/6710?id=1&cours=node#asd' }
+  
+  > url.parse('//imooc.com/course/list',true,true)
+Url {
+  protocol: null,
+  slashes: true,
+  auth: null,
+  host: 'imooc.com',
+  port: null,
+  hostname: 'imooc.com',
+  hash: null,
+  search: '',
+  query: {},
+  pathname: '/course/list',
+  path: '/course/list',
+  href: '//imooc.com/course/list' }

@@ -1,0 +1,64 @@
+，首先通过地址http://pecl.PHP.net/package/PDO_PGSQL下载PDO扩展包，建议用最新的那个版本，即1.0.2。
+
+1.cd /tmp 
+
+wget http://pecl.php.net/get/PDO_PGSQL-1.0.2.tgz
+
+tar -zxvf PDO_PGSQL-1.0.2.tgz
+
+
+cd PDO_PGSQL-1.0.2
+
+
+2，解压包，cd 进入解压后的文件夹目录下，这里要提醒一下，一定要进入到最里层文件，否则接下来的命令会报错，我就犯了这个错。
+
+3，根据你的php实际安装目录输入命令：
+
+[plain] view plain copy
+
+    # usr/bin/phpize  
+
+如果不清楚php安装在哪儿，最简单的办法，直接输入命令：
+
+[plain] view plain copy
+
+    # whereis phpize  
+
+就可以找到该文件的位置了，我的文件目录是在/usr/bin/phpize
+
+
+
+4，如果没报错，继续输入：
+
+[plain] view plain copy
+
+    # ./configure -with-php-config=/usr/bin/php-config  
+
+5，上面执行完没报错则继续，进行最后最关键的一步：
+
+[plain] view plain copy
+
+    # make && make install  
+
+到这里，如果运行成功，它会提示你在usr/lib64/php/module目录下已经有了pdo_pgsql.so文件，这个就是我们需要的那个扩展文件，接下来只需做下简单的配置就可以了。
+
+6，在etc/php.d目录下找到 30-pdo_mysql.ini 这个文件，复制一份，重命名为30-pdo_pgsql.ini，编辑内容为
+
+[plain] view plain copy
+
+    ; Enable pdo_pgsq;sql extension module  
+    extension=pdo_pgsql.so  
+
+保存，注意，文件名不要写错！
+
+7，重启apache 服务器
+
+[plain] view plain copy
+
+    # service restart httpd  
+
+
+ok，这样就可以了，希望对你有所帮助。
+
+出错：configure: error: Cannot find libpq-fe.h. Please specify correct PostgreSQL installation path 
+yum -y install postgresql-devel

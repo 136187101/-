@@ -1,0 +1,17 @@
+import string
+
+h=string.hjd()
+h.name()
+
+# string 是另一个文件    以下是该文件的代码 string.py
+
+#coding=utf-8
+
+#class hjd:
+#    def name(self):
+#        print("侯建东")
+
+#另一种调用文件方法
+#form string import hjd
+#h=hjd()
+#h.name

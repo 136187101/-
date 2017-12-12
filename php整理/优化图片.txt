@@ -1,0 +1,67 @@
+<meta http-equiv="refresh" content="2;URL=ckgoods.php">
+<?php
+	require_once("../../include/global.php");
+//开始删除无用的上传图片，
+	$dir=opendir("../pic");	
+	//打开文件
+	$fals=false;
+	while($f=readdir($dir))//readdir() 函数返回由 opendir() 打开的目录句柄中的条目。
+	{
+			if($f!="."&&$f!="..")
+			{
+				$rs=$db->query("select * from goods where goods_tu='../pic/$f' or tu_1='/admin/grouppic/$f' or tu_2='/admin/grouppic/$f' or tu_3='/admin/grouppic/$f'");
+				if($db->num_rows($rs)==0)
+				{
+					unlink("../pic/${f}");
+					$fals=true;
+				}
+			}
+	}
+//开始删除无用的截取图片	
+	$dir1=opendir("../grouppic");
+	//打开文件
+	$fals=false;
+	while($f1=readdir($dir1))//readdir() 函数返回由 opendir() 打开的目录句柄中的条目。
+	{
+			if($f1!="."&&$f1!="..")
+			{
+				$rs=$db->query("select * from goods where tu_1='/admin/grouppic/$f1' or tu_2='/admin/grouppic/$f1' or tu_3='/admin/grouppic/$f1'");
+				
+				if($db->num_rows($rs)==0)
+				{
+					unlink("../grouppic/${f1}");
+					$fals=true;
+				}
+			}
+	}	
+	
+	
+	
+	if($fals==true)
+	{
+		echo "<div style='color:#f00; font-size:12px;'>删除成功,两秒钟后自动跳转...</div>";	
+	}
+	else
+	{
+		echo "<div style='color:#f00; font-size:12px;'>没有垃圾图片...</div>";	
+	}
+	
+?>
+
+
+修改图片自动删除
+
+
+			$dir1=opendir("../../newspic");//打开图片文件
+			while($f1=readdir($dir1))//readdir() 函数返回由 opendir() 打开的目录句柄中的条目。
+			{
+					if($f1!="."&&$f1!="..")//如果文件不是系统默认文件
+					{
+						$rs=$db->query("select * from essay where image ='/newspic/$f1' or image_rot ='/newspic/$f1'");//查询所有文件在数据库里是否有记录
+						
+						if(mysql_num_rows($rs)==0)//如果没记录的话
+						{
+							unlink("../grouppic/${f1}");//删除这个垃圾文件
+						}
+					}
+			}	

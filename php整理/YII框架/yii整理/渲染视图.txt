@@ -1,0 +1,2 @@
+return $this->render('index');   带布局的渲染视图
+return $this->renderPartial('index');   不带布局的渲染视图

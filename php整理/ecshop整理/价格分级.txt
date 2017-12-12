@@ -1,0 +1,99 @@
+把category.php 里面的
+ /* 获取价格分级 */
+    if ($cat['grade'] == 0  && $cat['parent_id'] != 0)
+    {
+        $cat['grade'] = get_parent_grade($cat_id); //如果当前分类级别为空，取最近的上级分类
+    }
+
+    if ($cat['grade'] > 1)
+    {
+        /* 需要价格分级 */
+
+        /*
+            算法思路：
+                1、当分级大于1时，进行价格分级
+                2、取出该类下商品价格的最大值、最小值
+                3、根据商品价格的最大值来计算商品价格的分级数量级：
+                        价格范围(不含最大值)    分级数量级
+                        0-0.1                   0.001
+                        0.1-1                   0.01
+                        1-10                    0.1
+                        10-100                  1
+                        100-1000                10
+                        1000-10000              100
+                4、计算价格跨度：
+                        取整((最大值-最小值) / (价格分级数) / 数量级) * 数量级
+                5、根据价格跨度计算价格范围区间
+                6、查询数据库
+
+            可能存在问题：
+                1、
+                由于价格跨度是由最大值、最小值计算出来的
+                然后再通过价格跨度来确定显示时的价格范围区间
+                所以可能会存在价格分级数量不正确的问题
+                该问题没有证明
+                2、
+                当价格=最大值时，分级会多出来，已被证明存在
+        */
+
+        $sql = "SELECT min(g.shop_price) AS min, max(g.shop_price) as max ".
+               " FROM " . $ecs->table('goods'). " AS g ".
+               " WHERE ($children OR " . get_extension_goods($children) . ') AND g.is_delete = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1  ';
+               //获得当前分类下商品价格的最大值、最小值
+
+        $row = $db->getRow($sql);
+
+        // 取得价格分级最小单位级数，比如，千元商品最小以100为级数
+        $price_grade = 0.0001;
+        for($i=-2; $i<= log10($row['max']); $i++)
+        {
+            $price_grade *= 10;
+        }
+
+        //跨度
+        $dx = ceil(($row['max'] - $row['min']) / ($cat['grade']) / $price_grade) * $price_grade;
+        if($dx == 0)
+        {
+            $dx = $price_grade;
+        }
+
+        for($i = 1; $row['min'] > $dx * $i; $i ++);
+
+        for($j = 1; $row['min'] > $dx * ($i-1) + $price_grade * $j; $j++);
+        $row['min'] = $dx * ($i-1) + $price_grade * ($j - 1);
+
+        for(; $row['max'] >= $dx * $i; $i ++);
+        $row['max'] = $dx * ($i) + $price_grade * ($j - 1);
+
+        $sql = "SELECT (FLOOR((g.shop_price - $row[min]) / $dx)) AS sn, COUNT(*) AS goods_num  ".
+               " FROM " . $ecs->table('goods') . " AS g ".
+               " WHERE ($children OR " . get_extension_goods($children) . ') AND g.is_delete = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 '.
+               " GROUP BY sn ";
+
+        $price_grade = $db->getAll($sql);
+
+        foreach ($price_grade as $key=>$val)
+        {
+            $price_grade[$key]['start'] = $row['min'] + round($dx * $val['sn']);
+            $price_grade[$key]['end'] = $row['min'] + round($dx * ($val['sn'] + 1));
+            $price_grade[$key]['formated_start'] = price_format($price_grade[$key]['start']);
+            $price_grade[$key]['formated_end'] = price_format($price_grade[$key]['end']);
+            $price_grade[$key]['url'] = build_uri('category', array('cid'=>$cat_id, 'bid'=>0, 'price_min'=>$price_grade[$key]['start'], 'price_max'=> $price_grade[$key]['end'], 'filter_attr'=>0));
+
+            /* 判断价格区间是否被选中 */
+            if (isset($_REQUEST['price_min']) && $price_grade[$key]['start'] <= $price_min && $price_grade[$key]['end'] >= $price_max)
+            {
+                $price_grade[$key]['selected'] = 1;
+            }
+            else
+            {
+                $price_grade[$key]['selected'] = 0;
+            }
+        }
+
+        $smarty->assign('price_grade',     $price_grade);
+    }
+复制到index.php里面
+2.
+把price_grade.lbi在index.dwt中找个地方放进去。
+3.理论上的研究，没试过

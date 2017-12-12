@@ -1,0 +1,55 @@
+
+1加载控制器 
+	M实例化News类（数据库news表）M函数，是ThinkPHP内置的实例化模型的方法，而且用M方法实例化模型不需要创建对应的模型类，你可以理解为M方法是直接在操作底层的Model类，而Model类具备基本的CURD操作方法。
+
+	D实例化News类 D函数需要有对应的模型类
+
+添加：create()获取表单内容并自动对应数据库表字段（ 前提是表字段和表单name 值相同）
+      add()添加数据$data是数组
+	public function insert(){
+		$Form   =   D('Form');
+        if($Form->create()) {
+            $result =   $Form->add();
+            if($result) {
+                $this->success('操作成功！');
+            }else{
+                $this->error('写入错误！');
+            }
+        }else{
+            $this->error($Form->getError());
+        }
+   }
+function index(){
+		$news=M("News");
+		//$data=array('title'=>'新闻标题42','content'=>'新闻内容2','zuozhe'=>'乌雅氏','times'=>'2012-10-28 14:02:30');
+		$news->add($data);
+	}
+修改
+
+class NewsAction extends Action{
+		function index(){
+		$news=M("News");
+		//$data=array('id'=>'2','title'=>'新闻标题42','content'=>'新闻内容2','zuozhe'=>'乌雅氏','times'=>'2012-10-28 14:02:30');
+		$news->save($data);
+		$this->news=$news->where("id='1'")->select();
+		$this->display();
+}
+
+删除
+$news=M("News");
+$news->delete("id");
+1.$User = M("User"); // 实例化User对象
+2.$User->where('id=5')->delete(); // 删除id为5的用户数据
+3.$User->delete('1,2,5'); // 删除主键为1,2和5的用户数据
+4.$User->where('status=0')->delete(); // 删除所有状态为0的用户数据
+
+查询
+$news=M("News");
+$this->news=$news->select();全部
+$this->news=$news->while("id='2'")->select();有条件
+$this->news=$news->field('title,zuozhe')->select();//查询某些字段
+$this->news=$news->order("id desc")->select();排序
+$this->news=$news->limit("0,2")->select();查询几条数据
+
+查询一条数据
+$a=$news->find($_GET['id']);

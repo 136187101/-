@@ -1,0 +1,71 @@
+ 添加远程用户admin密码为password GRANT ALL PRIVILEGES ON *.* TO admin@localhost IDENTIFIED BY \'password\' WITH GRANT OPTION GRANT ALL PRIVILEGES ON *.* TO admin@\"%\" IDENTIFIED BY \'password\' WITH GRANT OPTION
+
+mysql教程添加远程用户或允许远程访问三种方法
+
+用root用户登陆，然后：
+
+grant all privileges on *.* to 创建的用户名 @"%" identified by "密码";
+
+flush privileges;   * 刷新刚才的内容*
+
+格式：grant 权限 on 数据库教程名.表名 to 用户@登录主机 identified by "用户密码";
+
+            @ 后面是访问mysql的客户端ip地址（或是 主机名） % 代表任意的客户端，如果填写 localhost 为
+
+本地访问（那此用户就不能远程访问该mysql数据库了）。
+
+同时也可以为现有的用户设置是否具有远程访问权限。如下：
+
+use mysql;
+
+update db set host = '%' where user = '用户名'; （如果写成 host=localhost 那此用户就不具有远程访问权限）
+
+flush privileges;
+
+grant all privileges on *.* to 'myuser'@'%' identified by 'mypassword' with grant option;
+
+ 
+
+ 
+
+方法二
+
+1．  使用grant语句添加：首先在数据库本机上用root用户
+
+登录mysql（我是用远程控制linux服务器，相当于在服务器本机登录mysql了），然后输入：
+
+mysql>grant all privileges on *.* to admin@localhost identified by 'something' with grant option;
+
+添加一个用户admin并授权通过本地机（localhost)访问，密码"something"。
+
+ mysql>grant all privileges on *.* to admin@"%" identified by 'something' with grant option;
+
+添加一个用户admin并授权可从任何其它主机发起的访问（通配符％）。使用这一条语句即可。
+
+2．使用insert语句：
+
+mysql>insert into user values('%','admin',password('something'), 'y','y','y','y','y','y',
+
+'y','y','y','y','y','y','y','y')
+
+   用户信息可在mysql数据库中的users表中查看，这里不在介绍了就。数清y的个数哦。
+
+   好了，使用admin帐号连接试试看，我是屡试屡成功哦，呵呵！
+
+方法三
+
+    添加远程用户admin密码为password 
+    grant all privileges on *.* to admin@localhost identified by 'password' with grant option 
+    grant all privileges on *.* to admin@"%" identified by 'password' with grant option
+
+
+    由于项目开发的要求数据库的设计不得不用远程模式。但是数据库的远程设置并没那么简单，该项目的数据库是mysql5.0。刚开始以为只要装了数据库服务器就可以进行远程链接了，但是mysql的设置是为了用户的安全，系统默认的设置是不允许远程用户连接，只能本地的用户连接。只要我们设置下系统的管理员用户的host这一项的值就可以给远程的用户访问了
+
+————————————————————————————————————————————
+我本人用到的是如下方法
+
+添加一个用户admin并授权通过本地机（localhost)访问，密码"something"。
+
+ mysql>grant all privileges on *.* to admin@"%" identified by 'something' with grant option;
+
+添加一个用户admin并授权可从任何其它主机发起的访问（通配符％）。使用这一条语句即可。

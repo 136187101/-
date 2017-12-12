@@ -1,0 +1,48 @@
+ ECSHOP的缓存存放在temp /文章夹下，时间长了这个文件夹就会非常庞大，拖慢网站速度。还有很多情况我们不需要他的缓存。本文介绍禁用ECSHOP缓存的方法。 
+
+www.au369.com
+
+
+　　ECSHOP的缓存有两部分，一部分是SMARTY的页面缓存；另一部分是SQL查询结果的缓存。这两部分都是保存在templates/caches/文件夹下。只要我们分别关闭这两个功能，就可以完全禁用ECSHOP的缓存。当然你也可以根据自己的需要关闭其中某一个。 
+
+http://www.au369.com
+
+　　１.关闭SMARTY的缓存：
+打开includes/cls_template.php，找到下面一段 
+
+www.au369.com
+
+
+　　if (file_put_contents($this->cache_dir . ‘/’ . $cachename . ‘.php’, ‘<?php exit;?>’ . $data . $out) === false)
+       {
+           trigger_error(‘can\’t write:’ . $this->cache_dir . ‘/’ . $cachename . ‘.php’);
+       } 
+
+www.au369.com
+
+　　将这一部分注释掉即可，改成 
+
+华西网络 au369.com
+
+/*
+if (file_put_contents($this->cache_dir . ‘/’ . $cachename . ‘.php’, ‘<?php exit;?>’ . $data . $out) === false)
+       {
+           trigger_error(‘can\’t write:’ . $this->cache_dir . ‘/’ . $cachename . ‘.php’);
+       }
+*/ 
+
+华西网络 au369.com
+
+　　２.关闭SQL查询结果缓存
+打开includes/cls_mysql.php 
+找到
+  　　var $max_cache_time=3600;//最大的缓存时间，以秒为单位
+改为
+  　　 var $max_cache_time=0;//最大的缓存时间，以秒为单位 www.au369.com 
+
+ecshop的缓存机制有缺陷，建议正式做站优化修改后再使用。若同Memcache、eAccelerator、Xcache内存优化结构结合使用更佳 
+
+华西网络 au369.com
+
+
+欢迎广大客户联系最模板，使用优化推广服务

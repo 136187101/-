@@ -1,0 +1,17 @@
+php5.4环境下安装ECshop会出现很多Strict Standards错误、警告，经过查找，已经找到解决方案。
+
+1、php5.4环境下安装ECshop出现includes/cls_template.php on line 406的解决方案。
+
+将 $tag_sel = array_shift(explode(‘ ‘, $tag)); 这句话拆开为两句。
+
+array_shift() 的参数是引用传递的，5.3以上默认只能传递具体的变量，而不能通过函数返回值 end(&array) 也一样（后面也会有end的函数，也需要拆分为两行）。
+
+2、php5.4环境下安装ECshop出现includes/lib_base.php on line 346的解决方案。
+
+将cls_image.php 中 function gd_version() 改成 static function gd_version() 即可。
+
+3、后台点击 开店向导 警告的解决方案。
+
+admin/include/modules/payment 下的几个文件构造函数错误，删掉即可。
+
+（PHP构造函数不是那样写的，估计写这构造函数的人是C++出身。）

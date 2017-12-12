@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"> 
+<head> 
+<meta name="keywords" content="PRcss,xhtml,html,css,js,book,个人主页,无聊,神经,懒惰" /> 
+<meta name="Author" content="PRcss,qq:50198763" /> 
+<meta name="Copyright" content="本页版权归PRcss所有。All Rights Reserved" /> 
+<title>滚动合集 - www.poluoluo.com</title> 
+<script type="text/javascript"> 
+// 自动滚动 
+function boxmove(d1,d2,d3,e,obj){ 
+    var speed=30; 
+    var demo=document.getElementById(d1);  
+    var demo1=document.getElementById(d2);  
+    var demo2=document.getElementById(d3); 
+    demo2.innerHTML=demo1.innerHTML; 
+    function boxTop(){ 
+            if(demo2.offsetTop-demo.scrollTop<=0){demo.scrollTop-=demo1.offsetHeight} 
+            else{demo.scrollTop++} 
+        } 
+    function boxRight(){ 
+            if(demo.scrollLeft<=0){demo.scrollLeft+=demo2.offsetWidth} 
+            else{demo.scrollLeft--} 
+        } 
+    function boxBottom(){  
+            if(demo1.offsetTop-demo.scrollTop>=0){demo.scrollTop+=demo2.offsetHeight} 
+            else{demo.scrollTop--} 
+        } 
+    function boxLeft(){ 
+            if(demo2.offsetWidth-demo.scrollLeft<=0){demo.scrollLeft-=demo1.offsetWidth} 
+            else{demo.scrollLeft++} 
+        } 
+    if(e==1){ 
+            var MoveTop=setInterval(boxTop,speed); 
+            demo.onmouseover=function(){clearInterval(MoveTop);} 
+            demo.onmouseout=function(){MoveTop=setInterval(boxTop,speed)} 
+        } 
+    if(e==2){ 
+            var MoveRight=setInterval(boxRight,speed); 
+            demo.onmouseover=function(){clearInterval(MoveRight)} 
+            demo.onmouseout=function(){MoveRight=setInterval(boxRight,speed)} 
+        } 
+    if(e==3){ 
+            var MoveBottom=setInterval(boxBottom,speed); 
+            demo.onmouseover=function(){clearInterval(MoveBottom);} 
+            demo.onmouseout=function(){MoveBottom=setInterval(boxBottom,speed)} 
+        } 
+    if(e==4){ 
+            var MoveLeft=setInterval(boxLeft,speed) 
+            demo.onmouseover=function(){clearInterval(MoveLeft)} 
+            demo.onmouseout=function(){MoveLeft=setInterval(boxLeft,speed)} 
+        } 
+    if(e=="top"){ 
+            MoveTop=setInterval(boxTop,speed) 
+            obj.onmouseout=function(){clearInterval(MoveTop);} 
+        } 
+    if(e=="right"){ 
+            MoveRight=setInterval(boxRight,speed) 
+            obj.onmouseout=function(){clearInterval(MoveRight);} 
+        } 
+    if(e=="bottom"){ 
+            MoveBottom=setInterval(boxBottom,speed) 
+            obj.onmouseout=function(){clearInterval(MoveBottom);} 
+        } 
+    if(e=="left"){ 
+            MoveLeft=setInterval(boxLeft,speed) 
+            obj.onmouseout=function(){clearInterval(MoveLeft);} 
+        } 
+    }     
+</script> 
+<style type="text/css"> 
+div#a,div#b,div#c,div#d { float:left;} 
+h2 { clear:both; } 
+div#b,div#d,div#bb { white-space:nowrap; } 
+</style> 
+</head> 
+<body> 
+<h1>滚动合集</h1> 
+<hr /> 
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<h2>向上</h2> 
+<div id="a" style="overflow:hidden;height:100px;width:90px;">  
+<div id="a1">  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" /> 
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />   
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" /> 
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" /> 
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" /> 
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" /> 
+ 
+</div>  
+<div id="a2"></div> 
+</div>  
+<script type="text/javascript"> 
+boxmove("a","a1","a2",1); 
+</script> 
+
+
+<h2>向右</h2> 
+<div id="b" style="overflow:hidden;height:100px;width:90px;">  
+<div id="b1"> 
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />   
+</div>  
+<div id="b2"></div> 
+</div>  
+<script type="text/javascript"> 
+boxmove("b","b1","b2",2); 
+</script> 
+
+<h2>向下</h2> 
+<div id="c" style="overflow:hidden;height:100px;width:90px;">  
+<div id="c1">  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />   
+</div>  
+<div id="c2"></div> 
+</div>  
+<script type="text/javascript"> 
+boxmove("c","c1","c2",3); 
+</script> 
+
+<h2>向左</h2> 
+<div id="d" style="overflow:hidden;height:100px;width:90px;">  
+<div id="d1">  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />   
+</div>  
+<div id="d2"></div> 
+</div>  
+<script type="text/javascript"> 
+boxmove("d","d1","d2",4); 
+</script> 
+
+<h2>手动滚动 - <strong onmouseover="boxmove('aa','aa1','aa2','top',this);">上</strong> <strong onmouseover="boxmove('aa','aa1','aa2','bottom',this);">下</strong></h2> 
+<div id="aa" style="overflow:hidden;height:100px;width:90px;">  
+<div id="aa1">  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />   
+</div>  
+<div id="aa2"></div> 
+</div>  
+
+<h2>手动滚动 - <strong onmouseover="boxmove('bb','bb1','bb2','left',this);">左</strong> <strong onmouseover="boxmove('bb','bb1','bb2','right',this);">右</strong></h2> 
+<div id="bb" style="overflow:hidden;height:100px;width:90px;">  
+<div id="bb1">  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />  
+<img src="http://www.poluoluo.com/jzxy/UploadFiles_333/201103/20110320101938325.gif" alt="" />   
+</div>  
+<div id="bb2"></div> 
+</div> 
+
+</body> 
+</html> 

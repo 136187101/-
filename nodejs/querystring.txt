@@ -1,0 +1,17 @@
+> querystring.stringify({name:'hjd',sex:'nan',form:''})
+'name=hjd&sex=nan&form='
+
+> querystring.stringify({name:'hjd',sex:'nan',form:''},'*')
+'name=hjd*sex=nan*form='
+
+> querystring.stringify({name:'hjd',sex:'nan',form:''},'*','_')
+'name_hjd*sex_nan*form_'
+
+> querystring.parse('name=hjd&sex=nan&form=')
+{ name: 'hjd', sex: 'nan', form: '' }
+
+> querystring.parse('name=hjd*sex=nan*form=','*')
+{ name: 'hjd', sex: 'nan', form: '' }
+
+> querystring.parse('name_hjd*sex_nan*form_','*','_')
+{ name: 'hjd', sex: 'nan', form: '' }

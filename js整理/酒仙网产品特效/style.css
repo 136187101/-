@@ -1,0 +1,110 @@
+/* -   放大镜 - */
+.MagicZoomBigImageCont {
+	border:			6px solid #FFECEC;
+	background:		#FFF;
+}
+.MagicZoomHeader {
+	font:			12px Tahoma, Verdana, Arial, sans-serif;
+	color:			#fff;
+	background:		#9A6F4A;
+	text-align:     center !important;
+}
+.MagicZoomPup {
+	border: 		1px solid #aaa;
+	background: 	#ffffff;
+}
+.MagicZoomLoading {
+	text-align:		center;
+	background: url("images/Zoom_loading.gif") no-repeat scroll 0 0 transparent;
+	color:			#444;
+	border: 		1px solid #ccc;
+	opacity:		0.8;
+	padding:		3px !important;
+	height:			32px;
+	width: 			32px;
+}
+.MagicZoomLoading img {
+	padding-top:	3px !important;
+}
+.MagicThumb {
+	/*cursor: url(images/zoomin.cur), -moz-zoom-in;*/
+	outline: none;
+}
+.MagicThumb-zoomed {
+	/*cursor: url(images/zoomin.cur), -moz-zoom-in;*/
+}
+.MagicThumb span {
+	display: none;
+}
+.MagicThumb img {
+	outline: none;
+}
+.MagicThumb-image {
+	border: 1px solid #cccccc;
+	outline: none;
+}
+.MagicThumb-image-zoomed {
+	cursor: url(images/zoomout.cur), pointer;
+}
+.MagicThumb-caption {
+	color: #333333;
+	background-color: #F0F0F0;
+	border: 1px solid #CCCCCC;
+	border-top: none;
+	font-family: Verdana, Helvetica;
+	font-size: 11px;
+	padding: 8px 16px;
+}
+.MagicThumb-controlbar {
+	display: block;
+	height: 18px;
+}
+.MagicThumb-controlbar a {
+	display: block;
+	width: 18px;
+	height: 18px;
+	margin: 0px 1px;
+	outline: none;
+	float: left;
+	overflow: hidden;
+}
+.MagicThumb-controlbar a span {
+	display: block;
+	width: 1000px;
+	height: 1000px;
+	background: transparent url(images/controlbar.png) no-repeat 0 0;
+	outline: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.MagicThumb-loading {
+	border: 1px solid #000000;
+	background: #ffffff url(images/loader.gif) no-repeat 2px 50%;
+	padding: 2px 2px 2px 22px;
+	margin: 0;
+	text-decoration: none;
+	text-align: left;
+	font-size: 8pt;
+	font-family: sans-serif;
+}
+
+
+.picture {
+	padding: 10px;
+	text-align: left;
+
+}
+.imgInfo{ border:2px #e3e3e3 solid; width:313px; height:311px; }
+.picture img {
+	float:left;
+	width:62px;
+	height:62px;
+	margin:0 2px;
+	border:1px solid #bfbfbf;
+}
+
+.picture img.autobg {
+	padding:3px;
+}
+/* 放大镜结束 

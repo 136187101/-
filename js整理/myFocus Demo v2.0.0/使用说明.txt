@@ -1,0 +1,16 @@
+<script type="text/javascript" src="themes/default/js/myfocus-1.2.4.min.js"></script><!--引入myFocus库-->
+<script type="text/javascript">
+myFocus.set({
+    id:'boxID',//焦点图盒子ID
+    pattern:'mF_qiyi',//风格应用的名称
+    time:5,//切换时间间隔(秒)
+    trigger:'click',//触发切换模式:'click'(点击)/'mouseover'(悬停)
+    width:890,//设置图片区域宽度(像素)
+    height:431,//设置图片区域高度(像素)
+	path:'themes/default/js/pattern/',
+    txtHeight:'0'//文字层高度设置(像素),'default'为默认高度，0为隐藏
+});
+</script>
+
+
+

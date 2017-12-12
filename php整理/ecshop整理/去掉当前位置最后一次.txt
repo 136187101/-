@@ -1,0 +1,9 @@
+includes/lib_main.php 
+260行
+    /* 处理最后一部分 */
+    if (!empty($str))
+    {
+       $page_title  = $str . '_' . $page_title;
+        $ur_here    .= ' <code>&gt;</code> ' . $str;
+    }
+注释掉即可。。。。

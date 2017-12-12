@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01 Transitional//EN" “
+http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+*
+{
+margin:0;
+padding:0;
+}
+body
+{
+text-align:center;
+}
+#top
+{
+position:relative;
+text-align:center;
+width:800px;
+height:203px;
+margin:0 auto;
+}
+#bg
+{
+width:800px;
+height:203px;
+position:absolute;
+z-index:-1;
+margin:0 auto;
+background-color:black;
+opacity:0.15;
+filter:alpha(opacity=15);
+}
+#banner
+{
+padding-left:2px;
+padding-right:2px;
+width:796px;
+height:203px;
+position:relative;
+text-align:left;
+}
+#banner img
+{
+display:none;
+}
+.current
+{
+opacity:1;
+position:absolute;
+display:block;
+z-index:2;
+}
+.next
+{
+opacity:0;
+position:absolute;
+display:block;
+z-index:1;
+}
+</style>
+</head>
+<body>
+<div id="top">
+<div id="bg"></div>
+<div id="banner">
+<img src="http://ceshi5.home158.cn/newspic/991595.jpg" style="display:block;" width="200" height="200"></img>
+<img src="http://ceshi5.home158.cn/2011/tu.jpg"  width="200" height="200"></img>
+<img src="http://ceshi5.home158.cn/newspic/991595.jpg" width="200" height="200"></img>
+<img src="http://ceshi5.home158.cn/2011/tu.jpg" width="200" height="200"></img>
+</div>
+<script>
+var objbanner=document.getElementById("banner");
+var imglist=objbanner.getElementsByTagName("img");
+var timer;
+var timer2;
+var op;
+var current;
+var next;
+var i=0;
+function change()//图片推进函数。
+{
+current=imglist[i%4];
+next=imglist[(i+1)%4];
+current.style.display="block";
+next.style.display="block";
+current.className="current";
+next.className="next";
+op=0;
+swap();
+i=i+1;
+usechange();
+}
+function usechange()
+{
+timer=setTimeout("change()",6000);//6000为图片停留时间。因为时间轴异步，会稍有误差。
+}
+function swap()//图片交替函数
+{
+op++;
+current.style.opacity=(100-op)/100;//for ff/chrome
+next.style.opacity=op/100;
+current.style.filter = "Alpha(Opacity=" + (100-op) + ")";//for ie
+next.style.filter="Alpha(Opacity=" + op + ")";
+timer2=setTimeout("swap()",10);//10为图片切换速率。速率越小，时间轴异步误差越小。
+if(op==100)
+{
+clearTimeout(timer2);
+}
+}
+if(document.all)
+{
+window.attachEvent('onload',usechange);
+}
+else
+{
+window.addEventListener('load',usechange,false);
+}
+</script>
+</body>
+</html>

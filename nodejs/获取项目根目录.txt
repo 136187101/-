@@ -1,0 +1,28 @@
+在node.js只提供了一个 dirname全局变量。通过 dirname可以获得“C:\wwwroot\yidata\server”。这时需要用到path。
+
+首先
+
+import path from 'path'; （ES6）或var path = require
+(
+ 
+'path '
+ 
+);
+ 
+path.join(dirname,'../')
+ 
+
+即可获取到node.js的项目根目录。 
+path.join(dirname,'../app/img/favicon.ico')
+ 
+
+即可获取目标文件。
+
+由上面的例子可知，path.join将多个参数组合成一个 path，因此我们只需要参照路径表示方法合并即可。比如js文件在第三层目录，那么项目根目录就是path.join(__dirname,'../../../') 。
+ 
+path.resolve(".")
+ 
+
+总结
+
+也可以直接获取项目根目录，但是要注意的是使用这个方法在一些情况下存在问题，以前遇到过，想不起来了。大家留意下，有问题可以留言交流。

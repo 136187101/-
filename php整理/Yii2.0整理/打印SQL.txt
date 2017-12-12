@@ -1,0 +1,17 @@
+        $list =parent::find()
+            ->select('a.advertiser,sum(a.money) as money,sum(a.xf_cost) as xf_cost,cu.advertiser as adname,dlgs.companyname')//->sum('money')
+            ->from('jd_renew_huikuan')
+            ->join("a left join",'jd_customer cu','cu.id=a.advertiser')
+            ->leftJoin("jd_contract ht","ht.id=a.xf_contractid")
+            ->leftJoin("jd_agent_company dlgs","dlgs.id=ht.agent_company")
+            ->where([
+                'a.audit_2'=>'1',
+                'a.payment_type'=>[1,2]
+            ])
+            ->andWhere($andwhere)
+            ->groupBy("a.advertiser,adname,companyname")
+            ->orderBy('money desc')
+            ->limit($number)
+            ->all();
+         $sql= clone $list;
+        echo $sql->createCommand()->getRawSql();exit;

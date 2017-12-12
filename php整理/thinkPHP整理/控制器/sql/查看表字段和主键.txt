@@ -1,0 +1,2 @@
+Ö÷¼ü£º$this->show($users->getPk());
+±í×Ö¶Î£ºdump($users->getDbFields());

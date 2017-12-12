@@ -1,0 +1,18 @@
+首先在数据库里建好主外键关系
+
+在model里设置get 关联数据对象
+   public function getTest(){
+       return $this->hasOne(Test::className(),['id'=>'id']);
+   }
+
+配置extraFields 
+ public function extraFields()
+    {
+        return ['test'];
+    }
+
+
+访问的时候要在地址栏加入expand 参数 切记！
+http://127.0.0.2/api/users?expand=test  
+
+expand=auditu,submituser0 可以写多个关联字段，哦呵呵

@@ -1,0 +1,12 @@
+　　先定义一个函数:
+　　function resetBtn(fm){
+   　　 fm.reset();
+    　　return false;
+　　}
+
+
+　　然后在下面调用
+　　<input type="image"  name="imgBtn" src="../../imageBtn.gif" onClick="return resetBtn(this.form);">
+
+
+

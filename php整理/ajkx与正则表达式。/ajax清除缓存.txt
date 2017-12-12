@@ -1,0 +1,2 @@
+在服务端加 header("Cache-Control: no-cache, must-revalidate");
+详细出处参考：http://www.jb51.net/article/5129.htm

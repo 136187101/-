@@ -1,0 +1,9 @@
+在template 文件下 新建文件夹
+例如 建立moban文件夹
+moban 
+	images    图片文件
+	js	  js文件
+	style	  css文件
+	
+在系统-》系统基本参数-》模板默认风格 里面改
+在生成-》更新主页HTML->选择主页模板  

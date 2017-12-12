@@ -1,0 +1,18 @@
+解决 .#2002 无法登录 MySQL 服务器 
+phpmyadmin
+将config.sample.inc.php复制成config.inc.php 
+
+出现这个错误，表示没有连接到数据库。修改config.inc.php文件， 
+
+复制代码 代码如下:
+
+
+将$cfg['Servers'][$i]['host'] = 'localhost'; 
+改为$cfg['Servers'][$i]['host'] = '127.0.0.1'; 
+
+
+或者 
+
+修改 php.ini : mysql.default_socket = /tmp/mysql.sock 
+
+搞定 

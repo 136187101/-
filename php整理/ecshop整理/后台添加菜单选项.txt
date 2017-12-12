@@ -1,0 +1,11 @@
+1:
+languages\zh_cn\admin\common.php
+
+/*分院*/
+$_LANG['06_fenyuan_h'] = '分院管理';
+$_LANG['fygl'] = '分院管理';
+2:
+在admin/includes/inc_menu.php
+调用刚才添加的 前面的0几代表排序
+$modules['06_fenyuan_h']['fygl'] 					= 'newslei/newslei.php'; 
+

@@ -1,0 +1,23 @@
+function findSize(id){
+			var len=$("#fileup")[0].files.length;
+			var fa=true;
+			for (var i=0;i<len;i++)
+			{
+				var size=($("#fileup")[0].files[0].size / 1024).toFixed(2);
+				//alert(size);
+				if(size>2000)
+				{
+					fa=false;
+				}
+			}
+			
+			return fa;
+		}
+				
+		$("#formid").submit(function(){
+		
+		if(findSize("fileup")!=true)
+		{
+			alert('上传的文件可能超出大小限制，请重新选择2M以内图片!');
+			return false;
+		}

@@ -1,0 +1,20 @@
+iframe src=http://tech.ddvip.com/2008-09/"1.htm" name="ifrmname" id="ifrmid"></iframe>
+方案一:用iframe的name属性定位
+
+<input type="button" name="Button" value="Button"
+onclick="document.frames('ifrmname').location.reload()">
+
+　　或
+
+<input type="button" name="Button" value="Button"
+onclick="document.all.ifrmname.document.location.reload()">
+
+　　方案二:用iframe的id属性定位
+
+<input type="button" name="Button" value="Button"
+onclick="ifrmid.window.location.reload()">
+
+　　终极方案:当iframe的src为其它网站地址(跨域操作时)
+
+<input type="button" name="Button" value="Button"
+onclick="window.open(document.all.ifrmname.src,'ifrmname','')">

@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteRule index.html$ index.php
+RewriteRule newsxx-([0-9]{1,})-([0-9]{1,}).html$ news_xx.php?fu_id=$1&xx_id=$2
+RewriteRule teacherx-([0-9]{1,})-([0-9]{1,}).aspx$ Teacher_xx.php?fu_id=$1&xx_id=$2
+</IfModule>

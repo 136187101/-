@@ -1,0 +1,7 @@
+一、日期格式转换
+1.字符日期格式转化为UNIX时间戳格式
+字段endtime为内容为UNIX时间戳格式，例如1346650755
+select * from test where endtime >= extract(epoch FROM date('2012-09-03 00:00:00'));
+2.UNIX时间戳转化为字符日期格式
+select * from test where date(to_timestamp(endtime))>='2012-09-02';
+ 

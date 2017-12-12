@@ -1,0 +1,99 @@
+下面介绍一个 yii2.0 的 Rbac 权限设置，闲话少说，直接上代码，
+
+1、首先我们要在 组件里面配置一下 Rbac ，如下所示(common/config/main-local.php或者main.php)。
+
+'authManager' => [
+    'class' => 'yii\rbac\DbManager',
+    'itemTable' => 'auth_item',
+    'assignmentTable' => 'auth_assignment',
+    'itemChildTable' => 'auth_item_child',
+],
+
+当然，在配置里面也可以设置 默认角色，只是我没写。Rbac 支持两种类，PhpManager 和 DbManager ，这里我使用 DbManager 。
+yii migrate --migrationPath=@yii/rbac/migrations/
+运行此命令生成权限数据表
+
+如果你的权限层次结构不会发生改变，而且你的用户数是恒定的，你可以通过 authManager 提供的 API 创建一个 控制台命令 一次性初始化授权数据
+：
+
+<?php
+namespace app\commands;
+
+use Yii;
+use yii\console\Controller;
+
+class RbacController extends Controller
+{
+    public function actionInit()
+    {
+        $auth = Yii::$app->authManager;
+
+        // 添加 "createPost" 权限
+        $createPost = $auth->createPermission('createPost');
+        $createPost->description = 'Create a post';
+        $auth->add($createPost);
+
+        // 添加 "updatePost" 权限
+        $updatePost = $auth->createPermission('updatePost');
+        $updatePost->description = 'Update post';
+        $auth->add($updatePost);
+
+        // 添加 "author" 角色并赋予 "createPost" 权限
+        $author = $auth->createRole('author');
+        $auth->add($author);
+        $auth->addChild($author, $createPost);
+
+        // 添加 "admin" 角色并赋予 "updatePost" 
+		// 和 "author" 权限
+        $admin = $auth->createRole('admin');
+        $auth->add($admin);
+        $auth->addChild($admin, $updatePost);
+        $auth->addChild($admin, $author);
+
+        // 为用户指派角色。其中 1 和 2 是由 IdentityInterface::getId() 返回的id （译者注：user表的id）
+        // 通常在你的 User 模型中实现这个函数。
+        $auth->assign($author, 2);
+        $auth->assign($admin, 1);
+    }
+}
+
+判断是否有权限
+在控制器里面 
+    public function actionCreate()
+    {
+        if(!Yii::$app->user->can('createPost'))
+        {
+            throw new ForbiddenHttpException('对不起，您没有权限进行该操作');
+        }
+
+	.......
+}
+
+Note: If you are using advanced template, you need to put your RbacController inside console/controllers directory and change namespace to console/controllers.
+
+作者可创建新贴，管理员可编辑帖子以及所有作者可做的事情。
+
+如果你的应用允许用户注册，你需要在注册时给新用户指派一次角色。例如， 在高级项目模板中，要让所有注册用户成为作者，你需要如下例所示修改 frontend\models\SignupForm::signup() 方法：
+
+public function signup()
+{
+    if ($this->validate()) {
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->save(false);
+
+        // 要添加以下三行代码：
+        $auth = Yii::$app->authManager;
+        $authorRole = $auth->getRole('author');
+        $auth->assign($authorRole, $user->getId());
+
+        return $user;
+    }
+
+    return null;
+}
+对于有动态更改授权数据的复杂存取控制需求的，你可能需要使用 authManager 提供的 API 的开发用户界面（例如：管理面板）。
+

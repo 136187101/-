@@ -1,0 +1,1 @@
+   echo "<script>window.alert('ÇëÖØÐÂµÇÂ¼!');location.replace('index.php');</script>";

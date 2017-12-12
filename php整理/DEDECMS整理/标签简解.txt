@@ -1,0 +1,12 @@
+<!--头条-->
+   <div class="onenews"> {dede:arclist flag='h' limit='0,1' infolen='260'}
+    <h2><a href="[field:arcurl/]">[field:title/]</a></h2>
+    <p>[field:info/]...<a href="[field:arcurl/]">[查看全文]</a></p>
+    {/dede:arclist} </div>
+   <!-- /onenews -->
+   <div class="d1"> {dede:arclist flag='h' limit='1,4'}
+    <div class='d1arc'><a href="[field:arcurl/]">[field:title/]</a></div>
+    {/dede:arclist} </div>
+<!--/头条-->
+
+h代表头条 dede:arclist 文章模块  limit 从哪到哪  infolen 简介长度

@@ -1,0 +1,82 @@
+UCenter整合 详细教程
+
+康盛的Ucenter产品非常的强大。即便不使用也有很好的学习价值。
+
+在这里我们只说，如何将自己的网站和其他康盛的站点互通，当然是使用ucenter
+
+为了，让两个应用之间可以互通（比如，自己的站点和uchome），我们需要先做一件事情，
+
+将ucenter安装包中的
+
+UCenter_1.6.0_SC_UTF8\advanced\examples下的api文件夹，config.inc.php文件和uc_client文件夹（这个在上一级目录），放到自己站点的一个目录下。
+
+一般我们可以将他们都统一放在一个目录中，这里我们取名为ucclient，目录结构形如
+
+ 
+
+接下来我们所说这个三个文件分别代表什么。
+
+1、Api文件夹中uc.php，你可以认为他是一个对外开放的接口文件，是REST形式的。该文件会根据被访问时，所带的参数执行相应的指令。
+
+典型的样子如下：
+
+http://localhost/uctest/examples/api/uc.php?time=1325579904&code=b785JopNAE5CnbKhng8Ci%2BRHv%2BuPSty5ycbzXYUyTFHxhHWHOCNsXK2gFYJakUrXMalBjcg2m3KyY5142iT8drZCzMwvzyOq4aciGgnArt4icSj6Kg63WrsbflE3vE%2BHLpvIY3jsE5OPbmTe8C9EaDDY6%2Fwy2iyGtYDM
+
+最关键的地方就是这个code参数，他是一个被加密了字符串，是基于base64和UC_KEY进行加密的。这个UC_KEY就是uc的通信密钥。这个字符串包含了，我们要进行的操作（比如，synlogin），包含了我们需要的参数（比如username，password等）。所以，密钥很关键，切不可设置的简简单单。
+
+简而言之，这个uc.php是用来被ucenter调用的，由此我们也可以知道，其中有不少方法，是需要我们根据我们自己站点的情况重写的。Uc.php只是统一一个接口，让ucenter知道如何和我们的站点通讯。
+
+2、uc_client文件夹，是一个很重要的类库，当然其实他不只是类库，但是他最重要的作用就是给我们提供相应的同步方法，这些同步方法，都是用来通知ucenter server的（也可以认为就是调用ucenter的方法）。
+
+3、config.inc.php这个配置文件，配置了我们需要的参数的，比如ucenter server的url等等，都是写很重要的参数，在uc.php和uc_client中都会用到。
+
+4、include没有什么用，这里只是为了让他不报错，加入的。你可以改造uc.php后，将include目录去除。 
+
+ 
+
+以上就是我们整合ucenter时需要了解的地方。
+
+接下来，我们说说ucenter applications之间的通知机制，就是我在uchome登录，是如何通知到我的网站的，反之又是怎么样的。
+
+我们可以跟踪一个最简单的synlogin方法，就可以发现，最终该方法返回的是一段html代码，并且是一个或多个script标签的代码（个数和你的application个数有关）。这个和同步又有什么关系呢？
+
+其实他这里处理起来很简单，就是利用html中的script标签的src属性，因为当在页面中加入script的时候，起会作为一个get自动访问指定的url，通过这种方式，就在用户不知不觉得情况下，调用了需要调用的方法（REST），同时因为ucenter使用了pop3协议，让其跨域设置cookie成为了可能。由此完成了同步目的，因为你同时设置了其他应用会用到的cookie。
+
+这就是为什么，每次登录uchome之类的，总会有个中间页面，提示你三秒后会自动跳转之类。因为页面级的get访问，可以要花时间的，如果我们用很快的速度点击调转的话，他没有足够的事件来完成script标签中的响应的话，我们的同步可就不起作用了。
+
+ 
+
+【提高部分】
+
+有个中间页面，总是觉得不太舒服。有没有办法不要这个中间页面就直接点登录，在后台完成相应的同步操作呢？答案是肯定的。
+
+解决方案其实也很简单，就是使用curl或get_files_content来获取需要设置的cookie
+
+大致的思路就是，在登录执行的部分，我们额外地通过curl访问，前面所说的script中的src所对应的url，将其需要设置的cookie取出来，整合到我们即将返回的Respones中。这样，我们就可以实现目的了。其实这里，我们就是利用curl做了个桥的作用，然后整合下。
+
+那么为什么ucenter不直接采用这个方式，还采用中间页面的方式呢？
+
+这个和ucenter支持的php版本有关，康盛支持php4.0，同时又要保证，不使用额外安装的exitension。这里我们用到的curl是一个extension，get_files_content又是5.0才引入的。一切都明白了吧。都是为了兼容性。
+
+ 
+
+最后，总结下，需要整合ucenter的话，我们一般要改三处地方，
+
+1、  config.inc.php，提供基本参数，一定要准确无误。
+
+2、  uc.php，供别的application调用的同步代码，需要将自己的相应登录或登出等逻辑写进去。
+
+3、  站点自身的登录或登出功能，在其中我们需要调用其他application的同步代码，有两种方式，中间页和curl
+
+ 
+
+根据这些原理分析，由于个application间的通信都是通过http和pop3协议的，所以，可以很好的跨平台，对于asp.net等其他的语言，只需要仿造php版本的逻辑写个就行，只是要保证类似uc.aspx中的方法签名一定要保证一样，否则的话产生出来的operation什么可就对不上了。另外，在ucenter server出设置时，也不要设置成uc.php了。要设置成uc.aspx了。
+
+在最后，说说大致的开发思路。
+
+首先有个前提，这些文件都是在你站点的服务器上，并没有在uc那边。
+
+在uc.php中，你最可能会需要改动的函数逻辑是synlogin和synlogout，你需要在这个文件写，加入你自己站点的登录，登出逻辑。
+
+在自己的站点的登录登出逻辑这里，记得要调用client.php中的方法，利用其返回的同步代码，最后是模拟登录呢还是中转页，你自己决定了，但是得要在你的逻辑中实现这个过程。改动了这这两个就完成了双向的登录，登出。但是，要注意，你的登录机制，否则cookie可能设置不上。
+

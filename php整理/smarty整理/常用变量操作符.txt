@@ -1,0 +1,45 @@
+capitalize [首字母大写]  
+例：{$name|capitalize }
+count_characters [计算字符数] 
+例：{$name|count_characters }
+cat [连接字符串] 
+例：{$name|cat:'你好' }
+count_paragraphs [计算段落数]
+例：{$name|count_paragraphs}
+count_sentences [计算句数]
+例：{$name|count_sentences}
+count_words [计算词数]
+例：{$name|count_words }
+date_format [时间格式]
+例：$stmarty->assign('name',strtotime('-0'));{$name|date_format:'%Y%m%d' }
+default [默认]
+例：{$name|default:'没有'}
+escape [转码]
+例：{$name|escape：html,url}
+indent[缩进] 
+例：{$name|indent:20:'&nbsp;'}
+lower[小写 ]
+例：{$name|lower}
+nl2br[换行符替换成<br />]
+regex_replace[正则替换]
+replace[替换]
+例：{$name|replace:"靠":"*"}
+spacify[插空]
+例：{$name|spacify:"-"}
+string_format[字符串格式化]数字 %.2f
+例：{$name|string_format:'%.2f'}//取两位小数
+例：{$name|string_format:'%.d'}//去整数
+strip[去除(多余空格)]
+例：{$name|strip:""}
+strip_tags[去除html标签]
+例:{$name|strip_tags}
+truncate[截取]
+例：{$name|truncate:20:"..."}
+upper[大写]
+例：{$name|upper}
+wordwrap[行宽约束]应用于英文
+例：{$name|wordwrap:10:"<br/>"}
+
+
+输出无格式
+$wenhua.content|strip_tags|strip:""|truncate:260:"..."

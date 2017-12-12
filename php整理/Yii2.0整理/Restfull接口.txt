@@ -1,0 +1,40 @@
+按照官方文档即可
+需要注意的点：
+.htaccess文件
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule (.*) index.php [NC,L]
+
+//路由配置的时候
+ 'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => false,
+            'showScriptName' => false,
+            'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['api/user']],
+            ],
+        ],
+
+
+路由配置文件
+ 'rules' => [
+               //'class'=>'yii\rest\UrlRule',
+                //'<modules:\w+>/<controller:\w+>/<action:\w+>'=>'<modules>/<controller>/<action>',
+
+                'dkrenewlist'=>'crm/renew/dkrenewlist',
+                'renewRank/<number:\d+>/<start>/<end>/<ourMain>'=>'crm/renew/renew_rank',//客户消费排名 参[数量/开始时间/结束时间/主体公司]
+                'renewTrend/<month:\d+>/<ourMain>'=>'crm/renew/renew_trend',//月趋势图  参[读取几月/主体]
+                'renewProfits/<number:\d+>/<start>/<end>/<ourMain>'=>'crm/renew/renew_profits',//客户消费排名 参[数量/开始时间/结束时间/主体公司]
+
+                ['class'=>'yii\rest\UrlRule','controller' => ['crm/users']],
+               // 'pluralize' => false
+                // 'hhh/<id:\d+>' => 'crm/users/hjd',
+                //'renew' => 'crm/renew/index'
+               //'GET,HEAD crm/users/<id>' => 'crm/users/view',
+            ],
+
+网站目录设置，一定要设置成web 目录文件

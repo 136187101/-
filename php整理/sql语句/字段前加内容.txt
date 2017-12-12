@@ -1,0 +1,3 @@
+update `表名`  set `image`=concat('要加的字',image) where id<>'0'
+where必须加，否则报错
+用mysql的 concat 函数就可以，刚上百度了一下

@@ -1,0 +1,47 @@
+  //smarty 模板页面 
+	<ul>
+		{foreach from=$dfl item=dfl1 key=dflk}
+			<li><a href="#">{$dfl1}</a>
+            <ul>
+            {foreach from=$xfl item=xfla key=xflk}
+            	{if $xfla.dflid==$dflk}
+                <li><a href="#">{$xfla.xfltitle}</a>
+                <ul>
+                	{foreach from=$zxfl item=zxfl1 key=zxflk}
+                	{if $zxfl1.xflid==$xflk}
+                    <li><a>{$zxfl1.zxtitle}</a></li>
+                    {/if}
+                    {/foreach}
+                </ul>
+                
+                </li>
+            	{/if}
+            {/foreach}
+
+            </ul>
+            </li>
+		{/foreach}
+      	</ul>
+
+
+//php页面
+
+	//产品分类导航
+	$rs_dfl=$db->query("select * from essay_zilei where fuid='2' order by zileipx desc");
+	while($rows_dfl=$hjd->fetch_array($rs_dfl))
+	{
+		$prdfl[$rows_dfl[id]]=$rows_dfl[zititle];
+        $rs_xfl=$db->query("select * from essay_zilei where fuid = '$rows_dfl[id]'  order by zileipx desc");
+         while ($rows_xfl=$hjd->fetch_array($rs_xfl))
+         {           	
+		 	$prxfl[$rows_xfl[id]]=array("dflid"=>$rows_dfl[id],"xfltitle"=>$rows_xfl[zititle]);
+            $rs_zxfl=$db->query("select * from essay_zilei where fuid = '$rows_xfl[id]'  order by zileipx desc");
+            while ($rows_zxfl=$hjd->fetch_array($rs_zxfl))
+            {
+				$zxfla[$rows_zxfl[id]]=array("xflid"=>$rows_xfl[id],"id"=>$rows_zxfl[id],"zxtitle"=>$rows_zxfl[zititle]);
+            }				
+         }
+	}
+		$smarty->assign("dfl",$prdfl);
+		$smarty->assign("xfl",$prxfl);
+		$smarty->assign("zxfl",$zxfla);

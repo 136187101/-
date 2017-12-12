@@ -1,0 +1,204 @@
+启动mongodb服务：
+D:/mongodb/bin>mongod --dbpath D:\mongodb\data\db
+
+cd 到mongo下的bin目录下
+执行D:\ruanjian\mongo\bin\mongo
+前提是启动mongodb服务
+
+出现如下代码表示链接成功
+MongoDB shell version v3.4.0
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.0
+>
+
+
+命令:
+1，show dbs  显示数据库列表
+2，use Northwind 进入Northwind数据库,大小写敏感
+3，show collections 显示数据库中的集合
+4，db   用于查看当前所在的数据库
+5，db.Customer.count() 查看集合Customer的记录总数
+6，db.Customer.findOne({"_id":"1"}) 查看CustomerId=1的记录
+
+新增数据
+1，use MyTest，这个数据库不存在，无所谓，mongo会创建，
+MongoDB在使用前，并不要求您事先创建好相应的数据库，设计数据表结构！
+在MongoDB中，没有【表】的概念，取而代之的是【集合】，也没有【数据记录】的概念，取而代之的是【文档】，我们可以把【文档】理解成一个【对象】，任意的对象，甚至可以有复杂的嵌套层次。
+因此，我们不用再写代码从【数据表字段】到C#类的【属性，字段】的转换了，现在直接就可以读写整个对象了。
+而且MongoDB不支持Join操作，所以，如果有【关联】操作，就需要你自己来处理
+2，item={"Key":"1","text":"wokao","number":3}
+3，db.table1.insert(item)，mongo将建立集合table1，并将item插入，完成了新增加数据库的工作
+4，db.table1.find()显示table1中的数据，MongoDB的文档使用的是一种称为BSON格式的对象，与Javascript中的JSON类似
+5，额外的，输入item1={"Id":5,"str":"asdfasdf"}，再插入db.table1.insert(item1)，再用find()命令看，也插入成功了~，注意到结构和item不一样！但不建议这样做。
+注意到：【每个文档有一个名为 "_id" 的成员】，我可没有定义啊。
+其实，MongoDB会为每个文档都创建这样一个文档成员，我们指定的 "key", "id" 对于MongoDB来说：它们并不是【文档的主键】，MongoDB只认 "_id"，你可以指定，但如果不指定，MongoDB就自动添加。
+
+可以这样： db.users.insert({"usersname":"hjd"})
+
+修改数据
+1，var t=db.table1.findOne({"Id":5})，获取一条记录
+2，t.str="wokao"
+3，db.table1.update({"Id":5},t)
+
+删除数据
+db.table1.remove({"Id":5})
+
+查找数据
+上面已经有find和findOne命令，即用于查询
+db.table1.find()
+MongoDB的查询条件中，并没有 >, <, >= , <= 这些运算符，而是使用 "$lt", "$lte", "$gt", "$gte"
+
+新建表
+db.MyTest.table2.save({})
+
+删除表
+db.table1.drop()或db.runCommand({"drop","table1"})
+
+删除数据库
+db.runCommand({"dropDatabase": 1})，此命令只能删除当前数据库
+
+获取服务端状态信息
+db.runCommand({"serverStatus" : 1})
+
+
+自己测试的
+> show dbs
+admin  0.000GB
+local  0.000GB
+> use users
+switched to db users
+> db.users.insert({"usersname":"侯建东"})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+admin  0.000GB
+local  0.000GB
+users  0.000GB
+> show collections
+users
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东" }
+> db.users.insert({"usersname":"Zoe","group":"Zom"})
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "Zom" }
+> db.users.find().count();
+2
+> db.users.insert({"usersname":"wutong","group":"wife"})
+WriteResult({ "nInserted" : 1 })
+> db.users.find().count();
+3
+> db.users.find({"_id":ObjectId("584678101b4a5cbb5ce2f762")})
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东" }
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "Zom" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+> db.users.insert({"usersname":"侯建东"})       }})
+WriteResult({ "nInserted" : 1 })
+> db.users.update({"usersname":"侯建东"},{$set:{"group","zhangfu"}})
+2016-12-06T16:45:10.022+0800 E QUERY    [main] SyntaxError: missing : after property id @(shell):1:50
+> db.users.update({"usersname":"Zoe"},{$set:{"group","zhangfu"}}))})
+2016-12-06T16:45:22.976+0800 E QUERY    [main] SyntaxError: missing : after property id @(shell):1:50
+> db.users.update({"usersname":"Zoe"},{$set:{"group":"zhangfu"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zhangfu" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东" }
+> db.users.update({"usersname":"侯建东"},{$set:{"group":"zhangfu"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find()                                                }})
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zhangfu" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东" }
+> db.users.update({"usersname":"Zoe"},{$set:{"group":"zz"}})     }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zz" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东" }
+> db.users.update({"usersname":"侯建东"},{$set:{"group":"zhangfu"}},{multi:true})
+WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find()                                                             e})
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zz" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东", "group" : "zhangfu" }
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zz" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("58467bd21b4a5cbb5ce2f766"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467bd31b4a5cbb5ce2f767"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467bd41b4a5cbb5ce2f768"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467bd41b4a5cbb5ce2f769"), "group" : "hhhh" }
+> db.users.remove({"group":"hhhh"})
+WriteResult({ "nRemoved" : 4 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zz" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东", "group" : "zhangfu" }
+> db.users.remove({"group":"hhhh"})
+WriteResult({ "nRemoved" : 0 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zz" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("58467c181b4a5cbb5ce2f76a"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c181b4a5cbb5ce2f76b"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c191b4a5cbb5ce2f76c"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c191b4a5cbb5ce2f76d"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c1a1b4a5cbb5ce2f76e"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c1a1b4a5cbb5ce2f76f"), "group" : "hhhh" }
+> db.users.insert({"group":"hhhh"},true)
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("584678101b4a5cbb5ce2f762"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("5846785f1b4a5cbb5ce2f763"), "usersname" : "Zoe", "group" : "zz" }
+{ "_id" : ObjectId("584678e11b4a5cbb5ce2f764"), "usersname" : "wutong", "group" : "wife" }
+{ "_id" : ObjectId("58467a4e1b4a5cbb5ce2f765"), "usersname" : "侯建东", "group" : "zhangfu" }
+{ "_id" : ObjectId("58467c181b4a5cbb5ce2f76a"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c181b4a5cbb5ce2f76b"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c191b4a5cbb5ce2f76c"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c191b4a5cbb5ce2f76d"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c1a1b4a5cbb5ce2f76e"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c1a1b4a5cbb5ce2f76f"), "group" : "hhhh" }
+{ "_id" : ObjectId("58467c261b4a5cbb5ce2f770"), "group" : "hhhh" }
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.remove({"group":"hhhh"})
+WriteResult({ "nRemoved" : 8 })
+> db.users.drop();
+true
+> db.users.insert({"group":"hhhh"})
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("58467c5b1b4a5cbb5ce2f772"), "group" : "hhhh" }
+>

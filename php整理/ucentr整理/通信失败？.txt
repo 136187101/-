@@ -1,0 +1,37 @@
+解决UCenter通信失败的问题
+发表于 2010 年 3 月 16 日 由 admin [ad#content]对于Uenter的初学者来说，经常会遇到的问题就是在添加新应用的时候，出现“通信失败”，查来查去也找不到具体的原因。其实导致“通信失败”的原因特别多，比如说Key值不匹配，或者配置接口地址有误。还有一些可能是服务端与客户端时间不匹配等等好多原因，这里将给大家介绍通信机制的原理，带领大家找出具体的问题所在！
+
+对于已出现“通信失败”问题的用户，建议你还是先阅读《UCenter如何整合自建应用》重新配置一次，或者检查一下应用配置，如果问题依然存在，那么可以按照下面的步骤来查找问题。
+
+首先我们应该清楚这个“通信失败”是从什么地方得来的，在应用管理页面，我们可以通过Firebug来做到这一步，如果您没有安装Firebug，可以参考这个URL：
+
+http://localhost/discuz/ucenter/admin.php?m=app&a=ping&inajax=1&url=http%3A%2F%2Flocalhost%2Fexamples&ip=&appid=3&random=19859&sid=6a6cr%2BqjOqTa8khveXdPH9SmPwU2T0ICgg2S%2FBwrBZApLl26vJCRkH2o8l7d%2FexAckUYz4bhLORnEw
+也许有人对这个地址的含义不是很清楚，我大体解释一下：因为这是在admin管理后台的功能，所以代码是在/ucenter/control/admin/下，参数m=app表示是在/ucenter/control/admin/下的app.php，参数a=ping表示在在这个文件的的onping()函数，参数url就是请求的客户端的地址，参数ip指的是你在配置信息里的填写的ip，参数appid是这个应用的ID，sid指的是admin的ID，你可以此地址查看相关的代码：/ucenter/control/admin/app.php
+
+function onping() {
+$ip = getgpc('ip');
+$url = getgpc('url');
+$appid = intval(getgpc('appid'));
+$app = $_ENV['app']->get_app_by_appid($appid);
+$status = '';
+if($app['extra']['apppath'] && @include $app['extra']['apppath'].'./api/'.$app['apifilename']) {
+$uc_note = new uc_note();
+$status = $uc_note->test($note['getdata'], $note['postdata']);
+} else {
+$this->load('note');
+$url = $_ENV['note']->get_url_code('test', '', $appid);
+$status = $_ENV['app']->test_api($url, $ip);
+}
+if($status == '1') {
+echo 'document.getElementById(\'status_'.$appid.'\').innerHTML = "<img src=\'images/correct.gif\' border=\'0\' class=\'statimg\' \/><span class=\'green\'>'.$this->lang['app_connent_ok'].'</span>";testlink();';
+} else {
+echo 'document.getElementById(\'status_'.$appid.'\').innerHTML = "<img src=\'images/error.gif\' border=\'0\' class=\'statimg\' \/><span class=\'red\'>'.$this->lang['app_connent_false'].'</span>";testlink();';
+}
+}
+这里有一个函数：如果$status为1能信才成功，其他的都是失败，在这里我们可以把变量$url和$status打印出来，$url地址就是客户端的接口地址。搞清楚这一点就好办了，我们可以直接在地址栏访问这个地址，如果他返回1，说明就通信成功了！我这里的测试地址是：
+
+http://localhost/examples/api/uc.php?code=a632n0LfAIbjl5qJHiMu7C4txDVOnCbZeBgQeQUJLub8Q1w7LAWP0Zb9tI%2FOTekdMuXHprfAHag
+如果返回错误提示，我们可以按照提示来寻找错误，如果什么都没有返回，可能是文件里缺少一些变量，这里的例子（UCenter自带例子）里就有一个失误，在包含数据库类文件的时候忘记定义了$database这个变量，应该是$database=‘mysql’，这个很不起眼的失误给很多开发者造成了疑惑，所以大家在查看代码时也一定要小心，不要放过任何一点可疑之处。
+
+require_once DISCUZ_ROOT.'./include/db_'.$database.'.class.php';
+范围缩小了，我们可以打开这个文件看看它都负责做什么，首先从URL里获取code,然后给它解密，获取真实的参数，这些参数分别是来判断超时和请求类型的，然后根据请求类型连接数据库，怎么样？经过这么一圈分析，是不是感觉很容易就能找到错误的原因！希望你已经成功配置了新建应用，如果还有什么问题请在这里留言。

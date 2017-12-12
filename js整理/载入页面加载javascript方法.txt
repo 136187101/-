@@ -1,0 +1,11 @@
+var CANVAS_WIDTH="200PX",CANVAS_HEIGHT="200PX";
+window.onload = function(){
+	
+	catcanvas();
+}
+
+function catcanvas(){
+	document.body.innerHTML="<canvas calss=\"mycanvas\" width=\""+CANVAS_WIDTH+"\" height="+CANVAS_HEIGHT+"></canvas>";
+	
+}
+

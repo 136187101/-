@@ -1,0 +1,52 @@
+举例如首页调用方法：
+1、先打开index.php文件找到以下代码：
+$smarty->assign('new_articles', index_get_new_articles()); // 最新文章
+
+在它下面增加以下：
+//调用方法
+
+$smarty->assign('class_articles_4', index_get_class_articles(4,6)); // 分类调用文章
+//调用多个就修改传进去的参数,以及模板接收的变量,其中上面的4就是文章分类ID,其中6是调用数量
+$smarty->assign('class_articles_5', index_get_class_articles(5,6)); // 分类调用文章
+$smarty->assign('class_articles_6', index_get_class_articles(6,6)); // 分类调用文章
+$smarty->assign('class_articles_7', index_get_class_articles(7,6)); // 分类调用文章
+$smarty->assign('class_articles_8', index_get_class_articles(8,6)); // 分类调用文章
+
+//在最后?>这个之前增加以下函数
+
+/**
+* 获得指定栏目最新的文章列表。
+*
+* @access private
+* @return array
+*/
+function index_get_class_articles($cat_aid, $cat_num)
+{
+$sql = "SELECT article_id, title,open_type,cat_id,file_url FROM " .$GLOBALS['ecs']->table('article'). " WHERE cat_id = ".$cat_aid." and is_open = 1 LIMIT " . $cat_num;
+$res = $GLOBALS['db']->getAll($sql);
+$arr = array();
+foreach ($res AS $idx => $row)
+{
+$arr[$idx]['id'] = $row['article_id'];
+$arr[$idx]['title'] = $row['title'];
+$arr[$idx]['short_title'] = $GLOBALS['_CFG']['article_title_length'] > 0 ?
+sub_str($row['title'], $GLOBALS['_CFG']['article_title_length']) : $row['title'];
+$arr[$idx]['cat_name'] = $row['cat_name'];
+$arr[$idx]['add_time'] = local_date($GLOBALS['_CFG']['date_format'], $row['add_time']);
+$arr[$idx]['url'] = $row['open_type'] != 1 ?
+build_uri('article', array('aid' => $row['article_id']), $row['title']) : trim($row['file_url']);
+$arr[$idx]['cat_url'] = build_uri('article_cat', array('acid' => $row['cat_id']));
+}
+return $arr;
+}
+
+2、第二步是在index.dwt模板想调用的地方增加以下代码，（注：以下调上面设置里的分类ID为8的文章列表)：
+
+<!--{foreach from=$class_articles_8 item=article}-->
+<li><a href="{$article.url}" title="{$article.title|escape:html}"><!--{$article.short_title|truncate:15:true}--></a></li>
+<!--{/foreach}-->
+
+
+ECSHOP获得指定栏目最新的商品列表2010-08-29 12:19ECSHOP获得指定栏目最新的商品列表
+
+

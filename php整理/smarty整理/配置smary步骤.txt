@@ -1,0 +1,16 @@
+1.下载smarty,需要其中的libs文件，可改名
+2.建立smarty配置文件：如下
+<?php
+include_once("smarty_hjd/Smarty.class.php");//包含smarty文件
+$smarty=new Smarty();//实例化stmart类
+$smarty->caching=false;//是否启用缓存技术，项目在调试中，建议不开启。
+$smarty->template_dir="template/wood/";//模板文件位置
+$smarty->compile_dir="template_c";//编译目录
+$smarty->cache_dir="smarty_cache";//缓存文件
+$smarty->cache_lifetime=10;//缓存存在时间 单位：秒
+///////////////////////////////===================================<br>
+$smarty->left_delimiter="{";//stmary符号
+$smarty->right_delimiter="}";
+
+?>
+3.建立template模板文件夹，建立template_c编译目录，建立stmarty_cache缓存文件夹

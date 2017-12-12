@@ -1,0 +1,9 @@
+$db = new yii\db\Connection([
+            'dsn' => 'pgsql:host=rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com;port=3432;dbname=crm',
+            'username' => 'rdspg',
+            'password' => 'anmeng',
+            'tablePrefix'=>'jd_',
+            'charset' => 'utf8',
+        ]);
+
+        $a=$db->createCommand('select * from jd_users')->queryAll();

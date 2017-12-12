@@ -1,0 +1,29 @@
+1. 首先创建一个 div，并且给它设置一个 class，这里我们设置为：subMenu。
+
+2. 在这个 div 内部，输入各个链接的 A 标签，并且都设置一个 #id。
+
+3. 然后但页每个部分都设置一个 class 名，并且这个 class 名字必须会上面菜单中 a 链接的 #id 名意义对应。比如第一个链接的 id 是 #section1，那么第一块区域的 class 必须设置为：.section1，以此类推。
+
+4. 在页脚加载 jQuery 库 和 jQuery.smint.js。
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript"   src="js/jquery.smint.js"></script>
+5. 通过下面代码调用：
+
+$(document).ready( function() {
+	$('.subMenu').smint();
+});
+为了控制更加方便和灵活，Smint 在导航菜单变成浮动在顶部的时候，会添加一个 .fxd 的 class。我们可以使用这个 class 添加一些额外的样式。
+
+另外，这个插件只有一个选项，就是设置页面滚动的速度：
+
+$('.subMenu').smint({
+	'scrollSpeed' : 1000 
+});
+默认是 500（半秒），你可以设置成任意你希望的时间。
+
+
+在css里
+.active {background: #3B5323;}  代表导航菜单停留
+如果在半屏刷新，导航定位出现错误 就在jqudery.smint.js 的57行
+注释掉//	$('.smint').css({ 'position': 'absolute', 'top':stickyTop }).removeClass('fxd'); 

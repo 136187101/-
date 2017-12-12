@@ -1,0 +1,60 @@
+链接
+
+HATEOAS, 是Hypermedia as the Engine of Application State的缩写, 提升RESTful API 应返回允许终端用户访问的资源操作的信息， HATEOAS 的目的是在API中返回包含相关链接信息的资源数据。
+
+资源类通过实现yii\web\Linkable 接口来支持HATEOAS， 该接口包含方法 getLinks() 来返回 links 列表，典型情况下应返回包含代表本资源对象URL的 self 链接，例如
+
+use yii\base\Model;
+use yii\web\Link; // represents a link object as defined in JSON Hypermedia API Language.
+use yii\web\Linkable;
+use yii\helpers\Url;
+
+class UserResource extends Model implements Linkable
+{
+    public $id;
+    public $email;
+
+    //...
+
+    public function fields()
+    {
+        return ['id', 'email'];
+    }
+
+    public function extraFields()
+    {
+        return ['profile'];
+    }
+
+    public function getLinks()
+    {
+        return [
+            Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
+            'edit' => Url::to(['user/view', 'id' => $this->id], true),
+            'profile' => Url::to(['user/profile/view', 'id' => $this->id], true),
+            'index' => Url::to(['users'], true),
+        ];
+    }
+}
+
+当响应中返回一个User 对象， 它会包含一个 _links 单元表示和用户相关的链接，例如
+
+{
+    "id": 100,
+    "email": "user@example.com",
+    // ...
+    "_links" => {
+        "self": {
+            "href": "https://example.com/users/100"
+        },
+        "edit": {
+            "href": "https://example.com/users/100"
+        },
+        "profile": {
+            "href": "https://example.com/users/profile/100"
+        },
+        "index": {
+            "href": "https://example.com/users"
+        }
+    }
+}

@@ -1,0 +1,3 @@
+if(PHP_VERSION >= 6 || !get_magic_quotes_gpc()) {
+$_REQUEST = array_map( 'addslashes', $_REQUEST);
+}

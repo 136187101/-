@@ -1,0 +1,11 @@
+
+±¾Ò³ÃæÉ¾³ý £º
+<a href="xinwen.asp?hjd=pg&xx=<%=rs("id")%>">É¾³ý</a>
+
+<%
+	if request.QueryString("hjd")="pg" then
+	ix=request.QueryString("xx")
+	sql="delete from news where id="&ix
+	conn.execute(sql)
+	end if
+%>

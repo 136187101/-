@@ -1,0 +1,88 @@
+YII2自定义公共方法
+
+在项目中，很多地方都需要公共方法的存在，以提高代码复用性，减少重复开发的时间，那yii2如何定义自己的公共方法呢？
+
+以yii2-advanced版本为基础来进行介绍：
+
+这里写图片描述 
+上图为yii2-advanced版本的基础目录结构，而./common 目录为公共资源目录，我们可以把定义的方法放在这个目录下，在此目录下我们随意建立一个文件比如”helps”目录，因为考虑到公共方法可能会有功能上的划分类，所以建立一个统一目录来进行管理。
+
+正式目录
+
+这里我建立了两个工具类。
+
+YII2采用了PHP的新特性命名空间
+
+建立公共方法
+
+<?php
+namespace common\helps;
+
+/*
+ * 自定义全局公共方法
+ */
+class tools{
+    public static function hello(){
+        echo 'hello world!';
+    }
+}
+?>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+直接调用
+
+<?
+/*直接在控制器中调用*/
+public function actionIndex(){
+    \common\helps\tools::hello();
+}
+?>
+1
+2
+3
+4
+5
+6
+1
+2
+3
+4
+5
+6
+声明命名空间调用
+
+<?
+namespace backend\controllers;
+
+use \common\helps\tools;//使用工具类
+
+class IndexController extends Controller{
+
+    public function actionIndex(){
+        tools::hello();//直接进行调用
+    }
+}
+
+?>

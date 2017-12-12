@@ -1,0 +1,4 @@
+给站点设置所属用户
+chown -R www-data:www-data admin  
+给文件设置权限
+chmod -R 755 admin

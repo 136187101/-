@@ -1,0 +1,38 @@
+进入PHP的源码安装包里（/tmp/php-5.X.X)进入到ext/pdo_pgsql目录。
+
+下面以本机环境为例：
+php-5.4.7的源码包放在:/tmp/php-5.4.7
+编译pdo_pgsql扩展
+# cd /tmp/php-5.4.7/ext/pdo_pgsql
+# /usr/local/php/bin/phpize
+根据实际安装路径进行修改
+
+# ./configure –with-php-config=/usr/local/php/bin/php-config
+
+参数说明：
+--with-php-config=/usr/local/php/bin/php-config 指定安装 PHP 的时候的配置
+
+
+这里可能会报错
+configure: error: Cannot find libpq-fe.h. Please specify correct PostgreSQL installation path
+解决方法：
+sudo apt-get install postgresql-server-dev-9.1 或许9.3
+
+# make
+# make install
+
+编译完成之后，请注意是否出现类似以下图片所示信息
+root@iZ251i2zejqZ:/usr/local/php5/php-5.5.23/ext/pdo_pgsql# make install
+Installing shared extensions:     /usr/local/php5/lib/php/extensions/no-debug-non-zts-20121212/
+
+如果出现说明编译安装成功，请十分注意红线圈住的目录（注意：不同时间段目录名称可能不一样）。
+编译安装完成之后，生成的 pdo_mysql.so 文件就放置在这个目录下。
+2、修改 php.ini 文件
+使用 vi 打开你机器的 php.ini 文件，添加一段代码“extension=/usr/local/php/lib/php/extensions/no-debug-non-zts-20090626/pdo_mysql.so”，加载 pdo_mysql.so 文件
+保存
+
+
+
+
+3、查看 phpinfo()
+首先重启 Apache 服务器。使用 phpinfo() 函数查看 php 的安装信息，如出现下图所示说明 PDO 扩展安装成功。

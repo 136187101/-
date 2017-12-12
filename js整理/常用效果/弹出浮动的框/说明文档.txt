@@ -1,0 +1,4 @@
+<a href="#TB_inline?height=200&amp;width=400&amp;inlineId=login_div&modal=false" class="thickbox"><img src="images/login02.gif" /></a>
+
+
+inlineId 是你定义的DIV框的id  其他属性不需改动

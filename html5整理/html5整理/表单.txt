@@ -1,0 +1,15 @@
+<form action="" name="obj" id="obj"> 
+
+required 此input 为必填项
+autofocus   页面刚载入就自动获得焦点
+placeholder="请输入您要输入的内容"   对用户的输入进行提示
+<input type="url" required>
+<input type="number" required>
+<input type="time" required>
+<textarea placeholder="请输入您要搜索的内容" required></textarea>
+<input type="submit" value="提交">
+</form>
+
+
+不在表单内，设定form 属性即可让input出现在body任何部位
+<input type="email" form="obj" required>

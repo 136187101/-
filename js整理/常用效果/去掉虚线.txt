@@ -1,0 +1,1 @@
+/*完美去除虚线框*/a {outline: none; text-decoration:none; color:#000000;}a:active {star:expression(this.onFocus=this.blur());}:focus { outline:0; }/*完美去除虚线框*/

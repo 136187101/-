@@ -1,0 +1,20 @@
+ 使用mysqladmin命令来修改Mysql的root密码
+ 　　一般Mysql的root默认密码为空，如果你之前并没有设置过root密码就使用mysqladmin命令，你可以使用如下mysqladmin命令来修改root密码
+========================以下是命令===================================
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysqladmin -u root -p password 123456
+Enter password
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysql -u root -p123456
+========================以上是命令===================================
+如上所述使用mysqladmin第一次修改root的默认密码时，Enter password回车即可，然后使用mysql.exe命令输入root及其密码即可进入Mysql命令行。
+　　如果已设置了Mysql的root密码，现在需要修改并进入Mysql命令行模式，则输入
+========================以下是命令===================================
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysqladmin -u root -p123456 password root
+C:\Program Files\MySQL\MySQL Server 5.1\bin>mysql -u root -proot
+========================以上是命令===================================
+即可。
+这里使用了到了Mysql自带的两种命令mysqladmin.exe和mysql.exe，mysqladmin修改密码的命令格式如下
+mysqladmin -u root -p[oldpass] password newpass
+　　注意oldpass(老密码)可选，如果root默认密码为空，则不需要输入，如果需要更改老密码，请注意老密码与-p之间不要有空格，否则会报错，另外password和newpass(新密码)之间以空格分隔。
+　　mysql命令与mysqladmin命令格式大同小异，主要用来输入正确的用户名和密码后进入Mysql命令行模式，格式如下
+mysql -u root -p[password]
+　　如果不输入password，回车后会出现Enter password的提示。如果root密码为空，也不需要输入password，出现Enter password提示后回车即可。

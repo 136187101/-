@@ -1,0 +1,1 @@
+ALTER TABLE jd_contract ALTER COLUMN agent_company TYPE integer USING(agent_company::integer);

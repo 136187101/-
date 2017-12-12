@@ -1,0 +1,9 @@
+底部对齐的代码：
+
+<style type="text/css">
+.box1 {border:1px #cccccc solid;  width:500px; height:600px;position:relative;}
+.box2 {border-top:1px #cccccc solid; background:#f2f6fb; width:498px; height:22px; position:absolute; bottom:0;}
+</style>
+<div class="box1">
+    <div class="box2"></div>
+</div>

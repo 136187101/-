@@ -1,0 +1,4 @@
+
+
+
+update jd_renew_huikuan  set submituser = c.submituser from jd_customer as c where jd_renew_huikuan.payment_type in (1,2) and jd_renew_huikuan.advertiser = c.id ;

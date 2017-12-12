@@ -1,0 +1,19 @@
+在controllers 下新建HjdController.php
+命名空间
+namespace app\controllers;
+引入模块
+use Yii;
+use yii\filters\AccessControl;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
+use app\models\LoginForm;
+use app\models\ContactForm;
+
+创建控制器 及 创建行为 注意名称要加action 前缀
+class HjdController extends Controller
+{
+    public function actionHjd(){
+		$this->layout="buju"; //切换布局
+        return $this->render('hjd');//渲染模板文件
+    }
+}

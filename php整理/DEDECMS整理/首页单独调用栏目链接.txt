@@ -1,0 +1,7 @@
+在首页有时候经常会调用到一个单独栏目的链接
+
+用{dede:channel}标签的话通常是调用到栏目下的链接，那要如何解决呢
+
+其实另外一标签可以很容易就解决
+
+{dede:type typeid="指定栏目id"}<a href="[field:typelink/]">[field:typename/]</a>{/dede:type}

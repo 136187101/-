@@ -1,0 +1,1 @@
+update jd_customer as c set fapiao = t.sum from (select advertiser,sum(invoice) from jd_contract group by advertiser) t where t.advertiser = c.id and t.sum > 0;

@@ -1,0 +1,656 @@
+<?php require_once("../../include/global.php"); ?>
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>WHB_PHP无限级分类</title>  
+<style type="text/css">  
+<!--  
+.STYLE1 {color: #FF0000}  
+body,td,th {  
+ font-family: 宋体;  
+ font-size: 12px;  
+}  
+.STYLE2 {  
+ color: #FFFFFF;  
+ font-size: 14px;  
+ font-weight: bold;  
+}  
+-->  
+</style>  
+</head>  
+ 
+<body>  
+
+<?php  
+ini_set("error_reporting","E_ALL & ~E_NOTICE");//忽略所有警告信息   
+//require_once("conn.php");//嵌入连接文件  
+    @$ToDo=$_GET["ToDo"];  
+    switch($ToDo)  
+    {          
+    case "add":  
+    echo add();  
+    break;  
+     
+    case "edit":  
+     echo edit();  
+    break;  
+ 
+     case "saveadd":  
+     echo saveadd();  
+    break;  
+     
+    case "saveedit":  
+    echo saveedit();  
+    break;  
+     
+    case "del":  
+    echo del();  
+    break;  
+        
+    default:  
+?>  
+ 
+<table width="90%">   
+<tr>  
+     <td valign="top"><table width="100%"   border="0" cellspacing="1" cellpadding="3">  
+       <tr>  
+           <td width="55%" height="20" align="center" bgcolor="#698FC7"><span class="tblhead"><b><span class="STYLE2">商品类别设置</span> <a href="?ToDo=add">添加一个新类别</a></b></span></td>  
+            
+        </tr>  
+     </table>  
+       <table width="100%" bgcolor="#cccccc" cellspacing="1" cellpadding="3">  
+         <tr bgcolor="#F9F9F9">  
+           <td width="6%" height="21">ID</td>  
+           <td width="49%">类别名称</td>  
+           <td width="14%">排序</td>  
+           <td width="31%">操作</td>  
+         </tr>  
+   <?php  
+         
+   $query=mysql_query("select * from b_mtype order by rootid,orders");  
+   while($arr=mysql_fetch_array($query))  
+   {  
+     
+   ?>  
+           
+           <td   bgcolor="#FFFFFF"><?php echo $arr["typeid"];?></td>  
+           <td   bgcolor="#FFFFFF" ><?php if ($arr["depth"]>0) {  
+                      for($i=1;$i<=$arr["depth"];$i++){ echo "&nbsp;";}  
+     }?>
+             <? if($arr["child"]>0) {  echo "+";}else {echo "-";}?>   
+       <? if($arr["parentid"]==0) { echo "<b>";}?>  
+       <? echo $arr["typename"];?>  
+       <? if ($arr["child"]>0) {?>(<? echo $arr["child"];?>)<? }?></td>  
+           <td bgcolor="#FFFFFF" ><?php echo $arr["orders"];?></td>  
+           <td bgcolor="#FFFFFF"><a href="?ToDo=add&editid=<?php echo $arr["typeid"];?>"><U>添加子类</U></a>   
+     | <a href="?ToDo=edit&editid=<?php echo $arr["typeid"]?>"><U>编辑类别</U></a>   
+            |   <? if($arr["child"]==0){?><a href="?ToDo=del&editid=<? echo $arr["typeid"];?>" onClick="{if(confirm('删除类别时，该类别下的所有产品将一并被删除，确定删除吗?')){return true;}return false;}"><U>删除类别</U></a><?}else{?><a href="#" onClick="{if(confirm('该类别含有下属类别，必须先删除其下属类别方能删除本类别！')){return true;}return false;}"><U>删除类别</U></a><?}?>&nbsp;</td>  
+         </tr>  
+   <?php  
+   }  
+   ?>  
+       </table>  
+     </td>  
+   </tr>  
+</table>   
+<?php  
+     break;  
+    }  
+    ?>  
+ 
+ 
+<?php   ///增加类别  
+function add(){  
+    @$editid=$_REQUEST["editid"];  
+?>  
+    <form name="form1" method="post" action="?ToDo=saveadd">  
+         <table width="90%"   align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC" >  
+           <tr bgcolor="#CCCCCC">  
+             <td colspan="2" align="center" bgcolor="#698FC7"><span class="STYLE2">创建新的类别</span></td>  
+           </tr>               
+           <tr>  
+             <td width="25%" bgcolor="#FFFFFF">类别名称：</td>  
+             <td width="75%" bgcolor="#FFFFFF"><input name="typename" type="text" id="typename"></td>  
+           </tr>  
+          <tr>   
+            <td width="25%" height=30 bgcolor="#FFFFFF"><U>所属类别</U></td>  
+            <td width="75%" bgcolor="#FFFFFF">   
+             <select name=btype>  
+             <option value="0">做为主类别</option>  
+             <?   
+     $query=mysql_query("select * from b_mtype order by rootid,orders");     
+     while($arr=mysql_fetch_array($query)){ ?>  
+             <option value="<? echo $arr["typeid"]?>" <?php if($editid == $arr['typeid']){ echo " selected"; }?>>  
+             <? if($arr["depth"]>0) {  
+               for($i=1;$i<=$arr["depth"];$i++)  
+      {  
+        echo "-";  
+          }  
+         
+              }?>  
+              <? echo $arr["typename"]?></option>  
+             <?  
+           }    
+              ?>  
+             </select>  
+             </td>  
+           </tr>  
+           <tr>  
+             <td bgcolor="#FFFFFF">&nbsp;</td>  
+             <td bgcolor="#FFFFFF"><input type="submit" name="Submit" value="保存">  
+               <label>  
+               <input type="button" name="cancel" id="cancel" value="返回" onClick="history.go(-1);" />  
+             </label></td>  
+           </tr>  
+         </table> <tbody id="t1" style="display:none;"> 
+</form>  
+<? }?>  
+ 
+<?php    /////保存增加的类别  
+function saveadd(){  
+ 
+$query=mysql_query("select typeid from b_mtype order by typeid desc limit 1");  
+while($arr=mysql_fetch_array($query)){  
+if (!$arr["typeid"]){  
+      $postnum=1;  
+    
+}else{  
+      $postnum=$arr["typeid"]+1;  
+    
+}     
+}  
+if(!$postnum) $postnum=1;  
+ 
+$ntid   =$postnum;  
+$tn     =$_REQUEST["typename"];  
+$btype =$_REQUEST["btype"];  
+ 
+ 
+//echo $btype;  
+ 
+if ($ntid=="" or $tn=="")  
+{  
+echo "<script language='javascript'>";  
+echo "alert('参数有误,请重新填写.！');";  
+echo "location.href='?';";  
+echo "</script>";  
+die();  
+}  
+ 
+if ($btype!=0){  
+    
+    $result=mysql_query("select rootid,typeid,depth,orders,parentstr from b_mtype where typeid='$btype'");  
+    $aa=mysql_fetch_array($result);  
+    $rootid=$aa['rootid'];  
+    //echo "aaaaaaaaaaa";  
+    $parentid=$aa['typeid'];  
+    $depth=$aa['depth'];  
+    $orders=$aa['orders'];  
+    $parentstr=$aa['parentstr'];  
+    //echo $rootid;  
+ 
+    if(($aa["depth"]+1)>20){   die("本分类限制最多只能有20级分类"); }  
+ 
+}  
+ 
+if($ntid == $btype)  
+{  
+echo "<script language='javascript'>";  
+echo "alert('您所指定的typeid值重复！');";  
+echo "location.href='?';";  
+echo "</script>";  
+die();  
+}  
+ 
+if($btype!=0){  
+ 
+   $depth=$depth+1;  
+   $rootid=$rootid;  
+   $orders =$ntid;  
+   $parentid =$btype;  
+   //$child = $child;  
+   if ($parentstr=="0"){  
+      $parentstr=$btype;  
+   }else{  
+      $parentstr=$parentstr.",".$btype;  
+   }  
+ 
+}else{  
+   $depth=0;  
+   $rootid=$ntid;  
+   $orders=1;  
+   $parentid=0;  
+   $child=0;  
+   $parentstr=0;  
+}  
+
+//插入类别  
+$query=mysql_query("insert into b_mtype values('$ntid','$tn','$parentid','$parentstr','$depth','$rootid','','$orders')") ;  
+//用于调试 echo "insert into b_mtype values('$ntid','$tn','$parentid','$parentstr','$depth','$rootid','','$orders')";  
+ 
+if ($btype!=0)  
+   {  
+      if ($depth>0)  
+      {  
+         //当上级分类深度大于0的时候要更新其父类（或父类的父类）的版面数和相关排序  
+         for ($i=1;$i<=$depth;$i++){  
+            //更新其父类版面数  
+            if ($parentid!=""){  
+               $query=mysql_query("update b_mtype set child=child+1 where typeid='$parentid'");  
+            }  
+            //得到其父类的父类的版面ID  
+            $result=mysql_query("select parentid from b_mtype where typeid='$parentid'");  
+            $par=mysql_fetch_array($result);  
+    
+            if ($par['parentid']!=""){  
+              $parentid=$par['parentid'];  
+            }  
+            //当循环次数大于1并且运行到最后一次循环的时候直接进行更新  
+            if ($i==$depth && $parentid!=""){  
+              $query=mysql_query("update b_mtype set child=child+1 where typeid='$parentid'");  
+            }  
+          }//for循环结束  
+          //更新该版面排序以及大于本需要和同在本分类下的版面排序序号  
+          $query=mysql_query("update b_mtype set orders=orders+1 where rootid='$rootid' and orders>'$orders'");  
+          //$orders1=$orders+1;  
+          //echo "orders1=".$orders1;  
+          $query=mysql_query("update b_mtype set orders='$orders'+1 where typeid='$ntid'");    
+    
+        }else{  //对应if ($depth>0)，当上级分类深度为0的时候只要更新上级分类版面数和该版面排序序号即可    
+        $query=mysql_query("update b_mtype set child=child+1 where typeid='$btype'");  
+        $result=mysql_query("select max(orders) from b_mtype where typeid='$ntid'");  
+        $ord=mysql_fetch_array($result);     
+        $query=mysql_query("update b_mtype set orders='$ord[0]'+1 where typeid='$ntid'");  
+        }  
+      
+}  
+   
+echo "<script language='javascript'>";  
+echo "alert('类别添加成功！');";  
+echo "location.href='?';";  
+echo "</script>";  
+}  
+?>  
+ 
+<?PHP    ////修改设置  
+function edit(){  
+   //global $db,$editid,$tn,$arr;  
+ 
+$editid=$_REQUEST["editid"];  
+ 
+$result=mysql_query("select * from b_mtype where typeid='$editid'");  
+$tn=mysql_fetch_array($result);  
+?>       
+<form   name="form2" action ="?ToDo=saveedit" method="post">         
+<input type="hidden" name="editid" value="<?php echo $editid;?>">  
+<table width="90%" border="0"   align=center cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">  
+<tr>   
+<th height=24 colspan=2 bgcolor="#698FC7" class="STYLE2">编辑类别：<?PHP echo $tn["typename"];?></th>  
+</tr>  
+<tr>   
+<td width="44%" height=30 bgcolor="#FFFFFF">类别名称</td>  
+<td width="56%" bgcolor="#FFFFFF">   
+<input type="text" name="typename" size="35"   value="<?php echo $tn["typename"];?>">  
+</td>  
+</tr>  
+ 
+<tr>   
+<td width="44%" height=30 bgcolor="#FFFFFF"><p>所属类别</p>  
+  <p>    <span class="STYLE1">特别提示：</span><br />  
+    所属类别不能指定当前类别(即自己)为父类别<BR>  
+    所属类别不能指定当前类别的子类别为父类别</p></td>  
+<td width="56%" bgcolor="#FFFFFF">   
+<select name="class">  
+<option value="0">做为主类别</option>  
+<?   
+$query=mysql_query("select * from b_mtype order by rootid,orders");  
+ 
+while($arr=mysql_fetch_array($query))  
+{ ?>  
+<option value="<?php echo $arr[typeid]?>" <?php if ($tn["parentid"] == $arr["typeid"]) { echo "selected"; } ?>><? if ($arr["depth"]>0) {?>  
+<?for ($i=1;$i<=$arr["depth"];$i++){ echo "-";}?>  
+<? } ?><?php echo $arr["typename"]?></option>  
+<?  
+}  
+?>  
+</select>  
+</td>  
+</tr>  
+ 
+<tr>   
+<td width="44%" height=24 bgcolor="#FFFFFF">&nbsp;</td>  
+<td width="56%" bgcolor="#FFFFFF">   
+<input type="submit" name="Submit" value="提交修改">  
+</td>  
+</tr>  
+</table>  
+</form>  
+ 
+<?   
+}  
+ 
+?>  
+ 
+ 
+<?php   /////保存修改  
+function saveedit(){  
+   //global $db,$aa,$bb,$cc,$dd,$ee,$ff,$gg,$ii,$jj,$kk,$ll,$mm,$nn,$qq,$rr;  
+   $editid=$_REQUEST["editid"];  
+   $btype=$_REQUEST["class"];  
+   $tn=$_REQUEST["typename"];  
+ 
+   if($editid == $btype ){  
+ echo "<script language='javascript'>";  
+    echo "alert('所属类别不能指定当前类别(即自己)为父类别！');";  
+    echo "location.href='?';";  
+    echo "</script>";  
+    die();   
+ }  
+ 
+   $result=mysql_query("select * from b_mtype where typeid='$editid'");  
+   $aa=mysql_fetch_array($result);  
+   $newtypeid=$aa["typeid"];  
+   $typename=$aa["typename"];  
+   $parentid=$aa["parentid"];  
+   $iparentid=$aa["parentid"];  
+   $parentstr=$aa["parentstr"];  
+   $depth = $aa["depth"];  
+   $rootid = $aa["rootid"];  
+   $child = $aa["child"];  
+   $orders = $aa["orders"];  
+ 
+   ////判断所指定的类别是否其下属类别  
+   if ($parentid ==0){  
+if ($btype!= 0) {  
+$result=mysql_query("select rootid from b_mtype where typeid='$btype'");  
+$b=mysql_fetch_array($result);  
+if ($rootid == $bb['rootid']) {  
+ echo "<script language='javascript'>";  
+    echo "alert('所属类别不能指定当前类别的子类别为父类别！');";  
+    echo "location.href='?';";  
+    echo "</script>";  
+    die();   
+   }   
+}  
+ 
+    }else{  
+$result=mysql_query("select typeid from b_mtype where parentstr like '%$parentstr%' and typeid='$btype'");  
+$cc=mysql_fetch_array($result);  
+if ($cc[0]){  
+   echo "<script language='javascript'>";  
+    echo "alert('所属类别不能指定当前类别的子类别为父类别！');";  
+    echo "location.href='?';";  
+    echo "</script>";  
+    die();     
+}  
+   }  
+ 
+   if ($parentid ==0){  
+$parentid=$editid;  
+$iparentid=0;  
+   }  
+   mysql_query("update b_mtype set typename='$tn',parentid='$btype' where typeid='$editid'");  
+ 
+   $result1=mysql_query("select max(rootid) from b_mtype");  
+   $ss=mysql_fetch_array($result1);  
+   $maxrootid=$ss["rootid"]+1;  
+   if (!$maxrootid){ $maxrootid=1;}  
+    
+ 
+//假如更改了所属类别  
+//需要更新其原来所属版面信息，包括深度、父级ID、版面数、排序、继承版主等数据  
+//需要更新当前所属版面信息  
+//继承版主数据需要另写函数进行更新--取消，在前台可用typeid in parentstr来获得  
+ 
+if ($parentid != $btype && !($iparentid==0 && $btype==0)) {  
+    //如果原来不是一级分类改成一级分类  
+    //echo "ggg";  
+      if ($iparentid>0 && $btype==0)   
+      {  
+   //更新当前版面数据  
+   mysql_query("update b_mtype set depth=0,orders=0,rootid='$editid',parentid=0,parentstr='0' where typeid='$newtypeid'");  
+   $parentstr=$parentstr .",";  
+   $result=mysql_query("select count(*) from b_mtype where parentstr like '%$parentstr%'");  
+   $dd=mysql_fetch_array($result);  
+   $postcount=$dd[0];  
+    if (emptyempty($postcount))  
+    {  
+       $postcount=1;  
+       }else{  
+       $postcount=$postcount+1;  
+       }  
+   //更新其原来所属类别版面数  
+   mysql_query("update b_mtype set child=child-'$postcount' where typeid='$iparentid'");  
+   //更新其原来所属类别数据，排序相当于剪枝而不需考虑  
+   for ($i=1;$i<=$depth;$i++)  
+    {  
+    ////得到其父类的父类的版面ID  
+    $result2=mysql_query("select parentid from b_mtype where typeid='$iparentid'");  
+    $ee=mysql_fetch_array($result2);  
+    if (!$ee[0]){  
+     $iparentid=$ee[0];  
+     mysql_query("update b_mtype set child=child-'$postcount' where typeid='$iparentid'");  
+           }  
+       } //for end  
+    
+   if ($child >0){     //m1  
+   //更新其下属类别数据  
+   //有下属类别，排序不需考虑，更新下属类别深度和一级排序ID(rootid)数据  
+   //更新当前版面数据  
+     
+     $i=0;  
+     $query=mysql_query("select * from b_mtype where parentstr like '%$parentstr%'");  
+     while($arr=mysql_fetch_array($query)){  
+ 
+     $i++;  
+     $mParentStr=strtr($arr['parentstr'],$parentstr," ");  
+     mysql_query("update b_mtype set depth=depth-'$depth',rootid='$maxrootid',parentstr='$mParentStr' where typeid='$arr[typeid]");  
+     }  
+    }   //m1 end  
+    }elseif ($iparentid > 0 && $btype >0) {  
+       
+     //将一个分类别移动到其他分类别下  
+     //获得所指定的类别的相关信息  
+     $result=mysql_query("select * from b_mtype where typeid='$btype'");  
+     $gg=mysql_fetch_array($result);  
+     //得到其下属版面数  
+     $parentstr=$parentstr .",";  
+     $iparentstr=$parentstr.$editid;  
+     echo $iparentstr;  
+     $result1=mysql_query("select count(*) from b_mtype where parentstr like '%$iparentstr%'");  
+     $ii=mysql_fetch_array($result1);  
+     $postcount=$ii[0];  
+     if (emptyempty($postcount)){ $postcount=1; }  
+ 
+     //在获得移动过来的版面数后更新排序在指定类别之后的类别排序数据  
+ 
+      $query=mysql_query("update b_mtype set orders=orders+'$postcount'+1 where rootid='$gg[rootid]' and orders>'$gg[orders]'");  
+     //更新当前版面数据  
+      If($gg[parentstr]=="0") {  
+       
+        // $idepth=$gg[depth]+1;  
+        // $iorders=$gg[orders]+1;  
+ 
+         mysql_query("update b_mtype set depth='$gg[depth]'+1,orders='$gg[orders]'+1,rootid='$gg[rootid]',parentid='$btype',parentstr='$gg[typeid]' where typeid='$newtypeid'");  
+      }Else{  
+      $aparentstr=$gg['parentstr'].",".$gg['typeid'];  
+         $idepth=$gg['depth']+1;  
+         $iorders=$gg['orders']+1;  
+         mysql_query("update b_mtype set depth='$idepth',orders='$iorders',rootid='$gg[rootid]',parentid='$btype',parentstr='$aparentstr' where typeid='$editid'");  
+      }  
+      $i=1;  
+      //如果有则更新下属版面数据  
+      //深度为原有深度加上当前所属类别的深度  
+   $iparentstr=$parentstr.$newtypeid;  
+        $query=mysql_query("select * from b_mtype where parentstr like '%$iparentstr%' order by orders");  
+      while($arr=mysql_fetch_array($query)){    // m2  
+       $i++;  
+           If ($gg['parentstr']=="0") {  
+            $iParentStr=$gg['typeid'].",".strtr($arr['parentstr'],$parentstr," ");  
+        }Else{  
+            $iParentStr=$gg["parentstr"] .",".$gg["typeid"] . "," . strtr($arr['parentstr'],$parentstr," ");  
+        }  
+    
+        $query=mysql_query("update b_mtype set depth=depth+'$gg[depth]'-'$depth'+1,orders='$gg[orders]'+'$i',rootid='$gg[rootid]',parentstr='$iParentStr' where typeid='$arr[typeid]'");  
+      }   ///m2 end  
+ 
+      $parentid=$btype;  
+      if ($rootid==$gg['rootid']) {   ///m3  
+     //在同一分类下移动  
+     //更新所指向的上级类别版面数，i为本次移动过来的版面数  
+     //更新其父类版面数  
+       $query=mysql_query("update b_mtype set child=child+'$i' where (! parentid=0) and typeid='$parentid'");  
+       for ($k=1;$k<=$gg['depth'];$k++){  
+   //得到其父类的父类的版面ID  
+     $result=mysql_query("select parentid from b_mtype where (! parentid=0) and typeid='$parentid'");  
+     $vv=mysql_fetch_array($result);  
+      if ($vv[0]){  
+    $parentid=$vv[0];  
+    //更新其父类的父类版面数  
+    mysql_query("update b_mtype set child=child+'$i' where (! parentid=0) and   typeid='$parentid'");  
+       }  
+        
+    } // for end  
+      //更新其原父类版面数  
+      mysql_query("update b_mtype set child=child-'$i' where (! parentid=0) and typeid='$iparentid'");  
+      //更新其原来所属类别数据  
+ 
+      for ($k=1;$k<=$depth;$k++){  
+     //得到其原父类的父类的版面ID  
+     $result1=mysql_query("select parentid from b_mtype where (! parentid=0) and typeid='$iparentid'");  
+     $zz=mysql_fetch_array($result1);  
+     if ($zz[0]){  
+    $iparentid=$zz[0];  
+     
+    //更新其原父类的父类版面数  
+    mysql_query("update b_mtype set child=child-'$i' where (! parentid=0) and   typeid='$iparentid'");  
+      }  
+     }//for end  
+        
+     }else{   ////m3 end  
+     //更新所指向的上级类别版面数，i为本次移动过来的版面数  
+     //更新其父类版面数  
+    mysql_query("update b_mtype set child=child+'$i' where typeid='$parentid'");  
+     for ($k=1;$k<=$gg["depth"];$k++){  
+   //得到其父类的父类的版面ID  
+   $result2=mysql_query("select parentid from b_mtype where typeid='$parentid'");  
+   $yy=mysql_fetch_array($result2);  
+   if ($yy[0]){  
+    $parentid=$yy[0];  
+    //更新其父类的父类版面数  
+    mysql_query("update b_mtype set child=child+'$i' where typeid='$parentid'");  
+    }  
+    
+      } //for end  
+      //更新其原父类版面数  
+      mysql_query("update b_mtype set child=child-'$i' where typeid='$iparentid'");  
+      //更新其原来所属类别数据  
+      for ($k=1;$k<=$depth;$k++){  
+   //得到其原父类的父类的版面ID  
+   $query=mysql_query("select parentid from b_mtype where typeid='$iparentid'");  
+   while($arr=mysql_fetch_array($query))  
+    {  
+         if ($arr[0]){  
+          $iparentid=$arr[0];  
+          //更新其原父类的父类版面数  
+          mysql_query("update b_mtype set child=child-'$i' where typeid='$iparentid'");  
+             }  
+        }  
+       } //for end   
+    } ///m3 end    
+    }else{  
+//如果原来是一级类别改成其他类别的下属类别  
+//得到所指定的类别的相关信息  
+$result=mysql_query("select * from b_mtype where typeid='$btype'");  
+$gg=mysql_fetch_array($result);  
+echo $rootid;  
+$result1=mysql_query("select count(*) from b_mtype where rootid='$rootid'");  
+$qq=mysql_fetch_array($result1);  
+$postcount=$qq[0];  
+//更新所指向的上级类别版面数，i为本次移动过来的版面数  
+$parentid=$btype;  
+//更新其父类版面数  
+mysql_query("update b_mtype set child=child+'$postcount' where typeid='$parentid'");  
+ 
+for ($k=1;$k<=$gg['depth'];$k++){  
+   //得到其父类的父类的版面ID  
+   $result2=mysql_query("select parentid from b_mtype where typeid='$parentid'");  
+   $rr=mysql_fetch_array($result2);  
+   if ($rr[0]){  
+    $parentid=$rr[0];  
+    //更新其父类的父类版面数  
+    mysql_query("update b_mtype set child=child+'$postcount' where typeid='$parentid'");  
+   }  
+ 
+} ///for end   
+//在获得移动过来的版面数后更新排序在指定类别之后的类别排序数据  
+mysql_query("update b_mtype set orders=orders+'$postcount'+1 where rootid='$gg[rootid]' and orders>'$gg[orders]'");  
+$i=0;  
+$query=mysql_query("select * from b_mtype where rootid='$rootid' order by orders");  
+while($arr=mysql_fetch_array($query))  
+{  
+    $i++;  
+    if ($arr['parentid'] ==0)  
+    {  
+   if ($gg['parentstr'] =="0")  
+    {   
+          $parentstr=$gg['typeid'];  
+       }else{  
+          $parentstr=$gg['parentstr'] .",".$gg['typeid'];  
+       }  
+     mysql_query("update b_mtype set depth=depth+'$gg[depth]'+1,orders='$gg[orders]'+'$i',rootid='$gg[rootid]',parentstr='$parentstr',parentid='$btype' where typeid='$arr[typeid]'");  
+     
+    }else{  
+   if ($gg['parentstr'] =="0"){  
+         $parentstr=$gg['typeid'] ."," . $arr['parentstr'];  
+       }else{  
+         $parentstr=$gg['parentstr'] .",".$gg['typeid'] .",". $arr['parentstr'];  
+       }  
+      mysql_query("update b_mtype set depth=depth+'$gg[depth]'+1,orders='$gg[orders]'+'$i',rootid='$gg[rootid]',parentstr='$parentstr' where typeid='$arr[typeid]'");  
+ 
+     }  
+   }///while end  
+}//else end   
+}  
+echo "<script language='javascript'>";  
+echo "alert('类别修改成功！');";  
+echo "location.href='?';";  
+echo "</script>";  
+}  
+?>  
+ 
+<?php   
+function   del(){  
+ 
+////更新其上级版面类别数，如果该类别含有下级类别则不允许删除  
+$editid=$_REQUEST["editid"];  
+$result=mysql_query("select parentstr,child,depth from b_mtype where typeid='$editid'");  
+$aa=mysql_fetch_array($result);  
+if ($aa[0]!="") {  
+if ($aa[1]>0){  
+ echo "<script language='javascript'>";  
+    echo "alert('该类别含有下属类别，必须先删除其下属类别方能删除本类别！');";  
+    echo "location.href='?';";  
+    echo "</script>";  
+    die();   
+}  
+//如果有上级版面，则更新数据  
+ 
+if ($aa[2]>0){  
+$query=mysql_query("update b_mtype set child=child-1 where typeid in ($aa[0])");  
+}  
+$query=mysql_query("delete from b_mtype where typeid='$editid'");  
+ 
+ 
+}  
+echo "<script language='javascript'>";  
+echo "alert('类别删除成功！');";  
+echo "location.href='?';";  
+echo "</script>";  
+}  
+?>
+  
+
+</body>  
+</html>  
+

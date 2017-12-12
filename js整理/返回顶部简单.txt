@@ -1,0 +1,1 @@
+javascript:scroll(0,0)

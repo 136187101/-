@@ -1,0 +1,7 @@
+dede在首页调用指定栏目的耳机分类一般是使用{dede:channelartlist'}进行调用！请看一下代码
+
+{dede:channelartlist typeid='4'}
+{dede:field name='typename'/}
+{/dede:channelartlist}
+
+如果我们要调用指定栏目里的二级分类只需要指定一级栏目的ID 用以上方法调用即可，这样的调用在做企业站时比较常用！typeid是指定的一级栏目的ID！

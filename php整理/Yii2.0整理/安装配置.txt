@@ -1,0 +1,5 @@
+下载：
+http://www.yiiframework.com/download/
+
+基础版：Yii 2 with basic application template
+高级版：Yii 2 with advanced application template

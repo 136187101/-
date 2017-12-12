@@ -1,0 +1,5 @@
+onfocus 获得焦点时
+onblur 失去焦点时；
+onclick 当鼠标点击时；
+onmouseout 鼠标经过；
+onmouseover 鼠标离开

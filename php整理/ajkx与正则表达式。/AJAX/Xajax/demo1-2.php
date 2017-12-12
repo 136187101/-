@@ -1,0 +1,6 @@
+<?php
+	$str=$_GET["name"];
+	$str="ÄãºÃ£¬$str";
+	$str=iconv("gb2312","utf-8",$str);
+	echo $str;
+?>

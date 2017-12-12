@@ -1,0 +1,89 @@
+情境要求：
+要在订单（Order）视图的gridview中显示出客户（Customer）姓名，并使其具有与其它字段相同的排序和搜索功能。
+
+数据库结构
+订单表order含有字段customer_id 与 客户表customer的id字段关联
+
+首先确保在Order Model中包含以下代码：
+
+public function getCustomer()
+{
+    return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+}
+
+用gii会自动生成此代码；
+
+第一步：
+在OrderSearch添加一个$customer_name变量
+
+class OrderSearch extends Order
+{
+    public $customer_name; //<=====就是加在这里
+}
+
+在OrderSearch  ruler 里加入新增的自定义字段
+比如：
+public function rules()
+    {
+        return [
+            [['id', 'groupid', 'ctime', 'manager', 'is_delete', 'jobtime', 'intime', 'istrue', 'njuptime'], 'integer'],
+            [['users', 'password', 'name', 'image', 'phone', 'email','customer_name'], 'safe'],
+            [['nianjia'], 'number'],
+        ];
+    }
+否则出不来搜索框
+
+第二步：
+修改OrderSearch中的search函数
+
+public function search($params)
+{
+    $query =  Order::find();
+    $query->joinWith(['customer']);<=====加入这句
+    $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+    ]);
+    
+  
+
+    if (!($this->load($params) && $this->validate())) {
+        return $dataProvider;
+    }
+
+    $query->andFilterWhere([
+        'id' => $this->id,
+        'user_id' => $this->user_id,
+        'customer_id' => $this->customer_id,
+        'order_time' => $this->order_time,
+        'pay_time' => $this->pay_time,
+    ]);
+
+    $query->andFilterWhere(['like', 'status', $this->status]);
+     $query->andFilterWhere(['like', 'customer.customer_name', $this->customer_name]) ;//<=====加入这句
+    //新增自定义字段排序
+   $dataProvider->sort->attributes['group_name']=[
+                    'asc' => ['group_name' => SORT_ASC],
+                    'desc' => ['group_name' => SORT_DESC],
+                    'label' => 'group Name'
+                ]; 
+	
+    return $dataProvider;
+}
+
+第三步：
+修改order/index视图的gridview
+
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'id',
+        'customer_id',  
+        'status',
+        ['label'=>'客户',  'attribute' => 'customer_name',  'value' => 'customer.customer_name' ],//<=====加入这句
+        ['class' => 'yii\grid\ActionColumn'],
+    ],
+]); ?>
+
+好了就这样，希望对你有帮助。

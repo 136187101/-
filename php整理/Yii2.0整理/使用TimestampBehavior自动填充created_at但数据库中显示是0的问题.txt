@@ -1,0 +1,32 @@
+参照教程自己建了张表，有created_at和updated_at两个字段，使用了TimestampBehavior自动填充。实际测试时发现，使用全自动填充，数据库中的结果是0000-00-00 00：00：00，但手动指定填充字段（created_at和updated_at）和填充方法（new Expression('NOW()')）后数据库中结果正常。
+为什么会这样呢？
+
+跟踪下源码发现原来是这样的...
+全自动填充时（未指定填充方法），返回的结果是时间戳，是一串数字；
+而我手动指定的填充方法（），返回的结果是一个时间值。
+发现问题没？两个方法返回的结果类型是不一样的，一个是数字，一个是时间。
+
+所以我们就要根据需要调整字段属性：
+created_at和updated_at字段属性是int时。可使用默认自动填充
+
+use yii\behaviors\TimestampBehavior;
+public function behaviors()
+{
+     return [
+         TimestampBehavior::className(),
+     ];
+}
+如果字段属性为timestamp时，可以使用如下方法自动填充：
+
+use yii\db\Expression;
+public function behaviors()
+{
+     return [
+         [
+             'class' => TimestampBehavior::className(),
+             'createdAtAttribute' => 'created_at',
+             'updatedAtAttribute' => 'updated_at',
+             'value' => new Expression('NOW()'),
+         ],
+     ];
+}

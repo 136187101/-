@@ -1,0 +1,17 @@
+<script>
+		function openFrame(){
+			api.openFrame({
+	            name: 'demo',
+	            url: 'frame1_window.html',
+	            rect: {
+		            x:0,
+		            y:60,
+		            w:'auto',
+		            h:'auto'
+	            }
+            });
+		}
+		apiready=function(){
+			openFrame();
+		}
+</script>

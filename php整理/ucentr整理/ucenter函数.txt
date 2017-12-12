@@ -1,0 +1,332 @@
+integer uc_user_register(string username , string password , string email)
+函数参数
+参数  含义 
+string username  用户名 
+string password  密码 
+string email  电子邮件 
+
+返回值
+值  含义 
+integer  大于 0:返回用户 ID，表示用户注册成功
+-1:用户名不合法
+-2:包含不允许注册的词语
+-3:用户名已经存在
+-4:Email 格式有误
+-5:Email 不允许注册
+-6:该 Email 已经被注册
+ 
+
+
+本接口函数用于新用户的注册。用户名、密码、Email 为一个用户在 UCenter 的基本数据，提交后 UCenter 会按照注册设置和词语过滤的规则检测用户名和 Email 的格式是否正确合法，如果正确则返回注册后的用户 ID，否则返回相应的错误信息。 
+
+$uid = uc_user_register($_POST['username'], $_POST['password'], $_POST['email']);
+if($uid <= 0) {
+	if($uid == -1) {
+		echo '用户名不合法';
+	} elseif($uid == -2) {
+		echo '包含要允许注册的词语';
+	} elseif($uid == -3) {
+		echo '用户名已经存在';
+	} elseif($uid == -4) {
+		echo 'Email 格式有误';
+	} elseif($uid == -5) {
+		echo 'Email 不允许注册';
+	} elseif($uid == -6) {
+		echo '该 Email 已经被注册';
+	} else {
+		echo '未定义';
+	}
+} else {
+	echo '注册成功';
+}
+
+
+用户登录
+array uc_user_login(string username , string password [, bool isuid])
+函数参数
+参数  含义 
+string username  用户名 / 用户 ID 
+string password  密码 
+bool isuid  是否使用用户 ID登录
+1:使用用户 ID登录
+0:(默认值) 使用用户名登录
+ 
+
+返回值
+值  含义 
+array integer [0]  大于 0:返回用户 ID，表示用户登录成功
+-1:用户不存在，或者被删除
+-2:密码错
+ 
+string [1]  用户名 
+string [2]  密码 
+string [3]  Email 
+bool [4]  用户名是否重名 
+
+本接口函数用于用户的登录验证，用户名及密码正确无误则返回用户在 UCenter 的基本数据，否则返回相应的错误信息。如果应用程序是升级过来的，并且当前登录用户和已有用户重名，那么返回的数组中 [4] 的值将返回 1。 
+list($uid, $username, $password, $email) = uc_user_login($_POST['username'], $_POST['password']);
+if($uid > 0) {
+	echo '登录成功';
+} elseif($uid == -1) {
+	echo '用户不存在,或者被删除';
+} elseif($uid == -2) {
+	echo '密码错';
+} else {
+	echo '未定义';
+}
+
+
+获取用户数据
+array uc_get_user(string username [, bool isuid])
+函数参数
+参数  含义 
+string username  用户名 
+bool isuid  是否使用用户 ID获取
+1:使用用户 ID获取
+0:(默认值) 使用用户名获取
+ 
+
+返回值
+值  含义 
+array integer [0]  用户 ID 
+string [1]  用户名 
+string [2]  Email 
+
+本接口函数用于获取用户在 UCenter 的基本数据，如用户不存在，返回值为 integer 的数值 0。 
+if($data = uc_get_user($username)) {
+	list($uid, $username, $email) = $data;
+} else {
+	echo '用户不存在';
+}
+
+
+更新用户资料
+integer uc_user_edit(string username , string oldpw , string newpw , string email [, bool ignoreoldpw])
+函数参数
+参数  含义 
+string username  用户名 
+string oldpw  旧密码 
+string newpw  新密码，如不修改为空 
+string email  Email，如不修改为空 
+bool ignoreoldpw  是否忽略旧密码
+1:忽略，更改资料不需要验证密码
+0:(默认值) 不忽略，更改资料需要验证密码
+ 
+
+返回值
+值  含义 
+integer  1:更新成功
+0:没有做任何修改
+-1:旧密码不正确
+-4:Email 格式有误
+-5:Email 不允许注册
+-6:该 Email 已经被注册
+-7:没有做任何修改
+-8:该用户受保护无权限更改
+ 
+
+本接口函数用于更新用户资料。更新资料需验证用户的原密码是否正确，除非指定 ignoreoldpw 为 1。如果只修改 Email 不修改密码，可让 newpw 为空；同理如果只修改密码不修改 Email，可让 email 为空。 
+$ucresult = uc_user_edit($_POST['username'], $_POST['oldpassword'], $_POST['newpassword'], $_POST['emailnew']);
+if($ucresult == -1) {
+	echo '旧密码不正确';
+} elseif($ucresult == -4) {
+	echo 'Email 格式有误';
+} elseif($ucresult == -5) {
+	echo 'Email 不允许注册';
+} elseif($ucresult == -6) {
+	echo '该 Email 已经被注册';
+}
+
+
+删除用户
+integer uc_user_delete(string/array username)
+函数参数
+参数  含义 
+string username  用户名 
+
+返回值
+值  含义 
+integer  1:成功
+0:失败
+ 
+
+
+同步登录
+string uc_user_synlogin(integer uid)
+函数参数
+参数  含义 
+integer uid  用户 ID 
+
+返回值
+值  含义 
+string  同步登录的 HTML 代码 
+
+如果当前应用程序在 UCenter 中设置允许同步登录，那么本接口函数会通知其他设置了同步登录的应用程序登录，把返回的 HTML 输出在页面中即可完成对其它应用程序的通知。输出的 HTML 中包含执行远程的 javascript 脚本，请让页面在此脚本运行完毕后再进行跳转操作，否则可能会导致无法同步登录成功。同时要保证同步登录的正确有效，请保证其他应用程序的 Cookie 域和 Cookie 路径设置正确。 
+list($uid, $username, $password, $email) = uc_user_login($_POST['username'], $_POST['password']);
+if($uid > 0) {
+	echo '登录成功';
+	echo uc_user_synlogin($uid);
+} elseif($uid == -1) {
+	echo '用户不存在,或者被删除';
+} elseif($uid == -2) {
+	echo '密码错';
+} else {
+	echo '未定义';
+}
+
+
+同步退出
+string uc_user_synlogout()
+返回值
+值  含义 
+string  同步退出的 HTML 代码 
+
+如果当前应用程序在 UCenter 中设置允许同步登录，那么本接口函数会通知其他设置了同步登录的应用程序退出登录，把返回的 HTML 输出在页面中即可完成其它应用程序的通知。输出的 HTML 中包含执行远程的 javascript 脚本，请让页面在此脚本运行完毕后再进行跳转操作，否则可能会导致无法同步退出登录。同时要保证同步退出登录的正确有效，请保证其他应用程序的 Cookie 域和 Cookie 路径设置正确。 
+
+检查 Email 地址
+integer uc_user_checkemail(string email)
+函数参数
+参数  含义 
+string email  Email 
+
+返回值
+值  含义 
+integer  1:成功
+-4:Email 格式有误
+-5:Email 不允许注册
+-6:该 Email 已经被注册
+ 
+
+本接口函数用于检查用户输入的 Email 的合法性。 
+$ucresult = uc_user_checkemail($_GET['email']);
+if($ucresult > 0) {
+	echo 'Email 格式正确';
+} elseif($ucresult == -4) {
+	echo 'Email 格式有误';
+} elseif($ucresult == -5) {
+	echo 'Email 不允许注册';
+} elseif($ucresult == -6) {
+	echo '该 Email 已经被注册';
+}
+
+
+检查用户名
+integer uc_user_checkname(string username)
+函数参数
+参数  含义 
+string username  用户名 
+
+返回值
+值  含义 
+integer  1:成功
+-1:用户名不合法
+-2:包含要允许注册的词语
+-3:用户名已经存在
+ 
+
+本接口函数用于检查用户输入的用户名的合法性。 
+$ucresult = uc_user_checkname($_GET['email']);
+if($ucresult > 0) {
+	echo '用户名可用';
+} elseif($ucresult == -1) {
+	echo '用户名不合法';
+} elseif($ucresult == -2) {
+	echo '包含要允许注册的词语';
+} elseif($ucresult == -3) {
+	echo '用户名已经存在';
+}
+
+
+添加保护用户
+integer uc_user_addprotected(string/array username , string admin)
+函数参数
+参数  含义 
+string/array username  保护用户名 
+string admin  操作的管理员 
+
+返回值
+值  含义 
+integer  1:成功
+-1:失败
+ 
+
+本接口函数用于添加被保护的用户。 
+
+删除保护用户
+integer uc_user_deleteprotected(string/array username)
+函数参数
+参数  含义 
+string/array username  保护用户名 
+
+返回值
+值  含义 
+integer  1:成功
+-1:失败
+ 
+
+本接口函数用于删除被保护的用户。 
+
+得到受保护的用户名列表
+integer uc_user_getprotected()
+返回值
+值  含义 
+array  受保护的用户数据  
+
+本接口函数用于获得被保护的用户列表。 
+
+把重名用户合并到 UCenter
+integer uc_user_merge(string/ oldusername , string newusername, integer uid, string password, string email)
+函数参数
+参数  含义 
+string oldusername  老用户名 
+string newusername  新用户名 
+integer uid  用户 ID 
+string password  密码 
+string email  电子邮件 
+
+返回值
+值  含义 
+integer  大于 0:返回用户 ID，表示用户注册成功
+-1:用户名不合法
+-2:包含不允许注册的词语
+-3:用户名已经存在
+ 
+
+本接口函数用于把重名的用户合并到 UCenter。 
+用户的合并和用户重名的处理
+如果您的应用程序集成到 UCenter 时包含旧的用户数据，我们建议您可以采取以下范例的方式把您的用户导入到 UCenter。 
+function getmaxuid() {
+	global $ucdb;
+	$query = $ucdb->query("SHOW CREATE TABLE ".UC_DBTABLEPRE."members");
+	$data = $ucdb->fetch_array($query);
+	$data = $data['Create Table'];
+	if(preg_match('/AUTO_INCREMENT=(\d+?)[\s|$]/i', $data, $a)) {
+		return $a[1] - 1;
+	} else {
+		return 0;
+	}
+}
+
+$maxuid = getmaxuid();
+
+$query = $db->query("SELECT * FROM {$tablepre}members");
+
+while($data = $db->fetch_array($query)) {
+	$salt = rand(100000, 999999);
+	$password = md5($data['password'].$salt);
+	$data['username'] = addslashes($data['username']);
+	$lastuid = $data['uid'] += $maxuid;
+	$queryuc = $ucdb->query("SELECT count(*) FROM ".UC_DBTABLEPRE."members WHERE username='$data[username]'");
+	$userexist = $ucdb->result($queryuc, 0);
+	if(!$userexist) {
+		$ucdb->query("INSERT LOW_PRIORITY INTO ".UC_DBTABLEPRE."members SET uid='$data[uid]', username='$data[username]', password='$password',
+			email='$data[email]', regip='$data[regip]', regdate='$data[regdate]', salt='$salt'", 'SILENT');
+		$ucdb->query("INSERT LOW_PRIORITY INTO ".UC_DBTABLEPRE."memberfields SET uid='$data[uid]'",'SILENT');
+	} else {
+		$ucdb->query("REPLACE INTO ".UC_DBTABLEPRE."mergemembers SET appid='".UC_APPID."', username='$data[username]'", 'SILENT');
+	}
+}
+
+$ucdb->query("ALTER TABLE ".UC_DBTABLEPRE."members AUTO_INCREMENT=".($lastuid + 1));
+
+本方式的基本流程是：首先，获取当前 UCenter 中的最大用户 ID 的值。然后，读取应用程序自己的用户表，判读用户名是否在 UCenter 重复。如果重复，把重名的用户名保存到 UCenter 的 mergemembers 表中，不合并这个用户。如果不重名，则按正常方式导入用户进行合并。当用户插入到 mergemembers 表后，用户在这个应用程序登录的时候，登录状态的返回数组中 [4] 的值将返回 1（请参考上面关于 uc_user_login() 函数的说明）。当登录状态返回重名状态后建议您在应用程序中判读用户合法性后进行更名的处理，调用本接口函数。

@@ -1,0 +1,26 @@
+@charset "utf-8";
+body{padding:0px; margin:0px; font-size:12px; font-family:Arial, Helvetica, sans-serif; word-break:break-all;}
+dl{padding:0px; margin:0px;}
+dd{padding:0px; margin:0px;}
+dt{padding:0px; margin:0px;}
+li{padding:0px; margin:0px; list-style-type:none;}
+h1 h2 h3 h4 h5 h6{ margin:0px; padding:0px;}
+ul{padding:0px; margin:0px; list-style:none;}
+form{padding:0px; margin:0px;}
+img{border:0px; margin:0px; padding:0px;}
+p{ margin:0px; padding:0px;}
+a:link {color: #0d2b59;text-decoration: none;}
+a:visited {text-decoration: none;color: #0d2b59;}
+a:hover {text-decoration: none; color: #0d2b59;}
+a:active {text-decoration: none;color: #0d2b59;}
+a {outline: none; text-decoration:none; color:#0d2b59;}
+a:active {star:expression(this.onFocus=this.blur());}
+area{star:expression(this.onFocus=this.blur());}
+:focus { outline:0; }
+.hand{ CURSOR:pointer;}
+/******以上是全局的样式*******/
+
+.shuru{border:1px #999 solid; width:140px;}
+.anniu{width:45px; height:17px; border:1px #666 solid; background:#999;}
+.guanliyuan{ border-collapse:collapse;}
+.guanliyuan th{ font-size:12px; font-weight:normal;}

@@ -1,0 +1,7 @@
+			if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) { 
+				$("#zhong_1").css("margin-top","-4px")
+			} 
+			if ($.browser.msie && ($.browser.version == "7.0") && !$.support.style) { 
+				$("#zhong_1").css("margin-top","-4px")
+			} 
+			});

@@ -1,0 +1,3 @@
+安装程序在您的计算机上检测到 Windows 2000 管理工具。在升级之前，请使用“添加/删除程序”将 Windows 2000 管理工具删除。要从运行 Windows XP Professional 的计算机远程管理服务器服务，请使用“远程桌面”。
+
+关此版本 Microsoft Windows 支持的软件列表，请查看位于 http://www.microsoft.com/isapi/redir.dll?prd=whistler&ar=help&sba=compatible 的 Microsoft Windows XP 兼容性列表。

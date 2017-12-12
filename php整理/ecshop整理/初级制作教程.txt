@@ -1,0 +1,212 @@
+在查看前阁下需要至少会使用一种编辑器（exp：Dreamweaver 、editplus 、emacs 、vi 、ee …意思就是可视化的html 编辑器或者直接文本编辑器，我在讲的时候用Dreamwaver 来讲，这样比较适合初学者和设计师）。
+
+下列章节的适用于ECshop 程序,同时这里许多内容和一些Smarty 相关。假如您已经熟悉这些内容可跳过不阅读。假如您是ECshop 新手并且想DIY 一下自己的店铺， 那您应该认真详细地从头到尾读一遍下面章节!
+
+第一章ECshop 模板基础
+读取本部分内容，您将了解：
+☆ 每个前台页面所对应的模板页面，模板文件的目录结构。
+☆ 一些最基本的ECshop 模板修改方法。
+☆ 模板的路径以及相关包含文件的方法（深入了解Dreamweaver 模板制作）。
+☆ 一些常用模板例子讲解。
+
+模板存放路径：
+ecshop/themes/xxxxx 其中的xxxxx 就是某一套模板，如，系统一般会自带的模板文件名叫做default ，（即，ecshop/themes/default ）里面放的就是安装时的默认模板，以下所有的说明都是针对默认模板来讲解。操作前提，将您当前使用的模板调整为default 模板，然后清空缓存。
+
+接下来我们进入default 目录，可以看到以下文件目录：
+
+文件目录如下：
+images/ (存放模板中用到的图片)
+library/ (存放一些小模板文件及重复被用到的模板文件)
+style.css (模板样式文件)
+index.dwt (首页的模板index.php )
+goods.dwt (商品显示页的模板goods.php )
+*.dwt (表示其它.dwt 文件)
+
+我们把images 里面的logo.gif 文件的名字，改为logo5.gif ，然后我们随便找一张gif图片，起名为logo.gif 放到images 目录中，然后我们刷新首页。看到没？首页logo 被修改了!如果你觉得大小不合适，那么我们打开library 目录中的page_header.lib 查看源代码，然后搜索images/logo.gif 然后看它后面width=”180″ height=”46″ 把180 和46 改为相应的值就可以了，到前台刷新看看。
+
+接下来我们用dreamweaver 打开index.dwt 文件，在源代码中搜索{$page_title} ，找到后，将{$page_title} 修改为“超级无敌的大卖场”，然后到浏览器前台刷新，看看页面有什么变化。
+
+看看浏览器头部啊，是不是网站的标题被改变了？
+
+对，{$page_title} 就是网站标题的标签（注：标签是从“{”开始到“}”结束哦，“{”和“}”属于标签的一部分）。
+
+整个ECshop 的模板就是一个一个这样的标签组成了，控制网站内容和数据的动态显示。
+
+比如（{$keyWords}）控制网站的关键字标签，（{$description}）网站描述标签，
+
+（这就是模板中的标签，每个标签都会对应程序里面的一个值，网站运行时模板引擎会来读取模板页面，然后把对应的标签用对应的值进行替换，就显示出我们看到的网站页面了）。
+
+很简单，如果你上一步你操作非常的容易的话，接下来的学习也是一样的。
+
+接下来要怎么改呢？
+
+下面我们真正开始做ECshop 的模板了（不懂HTML的观众准备好Dreamweaver 哦）:
+1. 我们到/themes/default 目录中，把index.dwt 改名为index_bak.dwt ，然后用Dreamweaver 新建一个HTML 文件，然后保存到/themes/default 目录中，命名为index.dwt ，刷新前台看看，什么也没有! 好,在我们新建的index.dwt 中找到<title>，把<title>和</title>中间的内容替换为“{$page_title}”，在<body>和</body>之间也放入一个{$page_title} ，刷新，网站标题被打印出来了？
+如有操作时候有弹出对话框,点击确定就可以了.
+
+2. 接下来我们选择可视化界面编辑：然后在{$page_title} 后面按Enter 键换行，然后输入：“商店公告：{$shop_notice}”，到浏览器刷新首页刷新看看。
+
+商店公告被调出来了，可以去网站后台，系统设置-> 商店设置-> 网店信息-> 商店公告-> 修改内容，然后到浏览器再刷新网站首页看看，呵呵，商店公告是被动态掉出来的。
+
+3. 继续在{$shop_notice} 后面按Enter 键换行，然后输入：
+代码如下：
+网站快讯：
+{foreach from=$new_articles item=article}
+{$article.short_title}
+{/foreach}
+
+注：换行的地方按Enter 键。
+刷新前台看看，呵呵，网站快讯被调出来了。好我们再到网站后台，文章管理->网站列表-> 添加文章，选择“网站快讯”这个分类，随便添加一篇内容，完成后前台刷新看看。
+两篇文章都被动态掉出来了。
+注释：
+代码如下：
+{foreach from=$new_articles item=article} : 循环的开始,
+{/foreach} : 循环的结束
+$new_articles: 为要循环的东西，这里为网站快讯
+{$article.short_title} : 快讯标题的标签
+模式为：
+{foreach from=$post item=name}
+content
+{/foreach}
+{foreach from=$post item=name} 和{/foreach} 标签中间可以任意添加要循环的内容content（可以为任意的东西），循环的次数受到$post 的限制（这里要填什么我都会告诉大家的）。name 为当前这个循环的对象，方便调用数据。以后这个循环我们会经常的用到哦。还是不懂也没有关系，每次遇到我都会讲那里要怎么设置的，多用就会了。
+
+我们也可以这么来写哦，注意：在代码编辑的视图里面编辑。
+代码如下：
+
+{foreach from=$new_articles item=article}
+
+{$article.short_title}
+
+{/foreach}
+
+保存，刷新首页看看，表格被一行一行的循环出来了哦。
+
+下一章预告：
+产品列表调用，还有产品缩略图！
+产品分类调用！
+
+第二章ECshop 模板进阶
+在我们上一章的基础上，我们在网站快讯的循环后面，按Enter 键，输入“商品列表”，接着建立一个2 行3 列的表格，宽度为70% ，表格边框为1（为了让大家看清楚）。
+代码如下：
+商品列表
+
+<p>商品列表</p>
+<table width=”70%” border=”1″>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+</table> 
+
+
+复制代码
+
+注：（ 1、2、3、4、5、6 这些个是序号，方便跟大家讲解）在这里，我们暂时先把下面这一行去掉（为了大家操作简单），变成：
+代码如下：
+商品列表1
+
+<p>商品列表</p>
+<table width=”70%” border=”1″>
+<tr>
+<td>1</td>
+</tr>
+</table> 
+
+
+复制代码
+
+我们要循环的是列，也就是，因此我们的循环标签应该在 和 的外面，而2 和3 应该是循环出来的东西，也就是我模板里面只用保留1 这个td 就可以了，2 和3都要去掉，于是就变成了下面的样子。代码如下：
+商品列表
+
+<p>商品列表</p>
+<table width=”70%” border=”1″>
+<tr>
+<td>1</td>
+</tr>
+</table> 
+
+
+复制代码
+
+好，现在我们开始加循环标签，我们要调用的是精品推荐商品。
+代码如下：
+商品列表
+
+{foreach from=$best_goods item=goods}
+{$goods.short_style_name}
+{/foreach}
+
+注意了：foreach 表示下面的内容属于要进行循环，from=$best_goods 表示循环的内容来自$best_goods ，（ $best_goods 是精品商品推荐的标签），item=goods 表示当前循环这一次的对象叫goods ，你也可以改为其它的东东，当然{$goods.short_style_name} 这个地方的。goods 也要相应的改了哦，{$goods.short_style_name} 表示goods 这个对象的商品名称。好了，我们保存，前台刷新看一下。精品商品被循环出来了吧？接着，为了大家应用方便，我们把goods 改为jingpinshangpin 。
+代码如下：
+商品列表
+
+{foreach from=$best_goods item=jingpinshangpin}
+{$jingpinshangpin.short_style_name}
+{/foreach}
+
+前台刷新看看，如果你有很多的精品商品你会发现商品变了，因为精品商品是随机调取出来的。好，我们继续完善它，给它加上链接对应商品的链接，也就是添加“”属性。
+代码如下：
+商品列表
+
+{foreach from=$best_goods item=jingpinshangpin}
+{$jingpinshangpin.short_style_name}
+{/foreach}
+
+刷新浏览器，点击链接看看链接到什么地方去了哦。呵呵！链接到了每个产品自己的页面了。
+
+说明：标签{$jingpinshangpin.url} 就是精品商品的商品链接的标签了，但是要记得哦，$jingpinshangpin 是你起的名字，item=$jingpinshangpin 的这个$jingpinshangpin 改变了的话，这里也要跟着改变。接下来我们为商品添加上图片，也就是增加一个属性。
+代码如下：
+商品列表
+
+{foreach from=$best_goods item=jingpinshangpin}
+
+{$jingpinshangpin.short_style_name}
+
+{/foreach}
+
+到前台刷新浏览器看看，呵呵，商品缩略图也被调出来了。
+
+说明：标签{$jingpinshangpin.thumb} 就是精品商品的缩略图的标签了，但是要记得，$jingpinshangpin 是你起的名字哦，item=$jingpinshangpin 的这个$jingpinshangpin 改变了的话，这里也要跟着改变。
+
+如果你已经熟练理解和掌握了以上的步骤，那么下面就越来越清晰和容易了。接下来我们调取新品上市（标签为：$new_goods）和热卖商品（标签为：$hot_goods），接着在刚才的代码后面加上去就是了，就不多讲了。
+代码如下：
+新品上市
+
+{foreach from=$new_goods item=xinpinshangshi}
+
+{$xinpinshangshi.short_style_name}
+
+{/foreach}
+
+热卖商品
+
+{foreach from=$hot_goods item=remaishangpin}
+
+{$remaishangpin.short_style_name}
+
+{/foreach}
+
+接着,我们要一个Menu 菜单，也就是做一个产品的分类列表出来。
+
+分类的标签是：$categories
+代码如下：
+分类列表
+{foreach from=$categories item=fenlei}
+{$fenlei.name}
+{/foreach}
+
+到前台刷新看看，分类列表被调取出来了，我们试着在后台多添加几个一级分类，然后到首页刷新看看。
+
+子分类的标签是对应在父分类标签来调用的。
+代码如下：
+分类列表
+{foreach from=$categories item=fenlei}
+{$fenlei.name}
+{foreach from=$fenlei.children item=child}
+- 

@@ -1,0 +1,37 @@
+smarty判断语句与常用标签
+发表于 2010 年 11 月 29 日 由 炫盾 立即进入这个学时。
+smarty的if语句和php的差不多，
+需要注意的是每个词之间必须用空格隔开。
+列举如下：
+eq相等，
+ne、neq不相等，
+gt大于，
+lt小于，
+gte、ge大于等于，
+lte、le 小于等于，
+not非， mod求模。
+is [not] div by是否能被某数整除，
+is [not] even是否为偶数，
+$a is [not] even by $b即($a / $b) % 2 == 0，
+is [not] odd是否为奇，
+$a is not odd by $b即($a / $b) % 2 != 0 示例：
+
+判断语句写法例如：
+
+{if $name==”小明”}
+这是小明。
+{elseif $name==”小红”}
+是小红！
+{else}
+谁也不是
+{/if}
+
+常见标签
+
+输出大括号：
+{ldelim}内容{rdelim}
+print：
+{内容}
+最常用的：{literal}{/literal}
+这个方式搜索引擎不会处理里面的内容，一般用来放置javascript代码
+执行php代码：{php}{/php} ($php_handling配置php的执行方式)

@@ -1,0 +1,5 @@
+<script type="text/javascript"> 
+setInterval("window.location.reload()",1000); 
+//Лђеп 
+//setTimeout("window.location.reload()",5000); 
+</script> 

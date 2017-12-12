@@ -1,0 +1,12 @@
+<script>
+function ConfirmDelBig()
+{
+   if(confirm("确定要删除吗？一旦删除不能恢复！"))
+     return true;
+   else
+     return false;
+	 
+}
+
+
+</script>

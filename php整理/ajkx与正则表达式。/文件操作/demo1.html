@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+table,td{
+	border:#F00 solid 1px;
+}
+.warn
+{
+	display:inline !important;
+	color:#F00;
+}
+#lblusername,#lblpwd,#lblsex,#lblage,#lblmobile,#lblphone,#lblemail{
+	display:none;
+}
+</style>
+<script language="javascript">
+//验证用户名
+function checkUsername()
+{
+	nodeUsername=document.getElementById("lblusername")
+	if(!(/^S\d{3}$/.test(frm.username.value)))
+	{
+		nodeUsername.className="warn"
+		nodeUsername.focus();
+		return false;
+	}
+	else
+	{
+		nodeUsername.className=""
+		return true;
+	}
+}
+//验证密码
+function checkPwd()
+{
+	node=document.getElementById("lblpwd");
+	if(!(/^\d{6}$/.test(frm.pwd.value)))
+	{
+		node.className="warn"
+		node.focus();
+		return false;
+	}
+	else
+	{
+		node.className=""
+		return true;
+	}
+}
+function check()
+{
+	if(!checkUsername())
+	{
+		return false;
+	}
+}
+function fun1(id)
+{
+	node=document.getElementById(id);
+	if(node.id=="username")
+	{
+		if(node.value=="*格式S001")
+			node.value="";
+		return;
+	}
+	if(node.id=="pwd")
+	{
+		if(node.value=="*6位数字")
+			node.value="";
+		return;
+	}
+}
+function fun2(id)
+{
+	node=document.getElementById(id);
+	if(node.id=="username")
+	{
+		if(node.value=="")
+			node.value="*格式S001";
+		else
+			checkUsername();
+		return;
+	}
+	if(node.id=="pwd")
+	{
+		if(node.value=="")
+			node.value="*6位数字";
+		else
+			checkPwd();
+		return;
+	}
+	
+}
+</script>
+</head>
+
+<body>
+<form id="frm" name="frm" method="post" action="" onsubmit="return check()">
+  <table width="500" border="1" align="center">
+    <tr>
+      <td>用户名：</td>
+      <td>
+        <input type="text" name="username" id="username" value="*格式S001" onfocus="fun1(this.id)" onblur="fun2(this.id)" />
+      <label id="lblusername">*格式S001</label></td>
+    </tr>
+    <tr>
+      <td>密码：</td>
+      <td>
+        <input type="text" name="pwd" id="pwd"  value="*6位数字" onfocus="fun1(this.id)" onblur="fun2(this.id)" />
+      <label id="lblpwd">*6位数字</label></td>
+    </tr>
+    <tr>
+      <td>性别：</td>
+      <td>
+        <input type="text" name="sex" id="sex" />
+      <label id="lblsex">*男或女</label></td>
+    </tr>
+    <tr>
+      <td>年龄：</td>
+      <td>
+        <input type="text" name="age" id="age" />
+       <label id="lblage"> *10-120
+      </label></td>
+    </tr>
+    <tr>
+      <td>手机：</td>
+      <td>
+        <input type="text" name="mobile" id="mobile" />
+       <label id="lblmobile"> *13188888888
+      </label></td>
+    </tr>
+    <tr>
+      <td>电话：</td>
+      <td>
+        <input type="text" name="phone" id="phone" />
+     
+       <label id="lblphone"> *010-11111111 </label></td>
+    </tr>
+    <tr>
+      <td>邮件：</td>
+      <td>
+        <input type="text" name="email" id="email" />
+      <label id="lblemail">  *sunjing010@sina.com
+      </label></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="submit" name="button" id="button" value="提交" />
+     </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

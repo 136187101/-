@@ -1,0 +1,1 @@
+select a.*,b.id as bid,b.title as bt from essay_zilei a left join essay b on b.id = a.fuid 

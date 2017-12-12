@@ -1,0 +1,215 @@
+基础版配置 web.php
+高级版配置 main.php
+
+1. 资源 装配
+
+  /assets/AppAsset.php
+
+２.入口index.php配置　
+
+  /web/index.php配置
+  defined('YII_DEBUG') or define('YII_DEBUG', false);      //debug mode: true
+  defined('YII_ENV') or define('YII_ENV', 'prod');         //debug mode: dev
+
+3.  配置数据库
+
+    ３.１系统默认配置
+
+　　　/config/db.php
+   return [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+    ];
+
+
+
+
+　３.２常用数据库配置
+
+　　　   /config/db.php
+   return [
+        'class' => 'yii\db\Connection',
+        //'dsn' => 'mssql:host=localhost;dbname=shop_obd2', // MySQL, MariaDB
+        //'dsn' => 'sqlite:/path/to/database/file', // SQLite
+        //'dsn' => 'pgsql:host=localhost;port=5432;dbname=mydatabase', // PostgreSQL
+        //'dsn' => 'cubrid:dbname=demodb;host=localhost;port=33000', // CUBRID
+        'dsn' => 'sqlsrv:Server=184.168.194.53;Database=xms_mbstarshop', // MS SQL Server, sqlsrv driver
+        //'dsn' => 'dblib:host=localhost;dbname=mydatabase', // MS SQL Server, dblib driver
+        //'dsn' => 'mssql:host=localhost;dbname=Sql_CarSets_co_uk', // MS SQL Server, mssql driver
+        //'dsn' => 'oci:dbname=//localhost:1521/mydatabase', // Oracle
+        
+        'username' => 'xmu_mbstarshop',
+        'password' => ' ',
+        'charset' => 'utf8',
+        //'tablePrefix' => 'tb_',
+    ];
+
+
+
+
+４.ＷＥＢ应用配置config/web.php
+
+   4.1　别名配置
+
+
+  　　'aliases' => [
+   　　　 '@name1' => 'path/to/path1',        // @xxx 表示别名
+　　　    '@name2' => 'path/to/path2',
+　　   ],
+
+　4.2 修改布局模板
+
+　　　--- 框架默认定义 ---
+
+
+　　　yii2/base/application.php
+       　 public $layout = 'main';
+
+           --- 自定义配置 ---
+
+
+            /config/web.php
+            'layout' => 'main',
+    4.3　修改默认路由
+
+　　--- 框架默认路由 ---
+
+        yii2/web/application.php
+        public $defaultRoute = 'site';
+
+        --- 自定义修改路由 ---
+
+        /config/web.php
+        'defaultRoute' => 'index',
+
+  4.4 配置路由 ( 配置reUrl, 和  /config/web.php　只能二选一，否则其中一个不工作)
+
+
+     4.4.1 /config/web.php配置
+
+　　'urlManager' => [
+            'showScriptName' => false,   // Disable index.php
+            'enablePrettyUrl' => true,   // Disable r= routes
+            'enableStrictParsing' => false,
+            'rules'=>array(
+                [
+                'pattern' => 'test/about',
+                'route' => 'site/about',
+                //'suffix' => '.do',
+                ],
+                'wholesale/<title:\w+>'=>'site/<title>',
+            '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+            '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+             ),
+            
+        ],
+
+
+  4.4.2  在/web/.htaccess
+
+      Options FollowSymLinks
+      RewriteEngine on
+      RewriteRule test/abc.do$ index.php?r=/site/contact [L]
+      RewriteCond %{REQUEST_FILENAME} !-f
+      RewriteRule !\.(js|ico|txt|gif|jpg|png|css|html|xml)$ /index.php
+      Options -Indexes
+
+
+
+
+  4.5 设置Cookie加密key
+
+         /config/web.php
+         'components' => [
+             'request' => [
+                // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+                'cookieValidationKey' => 'life2015',
+             ],
+
+         ],
+
+
+
+
+ 
+
+
+
+
+
+５. 资源装配配置
+
+　 5.1 /assets/AppAsset.php
+    public $css = [
+        'css/site.css',        //附加到header
+    ];
+    public $js = [
+                    //'test/test1.js',默认应用根目录前缀：/web/  ，附加到footer
+    ];　
+
+ 
+
+   5.2 --- 在视图脚本中注册，调用 ---
+
+    方法一
+    AppAsset::register($this);   //调用已资源管理器中已配置的文件
+    ?>
+    <?php $this->beginPage() ?>
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>">
+        <head>
+        ...
+        </head>
+        <body>
+        <?php $this->beginBody() ?>
+        ...
+
+        <?php $this->endBody() ?>    <!-- 相当于点位符 -->
+    </body>
+    </html>
+    <?php $this->endPage() ?>
+
+
+    方法二，注册文件
+
+
+    $this->registerJsFile('abc.js');   //加载在尾部，但在jquery.js之前
+    $this->registerJsFile('aaa.js', ['depends' => 'app\assets\AppAsset']);  //加载在jquery.js之后
+
+    方法三，注册 code block
+
+    可以直接写脚本，或
+
+      <?php$this->beginBlock('test')?> 
+
+$(function($){
+
+$('#mybutton').click(function(){
+
+alert('OK');
+
+});
+
+});
+
+<?php$this->endBlock()?>
+
+<?php$this->registerJs($this->blocks['test'], \yii\web\View::POS_END); ?>
+
+    $this->registerJs($this->blocks['test']);   //加载在尾部，但在jquery.js之前
+    $this->registerJs($this->blocks['test'],  ['depends' => 'app\assets\AppAsset']);  //加载在jquery.js之后
+
+
+
+
+6. /config/params.php 配置参数：
+　　\Yii::$app->params['recentPosts']
+
+
+
+
+--- 在控制器中修改视图中的 $this->title
+      \Yii::$app->view->title= 'from controller abc';　

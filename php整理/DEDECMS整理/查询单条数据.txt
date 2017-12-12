@@ -1,0 +1,2 @@
+{dede:sql sql='Select body from dede_addonarticle where aid=81'}[field:body/]
+{/dede:sql}

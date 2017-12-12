@@ -1,0 +1,18 @@
+E:\php\qibo\a_d\admin\template\norm\listad.htm
+修改复制功能
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function JM_cc(ob){
+
+var obj=document.getElementById(ob).value; if (obj) { 
+
+//obj.select();js=obj.createTextRange();js.execCommand("Copy");
+
+clipboardData.setData("text",obj);
+
+}
+}
+//-->
+</SCRIPT>
+
+它之前的obj没有加value,so 取不到值， 复制也有问题

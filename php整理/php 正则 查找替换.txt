@@ -1,0 +1,12 @@
+	 $str='{grkcid:385,hjd:侯建东}';
+	 //$str='{"grkcid":"385","hjd":"侯建东"}';
+	 $array = json_decode($str,true);
+	 if(empty($array))
+	 {
+		 $patterns=array('/{/','/:/','/,/','/}/');
+		 $replace=array('{"','":"','","','"}');
+		 $str=preg_replace($patterns,$replace,$str);
+		 $array = json_decode($str,true);	 		 
+	 }
+	 echo $array['grkcid'];
+

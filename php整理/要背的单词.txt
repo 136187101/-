@@ -1,0 +1,57 @@
+explode：把字符串变成数组！$array=explode(",",$字符串);
+$ai=substr($ai,0,-1);:去掉数组最后的逗号。
+mysql_num_rows:返回查询记录集条数！
+mysql_fetch_array(): 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有
+返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false。
+$hobby=implode(",",$hobby);:把数组拆分为字符串。
+sizeof($hobby):查询数组数量，和count一样。
+foreach($数组 as $临时变量){
+	echo $临时变量;
+}
+
+end 获取数据最后一个 end($array);
+
+聚合函数：
+平均分：avg;
+最大值：max;
+最小值：min；
+查询记录的总行数：count;
+总和:sum
+
+Mysql函数：
+distinct 不输出结果的重复值。
+
+PHP跳转先打开缓冲流：
+ob_start();
+跳转:header("localhost:地址")!
+打开会话：
+session_start();
+服务器分配ID：
+session_id()；
+stripslashes:转译字符；
+
+时间函数： date('Y-m-d H:i:s')
+
+ceil :进一
+19.27!
+
+session_unset()
+释放当前在内存中已经创建的所有$_SESSION变量，但不删除session文件以及不释放对应的session id
+
+session_destroy()
+删除当前用户对应的session文件以及释放session id，内存中的$_SESSION变量内容依然保留
+
+unset() 销毁指定的变量
+
+格式：
+	echo "<pre>";
+	print_r($goods);
+	echo "</pre>";
+
+mysql_insert_id() :函数返回上一步 INSERT 操作产生的 ID。
+
+提交按钮变灰  echo "disabled"；
+
+iconv_substr 截取字符串
+	echo iconv_substr($_POST["text"],0,10,"utf-8");
+

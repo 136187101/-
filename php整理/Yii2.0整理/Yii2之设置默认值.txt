@@ -1,0 +1,15 @@
+1.在模型中的rules方法中定义默认值，这个默认值是当提交的数据没有值得情况下生效。而在页面的js检测是不会与这发生关系的，在页面中设置默认值请往下看。
+
+return [
+    // 若 "username" 和 "email" 为空，则设为 null
+    [['username', 'email'], 'default'],
+
+    // 若 "level" 为空，则设其为 1
+    ['level', 'default', 'value' => 1],
+];
+
+2.在页面中定义默认值
+
+    //value就是默认值
+    <?= $form->field($model, 'split_ratio_zhubo')->textInput(['maxlength' => true,'value'=>30]) ?>
+

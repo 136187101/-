@@ -1,0 +1,2 @@
+var dataObj=eval("("+msg+")");//转换为json对象 
+alert(dataObj.id);

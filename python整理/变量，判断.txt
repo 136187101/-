@@ -1,0 +1,12 @@
+# coding=utf-8
+a=10;
+if a>90:
+    print("你考的非常好啊")
+elif a > 80:
+    print("良好")
+elif a > 60:
+    print("刚好及格")
+elif a>30:
+    print("你不及格")
+else:
+    print("你可以退学了！")

@@ -1,0 +1,49 @@
+                <div class="hzblnr">
+                    <a class="prevbut" onmouseup="ISL_StopUp_1()" onmousedown="ISL_GoUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"><img src="images/zuoyou_08.jpg" width="41" height="159" /></a>
+                    <div class="pcont" id="ISL_Cont_1">
+                        <div class="ScrCont">
+                            <ul class="myimg" id="List1_1">
+								<li><img src="http://img.ffffound.com/static-data/assets/6/f8a9dd53720bf31b5917915e8222c27370a3681c_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/68e9a7a8476e26a1022fa5e39ccdda669a5d4f08_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/56d1b9aaff5b424f1cdb08b80544d5150839b4de_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/56d1b9aaff5b424f1cdb08b80544d5150839b4de_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/20417dfc945bae6c720a660625e9652a154c2c94_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/f4a9f29299f3dba6e7af0ac3c5aff93e01f874d3_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/ca6f0c9ac0c6e3bfce827cd92833e1db620b6377_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/809fcfbb8a1f58d1d47a760fd4283556cce201ef_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/56d1b9aaff5b424f1cdb08b80544d5150839b4de_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/49d6ae8901500f473a2e3e58e5b5ddc0e788bc9d_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/f8a9dd53720bf31b5917915e8222c27370a3681c_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+			<li><img src="http://img.ffffound.com/static-data/assets/6/68e9a7a8476e26a1022fa5e39ccdda669a5d4f08_m.jpg" alt="demo" title="demo" width="160" height="108" /><p>这里是标题</p></li>
+                            </ul>
+                            <ul class="myimg" id="List2_1"></ul>
+                        </div>
+                    </div>
+                    <a class="nextbut"onmouseup="ISL_StopDown_1()" onmousedown="ISL_GoDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self"><img src="images/zuoyou_10.jpg" width="39" height="159" /></a>
+                </div>
+                <script type="text/javascript">picrun_ini();</script>
+
+
+
+
+css
+
+/*demo css*/
+.hzblnr{ margin:0 auto; width:977px; overflow:hidden; height:159px; }
+.prevbut,.nextbut { float:left; margin-left:0px;width:20px; height:149px; text-align:center; }
+
+.hzblnr .pcont { float:left;position:relative;overflow:hidden; width:900px; margin-left:15px;  height:auto; padding-top:10px;}
+.hzblnr .ScrCont { width:32766px; zoom: 1}
+.hzblnr #List1_1 {float: left}
+.hzblnr #List2_1 {float: left}
+
+.myimg{ padding:0; float:left; display:block; width:auto; height:auto; }
+.myimg li{ float:left; margin:0 5px;width:157px;margin-left:20px;}
+.myimg li img{ margin:0 auto;width:160px;height:108px; text-align:center; text-align:center;  border:2px #9da8bd solid;}
+.myimg li p{ margin-top:10px; text-align:center; color:#383838;}
+
+

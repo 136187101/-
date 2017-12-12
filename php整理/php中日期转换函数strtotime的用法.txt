@@ -1,0 +1,57 @@
+php中日期转换函数strtotime的用法：
+　　
+　　语法：
+　　
+　　int strtotime （ string time [, int now] ）
+　　
+　　返回将任何英文文本的日期时间描述解析为 Unix 时间戳
+　　
+　　实例：
+　　
+　　一，获取指定日期的unix时间戳 strtotime（“2009-1-22”） 示例如下：
+　　
+　　echo strtotime（“2009-1-22”） 结果：1232553600
+　　
+　　说明：返回2009年1月22日0点0分0秒时间戳
+　　
+　　二，获取英文文本日期时间 示例如下：
+　　
+　　便于比较，使用date将当时间戳与指定时间戳转换成系统时间
+　　
+　　（1）打印明天此时的时间戳strtotime（“+1 day”）
+　　
+　　当前时间：echo date（“Y-m-d H:i:s”,time（）） 结果：2009-01-22 09:40:25
+　　
+　　指定时间：echo date（“Y-m-d H:i:s”,strtotime（“+1 day”）） 结果：2009-01-23 09:40:25
+　　
+　　（2）打印昨天此时的时间戳strtotime（“-1 day”）
+　　
+　　当前时间：echo date（“Y-m-d H:i:s”,time（）） 结果：2009-01-22 09:40:25
+　　
+　　指定时间：echo date（“Y-m-d H:i:s”,strtotime（“-1 day”）） 结果：2009-01-21 09:40:25
+　　
+　　（3）打印下个星期此时的时间戳strtotime（“+1 week”）
+　　
+　　当前时间：echo date（“Y-m-d H:i:s”,time（）） 结果：2009-01-22 09:40:25
+　　
+　　指定时间：echo date（“Y-m-d H:i:s”,strtotime（“+1 week”）） 结果：2009-01-29 09:40:25
+　　
+　　（4）打印上个星期此时的时间戳strtotime（“-1 week”）
+　　
+　　当前时间：echo date（“Y-m-d H:i:s”,time（）） 结果：2009-01-22 09:40:25
+　　
+　　指定时间：echo date（“Y-m-d H:i:s”,strtotime（“-1 week”）） 结果：2009-01-15 09:40:25
+　　
+　　（5）打印指定下星期几的时间戳strtotime（“next Thursday”）
+　　
+　　当前时间：echo date（“Y-m-d H:i:s”,time（）） 结果：2009-01-22 09:40:25
+　　
+　　指定时间：echo date（“Y-m-d H:i:s”,strtotime（“next Thursday”）） 结果：2009-01-29 00:00:00
+　　
+　　（6）打印指定上星期几的时间戳strtotime（“last Thursday”）
+　　
+　　当前时间：echo date（“Y-m-d H:i:s”,time（）） 结果：2009-01-22 09:40:25
+　　
+　　指定时间：echo date（“Y-m-d H:i:s”,strtotime（“last Thursday”）） 结果：2009-01-15 00:00:00
+　　
+　　以上示例可知，strtotime能将任何英文文本的日期时间描述解析为Unix时间戳，我们结合mktime（）或date（）格式化日期时间获取指定的时间戳，实现所需要的日期时间。

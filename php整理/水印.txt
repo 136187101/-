@@ -1,0 +1,43 @@
+<?php
+$image="uid.jpg";//图片路径
+
+$img=getimagesize($image);//载入图片的函数   得到图片的信息
+
+//var_dump($img);//可以打印出数组，查看载入图片的信息
+
+switch($img[2]){//判断图片的类型
+	case 1:
+		$im=@imagecreatefromgif($image);//载入图片，创建新图片
+	break;
+	
+	case 2:
+		$im=@imagecreatefromjpeg($image);
+	break;
+
+	case 3:
+		$im=@imagecreatefrompng($image);
+	break;
+}
+
+$logo="dfvv.jpg";
+$lo=getimagesize($logo);
+
+switch($lo[2]){
+	case 1:
+		$in=@imagecreatefromgif($logo);//载入图片，创建新图片
+	break;
+	
+	case 2:
+		$in=@imagecreatefromjpeg($logo);
+	break;
+
+	case 3:
+		$in=@imagecreatefrompng($logo);
+	break;
+}
+
+imagecopy($im,$in,200,100,0,0,75,26);//两个图片合并，，，，大图片，小图片，小图片的x轴，小图片的y轴，小图片在画布的x轴，小图片在画布的y轴，小图片的宽，小图片的高
+
+imagejpeg($im, "sdfsfd.jpg", 100);//加个100可以更清晰
+
+?>

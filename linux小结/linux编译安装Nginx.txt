@@ -1,0 +1,47 @@
+Linux_Ubuntu编译安装Nginx与使用
+
+Linux安装Nginx准备工作
+sudo apt-get install gcc g++ automake libpcre3 libpcre3-dev zlib1g zlib1g.dev openssl libssl-dev
+GCC：编译器
+Automake：自动完成Makefile
+Pcre库：支持Rewrite
+Zlib库：支持gzip
+Openssl库：支持ssl模块
+
+使用configure自动创建Makefile文件
+mkdir /nginx_zjwlgr/  根目录创建文件夹
+wget http://nginx.org/download/nginx-1.6.2.tar.gz 下载nginx
+cp nginx.tar.gz /nginx_zjwlgr  拷贝nginx包
+tar xf nginx.tar.gz  解压nginx包
+cd nginx.1.6.2  进入解压后的文件夹
+./configure --prefix=/usr/local/nginx_162  指定nginx安装目录
+ls -l  查看Makefile文件
+
+Nginx的源代码编译和安装
+cd nginx.1.6.2  进入解压后的文件夹
+make  .....
+make install ....
+cd /nginx_zjwlgr; ls *  可看到安装后的资源
+安装完成
+
+Nginx的信号控制
+使用kill命令发送信号：
+kill 信号名称 PID
+信号名称：
+1，TERM或INT - 快速停止Nginx服务
+2，QUIT - 平缓停止Nginx服务
+3，HUP - 使用新的配置文件启动进程，之后平缓停止原有进程，所谓 平滑启动
+4，USR1 - 重新打开日志文件，常用于日志分割
+5，USR2 - 使用新版本Nginx文件启动服务，之后平缓停止原有Nginx服务，所谓 平滑升级
+6，WINCH - 平缓停止worker process，由于Nginx服务器平滑升级
+PID：
+1，Nginx服务主进程的PID，获取NginxPID，使用系统的ps命令查看特定分组进程：ps -ef | grep Nginx
+
+Nginx服务器的启动停止重启
+1，Nginx主程序命令，./sbin/nginx -h 查看帮助后 -V版本号，-t配置文件是否有错误语法 等......
+2，启动Nginx服务器：./sbin/nginx
+3，停止Nginx服务器：kill -TERM PID
+4，平滑重启Nginx服务器：kill -HUP PID
+5，平缓升级Nginx服务器：kill -USR2 PID 查看新的Nginx正常后，kill -WINCH PID 停止旧服务器
+
+ps -ef | grep nginx  查看谁占用ngix 

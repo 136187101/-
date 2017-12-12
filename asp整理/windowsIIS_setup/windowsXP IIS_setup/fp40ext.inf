@@ -1,0 +1,335 @@
+[Version]
+Signature = "$Windows NT$"
+
+[Optional Components]
+fp_extensions
+fp_vid_deploy
+
+[fp_extensions]
+; Core FP server extensions
+Parent = iis
+Needs = iis_www
+OptionDesc = %fp_desc%
+Tip = %fp_tip%
+MODETOKEN
+IconIndex = *
+SizeApproximation=SIZE_APPROXIMATION_TOKEN
+
+[fp_vid_deploy]
+; If this subcomponent is chosen, we'll copy fp4areg.dll into the
+; isapi\_vti_aut directory, so Visual InterDev can use it to
+; remotely deploy apps.
+; *Not* installed by default.
+Parent = iis
+Needs = fp_extensions
+OptionDesc = %vid_desc%
+Tip = %vid_tip%
+; Modes not set, because we don't install this by default
+IconIndex = *
+
+[fp_install_vid]
+CopyFiles = FPvid_deploy
+
+[fp_uninstall_vid]
+DelFiles = FPvid_deploy
+
+;-------------------------
+
+[fp_install_r]
+CopyFiles = FPbin, FPisapiBin, FPisapiAut, FPisapiAdm, FPcgiBin, FPcgiAut, FPcgiAdm, FPadmin_ntiis, FPadmin_ntcgi, FPadminScripts_ntiis, FPadminScripts_ntcgi, FProot_servsupp, FPvinavbar, FPintl, FP98bin
+
+; ---------------- Start of file lists --------------
+
+[FPbin]
+_vti_inf.htm,,,32
+cfgwiz.exe,,,32
+fp4areg.dll,,,32
+fp4atxt.dll,,,32
+fp4autl.dll,,,32
+fp4avss.dll,,,32
+fp4awel.dll,,,32
+fpencode.dll,,,32
+fpexedll.dll,,,32
+fpmmc.dll,,,32
+fpmmc.msc,,,32
+fpremadm.exe,,,32
+fpsrvadm.exe,,,32
+postinfo.htm,,,32
+tcptest.exe,,,32
+
+[FPisapiBin]
+shtml.dll,,,32
+fpcount.exe,,,32
+
+[FPisapiAut]
+author.dll,,,32
+
+[FPisapiAdm]
+admin.dll,,,32
+
+[FPcgiBin]
+shtml.exe,,,32
+fpcount.exe,,,32
+
+[FPcgiAut]
+author.exe,,,32
+
+[FPcgiAdm]
+admin.exe,,,32
+
+; HTML admin forms, for remote admin of FrontPage server extensions
+[FPadmin_ntiis]
+fpadmin.htm,ntiis_fpadmin.htm,,32
+fpbanner.htm,ntiis_fpbanner.htm,,32
+check.htm,ntiis_check.htm,,32
+contents.htm,ntiis_contents.htm,,32
+disable.htm,ntiis_disable.htm,,32
+enable.htm,ntiis_enable.htm,,32
+ipaddr.htm,ntiis_ipaddr.htm,,32
+newsrvr.htm,ntiis_newsrvr.htm,,32
+newsbweb.htm,ntiis_newsbweb.htm,,32
+perms.htm,ntiis_perms.htm,,32
+recalc.htm,ntiis_recalc.htm,,32
+uninstal.htm,ntiis_uninstal.htm,,32
+topleft.gif,ntiis_topleft.gif,,32
+topright.gif,ntiis_topright.gif,,32
+fpcreate.gif,ntiis_fpcreate.gif,,32
+delsbweb.htm,ntiis_delsbweb.htm,,32
+rensbweb.htm,ntiis_rensbweb.htm,,32
+direxe.htm,ntiis_direxe.htm,,32
+dirnoexe.htm,ntiis_dirnoexe.htm,,32
+footer.htm,ntiis_footer.htm,,32
+
+[FPadmin_ntcgi]
+fpadmin.htm,ntcgi_fpadmin.htm,,32
+fpbanner.htm,ntcgi_fpbanner.htm,,32
+check.htm,ntcgi_check.htm,,32
+contents.htm,ntcgi_contents.htm,,32
+disable.htm,ntcgi_disable.htm,,32
+enable.htm,ntcgi_enable.htm,,32
+ipaddr.htm,ntcgi_ipaddr.htm,,32
+newsrvr.htm,ntcgi_newsrvr.htm,,32
+newsbweb.htm,ntcgi_newsbweb.htm,,32
+perms.htm,ntcgi_perms.htm,,32
+recalc.htm,ntcgi_recalc.htm,,32
+uninstal.htm,ntcgi_uninstal.htm,,32
+topleft.gif,ntcgi_topleft.gif,,32
+topright.gif,ntcgi_topright.gif,,32
+fpcreate.gif,ntcgi_fpcreate.gif,,32
+delsbweb.htm,ntcgi_delsbweb.htm,,32
+rensbweb.htm,ntcgi_rensbweb.htm,,32
+direxe.htm,ntcgi_direxe.htm,,32
+dirnoexe.htm,ntcgi_dirnoexe.htm,,32
+footer.htm,ntcgi_footer.htm,,32
+
+[FPadminScripts_ntiis]
+fpadmdll.dll,,,32
+
+[FPadminScripts_ntcgi]
+fpadmcgi.exe,,,32
+
+[FProot_servsupp]
+fp4amsft.dll,,,32
+fp4apws.dll,,,32
+fp4awebs.dll,,,32
+fp4anscp.dll,,,32
+
+[FPvinavbar]
+fp4avnb.dll,,,32
+vinavbar.inf,,,32
+vinavbar.btl,,,32
+
+[FPintl]
+fpmmc.chm,,,32
+fpmmcglo.hlp,,,32
+fpmmcsat.dll,,,32
+fpext.msg,,,32
+nortbots.htm,,,32
+tcptsat.dll,,,32
+
+[FP98bin]
+fp98sadm.exe,,,32
+fp98swin.exe,,,32
+fpsrvadm.exe,stub_fpsrvadm.exe,,32
+fpsrvwin.exe,stub_fpsrvwin.exe,,32
+
+[FPvid_deploy]
+fp30reg.dll,fp4areg.dll,,32
+
+; ---------------- Directory Definitions --------------
+
+[DestinationDirs]
+FPbin                = 40002, 40\bin
+FPisapiBin           = 40002, 40\isapi
+FPisapiAut           = 40002, 40\isapi\_vti_aut
+FPisapiAdm           = 40002, 40\isapi\_vti_adm
+FPcgiBin             = 40002, 40\_vti_bin
+FPcgiAut             = 40002, 40\_vti_bin\_vti_aut
+FPcgiAdm             = 40002, 40\_vti_bin\_vti_adm
+FPadmin_ntiis        = 40002, 40\admisapi
+FPadminScripts_ntiis = 40002, 40\admisapi\scripts
+FPadmin_ntcgi        = 40002, 40\admcgi
+FPadminScripts_ntcgi = 40002, 40\admcgi\scripts
+FProot_servsupp      = 40002, 40\servsupp
+FPvinavbar           = 40002, 40\bots\vinavbar
+FPintl               = 40002, 40\bin\2052
+
+FP98bin              = 40003, version3.0\bin
+
+; If the fp_vid_deploy subcomponent is selected, we install fp4areg.dll
+; to the isapi\_vti_aut, from whence it gets propagated to all
+; webs
+; NOTE: This is the same as the FPisapiAut directory.
+FPvid_deploy         = 40002, 40\isapi\_vti_aut
+
+; -----------------------------------------
+; 34000 = "\i386" or "\Nec98"
+
+[SourceDisksNames.x86]
+1=PLATFORMCDNAME,"fp40ext.cab",0,%34000%
+
+[SourceDisksNames.alpha]
+1=PLATFORMCDNAME,"fp40ext.cab",0,\alpha
+
+[SourceDisksFiles]
+_vti_inf.htm=1,,,,
+cfgwiz.exe=1,,,,
+fp4areg.dll=1,,,,
+fp4atxt.dll=1,,,,
+fp4autl.dll=1,,,,
+fp4avss.dll=1,,,,
+fp4awel.dll=1,,,,
+fpencode.dll=1,,,,
+fpexedll.dll=1,,,,
+fpmmc.dll=1,,,,
+fpmmc.msc=1,,,,
+fpremadm.exe=1,,,,
+fpsrvadm.exe=1,,,,
+nortbots.htm=1,,,,
+postinfo.htm=1,,,,
+tcptest.exe=1,,,,
+fpmmc.chm=1,,,,
+fpmmcglo.hlp=1,,,,
+fpmmcsat.dll=1,,,,
+tcptsat.dll=1,,,,
+fpext.msg=1,,,,
+shtml.dll=1,,,,
+fpcount.exe=1,,,,
+author.dll=1,,,,
+admin.dll=1,,,,
+shtml.exe=1,,,,
+fpcount.exe=1,,,,
+author.exe=1,,,,
+admin.exe=1,,,,
+ntiis_fpadmin.htm=1,,,,
+ntiis_fpbanner.htm=1,,,,
+ntiis_check.htm=1,,,,
+ntiis_contents.htm=1,,,,
+ntiis_disable.htm=1,,,,
+ntiis_enable.htm=1,,,,
+ntiis_ipaddr.htm=1,,,,
+ntiis_newsrvr.htm=1,,,,
+ntiis_newsbweb.htm=1,,,,
+ntiis_perms.htm=1,,,,
+ntiis_recalc.htm=1,,,,
+ntiis_uninstal.htm=1,,,,
+ntiis_topleft.gif=1,,,,
+ntiis_topright.gif=1,,,,
+ntiis_fpcreate.gif=1,,,,
+ntiis_delsbweb.htm=1,,,,
+ntiis_rensbweb.htm=1,,,,
+ntiis_direxe.htm=1,,,,
+ntiis_dirnoexe.htm=1,,,,
+ntiis_footer.htm=1,,,,
+ntcgi_fpadmin.htm=1,,,,
+ntcgi_fpbanner.htm=1,,,,
+ntcgi_check.htm=1,,,,
+ntcgi_contents.htm=1,,,,
+ntcgi_disable.htm=1,,,,
+ntcgi_enable.htm=1,,,,
+ntcgi_ipaddr.htm=1,,,,
+ntcgi_newsrvr.htm=1,,,,
+ntcgi_newsbweb.htm=1,,,,
+ntcgi_perms.htm=1,,,,
+ntcgi_recalc.htm=1,,,,
+ntcgi_uninstal.htm=1,,,,
+ntcgi_topleft.gif=1,,,,
+ntcgi_topright.gif=1,,,,
+ntcgi_fpcreate.gif=1,,,,
+ntcgi_delsbweb.htm=1,,,,
+ntcgi_rensbweb.htm=1,,,,
+ntcgi_direxe.htm=1,,,,
+ntcgi_dirnoexe.htm=1,,,,
+ntcgi_footer.htm=1,,,,
+fpadmdll.dll=1,,,,
+fpadmcgi.exe=1,,,,
+fp4amsft.dll=1,,,,
+fp4apws.dll=1,,,,
+fp4awebs.dll=1,,,,
+fp4anscp.dll=1,,,,
+fp4avnb.dll=1,,,,
+vinavbar.inf=1,,,,
+vinavbar.btl=1,,,,
+fp98sadm.exe=1,,,,
+fp98swin.exe=1,,,,
+stub_fpsrvadm.exe=1,,,,
+stub_fpsrvwin.exe=1,,,,
+
+[lang_dep]
+;
+; Language-dependent strings loaded explicitly by the FP OCM code
+; Localize all strings in this section and the next.
+;
+FrontPageLangID = "2052"
+UILangAbbrev = "chs"
+;
+; next 2 strings must be valid filenames
+;
+FrontPageRoot = ""
+ServerAdminDesc = "FrontPage 服务器管理员"
+;
+; status strings, displayed during install/uninstall
+;
+ConfiguringExtensions = "正在配置 FrontPage 服务器扩展..."
+RemovingExtensions = "正在删除 FrontPage 服务器扩展..."
+;
+; The following is a security warning displayed when the user does a Custom
+; setup and chooses to install the VID RAD deployment support DLL.
+;
+; The four VidWarningX strings are simply concatenated together.  There should be
+; a single space at the end of each.  The max length for each individual string
+; is 512 bytes.
+;
+VidWarning1 = "您已经选择了安装 Visual InterDev RAD 远程配置支持。只有开发用的服务器需要安装， "
+VidWarning2 = "因为 RAD 可让作者注册服务器组件，并且修改 COM+ 设置以影响正在运行的服务器状态。 "
+VidWarning3 = "如果您安装了 RAD Remote Deployment Support，需要经常检查 FrontPage 站点权限设置， "
+VidWarning4 = "从而确保未经授权的作者无法获得创作权。"
+VidWarningTitle = "Visual InterDev RAD 远程配置支持"
+;
+; The following are command lines used to install/uninstall/upgrade the
+; server extensions.
+; Do Not Localize!
+; Do Not change the order of the substitution parameters!
+; Note: the %%s in New/DelFPWebCmdLine is intentional - this string is sprintf'd
+;       into twice, the second time by K2's MMC.
+;
+FpCmdInstall = "%s\40\bin\fpsrvadm -unattended true -o install -t msiis -m %s -u ""%s"" -pw p"
+FpCmdUninstall = "%s\40\bin\fpsrvadm -unattended true -o uninstall -p all -m %s"
+FpCmdUpgrade = "%s\40\bin\fpsrvadm -unattended true -o upgrade -p all -m %s"
+
+
+[Strings]
+;
+; Localize all strings in this section.
+; These strings are used directly by OCM.
+;
+fp_desc     = "FrontPage 2000 服务器扩展"
+fp_tip      = "使用 Microsoft FrontPage 和 Visual InterDev 来创作和管理站点"
+vid_desc    = "Visual InterDev RAD 远程配置支持"
+vid_tip     = "启用站点服务器上的远程应用程序"
+WKS_CD_NAME = "Windows 2000 Professional CD-ROM"
+SRV_CD_NAME = "Windows 2000 Server CD-ROM"
+SDESC_Fp_Extensions      = "FrontPage 服务器扩展文件" 
+LDESC_Fp_Extensions      = "使用 Microsoft FrontPage 和 Visual InterDev 来创作和管理站点"
+SDESC_Vid_Deployment_Dll = "Visual InterDev RAD 远程配置支持"
+LDESC_Vid_Deployment_Dll = "启用站点服务器上的远程应用程序"

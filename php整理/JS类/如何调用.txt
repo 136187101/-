@@ -1,0 +1,3 @@
+在CONN文件里输入
+require_once("js.class.php");
+	$js =new JS()

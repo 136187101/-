@@ -1,0 +1,4 @@
+git reset --hard HEAD~1
+这是回滚命令
+关键时刻用这个
+运行一次，回滚一个commit

@@ -1,0 +1,21 @@
+今天遇到类似的问题，通过ajax传递过来的数据，回调的数据一直不正确，后来发现是这个问题。
+贴下源代码
+
+public function load($data, $formName = null)
+{
+    //$scope是通过类反射获取的表单名
+    $scope = $formName === null ? $this->formName() : $formName;
+    if ($scope === '' && !empty($data)) {
+        $this->setAttributes($data);
+
+        return true;
+        //如果$data中存在表单名，则设置属性，否则返回false
+    } elseif (isset($data[$scope])) {
+        $this->setAttributes($data[$scope]);
+
+        return true;
+    } else {
+        return false;
+    }
+}
+解决方法：$model->load(Yii::$app->request->post(),'')

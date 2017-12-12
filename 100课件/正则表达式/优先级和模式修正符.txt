@@ -1,0 +1,25 @@
+i 正则内容在匹配时候不区分大小写（默认是区分的）
+
+m 在匹配首内容或者尾内容时候采用多行识别匹配
+$zz="/houm$/m";
+echo $str="shoum1s\n5houm\nhoumss";
+
+s 将转义回车取消是为单行匹配如. 匹配的时候
+$zz="/asdh(.*)adqw/s";
+echo $str="asdhasda\nsdqw\neadqw";
+
+x 忽略正则中的空白
+$zz="/(\d)aaa\\1 34/x";
+echo $str="a1231aaa134";
+
+A 强制从头开始匹配
+$zz="/^AAA(.*)21/ismA";
+echo $str="aaaZZ\naaaZ231321";
+
+D 强制$匹配尾部无任何内容 \n
+$zz="/^AAA(.*)21$/iD";
+echo $str="aaaZZaaaZ231321\n";
+
+U 禁止贪婪匹配 只跟踪到最近的一个匹配符并结束，常用在采集程序上的正则表达式
+$zz="/<(.*)>/U";
+echo $str="<div>你好啊</div>";

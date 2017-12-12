@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title></title>
+
+ 
+
+    <script type="text/javascript">
+
+        var count = 0; //做计数器
+        var limit = new Array(); //用于记录当前显示的哪几个菜单
+        var countlimit = 1; //同时打开菜单数目，可自定义
+ 
+
+        function expandIt(el) {
+
+            obj = eval("sub" + el);
+
+            if (obj.style.display == "none") {
+
+                obj.style.display = "block"; //显示子菜单
+                if (count < countlimit) {//限制2个
+                    limit[count] = el; //录入数组
+                    count++;
+
+                }
+
+                else {
+
+                    eval("sub" + limit[0]).style.display = "none";
+
+                    for (i = 0; i < limit.length - 1; i++) { limit[i] = limit[i + 1]; } //数组去掉头一位，后面的往前挪一位
+                    limit[limit.length - 1] = el;
+
+                }
+
+            }
+
+            else {
+
+                obj.style.display = "none";
+
+                var j;
+
+                for (i = 0; i < limit.length; i++) { if (limit[i] == el) j = i; } //获取当前点击的菜单在limit数组中的位置
+                for (i = j; i < limit.length - 1; i++) { limit[i] = limit[i + 1]; } //j以后的数组全部往前挪一位
+                limit[limit.length - 1] = null; //删除数组最后一位
+                count--;
+
+            }
+
+        }
+
+    </script>
+
+ 
+
+</head>
+
+<body>
+
+    <div id="main1" onclick="expandIt(1)" class="man">
+
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+
+            <tr style="cursor: hand;">
+
+                <td width="26">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    返回首页
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div id="sub1" style="display: none" class="man">
+
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+
+            <tr>
+
+                <td width="36" height="22">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    <a href="AboutList.asp" target="mainFrame" onclick='changeAdminFlag("企业信息列表")'>企业信息列表</a>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td width="36" height="22">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    <a href="AboutEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加企业信息")'>
+
+                        添加企业信息</a>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div id="main2" onclick="expandIt(2)" class="man">
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+            <tr style="cursor: hand;">
+                <td width="26">
+                </td>
+                <td class="SystemLeft">
+                    关于筑高
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="sub2" style="display: none" class="man">
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+           	 <tr>  <td width="36" height="22">   </td>
+             	 <td class="SystemLeft">
+<a href="NewsSort.asp?Action=Add&ParentID=0" target="mainFrame" onclick='changeAdminFlag("新闻类别")'>新闻类别</a>
+				 </td>
+            </tr>
+            <tr>
+                <td width="36" height="22"> </td>
+                <td class="SystemLeft">  <a href="NewsList.asp" target="mainFrame" onclick='changeAdminFlag("新闻列表")'>新闻列表</a> </td>
+            </tr>
+            <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="main3" onclick="expandIt(3)" class="man">
+
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+
+            <tr style="cursor: hand;">
+
+                <td width="26">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    业务领域
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div id="sub3" style="display: none" class="man">
+
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+
+            <tr>
+
+                <td width="36" height="22">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    <a href="ProductSort.asp?Action=Add&ParentID=0" target="mainFrame" onclick='changeAdminFlag("产品类别")'>
+
+                        产品类别</a>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td width="36" height="22">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    <a href="ProductList.asp" target="mainFrame" onclick='changeAdminFlag("产品列表")'>产品列表</a>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td width="36" height="22">
+
+                </td>
+
+                <td class="SystemLeft">
+
+                    <a href="ProductEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加产品")'>
+
+                        添加产品</a>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+	
+	
+	
+<div id="main4" onclick="expandIt(4)" class="man">
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+            <tr style="cursor: hand;">
+                <td width="26">
+                </td>
+                <td class="SystemLeft">
+                    服务流程
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="sub4" style="display: none" class="man">
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+           	 <tr>  <td width="36" height="22">   </td>
+             	 <td class="SystemLeft">
+<a href="NewsSort.asp?Action=Add&ParentID=0" target="mainFrame" onclick='changeAdminFlag("新闻类别")'>新闻类别</a>
+				 </td>
+            </tr>
+            <tr>
+                <td width="36" height="22"> </td>
+                <td class="SystemLeft">  <a href="NewsList.asp" target="mainFrame" onclick='changeAdminFlag("新闻列表")'>新闻列表</a> </td>
+            </tr>
+            <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+             <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+        </table>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<div id="main5" onclick="expandIt(5)" class="man">
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+            <tr style="cursor: hand;">
+                <td width="26">
+                </td>
+                <td class="SystemLeft">
+                    案例展示
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="sub5" style="display: none" class="man">
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+           	 <tr>  <td width="36" height="22">   </td>
+             	 <td class="SystemLeft">
+<a href="NewsSort.asp?Action=Add&ParentID=0" target="mainFrame" onclick='changeAdminFlag("新闻类别")'>展览展示</a>
+				 </td>
+            </tr>
+            <tr>
+                <td width="36" height="22"> </td>
+                <td class="SystemLeft">  <a href="NewsList.asp" target="mainFrame" onclick='changeAdminFlag("新闻列表")'>回忆活动</a> </td>
+            </tr>
+            <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>商业展示</a> </td>
+            </tr>
+             <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>公共空间</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div id="main6" onclick="expandIt(6)" class="man">
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+            <tr style="cursor: hand;">
+                <td width="26">
+                </td>
+                <td class="SystemLeft">
+                    企业动态
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="sub6" style="display: none" class="man">
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+           	 <tr>  <td width="36" height="22">   </td>
+             	 <td class="SystemLeft">
+<a href="NewsSort.asp?Action=Add&ParentID=0" target="mainFrame" onclick='changeAdminFlag("新闻类别")'>新闻类别</a>
+				 </td>
+            </tr>
+            <tr>
+                <td width="36" height="22"> </td>
+                <td class="SystemLeft">  <a href="NewsList.asp" target="mainFrame" onclick='changeAdminFlag("新闻列表")'>新闻列表</a> </td>
+            </tr>
+            <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+             <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div id="main7" onclick="expandIt(7)" class="man">
+        <table width="170" height="24" border="0" cellpadding="0" cellspacing="0">
+            <tr style="cursor: hand;">
+                <td width="26">
+                </td>
+                <td class="SystemLeft">
+                    联系我们
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="sub7" style="display: none" class="man">
+        <table width="160" border="0" cellspacing="0" cellpadding="0">
+           	 <tr>  <td width="36" height="22">   </td>
+             	 <td class="SystemLeft">
+<a href="NewsSort.asp?Action=Add&ParentID=0" target="mainFrame" onclick='changeAdminFlag("新闻类别")'>新闻类别</a>
+				 </td>
+            </tr>
+            <tr>
+                <td width="36" height="22"> </td>
+                <td class="SystemLeft">  <a href="NewsList.asp" target="mainFrame" onclick='changeAdminFlag("新闻列表")'>新闻列表</a> </td>
+            </tr>
+            <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+             <tr>
+               <td width="36" height="22"></td>
+          <td class="SystemLeft"><a href="NewsEdit.asp?Result=Add" target="mainFrame" onclick='changeAdminFlag("添加新闻")'>添加新闻</a> </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
+
+

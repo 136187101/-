@@ -1,0 +1,5 @@
+1.添加个栏目
+	/hy/menu.php  添加栏目
+	例：'分类提示'=>array('power'=>'companypic','link'=>'file=sortts&job=list'),
+2.添加PHP控制器页面(menu.php里的栏目的file参数是什么建立的php文件就是什么)
+	

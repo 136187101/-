@@ -1,0 +1,8 @@
+ludou-custom-register-2-0-3.zip  是用户注册插件
+poedit-1.5.4-setup.exe 是修改语言包文件的插件
+语言包的路径位于：wordpress\wp-content\languages下面，其中的中文语言包为：zh_CN.mo和zh_CN.po
+解压后在bin目录下面找到poedit.exe，点击运行。
+
+3、第一次运行时，选择simple chiness。点击确定。
+
+4、点击打开，找到po的语言文件，进行编辑即可。

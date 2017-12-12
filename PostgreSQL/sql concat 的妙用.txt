@@ -1,0 +1,10 @@
+SELECT
+concat('insert into jd_account_users (account_id,u_id) SELECT * from (SELECT a.id,u.id from jd_account a join jd_users u on a.appid="',a.appid,'" and a.endtime="4092599349" and  u.name="',u.name,'") as ua;')
+FROM
+	tb_third_account A,
+	tb_user u,
+	tb_user_and_third_account ut
+WHERE
+	ut.account_id = A . ID
+AND ut.user_id = u. ID
+AND u. TYPE = 100001

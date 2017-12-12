@@ -1,0 +1,31 @@
+织梦默认情况下是没有开启weight排序的需要修改arclist.lib.php
+
+1、 在织梦系统中找到以下目录\include\taglib中的arclist.lib.php文件并打开
+
+大约在74 、75行找到：
+
+      // arclist是否需要weight排序,默认为"N",如果需要排序则设置为"Y"
+    $isweight = $ctag->GetAtt('isweight');
+
+把这行修改为：
+
+  $weight = $ctag->GetAtt('weight');
+
+ 
+
+2、
+
+大约在327行找到
+
+    //文档排序的方式
+    $ordersql = '';
+    if($orderby=='hot' || $orderby=='click') $ordersql = " ORDER BY arc.click $orderWay";
+    else if($orderby == 'sortrank' || $orderby=='pubdate') $ordersql = " ORDER BY arc.sortrank $orderWay";
+    else if($orderby == 'id') $ordersql = "  ORDER BY arc.id $orderWay";
+    else if($orderby == 'near') $ordersql = " ORDER BY ABS(arc.id - ".$arcid.")";
+    else if($orderby == 'lastpost') $ordersql = "  ORDER BY arc.lastpost $orderWay";
+    else if($orderby == 'scores') $ordersql = "  ORDER BY arc.scores $orderWay";
+    else if($orderby == 'rand') $ordersql = "  ORDER BY rand()";
+
+    else if($orderby == 'weight') $ordersql = "  order by arc.weight asc";//在这里增加一行---->如果没有特定设置排序则按照权重先排序
+    else $ordersql = " ORDER BY arc.sortrank $orderWay"; 

@@ -1,0 +1,40 @@
+<?php
+/*
+@ini_set();
+require_once("include/init.php");
+@header('Content-type: text/html;charset=utf-8');
+set_time_limit(0);
+//$aa=file_group("images/1.jpg",120,160);
+//读取所有大分类 
+        $rs=$db->query("select * from essay_zilei where fuid='28'");
+		while($rows=mysql_fetch_array($rs))
+		{
+			$banben=$rows[id].",".$banben;
+		}
+		$banben=substr($banben,0,-1);
+		$rs_bb=$db->query("select * from essay_zilei where fuid in ($banben)");
+		while($rows_bb=mysql_fetch_array($rs_bb))
+		{
+			$zuixiao=$rows_bb[id].",".$zuixiao;
+		}
+		$zuixiao=substr($zuixiao,0,-1);
+		$rs_zx=$db->query("select * from essay_zilei where id in ($zuixiao) order by zileipx desc");
+		while($rows_zx=mysql_fetch_array($rs_zx))
+		{
+			$ziid.=$rows_zx[id].",";
+		}
+		$ziid=substr($ziid,0,-1);
+$rspr=$db->query("select * from essay where ziid in($ziid)");
+echo "共".mysql_num_rows($rspr)."张图片需要处理";
+$i;
+while($rowspr=mysql_fetch_array($rspr))
+{
+	$a=file_group($rowspr[image_rot],120,160);
+	//echo $rowspr[image];
+	//unlink($rowspr[image]);
+	$db->query("update essay set image='$a' where id = '$rowspr[id]'");
+	echo "图片{$i}&nbsp;处理成功.....<br/>";
+$i++;
+}
+*/
+?>

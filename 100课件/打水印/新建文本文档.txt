@@ -1,0 +1,32 @@
+<?php 
+header("Content-type: image/jpeg");
+$image="Windows7_008019.jpg";
+$img=getimagesize($image);
+switch ($img[2])
+{
+	case 1;
+	$im=@imagecreatefromgif($image);
+	break;
+	case 2;
+	$im=@imagecreatefromjpeg($image);
+	break;
+	case 3;
+	$im=@imagecreatefrompng($image);
+	break;
+}
+$logo="20090713214002-1854641707.gif";
+$ing=@imagecreatefromgif($logo);
+imagecopy($im, $ing, 400, 20, 0, 0, 300, 425);
+
+$tc=imagecolorallocate($im, 255, 255, 255);
+$st=iconv('gbk','utf-8', '·ç¶È-ÍôËÕãñ');
+imagettftext($im, 14, 0, 20,20, $tc,'ÃÔÄã¼ò»Æ²Ý.ttf',$st);
+
+
+$xin=imagecreatetruecolor(500, 500);
+
+imagecopyresized($xin, $im, 0, 0, 0, 0, 500, 500, 1920, 1200);
+
+imagejpeg($xin,'',100);
+
+?>

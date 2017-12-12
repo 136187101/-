@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	
+	$("#ckname").blur(function(){
+		
+		
+			$.ajax({type:'POST',url:'yan.php',data:'name='+$("#ckname").val(),success:function(mas){
+				if(mas==1)
+					{
+						$("#usersname").html("你吻过");
+						$("#usnnnn").val("0");
+						alert($("#usnnnn").val());
+					}
+				
+				}
+				})		
+		})	
+	
+	})
+
+</script>
+<script language="javascript">
+	function yanfn(){
+		if(document.getElementById("usnnnn").value=="0")
+		{
+			alert("用户名已存在！！");
+			return false;	
+		}
+		
+		
+		}
+</script>
+<title>无标题文档</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="" onsubmit="return yanfn()">
+<input id="usnnnn" type="hidden" value="1" />
+  <table width="385" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="69">&nbsp;</td>
+      <td width="233">&nbsp;</td>
+      <td width="40">&nbsp;</td>
+      <td width="43">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>用户名：</td>
+      <td colspan="2"><input type="text" name="textfield"  id="ckname" /><span id="usersname"></span></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="2">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button" id="button" value="提交" /></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

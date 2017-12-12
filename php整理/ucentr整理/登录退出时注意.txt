@@ -1,0 +1,14 @@
+		setcookie('Example_auth', uc_authcode($uid."\t".$username, 'ENCODE'));
+		//生成同步登录的代码
+
+		$ucsynlogin = uc_user_synlogin($uid);
+		echo $ucsynlogin;
+		注意：跳转前必须输出同步登陆代码echo $ucsynlogin;
+
+		//生成同步退出的代码
+$ucsynlogout = uc_user_synlogout();
+echo $ucsynlogout;
+$js->alert("退出成功");
+$rul=substr($rul,0,-7);
+$js->goto($rul);
+注意：跳转前必须输出同步退出代码echo $ucsynlogout;

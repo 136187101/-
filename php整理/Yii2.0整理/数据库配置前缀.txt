@@ -1,0 +1,13 @@
+config/db.php
+
+<?php
+
+return [
+
+    'class' => 'yii\db\Connection',
+    'dsn' => 'pgsql:host=localhost;port=5432;dbname=crm', // PostgreSQL
+    'username' => 'postgres',
+    'password' => '123456',
+    'charset' => 'utf8',
+    'tablePrefix' => 'jd_',   //加入前缀名称fc_
+];

@@ -1,0 +1,1 @@
+<a href="javascript:if(confirm('确实要删除该内容吗?'))location='http://www.baidu.com'">弹出窗口</a> 

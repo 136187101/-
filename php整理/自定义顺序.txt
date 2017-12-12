@@ -1,0 +1,11 @@
+SELECT SQL_CALC_FOUND_ROWS DISTINCT A. *
+FROM qb_hy_company A
+LEFT JOIN qb_hy_company_fid B ON A.uid = B.uid
+WHERE B.fid = '75'
+AND A.city_id = '1'
+AND A.yz =1
+ORDER BY instr( '41,39,42', rid ) DESC
+LIMIT 0 , 30
+
+
+phpMyAdmin - 数据库备份成功！请在一小时之后在您的FTP主目录/myfolder/子目录下查看结果

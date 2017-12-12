@@ -1,0 +1,6 @@
+如何获得jquery this 的特定子元素2010-04-20 13:42:00|  分类： js |  标签： |字号大中小 订阅 .
+
+比如给this里的class名为demo的div添加css：
+
+var olimgurl = $(this).find(“img”).attr(“src”);
+$(this).find(”.demo”).css({‘background’ : ‘url(’ + olimgurl + ‘) no-repeat center -192px’});

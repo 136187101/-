@@ -1,0 +1,29 @@
+	HJD1.0 Alpha　
+　Alpha -- 内部测试版　Beta -- 公开测试版
+　　Cardware -- 属共享软件的一种，只要给作者回复一封电邮或明信片即可。目前这种形式已不多见。
+　　CHT -- 繁体中文版
+　　CN/SPC -- 简体中文版
+　　EN -- 英文版
+　　Corporation & Enterprise -- 企业版
+　　Deluxe -- 豪华版
+　　Demo -- 演示版
+　　Dev -- 开发专用版，程序员版本。
+　　Enhance -- 增强版&；加强版 （属于正式版）
+　　Express&Special -- 特别版
+　　Final -- 最终版
+　　Free -- 免费版
+　　Full version -- 完全版 （属于正式版）
+　　Green -- 绿色版&；破解版
+　　Mini -- 迷你版&；精简版，只有最基本的功能
+　　Multi-language -- 多语言版
+　　Plus -- 属增强版，不过大部分是在程序界面及功能上增强。
+　　Preview -- 预览版
+　　Professional -- 专业版
+　　Regged/Registered -- 已注册版
+　　Release -- 发行版 有时间限制
+　　Retail/RTM -- 零售版
+　　Shareware -- 共享版
+　　Stable -- 稳定版
+　　Standard -- 标准版
+　　Ultimate -- 旗舰版
+　　Upgrade -- 升级版

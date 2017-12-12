@@ -1,0 +1,4 @@
+{dede:global.cfg_webname/}
+
+¸ÄÎª
+[field:global.cfg_webname/]

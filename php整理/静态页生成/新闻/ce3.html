@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+        <link rel="stylesheet" href="ubb/themes/default/default.css" />
+		<script charset="utf-8" src="ubb/kindeditor-min.js"></script>
+		<script>
+
+			// 自定义插件 #2
+
+			function getParam(url, name) {
+				return url.match(new RegExp('[?&]' + name + '=([^?&]+)', 'i')) ? unescape(RegExp.$1) : '';
+			}
+			KindEditor.ready(function(K) {
+				var tabTitleList = [''];
+				var optionMap = {
+					'content0' : {
+						cssPath : '../plugins/code/prettify.css',
+						allowFileManager : true
+					},
+					'content1' : {
+						cssPath : '../plugins/code/prettify.css',
+						resizeType : 1,
+						allowPreviewEmoticons : false,
+						allowImageUpload : false,
+						items : [
+							'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+							'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+							'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+					},
+
+				};
+				var editor = null;
+				var tabs = K.tabs({
+					src : K('#tabs'),
+					cls : 'ke-tabs-example',
+					afterSelect : function(i) {
+						if (editor) {
+							editor.remove();
+							editor = null;
+						}
+						if (i == 2) {
+							return;
+						}
+						editor = K.create('#tab' + i + ' textarea[name=content]', optionMap['content' + i]);
+					}
+				});
+				K.each(tabTitleList, function(i, title) {
+					tabs.add({
+						title : title,
+						panel : K('#tab' + i)
+					});
+				})
+				var index = parseInt(getParam(location.href, 'tab') || 0, 10);
+				tabs.select(index);
+			});
+		</script>
+	</head>
+	<body>
+
+		<!-- 默认模式 -->
+		<div id="tab0" style="display:none;">
+            <form method="post" action="bb.php">
+            标题：<input type="text" name="htmltitle"><br>
+			内容：<textarea name="content" style="width:800px;height:400px;visibility:hidden;">
+			</textarea>
+            <input type="submit" name="submit" value="添加">
+			</form>
+		</div>
+</body>
+</html>

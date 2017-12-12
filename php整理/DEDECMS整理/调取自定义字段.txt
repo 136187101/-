@@ -1,0 +1,16 @@
+
+
+{dede:arclist typeid='1' flag='h'  addfields='price,xinghao' channelid='6' titlelen="50" row='20'}
+
+addfields='字段，字段字段'
+
+
+用arclist调用于附加表字段的方法：
+
+要获取附加表内容，必须符合两个条件
+1、指定 channelid 频道ID属性 
+2、指定要获得的字段 addfields='字段1,字段'
+如：
+{dede:arclist addfields='filetype,language,softtype' row='8' channelid='3'}
+[field:textlink /] - [field:softtype /]<br />
+{/dede:arclist}

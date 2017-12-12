@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>ImageZoom 图片放大效果（扩展篇）</title>
+<script src="CJL.0.1.min.js"></script>
+<script src="ImageZoom.js"></script>
+<script>
+
+ImageZoom._MODE = {
+
+	//切割
+	"cropper": {
+		options: {//默认值
+			opacity:	.5//透明度
+    	},
+		methods: {
+			init: function() {
+				var body = document.body,
+					cropper = body.insertBefore(document.createElement("img"), body.childNodes[0]);
+				cropper.style.display = "none";
+				
+				this._cropper = cropper;
+				this.opacity = this.options.opacity;
+			},
+			load: function() {
+				var cropper = this._cropper, image = this._image, rect = this._rect;
+				cropper.src = image.src;
+				cropper.width = image.width;
+				cropper.height = image.height;
+				$$D.setStyle( cropper, {
+					position: "absolute",
+					left: rect.left + this._repairLeft + "px",
+					top: rect.top + this._repairTop + "px"
+				});
+			},
+			start: function() {
+				this._cropper.style.display = "block";
+				$$D.setStyle( this._image, "opacity", this.opacity );
+			},
+			move: function(e, x, y) {
+				var w = this._rangeWidth, h = this._rangeHeight, scale = this._scale;
+				x = Math.ceil( -x / scale ); y = Math.ceil( -y / scale );
+				this._cropper.style.clip = "rect(" + y + "px " + (x + w) + "px " + (y + h) + "px " + x + "px)";
+			},
+			end: function() {
+				$$D.setStyle( this._image, "opacity", 1 );
+				this._cropper.style.display = "none";
+			},
+			dispose: function() {
+				$$D.setStyle( this._image, "opacity", 1 );
+				document.body.removeChild( this._cropper );
+				this._cropper = null;
+			}
+		}
+	}
+}
+
+ImageZoom.prototype._initialize = (function(){
+	var init = ImageZoom.prototype._initialize,
+		mode = ImageZoom._MODE,
+		modes = {
+			"follow": [ mode.follow ],
+			"handle": [ mode.handle ],
+			"cropper": [ mode.cropper ],
+			"handle-cropper": [ mode.handle, mode.cropper ]
+		};
+	return function(){
+		var options = arguments[2];
+		if ( options && options.mode && modes[ options.mode ] ) {
+			$$A.forEach( modes[ options.mode ], function( mode ){
+				//扩展options
+				$$.extend( options, mode.options, false );
+				//扩展钩子
+				$$A.forEach( mode.methods, function( method, name ){
+					$$CE.addEvent( this, name, method );
+				}, this );
+			}, this );
+		}
+		init.apply( this, arguments );
+	}
+})();
+
+</script>
+</head>
+<body style="padding:100px">
+<style>
+
+.container{ position:relative;}
+
+.izImage, .izViewer{border:1px solid #000;background:#fff url('http://www.cnblogs.com/images/cnblogs_com/cloudgamer/169629/o_loading.gif') no-repeat center;}
+.izImage{width:300px;}
+.izViewer{width:200px;height:200px;position:absolute;left:320px;top:0;display:none;}
+
+</style>
+<br>
+仿凡客诚品(vancl)商品图片放大效果
+<style>
+.list{ padding-right:10px;}
+.list img{ cursor:pointer; padding:1px; border:1px solid #cdcdcd; margin-bottom:10px; display:block;}
+.list img.onzoom, .list img.on{padding:0px; border:2px solid #336699;}
+
+.izImage2{border:0;width:400px;}
+.izViewer2{width:360px;height:300px;position:absolute;left:420px;top:0;display:none; border:1px solid #999;}
+
+.handle2{display:none;opacity:0.6;filter:alpha(opacity=60);background:#E6EAF3; cursor:crosshair;}
+
+</style>
+<table>
+	<tr>
+		<td valign="top"><div id="idList" class="list"> </div></td>
+		<td><div class="container"> <img id="idImage2" class="izImage2" />
+				<div id="idViewer2" class="izViewer2"></div>
+			</div></td>
+	</tr>
+</table>
+<div id="idHandle3" class="handle2"></div>
+<script>
+
+(function(){
+
+var iz = new ImageZoom( "idImage2", "idViewer2", {
+	mode: "handle", handle: "idHandle3", scale: 2, delay: 0
+});
+
+var arrPic = [], list = $$("idList"), image = $$("idImage2");
+
+arrPic.push({ smallPic: "http://www.cnblogs.com/images/cnblogs_com/cloudgamer/241722/o_s_1.jpg", originPic: "http://www.cnblogs.com/images/cnblogs_com/cloudgamer/241722/o_m_1.jpg", zoomPic: "http://www.cnblogs.com/images/cnblogs_com/cloudgamer/241722/o_b_1.jpg" });
+arrPic.push({ smallPic: "http://www.cnblogs.com/images/cnblogs_com/cloudgamer/241722/o_s_2.jpg", originPic: "http://www.cnblogs.com/images/cnblogs_com/cloudgamer/241722/o_m_2.jpg", zoomPic: "http://www.cnblogs.com/images/cnblogs_com/cloudgamer/241722/o_b_2.jpg" });
+
+$$A.forEach(arrPic, function(o, i){
+	var img = list.appendChild(document.createElement("img"));
+	img.src = o.smallPic;
+	img.onclick = function(){
+		iz.reset({ originPic: o.originPic, zoomPic: o.zoomPic });
+		$$A.forEach(list.getElementsByTagName("img"), function(img){  img.className = ""; });
+		img.className = "onzoom";
+	}
+	
+	var temp;
+	img.onmouseover = function(){ if( !this.className ){ this.className = "on"; temp = image.src; image.src = o.originPic; } }
+	img.onmouseout = function(){ if( this.className == "on" ){ this.className = ""; image.src = temp; } }
+	
+	if(!i){ img.onclick(); }
+})
+
+
+})()
+
+</script>
+
+</body>
+</html>

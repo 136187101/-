@@ -1,0 +1,10 @@
+		 width:500px;height:auto;margin:0 auto;
+		 color:#111;font-size:14px;border:1px solid red;
+		  -moz-column-gap:10px;
+		  -webkit-column-gap:10px;
+		  -moz-column-rule:1px solid red;
+		  -webkit-column-rule:1px solid red;
+		  -moz-column-width:100px;
+		  -webkit-column-width:180px;
+		 -moz-column-count:3; 
+		 -webkit-column-count:3;

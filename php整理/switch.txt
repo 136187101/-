@@ -1,0 +1,11 @@
+switch($rows[id]){
+	case '12';
+	$aburl="single.php?id=33";
+	break;
+	case '13';
+	$aburl="single.php?id=23";
+	break;
+	default;
+	$aburl="news.php?type=ab&fuid=$rows[id]";
+	break;
+}

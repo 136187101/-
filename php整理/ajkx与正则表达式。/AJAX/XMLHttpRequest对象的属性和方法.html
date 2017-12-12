@@ -1,0 +1,742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<div><span lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象是</span><span 
+      lang="EN-US" xml:lang="EN-US">Ajax</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">技术的核心。在</span><span 
+      lang="EN-US" xml:lang="EN-US">Internet Explorer 5</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">中，</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象以</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象引入，被称之为</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，它是一种支持异步请求的技术。后来</span><span 
+      lang="EN-US" xml:lang="EN-US">Mozilla</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">、</span><span 
+      lang="EN-US" xml:lang="EN-US">Netscape</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">、</span><span 
+      lang="EN-US" xml:lang="EN-US">Safari</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">、</span><span 
+      lang="EN-US" xml:lang="EN-US">Firefox</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">和其他浏览器也提供了</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">类，虽然这些浏览器都提供了</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">类，但它们创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">类的方法并不相同。</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">使我们可以使用</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">向服务器提出请求并处理响应，而不阻塞用户的其他操作。</span>
+    <p>&nbsp;</p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">不刷新页面就和服务器进行交互是</span><span 
+      lang="EN-US" xml:lang="EN-US">Ajax</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">最大的特点。这个重要的特点主要归功于</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。使用</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象使得网页应用程序像</span><span 
+      lang="EN-US" xml:lang="EN-US"><a onclick="javascript:tagshow(event, 'windows');" 
+      href="javascript:;" 
+      target="_self"><U><strong>windows</strong></U></a></span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">应用程序一样，能够及时响应用户与服务器之间的交互，不必进行页面刷新或者跳转，并且能够进行一系列的数据处理，这些功能可以使用户的等待时间缩短，同时也减轻了服务器端的负载。</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">目前</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象已经得到了大部分浏览器的支持，因此使用</span><span 
+      lang="EN-US" xml:lang="EN-US">Ajax</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">技术开发</span><span 
+      lang="EN-US" xml:lang="EN-US">Web</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">应用程序的时候一般情况下不会出现问题。不过，当开发人员确定使用</span><span 
+      lang="EN-US" xml:lang="EN-US">Ajax</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">技术来开发时，仍然需要考虑用户会使用什么样的浏览器来对网站进行访问，虽然不支持</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的浏览器占少数。</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">在使用</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象向服务器发送请求和处理响应之前，必修先用</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">创建一个</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象，然后通过这个对象来和服务器建立请求并接收服务器返回的数据。由于</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">不是一个</span><span 
+      lang="EN-US" xml:lang="EN-US">W
+    <ST1:CHMETCNV unitname="C" sourcevalue="3" hasspace="False" 
+      negative="False" numbertype="1" tcsc="0" 
+      w:st="on">3C</ST1:CHMETCNV>
+    </span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">标准，所以可以采用多种方法使用</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">来创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的实例。</span><span 
+      lang="EN-US" xml:lang="EN-US">Internet Explorer</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">把</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">实现为一个</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象，其他浏览器（如</span><span 
+      lang="EN-US" xml:lang="EN-US">Firefox</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">、</span><span 
+      lang="EN-US" xml:lang="EN-US">Safari</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">和</span><span 
+      lang="EN-US" xml:lang="EN-US">Opera</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">等）把它实现为一个本地</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。由于存在这些差别，</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">代码中必须包含有关的逻辑，从而使用</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">技术或者使用本地</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象技术来创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的一个实例。</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">正因为在不同的浏览器中，</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的创建方式不同，因此在程序中创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象之前需要对浏览器进行判断。使用详细编写代码方式来区别浏览器类型的方式不仅代码量大，而且很不方便也不灵活。在这里我们可以换一种思路来解决，只需要检查浏览器是否提供对</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的支持即可。如果浏览器支持</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象，就可以使用</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">来创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。否则，就需要在程序中使用本地</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象技术来创建。下面的代码展示了在不同的浏览器中使用</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">代码来创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的编程方法。</span></p>
+  <table class="hands-on4" 
+      style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN-LEFT: 14.2pt; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BORDER-COLLAPSE: collapse; mso-border-top-alt: .5pt; mso-border-left-alt: .5pt; mso-border-bottom-alt: 2.25pt; mso-border-right-alt: 2.25pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid; mso-yfti-tbllook: 480; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt" 
+      cellspacing="0" cellpadding="0" border="1">
+      <tbody>
+        <tr 
+        style="mso-yfti-irow: 0; mso-yfti-firstrow: yes; mso-yfti-lastrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 2.25pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 426.1pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 2.25pt solid; mso-border-top-alt: .5pt; mso-border-left-alt: .5pt; mso-border-bottom-alt: 2.25pt; mso-border-right-alt: 2.25pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid" 
+          width="568"><p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#001 function 
+            createXMLHttpRequest()</span></p>
+              <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#002 {</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#003<span 
+            style="mso-tab-count: 1">&nbsp;</span>var xmlreq = false;</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#004<span 
+            style="mso-tab-count: 1">&nbsp;</span>if 
+              (window.ActiveXObject)</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#005<span 
+            style="mso-tab-count: 1">&nbsp;</span>{</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#006<span 
+            style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>xmlreq 
+              = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#007<span 
+            style="mso-tab-count: 1">&nbsp;</span>}</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#008<span 
+            style="mso-tab-count: 1">&nbsp;</span>else if 
+              (window.XMLHttpRequest)</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#009<span 
+            style="mso-tab-count: 1">&nbsp;</span>{</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#010<span 
+            style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>xmlreq 
+              = new XMLHttpRequest();</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#011<span 
+            style="mso-tab-count: 1">&nbsp;</span>}</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#012<span 
+            style="mso-tab-count: 1">&nbsp;</span>return xmlreq;</span></p>
+            <p class="hands-on1"><span lang="EN-US" xml:lang="EN-US">#013 
+              }</span></p></td>
+        </tr>
+      </tbody>
+    </table>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">我们从上面代码中看出，创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的过程比较简单。首先在</span><span 
+      lang="EN-US" xml:lang="EN-US">createXMLHttpRequest()</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法中创建了一个变量</span><span 
+      style="FONT-SIZE: 9pt; FONT-FAMILY: 新宋体; mso-hansi-font-family: 'Times New Roman'; mso-no-proof: yes" 
+      lang="EN-US" xml:lang="EN-US">xmlreq</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">来保存对这个对象的引用，并将其默认值设置为</span><span 
+      lang="EN-US" xml:lang="EN-US">false</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。然后在这个方法中通过简单的判断，确定究竟使用什么方法来创建对象。由于用户使用的浏览器类型不同，代码</span><span 
+      lang="EN-US" xml:lang="EN-US">window.ActiveXObject</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">可能返回一个对象，也可能返回</span><span 
+      lang="EN-US" xml:lang="EN-US">null</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。</span><span 
+      lang="EN-US" xml:lang="EN-US">If</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">条件语句根据返回的结果来判断浏览器是否能支持</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">控件，相应地得知浏览器是</span><span 
+      lang="EN-US" xml:lang="EN-US">IE</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">还是其他浏览器类型。如果判定用户使用的是</span><span 
+      lang="EN-US" xml:lang="EN-US">IE</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">浏览器，则通过实例化</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveXObject</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的一个实例的方法来创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。使用这种方法时，参数字符串指明要创建何种类型的</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。在本例子中，参数是</span><span 
+      lang="EN-US" xml:lang="EN-US">Microsoft.XMLHTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，这说明需要创建的是</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的一个实例。</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">如果</span><span 
+      lang="EN-US" xml:lang="EN-US">window.ActiveXObject</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">返回</span><span 
+      lang="EN-US" xml:lang="EN-US">null</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，表示用户使用的浏览器不支持</span><span 
+      lang="EN-US" xml:lang="EN-US">ActiveX</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象，那么程序会执行</span><span 
+      lang="EN-US" xml:lang="EN-US">else</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">语句所指定的操作。首先判断浏览器是否把</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">实现为本地</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。如果存在</span><span 
+      lang="EN-US" xml:lang="EN-US">window.XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，那么就创建</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象。最后将这个</span><span 
+      lang="EN-US" xml:lang="EN-US">xmlreq</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">变量返回，完成了</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的创建过程。</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">由于</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">具有动态类型的特性，而且</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象在不同浏览器上的实现是兼容的，所有可以用同样的方式访问</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">实例的属性和方法，而不论这个实例创建的方法是什么。这就大大简化了开发过程，而且在</span><span 
+      lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">中也不必编写特定于浏览器的逻辑。</span></p>
+  <p class="MsoNormal" style="TEXT-INDENT: 21pt"><span 
+      style="FONT-SIZE: 15pt" lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-SIZE: 15pt; FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的属性</span><span style="FONT-SIZE: 15pt" 
+      lang="EN-US" xml:lang="EN-US">
+      <O:P></O:P>
+    </span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象提供了许多属性，处理</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">时需要频繁用到这些属性，如下表所示：</span></p>
+  <table class="hands-on3" 
+      style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN-LEFT: 14.2pt; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BORDER-COLLAPSE: collapse; mso-yfti-tbllook: 480; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-table-layout-alt: fixed; mso-border-alt: solid windowtext 1.0pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext" 
+      cellspacing="0" cellpadding="0" border="1">
+      <tbody>
+        <tr style="HEIGHT: 7.25pt; mso-yfti-irow: -1; mso-yfti-firstrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e5e5e5; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; HEIGHT: 7.25pt; mso-shading: windowtext; mso-pattern: gray-10 auto" 
+          width="192"><p class="MsoNormal" style="TEXT-ALIGN: center; mso-yfti-cnfc: 1" 
+            align="center"><strong style="mso-bidi-font-weight: normal"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span><span 
+            lang="EN-US" xml:lang="EN-US">
+              <O:P></O:P>
+          </span></strong></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e5e5e5; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; HEIGHT: 7.25pt; mso-border-left-alt: solid windowtext 1.0pt; mso-shading: windowtext; mso-pattern: gray-10 auto" 
+          width="360"><p class="MsoNormal" style="TEXT-ALIGN: center; mso-yfti-cnfc: 1" 
+            align="center"><strong style="mso-bidi-font-weight: normal"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">描述</span><span 
+            lang="EN-US" xml:lang="EN-US">
+              <O:P></O:P>
+          </span></strong></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 0">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">onreadystatechange</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">每个状态改变时都会触发这个事件处理程序，通常会调用一个</span><span 
+            lang="EN-US" xml:lang="EN-US">JavaScript</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">函数</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 1">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">readyState</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">请求的状态</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 2">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">responseText</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">服务器的响应，表示为一个串</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 3">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">responseXML</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">服务器的响应，表示为</span><span 
+            lang="EN-US" xml:lang="EN-US">XML</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，这个对象可以解析为一个</span><span 
+            lang="EN-US" xml:lang="EN-US">DOM</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 4">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">status</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">服务器的</span><span 
+            lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">状态</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 5; mso-yfti-lastrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: .5pt; mso-border-left-alt: 1.0pt; mso-border-bottom-alt: 1.0pt; mso-border-right-alt: .5pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">statusText</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">状态的对应文本</span></p></td>
+        </tr>
+      </tbody>
+    </table>
+  <p class="hands-on0"><span 
+      style="mso-ansi-language: #0400; mso-fareast-language: #0400">
+      <O:P></O:P>
+    </span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">下面我们来看看这些属性和事件的详细说明。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">1. readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">当</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象吧一个</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">请求发送到服务器时将经历若干种状态。一直等待直到请求被处理，然后，它才接收一个响应。这样以来，脚本才正确响应各种状态，</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象暴露一个描述对象的当前状态的</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性，如下表所示：</span></p>
+  <table class="hands-on3" 
+      style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN-LEFT: 14.2pt; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BORDER-COLLAPSE: collapse; mso-yfti-tbllook: 480; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-table-layout-alt: fixed; mso-border-alt: solid windowtext 1.0pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext" 
+      cellspacing="0" cellpadding="0" border="1">
+      <tbody>
+        <tr style="HEIGHT: 7.25pt; mso-yfti-irow: -1; mso-yfti-firstrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e5e5e5; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 90.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; HEIGHT: 7.25pt; mso-shading: windowtext; mso-pattern: gray-10 auto" 
+          width="120"><p class="MsoNormal" style="TEXT-ALIGN: center; mso-yfti-cnfc: 1" 
+            align="center"><strong style="mso-bidi-font-weight: normal"><span 
+            lang="EN-US" xml:lang="EN-US">readyState</span></strong><strong 
+            style="mso-bidi-font-weight: normal"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">取值</span><span 
+            lang="EN-US" xml:lang="EN-US">
+              <O:P></O:P>
+          </span></strong></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e5e5e5; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 324pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; HEIGHT: 7.25pt; mso-border-left-alt: solid windowtext 1.0pt; mso-shading: windowtext; mso-pattern: gray-10 auto" 
+          width="432"><p class="MsoNormal" style="TEXT-ALIGN: center; mso-yfti-cnfc: 1" 
+            align="center"><strong style="mso-bidi-font-weight: normal"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">描述</span><span 
+            lang="EN-US" xml:lang="EN-US">
+              <O:P></O:P>
+          </span></strong></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 0">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 90.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="120"><p class="hands-on" style="TEXT-ALIGN: center" align="center"><span 
+            lang="EN-US" xml:lang="EN-US">0</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 324pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="432"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">描述一种“未初始化”状态。此时，已经创建了一个</span><span 
+            lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象，但是还没有初始化。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 1">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 90.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="120"><p class="hands-on" style="TEXT-ALIGN: center" align="center"><span 
+            lang="EN-US" xml:lang="EN-US">1</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 324pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="432"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">描述一种“发送”状态。此时，代码已经</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">调用了</span><span style="FONT-FAMILY: ??" 
+            lang="EN-US" xml:lang="EN-US">XMLHttpRequest open()</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">方法并且</span><span style="FONT-FAMILY: ??" 
+            lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">已经准备好把一个请求发送到服务器。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 2">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 90.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="120"><p class="hands-on" style="TEXT-ALIGN: center" align="center"><span 
+            lang="EN-US" xml:lang="EN-US">2</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 324pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="432"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">描述一种“发送”状态。此时，已经通过</span><span style="FONT-FAMILY: ??" 
+            lang="EN-US" xml:lang="EN-US">send()</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">方法把一个请求发送到服务器端，但是还没有收到一个响应。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 3">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 90.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="120"><p class="hands-on" style="TEXT-ALIGN: center" align="center"><span 
+            lang="EN-US" xml:lang="EN-US">3</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 324pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="432"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">描述一种“正在接收”状态。此时，已经接收到</span><span style="FONT-FAMILY: ??" 
+            lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">响应头部信息，但是消息体部分还没有完全接收结束。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 4; mso-yfti-lastrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 90.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: .5pt; mso-border-left-alt: 1.0pt; mso-border-bottom-alt: 1.0pt; mso-border-right-alt: .5pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid" 
+          valign="top" width="120"><p class="hands-on" style="TEXT-ALIGN: center" align="center"><span 
+            lang="EN-US" xml:lang="EN-US">4</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 324pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" 
+          valign="top" width="432"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: ??; mso-hansi-font-family: ??">描述一种“已加载”状态。此时，响应已经被完全接收。</span></p></td>
+        </tr>
+      </tbody>
+    </table>
+  <p class="hands-on0"><span 
+      style="mso-ansi-language: #0400; mso-fareast-language: #0400">
+      <O:P></O:P>
+    </span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">2. onreadystatechange</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">无论</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值何时发生改变，</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象都会激发一个</span><span 
+      lang="EN-US" xml:lang="EN-US">readystatechange</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">事件。其中，</span><span 
+      lang="EN-US" xml:lang="EN-US">onreadystatechange</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性接收一个</span><span 
+      lang="EN-US" xml:lang="EN-US">EventListener</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值，向该方法指示无论</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值何时发生改变，该对象都将激活。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">3. responseText</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">这个</span><span 
+      lang="EN-US" xml:lang="EN-US">responseText</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性包含客户端接收到的</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">响应的文本内容。当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值为</span><span 
+      lang="EN-US" xml:lang="EN-US">0</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">、</span><span 
+      lang="EN-US" xml:lang="EN-US">1</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">或</span><span 
+      lang="EN-US" xml:lang="EN-US">2</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">时，</span><span 
+      lang="EN-US" xml:lang="EN-US">responseText</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">包含一个空字符串。当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值为</span><span 
+      lang="EN-US" xml:lang="EN-US">3</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">（正在接收）时，响应中包含客户端还未完成的响应信息。当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">为</span><span 
+      lang="EN-US" xml:lang="EN-US">4</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">（已加载）时，该</span><span 
+      lang="EN-US" xml:lang="EN-US">responseText</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">包含完整的响应信息。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">4. responseXML</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">此属性用于当接收到完整的</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">响应时（</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">为</span><span 
+      lang="EN-US" xml:lang="EN-US">4</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">）描述</span><span 
+      lang="EN-US" xml:lang="EN-US">XML</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">响应；此时，</span><span 
+      lang="EN-US" xml:lang="EN-US">Content-Type</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">头部指定</span><span 
+      lang="EN-US" xml:lang="EN-US">MIME</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">（媒体）类型为</span><span 
+      lang="EN-US" xml:lang="EN-US">text/xml</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">application/xml</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">或以</span><span 
+      lang="EN-US" xml:lang="EN-US">+xml</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">结尾。如果</span><span 
+      lang="EN-US" xml:lang="EN-US">Content-Type</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">头部并不包含这些媒体类型之一，那么</span><span 
+      lang="EN-US" xml:lang="EN-US">responseXML</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的值为</span><span 
+      lang="EN-US" xml:lang="EN-US">null</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。无论何时，只要</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值不为</span><span 
+      lang="EN-US" xml:lang="EN-US">4</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，那么该</span><span 
+      lang="EN-US" xml:lang="EN-US">responseXML</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的值也为</span><span 
+      lang="EN-US" xml:lang="EN-US">null</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">其实，这个</span><span 
+      lang="EN-US" xml:lang="EN-US">responseXML</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性值是一个文档接口类型的对象，用来描述被分析的文档。如果文档不能被分析（例如，如果文档不是良构的或不支持文档相应的字符编码），那么</span><span 
+      lang="EN-US" xml:lang="EN-US">responseXML</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的值将为</span><span 
+      lang="EN-US" xml:lang="EN-US">null</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">5. status</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">这个属性描述了</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">状态代码，而且其类型为</span><span 
+      lang="EN-US" xml:lang="EN-US">short</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。而且，仅当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值为</span><span 
+      lang="EN-US" xml:lang="EN-US">3</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">（正在接收中）或</span><span 
+      lang="EN-US" xml:lang="EN-US">4</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">（已加载）时，这个</span><span 
+      lang="EN-US" xml:lang="EN-US">status</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性才可用。当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的值小于</span><span 
+      lang="EN-US" xml:lang="EN-US">3</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">时试图存取</span><span 
+      lang="EN-US" xml:lang="EN-US">status</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">的值将引发一个异常。例如：</span><span 
+      lang="EN-US" xml:lang="EN-US">status</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">等于</span><span 
+      lang="EN-US" xml:lang="EN-US">200</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">表示成功，</span><span 
+      lang="EN-US" xml:lang="EN-US">404</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">表示未找到资源。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">6. statusText</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">这个属性描述了</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">状态代码文本，并且仅当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值为</span><span 
+      lang="EN-US" xml:lang="EN-US">3</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">或</span><span 
+      lang="EN-US" xml:lang="EN-US">4</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">才可用。当</span><span 
+      lang="EN-US" xml:lang="EN-US">readyState</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">为其它值时试图存取</span><span 
+      lang="EN-US" xml:lang="EN-US">statusText</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">属性将引发一个异常。</span></p>
+  <p class="MsoNormal"><span 
+      style="FONT-SIZE: 16pt" lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-SIZE: 16pt; FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的方法</span><span style="FONT-SIZE: 16pt" 
+      lang="EN-US" xml:lang="EN-US">
+      <O:P></O:P>
+    </span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">下表显示了</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象的一些常用的方法，其中描述部分介绍了这些方法的作用和意义。</span></p>
+  <table class="hands-on3" 
+      style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN-LEFT: 14.2pt; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; BORDER-COLLAPSE: collapse; mso-yfti-tbllook: 480; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-table-layout-alt: fixed; mso-border-alt: solid windowtext 1.0pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext" 
+      cellspacing="0" cellpadding="0" border="1">
+      <tbody>
+        <tr style="HEIGHT: 7.25pt; mso-yfti-irow: -1; mso-yfti-firstrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e5e5e5; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; HEIGHT: 7.25pt; mso-shading: windowtext; mso-pattern: gray-10 auto" 
+          width="192"><p class="MsoNormal" style="TEXT-ALIGN: center; mso-yfti-cnfc: 1" 
+            align="center"><strong style="mso-bidi-font-weight: normal"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法</span><span 
+            lang="EN-US" xml:lang="EN-US">
+              <O:P></O:P>
+          </span></strong></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e5e5e5; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; HEIGHT: 7.25pt; mso-border-left-alt: solid windowtext 1.0pt; mso-shading: windowtext; mso-pattern: gray-10 auto" 
+          width="360"><p class="MsoNormal" style="TEXT-ALIGN: center; mso-yfti-cnfc: 1" 
+            align="center"><strong style="mso-bidi-font-weight: normal"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">描述</span><span 
+            lang="EN-US" xml:lang="EN-US">
+              <O:P></O:P>
+          </span></strong></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 0">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">abort()</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">停止当前请求</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 1">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span 
+          lang="EN-US" xml:lang="EN-US">getAllResponseHeaders()</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">把</span><span 
+            lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">请求的所有相应首部作为键</span><span 
+            lang="EN-US" xml:lang="EN-US">/</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">值对返回。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 2">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span 
+            lang="EN-US" xml:lang="EN-US">getResponseHeader(&quot;header&quot;)</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">返回指定首部的串值。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 3">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span 
+lang="EN-US" xml:lang="EN-US">open(&quot;method&quot;,&quot;url&quot;)</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">建立对服务器的调用。</span><span 
+            lang="EN-US" xml:lang="EN-US">method</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">参数可以是</span><span 
+            lang="EN-US" xml:lang="EN-US">GET</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">、</span><span 
+            lang="EN-US" xml:lang="EN-US">POST</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">或</span><span 
+            lang="EN-US" xml:lang="EN-US">PUT</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">等；</span><span 
+            lang="EN-US" xml:lang="EN-US">url</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">参数可以是相对</span><span 
+            lang="EN-US" xml:lang="EN-US">URL</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">或绝对</span><span 
+            lang="EN-US" xml:lang="EN-US">URL</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。这个方法还包括</span><span 
+            lang="EN-US" xml:lang="EN-US">3</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">个可选参数。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 4">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="192"><p class="hands-on"><span lang="EN-US" xml:lang="EN-US">send(content)</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-right-alt: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">向服务器发送请求。</span></p></td>
+        </tr>
+        <tr style="mso-yfti-irow: 5; mso-yfti-lastrow: yes">
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: windowtext 1pt solid; WIDTH: 144.2pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: .5pt; mso-border-left-alt: 1.0pt; mso-border-bottom-alt: 1.0pt; mso-border-right-alt: .5pt; mso-border-color-alt: windowtext; mso-border-style-alt: solid" 
+          valign="top" width="192"><p class="hands-on"><span 
+            lang="EN-US" xml:lang="EN-US">setRequestHeader(&quot;header&quot;,&quot;value&quot;)</span></p></td>
+          <td 
+          style="BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0cm; BORDER-LEFT: medium none; WIDTH: 270pt; PADDING-TOP: 0cm; BORDER-BOTTOM: windowtext 1pt solid; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" 
+          valign="top" width="360"><p class="hands-on"><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">把指定首部设置为所提供的值，在设置任何首部之前必须先调用</span><span 
+            lang="EN-US" xml:lang="EN-US">open()</span><span 
+            style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法。</span></p></td>
+        </tr>
+      </tbody>
+    </table>
+  <p class="hands-on0"><span 
+      style="mso-ansi-language: #0400; mso-fareast-language: #0400">
+      <O:P></O:P>
+    </span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">下面我们来更详细的看看这些方法的使用。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">1. abort()</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法</span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">可以使用这个</span><span 
+      lang="EN-US" xml:lang="EN-US">abort()</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法来暂停与一个</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象相联系的</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">请求，从而把该对象复位到未初始化状态。</span></p>
+  <p class="hands-on2"><span style="FONT-FAMILY: Arial" lang="EN-US" xml:lang="EN-US">2. 
+    open()</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-bidi-font-family: Arial">方法</span><span style="FONT-FAMILY: Arial" 
+      lang="EN-US" xml:lang="EN-US">
+                  <O:P></O:P>
+                </span></p>
+  <p class="hands-on2"><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">此方法用来和服务器之间建立连接。其完整的方法参数是</span><span 
+      lang="EN-US" xml:lang="EN-US">open(string method</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">string uri</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">boolean asynch</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">string username</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">string password)</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，其中前两个参数是必要的，后面三个为可选参数。</span></p>
+  <p class="hands-on2"><span lang="EN-US" xml:lang="EN-US">method</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">参数是必须提供的，用于指定用来发送请求的</span><span 
+      lang="EN-US" xml:lang="EN-US">HTTP</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法（</span><span 
+      lang="EN-US" xml:lang="EN-US">GET</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">POST</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">PUT</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">，</span><span 
+      lang="EN-US" xml:lang="EN-US">DELETE</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">或</span><span 
+      lang="EN-US" xml:lang="EN-US">HEAD</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">）。为了把数据发送到服务器，应该使用</span><span 
+      lang="EN-US" xml:lang="EN-US">POST</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法；为了从服务器端检索数据，应该使用</span><span 
+      lang="EN-US" xml:lang="EN-US">GET</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">方法。另外，</span><span 
+      lang="EN-US" xml:lang="EN-US">uri</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">参数用于指定</span><span 
+      lang="EN-US" xml:lang="EN-US">XMLHttpRequest</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">对象把请求发送到的服务器相应的</span><span 
+      lang="EN-US" xml:lang="EN-US">URI</span><span 
+      style="FONT-FAMILY: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'">。借助于</span></p>
+</div>
+</body>
+</html>

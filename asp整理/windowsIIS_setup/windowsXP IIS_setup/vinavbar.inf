@@ -1,0 +1,12 @@
+[info]
+clientarchitectures=all
+version=1.10
+vendor=Microsoft Corporation
+contact=http://www.microsoft.com/vinterdev/
+serverbinding=external
+servermodule=fp4Avnb.dll
+clientbinding=BTL
+clientmodule=vinavbar.btl
+name=Visual InterDev Navigation Bar
+description=Generates a page navigation bar based on the web's navigation structure.
+type=insert

@@ -1,0 +1,8 @@
+ErrorDocument 404 /error/404.php
+
+
+在.htaccess 里写这个就可以了
+
+可以用腾讯的公益404页面
+
+接口网址：www.qq.com/404/

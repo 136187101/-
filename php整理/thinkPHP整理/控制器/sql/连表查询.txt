@@ -1,0 +1,6 @@
+
+//方式一
+$uu=$users->field("users.id as uid,liuyan.id as lid,users.*,liuyan.*")->table("think_users users,think_users_liuyan liuyan")->where("users.id=liuyan.uid")->select();
+    dump($uu);
+//方式二
+$list=$liuyan->field("liuyan.id as lid,liuyan.*,users.id,users.usersname")->table("think_users_liuyan as liuyan")->join("right join think_admin_users as users on users.id=liuyan.uid")->select();

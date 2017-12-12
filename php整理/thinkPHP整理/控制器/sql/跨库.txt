@@ -1,0 +1,5 @@
+ThinkPHP可以支持模型的同一数据库服务器的跨库操作，跨库操作只需要简单配置一个模型所在的数据库名称即可，例如，假设UserModel对应的数据表在数据库user下面，而InfoModel对应的数据表在数据库info下面，那么我们只需要进行下面的设置即可。 
+1.class UserModel extends Model {     protected $dbName = 'user'; } class InfoModel extends Model {     protected $dbName = 'info'; }在进行查询的时候，系统能够自动添加当前模型所在的数据库名。 
+1.$User = D('User');  $User->select(); echo $User->getLastSql(); // 输出的SQL语句为 select * from user.think_user 模型的表前缀取的是项目配置文件定义的数据表前缀，如果跨库操作的时候表前缀不是统一的，那么我们可以在模型里面单独定义表前缀，例如：
+1.protected $tablePrefix = 'other_';如果你没有定义模型类，而是使用的M方法操作的话，也可以支持跨库操作，例如： 
+1.$User = M('user.User','other_'); 表示实例化User模型，连接的是user数据库的other_user表

@@ -1,0 +1,4 @@
+					for($i=ord("a");$i<=ord("z");$i++){
+						echo "<a href=\"#\">".strtoupper(chr($i))."</a>|";
+						
+					}

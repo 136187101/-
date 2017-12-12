@@ -1,0 +1,21 @@
+<script language="javascript">
+var aa=prompt("请输入一个数字");
+switch(aa)
+{
+	case "1":document.write("1是阿拉伯数字中最小的正整数。它也广泛应用于很多领域，比如在计算机技术中1与0是计算机储存的基本单位，在音乐领域1代表音阶中的1个基本音级dou");	
+	break;
+	case "2":document.write("2是一个自然数，2同时也是1和3之间的整数。2有很多数学性质，如果一个数能被2整除，那个数就是偶数。2是最小的质数（也叫素数）。");
+	break;
+	case "3":document.write("3（三）是2与4之间的自然数，奇数，是第2个质数。");
+	break;
+	case "4":document.write("4 数字，（发音：中文 si 英文four ），是3与5之间的自然数。正整数中最小的合数。");
+	break;
+	case "5":document.write("5（发音：中文 wǔ 英文 Five ），是4与6之间的自然数，是第3个质数，它还是圆周率的第4、第8、第10位小数。与汉语中的“五”同义，但和“吾”不同义。");
+	break;
+	case "6":document.write("6是阿拉伯数字，是自然数字组成的十个数字中的一员。");
+	break;
+	case "7":document.write("7是阿拉伯数字，（七）是6与8之间的自然数。小写：七，大写：柒。");
+	default:document.write("暂无匹配项");
+	
+}
+</script>

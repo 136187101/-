@@ -1,0 +1,43 @@
+PHP中缩放图像.
+有两种改变图像大小的方法.
+(1):ImageCopyResized() 函数在所有GD版本中有效,但其缩放图像的算法比较粗糙.
+(2):imagecopyresampled() ,其像素插值算法得到的图像边缘比较平滑.(但该函数的速度比 ImageCopyResized() 慢).
+
+两个函数的参数是一样的.如下:
+ImageCopyResampled(dest,src,dy,dx,sx,sy,dw,dh,sw,sh);
+ImageCopyResized(dest,src,dy,dx,sx,sy,dw,dh,sw,sh); 
+bool imagecopyresampled ( resource $dst_image , resource $src_image , int $dst_x , int $dst_y , int $src_x , int $src_y , int $dst_w , int $dst_h , int $src_w , int $src_h )
+
+$dst_image：新建的图片
+
+$src_image：需要载入的图片
+
+$dst_x：设定需要载入的图片在新图中的x坐标
+
+$dst_y：设定需要载入的图片在新图中的y坐标
+
+$src_x：设定载入图片要载入的区域x坐标
+
+$src_y：设定载入图片要载入的区域y坐标
+
+$dst_w：设定载入的原图的宽度（在此设置缩放）
+
+$dst_h：设定载入的原图的高度（在此设置缩放）
+
+$src_w：原图要载入的宽度
+
+$src_h：原图要载入的高度
+
+<?PHP //例子
+$src = ImageCreateFromJPEG('php.jpg');
+$width = ImageSx($src);
+$height = ImageSy($src);
+$x = $widht/2;
+$y = $height/2;
+$dst = ImageCreateTrueColor($x,$y);
+ImageCopyResampled($dst,$src,0,0,0,0,$x,$y,$widht,$height);
+header('Content-Type : image/png');
+ImagePNG($det);
+?>
+ 
+
