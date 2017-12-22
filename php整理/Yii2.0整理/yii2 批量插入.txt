@@ -1,0 +1,18 @@
+$sql = $queryBuilder->batchInsert('user', ['name', 'age'], [
+    ['Tom', 30],
+    ['Jane', 20],
+    ['Linda', 25],
+]);
+
+
+»»ÖÖÐ´·¨¼´ÊÇ
+$blogCategory = new BlogCategory;
+$attributes = ['blog_id', 'category_id'];
+$tableName = $blogCategory::tableName();
+
+$data=[[1,2],[2,3],[4,5]]
+  $db->createCommand()->batchInsert(
+                $tableName, 
+                $attributes,
+                $data
+            )->execute();

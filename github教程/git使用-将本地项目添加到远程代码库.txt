@@ -1,0 +1,74 @@
+最近刚接触Git，发现挺好用的，而且OSC还提供了免费的托管仓库，打算把自己电脑上的代码同步到OSC上，结果总是出现各种失败。网上搜索的解决方案大部分是先在Git@OSC上创建项目，然后再clone到本地，而我是想把已经在本地创建好的仓库直接push到Git@OSC上。摸索半天终于解决，分享一下我的方式。
+
+        使用范围：已经在本地通过 git init 命令创建了本地仓库，然后想把本地仓库push到Git@OSC上。不对Git的安装及使用进行详细说明，Git详细使用请参考http://git.oschina.net/progit/(我的所有操作是在linux上进行的，windows上通过msysgit应该也能完成 )   
+
+第一步：创建本地仓库用于push到远处仓库Git@OSC上
+
+1.随意创建一个本地项目StudyGit，用于测试
+
+# cd ./StudyGit  // 进入项目的根目录
+
+2.为StudyGit项目创建本地仓库，进入StudyGit项目根目录，在根目录下执行如下操作：
+
+# git init      //此时只是根据StudyGit项目目录结构做了部分初始工作，StudyGit项目的文件还没被最终及提交到本地仓库。
+
+3.将StudyGit项目中的文件提交到本地仓库：
+
+               
+
+# git add .     //将目录下所有文件加入暂存区
+# git commit -a -m “初次提交”    //此时本地仓库中已经保存有StudyGit项目的记录了，接下来可以将本地仓库中内容push到远程仓库了。
+
+第二步：为当前用户（我的是root用户）创建ssh连接公钥，并将公钥添加在添加在个人的Git@OSC账号下，用于向远程服务器push时的验证
+
+参见其它文章，不再详述。
+
+第三步：为StudyGit项目添加远程仓库，并将本地仓库中代码push到远程仓库：
+
+  1.在Git@OSC上创建一个StudyGit的项目仓库作为远程仓库使用，不一定要叫StudyGit其他名字应该也可以；        
+
+  2.进入StudyGit的根目录，为本项目添加远程仓库(注意一定要进入到StudyGit项目的目录内，不一定要是根目录,子目录也可以):
+
+ # git remote add osc git@git.oschina.net:flan/StudyGit.git    //1.”osc”是远程仓库地址的别名(不是远程仓库上项目的名字)可以随便起，默认是origin
+
+3.StudyGit.git 是刚刚在git.oschina.net上创建的远程仓库；   
+
+  # git remote -v          //可以查看当前项目连接的是哪个远程仓库地址
+
+4.将本地仓库push到Git@OSC上的远程仓库：
+
+ # git push -u osc master                //”osc” 是刚刚创建的远程仓库名，“master”是本地仓库的主干分支（目前也只有这一个分支，没有其他分支）
+
+如里有报错误：
+复制代码
+
+To git@git.oschina.net:yangzhi/hello.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'git@git.oschina.net:yangzhi/hello.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushin
+hint: to the same ref. You may want to first merge the remote changes (e.g.
+hint: 'git pull') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+复制代码
+
+可以输入：
+
+git push -f 
+
+5、克隆代码到本地：
+
+git clone git@github..com:用户名/项目名.git
+
+ 
+
+=================================================================================================
+
+其实在git上创建项目后，官方给出了很好的文档，帮助我们在本地从零或从已有项目与远程建立关联：
+
+=================================================================================================
+
+http://guxiaojje.blog.163.com/blog/static/140942291201272110343064/
+
+ 
